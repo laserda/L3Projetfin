@@ -16,6 +16,7 @@ model Citoyen {
   adresse       String
   email         String    @unique
   telephone     String
+  password      String
   demandes      Demande[]
 }
 
@@ -29,7 +30,7 @@ model Demande {
   citoyen     Citoyen   @relation(fields: [citoyenId], references: [id])
   paiement    Paiement? @relation(fields: [paiementId], references: [id])
   acte        Acte?
-  historiques HistoriqueModification[]
+  historiques HistoriqueModification[] @relation("DemandeHistoriques")
 }
 
 model Acte {
@@ -43,7 +44,7 @@ model Acte {
   demande            Demande   @relation(fields: [demandeId], references: [id])
   agentId            String?   @map("id_agent")
   agent              Agent?    @relation(fields: [agentId], references: [id])
-  historiques        HistoriqueModification[]
+  historiques        HistoriqueModification[] @relation("ActeHistoriques")
 }
 
 model Paiement {
@@ -61,6 +62,7 @@ model Agent {
   prenom    String
   email     String    @unique
   role      RoleAgent
+  password  String
   actes     Acte[]
   historiques HistoriqueModification[]
 }
@@ -75,7 +77,12 @@ model HistoriqueModification {
   ancienneValeur    String     @map("ancienne_valeur")
   nouvelleValeur    String     @map("nouvelle_valeur")
   agent             Agent      @relation(fields: [agentId], references: [id])
-  // Relations polymorphes supprimées pour éviter les conflits Prisma
+
+  // Relations inverses pour Demande et Acte
+  demandeId         String?    @map("id_demande")
+  demande           Demande?   @relation("DemandeHistoriques", fields: [demandeId], references: [id])
+  acteId            String?    @map("id_acte")
+  acte              Acte?      @relation("ActeHistoriques", fields: [acteId], references: [id])
 }
 
 enum TypeActe {

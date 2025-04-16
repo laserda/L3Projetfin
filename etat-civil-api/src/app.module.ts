@@ -9,10 +9,12 @@ import { HistoriqueModule } from './modules/historique/historique.module';
 import { StatistiquesModule } from './modules/statistiques/statistiques.module';
 import { ConfigurationModule } from './modules/configuration/configuration.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
     AuthModule,
     UserModule,
     DemandesModule,

@@ -31,3 +31,15 @@ API d'état civil basée sur NestJS, Prisma et PostgreSQL.
 
 ## Endpoints principaux
 Voir la documentation dans le dossier `/docs` ou le code source des controllers.
+
+
+Executer le projet
+npm run start:dev
+
+Generer un secret
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
+npx prisma generate
+docker-compose up -d
+npx prisma migrate dev --name init
+npx prisma db push

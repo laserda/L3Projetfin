@@ -1,32 +1,73 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException, UnauthorizedException, InternalServerErrorException } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly prisma: PrismaService
+  ) {}
 
   async register(dto: RegisterDto) {
-    // Ici tu feras l'appel Prisma pour créer un citoyen
-    // Hash du mot de passe
-    const hash = await bcrypt.hash(dto.password, 10);
-    // TODO: Insérer le citoyen en base
-    return { message: 'Inscription réussie (mock)', email: dto.email };
+    try {
+      const existing = await this.prisma.citoyen.findUnique({ where: { email: dto.email } });
+      if (existing) {
+        throw new ConflictException('Un utilisateur avec cet email existe déjà');
+      }
+      const hash = await bcrypt.hash(dto.password, 10);
+      const citoyen = await this.prisma.citoyen.create({
+        data: {
+          email: dto.email,
+          telephone: dto.telephone,
+          nom: dto.nom,
+          prenom: dto.prenom,
+          password: hash,
+          dateNaissance: dto.dateNaissance ? new Date(dto.dateNaissance) : new Date(),
+          lieuNaissance: dto.lieuNaissance || '',
+          adresse: dto.adresse || '',
+        },
+      });
+      return { message: 'Inscription réussie', email: citoyen.email };
+    } catch (error) {
+      throw new InternalServerErrorException('Erreur lors de l\'inscription');
+    }
   }
 
   async login(dto: LoginDto) {
-    // Ici tu feras l'appel Prisma pour vérifier le citoyen
-    // TODO: Vérifier le mot de passe
-    // Générer le JWT
-    const token = this.jwtService.sign({ email: dto.email, role: 'citoyen' });
-    return { token };
+    try {
+      const citoyen = await this.prisma.citoyen.findUnique({ where: { email: dto.email } });
+      if (!citoyen) {
+        throw new UnauthorizedException('Identifiants invalides');
+      }
+      const valid = await bcrypt.compare(dto.password, citoyen.password);
+      if (!valid) {
+        throw new UnauthorizedException('Identifiants invalides');
+      }
+      const token = this.jwtService.sign({ email: citoyen.email, role: 'citoyen', id: citoyen.id });
+      return { token };
+    } catch (error) {
+      throw new InternalServerErrorException('Erreur lors de la connexion');
+    }
   }
 
   async loginAgent(dto: LoginDto) {
-    // Vérifier l'email et le mot de passe dans la table Agent
-    // Générer le JWT avec role: 'agent'
-    return { token: this.jwtService.sign({ email: dto.email, role: 'agent' }) };
+    try {
+      const agent = await this.prisma.agent.findUnique({ where: { email: dto.email } });
+      if (!agent) {
+        throw new UnauthorizedException('Identifiants invalides');
+      }
+      const valid = await bcrypt.compare(dto.password, agent.password);
+      if (!valid) {
+        throw new UnauthorizedException('Identifiants invalides');
+      }
+      const token = this.jwtService.sign({ email: agent.email, role: agent.role, id: agent.id });
+      return { token };
+    } catch (error) {
+      throw new InternalServerErrorException('Erreur lors de la connexion');
+    }
   }
 }
