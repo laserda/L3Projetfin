@@ -1,0 +1,14 @@
+.navbar-brand img {
+  max-height: 40px;
+}
+.hero-section {
+  background: linear-gradient(90deg, #f8fafc 60%, #e9ecef 100%);
+  border-radius: 1rem;
+}
+.card {
+  border-radius: 1rem;
+}
+footer {
+  background: #fff;
+  border-top: 1px solid #e9ecef;
+}
