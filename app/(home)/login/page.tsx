@@ -33,15 +33,6 @@ const Page = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [loginError, setLoginError] = useState<string | null>(null);
-    // const router = useRouter();
-
-    // const session = useSession();
-
-    // useEffect(() => {
-    //     if (session?.data?.user) {
-    //         // red("/dashboard");
-    //     }
-    // }, [session]);
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
@@ -55,7 +46,7 @@ const Page = () => {
         const { email, password } = values;
 
         try {
-            const { data, error } = await authClient.signIn.email(
+            await authClient.signIn.email(
                 {
                     email,
                     password,
