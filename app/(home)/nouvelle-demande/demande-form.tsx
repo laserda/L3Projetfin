@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useForm } from "react-hook-form";
@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import { Calendar } from "@/components/ui/calendar";
 import {
     Select,
     SelectContent,
@@ -32,8 +33,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { RequestType } from "@/types";
 import { demandeFormSchema, DemandeFormValues } from "@/validation";
+import { CalendarIcon } from "lucide-react";
 
 const DemandeForm = () => {
     const router = useRouter();
@@ -221,14 +230,65 @@ const DemandeForm = () => {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>Date</FormLabel>
-                                            <FormControl>
-                                                <Input type="date" {...field} />
-                                            </FormControl>
-                                            <FormDescription>
+
+                                            <Popover>
+                                                <PopoverTrigger asChild>
+                                                    <FormControl>
+                                                        <Button
+                                                            variant={"outline"}
+                                                            className={`"w-[240px] pl-3 text-left font-normal",
+                        ${!field.value && "text-muted-foreground"}`}
+                                                        >
+                                                            {field.value ? (
+                                                                <span>
+                                                                    {new Date(
+                                                                        field.value
+                                                                    ).toLocaleDateString(
+                                                                        "fr-FR"
+                                                                    )}
+                                                                </span>
+                                                            ) : (
+                                                                <span>
+                                                                    Date de
+                                                                    naissance,
+                                                                    mariage ou
+                                                                    décès
+                                                                </span>
+                                                            )}
+                                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                        </Button>
+                                                    </FormControl>
+                                                </PopoverTrigger>
+                                                <PopoverContent
+                                                    className="w-auto p-0"
+                                                    align="start"
+                                                >
+                                                    <Calendar
+                                                        mode="single"
+                                                        selected={
+                                                            new Date(
+                                                                field.value
+                                                            )
+                                                        }
+                                                        onSelect={
+                                                            field.onChange
+                                                        }
+                                                        disabled={(date) =>
+                                                            date > new Date() ||
+                                                            date <
+                                                                new Date(
+                                                                    "1900-01-01"
+                                                                )
+                                                        }
+                                                        initialFocus
+                                                    />
+                                                </PopoverContent>
+                                            </Popover>
+                                            {/* <FormDescription>
                                                 Date de naissance, mariage ou
                                                 décès
                                             </FormDescription>
-                                            <FormMessage />
+                                            <FormMessage /> */}
                                         </FormItem>
                                     )}
                                 />
