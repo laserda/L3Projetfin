@@ -3,8 +3,7 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { UserCircle, Menu } from "lucide-react";
-// import { auth } from "@/lib/auth";
-import { getUser } from "@/server/user";
+
 import {
     Sheet,
     SheetContent,
@@ -14,15 +13,20 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import LogOutButton from "./LogOutButton";
+import { getCitoyen } from "@/server/auth/citoyen";
 
 export const Navbar = async () => {
-    const session = await getUser();
+    const user = await getCitoyen();
+
     const navLinks = [
         { href: "/", label: "Accueil" },
         { href: "/nouvelle-demande", label: "Nouvelle Demande" },
-        ...(session ? [{ href: "/dashboard", label: "Dashboard" }] : []),
+        ...(user ? [{ href: "/dashboard", label: "Dashboard" }] : []),
         { href: "/suivi-demande", label: "Suivi Demande" },
     ];
+
+    console.log(user?.id);
 
     const renderNavLinks = () => (
         <>
@@ -61,17 +65,11 @@ export const Navbar = async () => {
 
                     {/* Auth & mobile menu */}
                     <div className="flex items-center">
-                        {session ? (
-                            <Button
-                                // onClick={() => authClient.signOut()}
-                                variant="ghost"
-                                className="flex items-center gap-2"
-                            >
-                                <UserCircle className="h-5 w-5" />
-                                <span className="hidden sm:inline">
-                                    Déconnexion
-                                </span>
-                            </Button>
+                        {user ? (
+                            <>
+                                <p>{user.nom}</p>
+                                <LogOutButton />
+                            </>
                         ) : (
                             <Link href="/login" className={buttonVariants()}>
                                 <UserCircle className="h-5 w-5" />

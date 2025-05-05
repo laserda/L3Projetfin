@@ -3,13 +3,19 @@ import { ReactNode } from "react";
 import SideBar from "@/components/SideBar";
 import "../globals.css";
 
-import { getSession } from "@/server/sessions/citoyen_session";
+import { getUser } from "@/server/user";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
     children,
 }: {
     children: ReactNode;
 }) {
+    const session = await getUser();
+
+    if (!session) return redirect("/");
+    if (session.user.role === "user") return redirect("/");
+
     return (
         <html lang="fr">
             <body>
@@ -20,7 +26,7 @@ export default async function DashboardLayout({
                         <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
                             <header className="bg-white shadow-sm z-10 fixed w-[80%] p-4 flex items-center justify-between">
                                 <h1 className="text-xl font-semibold text-gray-800 ml-14">
-                                    {/* {session.user.name}-{session.user.email} */}
+                                    {session.user.name}-{session.user.email}
                                 </h1>
                             </header>
 
