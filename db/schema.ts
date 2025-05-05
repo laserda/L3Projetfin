@@ -4,56 +4,113 @@ import {
     timestamp,
     boolean,
     integer,
+    uuid,
+    decimal,
 } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
-    id: text("id").primaryKey(),
+import { pgEnum } from "drizzle-orm/pg-core";
+
+// Enums pour le statut d'une demande
+export const statutDemandeEnum = pgEnum("statut_demande", [
+    "soumise",
+    "en_traitement",
+    "validée",
+    "refusée",
+    "livrée",
+]);
+
+// Enums pour les moyens de paiement
+export const modePaiementEnum = pgEnum("mode_paiement", [
+    "mobile_money",
+    "carte_bancaire",
+    "virement",
+]);
+
+// Enums pour les types d'entité modifiées
+export const typeEntiteEnum = pgEnum("type_entite", ["demande", "acte"]);
+
+export const agentRole = pgEnum("role", ["admin", "agent"]);
+
+export const agent = pgTable("agent", {
+    id: uuid("id").primaryKey().defaultRandom(),
     name: text("name").notNull(),
     email: text("email").notNull().unique(),
-    emailVerified: boolean("email_verified").notNull(),
     image: text("image"),
     createdAt: timestamp("created_at").notNull(),
     updatedAt: timestamp("updated_at").notNull(),
+    role: agentRole("role").notNull().default("agent"),
+    password: text("password").notNull(),
 });
 
-export const session = pgTable("session", {
-    id: text("id").primaryKey(),
-    expiresAt: timestamp("expires_at").notNull(),
-    token: text("token").notNull().unique(),
-    createdAt: timestamp("created_at").notNull(),
-    updatedAt: timestamp("updated_at").notNull(),
-    ipAddress: text("ip_address"),
-    userAgent: text("user_agent"),
-    userId: text("user_id")
+export const citoyen = pgTable("citoyen", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    nom: text("nom").notNull(),
+    prenom: text("prenom").notNull(),
+    dateNaissance: timestamp("date_naissance").notNull(),
+    lieuNaissance: text("lieu_naissance").notNull(),
+    adresse: text("adresse").notNull(),
+    email: text("email").notNull(),
+    telephone: text("telephone").notNull(),
+    password: text("password").notNull(),
+    createdAt: timestamp("created_at").defaultNow(),
+    updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const paiement = pgTable("paiement", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    montant: decimal("montant", { precision: 10, scale: 2 }).notNull(),
+    modePaiement: text("mode_paiement").notNull(), // Enum: mobile_money, carte_bancaire, virement
+    datePaiement: timestamp("date_paiement").notNull(),
+    transactionId: text("transaction_id").notNull(),
+});
+
+// Enums pour les types d'acte
+export const typeActeEnum = pgEnum("type_acte", [
+    "naissance",
+    "mariage",
+    "décès",
+]);
+export const demande = pgTable("demande", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    citoyenId: uuid("citoyen_id")
         .notNull()
-        .references(() => user.id, { onDelete: "cascade" }),
+        .references(() => citoyen.id),
+    typeActe: typeActeEnum("type_acte").notNull(),
+    statut: statutDemandeEnum("statut_demande").notNull(),
+    dateDemande: timestamp("date_demande").notNull(),
+    paiementId: uuid("paiement_id").references(() => paiement.id),
 });
 
-export const account = pgTable("account", {
-    id: text("id").primaryKey(),
-    accountId: text("account_id").notNull(),
-    providerId: text("provider_id").notNull(),
-    userId: text("user_id")
+export const documentActe = pgTable("document_acte", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    demandeId: uuid("demande_id")
         .notNull()
-        .references(() => user.id, { onDelete: "cascade" }),
-    accessToken: text("access_token"),
-    refreshToken: text("refresh_token"),
-    idToken: text("id_token"),
-    accessTokenExpiresAt: timestamp("access_token_expires_at"),
-    refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
-    scope: text("scope"),
-    password: text("password"),
-    createdAt: timestamp("created_at").notNull(),
-    updatedAt: timestamp("updated_at").notNull(),
+        .references(() => demande.id),
+    dateDelivrance: timestamp("date_delivrance").notNull(),
+    signatureNumerique: text("signature_numerique").notNull(),
+    estArchive: boolean("est_archive").notNull().default(false),
+    dateArchivage: timestamp("date_archivage"),
+    fichierPdf: text("fichier_pdf").notNull(),
 });
 
-export const verification = pgTable("verification", {
-    id: text("id").primaryKey(),
-    identifier: text("identifier").notNull(),
-    value: text("value").notNull(),
-    expiresAt: timestamp("expires_at").notNull(),
-    createdAt: timestamp("created_at"),
-    updatedAt: timestamp("updated_at"),
+export const historiqueModifications = pgTable("historique_modifications", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    typeEntite: text("type_entite").notNull(),
+    entiteId: uuid("entite_id").notNull(),
+    agentId: text("agent_id")
+        .notNull()
+        .references(() => agent.id),
+    action: text("action").notNull(),
+    dateModification: timestamp("date_modification").notNull(),
+    ancienneValeur: text("ancienne_valeur"),
+    nouvelleValeur: text("nouvelle_valeur"),
 });
 
-export const schema = { user, session, account, verification };
+export const schema = {
+    agent,
+    citoyen,
+    demande,
+    paiement,
+    documentActe,
+    historiqueModifications,
+};

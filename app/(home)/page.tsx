@@ -2,34 +2,33 @@ import { FileText, User, Search } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getUser } from "@/server/user";
+// import { getUser } from "@/server/user";
+
+const features = [
+    {
+        title: "Demande d'acte de naissance",
+        description:
+            "Obtenez une copie de votre acte de naissance facilement et rapidement.",
+        icon: <FileText className="h-10 w-10 text-ci-orange" />,
+        href: "/nouvelle-demande?type=naissance",
+    },
+    {
+        title: "Demande d'acte de mariage",
+        description:
+            "Demandez une copie de votre acte de mariage en quelques clics.",
+        icon: <FileText className="h-10 w-10 text-ci-orange" />,
+        href: "/denouvelle-demande?type=mariage",
+    },
+    {
+        title: "Demande d'acte de décès",
+        description: "Obtenez un certificat de décès simplement et rapidement.",
+        icon: <FileText className="h-10 w-10 text-ci-orange" />,
+        href: "/nouvelle-demande?type=deces",
+    },
+];
 
 export default async function HomePage() {
-    const session = await getUser();
-
-    const features = [
-        {
-            title: "Demande d'acte de naissance",
-            description:
-                "Obtenez une copie de votre acte de naissance facilement et rapidement.",
-            icon: <FileText className="h-10 w-10 text-ci-orange" />,
-            href: "/nouvelle-demande?type=naissance",
-        },
-        {
-            title: "Demande d'acte de mariage",
-            description:
-                "Demandez une copie de votre acte de mariage en quelques clics.",
-            icon: <FileText className="h-10 w-10 text-ci-orange" />,
-            href: "/denouvelle-demande?type=mariage",
-        },
-        {
-            title: "Demande d'acte de décès",
-            description:
-                "Obtenez un certificat de décès simplement et rapidement.",
-            icon: <FileText className="h-10 w-10 text-ci-orange" />,
-            href: "/nouvelle-demande?type=deces",
-        },
-    ];
+    // const session = await getUser();
 
     return (
         <main className="px-4 md:px-8">
@@ -59,8 +58,8 @@ export default async function HomePage() {
                             Suivre ma demande
                         </Button>
                     </Link>
-                    {session && (
-                        <Link href="/login">
+                    {/* {session && session.user.role !== "user" && (
+                        <Link href="/dashboard">
                             <Button
                                 size="lg"
                                 variant="secondary"
@@ -70,7 +69,7 @@ export default async function HomePage() {
                                 Espace administration
                             </Button>
                         </Link>
-                    )}
+                    )} */}
                 </div>
             </section>
 
