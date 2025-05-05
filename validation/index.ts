@@ -56,3 +56,19 @@ export const loginFormSchema = z.object({
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
+
+// Schéma de validation pour le formulaire de connexion
+export const RegisterFormSchema = z.object({
+    email: z.string().email({
+        message: "Veuillez saisir une adresse email valide",
+    }),
+    password: z.string().min(6, {
+        message: "Le mot de passe doit contenir au moins 6 caractères",
+    }),
+    name: z.string().min(2, {
+        message: "Le nom doit contenir au moins 2 caractères",
+    }),
+    // role: z.enum(["admin", "agent", "citoyen"]).nullable(),
+});
+
+export type RegisterFormValues = z.infer<typeof RegisterFormSchema>;

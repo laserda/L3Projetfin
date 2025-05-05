@@ -7,12 +7,14 @@ import {
     LogOut,
     Menu,
     PieChart,
+    User,
     X,
 } from "lucide-react";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { authClient } from "@/lib/auth-client";
+import LogOutButton from "./LogOutButton";
 
 const menuItems = [
     {
@@ -29,6 +31,11 @@ const menuItems = [
         label: "Statistiques",
         icon: <PieChart className="h-5 w-5" />,
         href: "/dashboard/stats",
+    },
+    {
+        label: "Agents",
+        icon: <User className="h-5 w-5" />,
+        href: "/dashboard/agents",
     },
 ];
 
@@ -101,19 +108,8 @@ md:translate-x-0 md:z-auto
                         </nav>
                     </div>
 
-                    <div className="p-4 border-t">
-                        <Button
-                            variant="ghost"
-                            onClick={async () => {
-                                await authClient.signOut();
-
-                                redirect("/");
-                            }}
-                            className="w-full justify-start text-gray-700 hover:text-ci-orange hover:bg-gray-100"
-                        >
-                            <LogOut className="h-5 w-5 mr-3" />
-                            Déconnexion
-                        </Button>
+                    <div className={` p-4 border-t w-full justify-start`}>
+                        <LogOutButton />
                     </div>
                 </div>
             </aside>
