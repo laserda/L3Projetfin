@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { LogOut, LoaderCircle } from "lucide-react";
-import { logout } from "@/server/auth/citoyen";
+import {  logout } from "@/server/auth/citoyen";
+
 
 function LogOutButton() {
     const [loading, setLoading] = useState(false);
+
 
     return (
         <Button
@@ -20,7 +22,7 @@ function LogOutButton() {
             {loading ? (
                 <LoaderCircle className="h-5 w-5 animate-spin" />
             ) : (
-                <LogOut className="h-5 w-5" />
+                    <LogOut className="h-5 w-5" />
             )}
         </Button>
     );

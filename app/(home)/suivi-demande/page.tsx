@@ -28,12 +28,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import {
-    emailFormSchema,
-    EmailFormValues,
-    suiviFormSchema,
-    SuiviFormValues,
-} from "@/validation";
+// import {
+//     emailFormSchema,
+//     EmailFormValues,
+//     suiviFormSchema,
+//     SuiviFormValues,
+// } from "@/validation";
 import { formatDate, getRequestTypeName } from "@/utils";
 
 const SuiviPage = () => {
@@ -42,23 +42,23 @@ const SuiviPage = () => {
     const [searchPerformed, setSearchPerformed] = useState(false);
 
     // Formulaire de recherche par référence
-    const refForm = useForm<SuiviFormValues>({
-        resolver: zodResolver(suiviFormSchema),
+    const refForm = useForm({
+        // resolver: zodResolver(suiviFormSchema),
         defaultValues: {
             reference: "",
         },
     });
 
     // Formulaire de recherche par email
-    const emailForm = useForm<EmailFormValues>({
-        resolver: zodResolver(emailFormSchema),
+    const emailForm = useForm({
+        // resolver: zodResolver(emailFormSchema),
         defaultValues: {
             email: "",
         },
     });
 
     // Recherche par référence
-    const onSearchByRef = (data: SuiviFormValues) => {
+    const onSearchByRef = (data: any) => {
         // Reset previous search results
         setRequest(null);
         setRequestsFound([]);
@@ -84,7 +84,7 @@ const SuiviPage = () => {
     };
 
     // Recherche par email
-    const onSearchByEmail = (data: EmailFormValues) => {
+    const onSearchByEmail = (data: any) => {
         // Reset previous search results
         setRequest(null);
         setRequestsFound([]);
