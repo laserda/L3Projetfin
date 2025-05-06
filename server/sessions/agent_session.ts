@@ -17,11 +17,6 @@ export async function createSession(userId: string, role: "admin" | "agent") {
     });
 }
 
-export async function deleteSession() {
-    const Cookies = await cookies();
-    Cookies.delete("session");
-}
-
 type SessionPayload = {
     userId: string;
     expiresAt: Date;
@@ -32,7 +27,7 @@ export async function encrypt(payload: SessionPayload) {
     return new SignJWT(payload)
         .setProtectedHeader({ alg: "HS256" })
         .setIssuedAt()
-        .setExpirationTime("7d")
+        .setExpirationTime("2h")
         .sign(encodedKey);
 }
 
@@ -52,4 +47,9 @@ export async function getSession() {
     const session = Cookies.get("session")?.value;
     if (!session) return null;
     return await decrypt(session);
+}
+
+export async function deleteSession() {
+    const Cookies = await cookies();
+    Cookies.delete("session");
 }

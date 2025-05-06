@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/popover";
 
 import { RequestType } from "@/types";
-import { demandeFormSchema, DemandeFormValues } from "@/validation";
+// import { demandeFormSchema, DemandeFormValues } from "@/validation";
 import { CalendarIcon } from "lucide-react";
 
 const DemandeForm = () => {
@@ -50,8 +50,8 @@ const DemandeForm = () => {
 
     const typeFromUrl = searchParams.get("type") as RequestType | null;
 
-    const form = useForm<DemandeFormValues>({
-        resolver: zodResolver(demandeFormSchema),
+    const form = useForm({
+        // resolver: zodResolver(demandeFormSchema),
         defaultValues: {
             type: typeFromUrl || "naissance",
             nom: "",
@@ -70,7 +70,7 @@ const DemandeForm = () => {
         }
     }, [typeFromUrl, form]);
 
-    const onSubmit = async (data: DemandeFormValues) => {
+    const onSubmit = async (data: any) => {
         try {
             const requests = JSON.parse(
                 localStorage.getItem("requests") || "[]"
