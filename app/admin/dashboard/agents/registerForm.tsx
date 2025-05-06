@@ -4,52 +4,47 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { Info } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useEffect } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { LoginFormData, loginSchema } from "@/validation/validation-citoyen";
-import { login } from "@/server/auth/citoyen";
+import {
+    RegisterFormData,
+    registerSchema,
+} from "@/validation/validation-agent";
+import { register } from "@/server/auth/agent";
+import { redirect } from "next/navigation";
+import { useForm } from "react-hook-form";
 
-function LoginForm() {
-    const [isPending, startTransition] = useTransition();
-    const [state, loginAction] = useActionState(login, undefined);
-    const [err, setErr] = useState("");
-    const form = useForm({
-        resolver: zodResolver(loginSchema),
+function RegisterForm() {
+    const [state, formAction] = useActionState(register, undefined);
+
+    const form = useForm<RegisterFormData>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             email: "",
             password: "",
+            name: "",
         },
     });
 
-    const onSubmit = async (data: LoginFormData) => {
-        const formData = new FormData();
-        Object.entries(data).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
-
-        startTransition(() => {
-            loginAction(formData);
-        });
-        const errMessage = Object.values(state?.errors ?? {})[0]?.toString();
-        setErr(errMessage);
-    };
+    useEffect(() => {
+        if (state?.redirectTo) {
+            redirect(state.redirectTo); // ✅ déclenché une fois le formState mis à jour
+        }
+    }, [state]);
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                {err && (
+            <form action={formAction} className="space-y-6">
+                {state?.errors && (
                     <Alert
                         variant="destructive"
                         className="flex items-center border-red-500"
@@ -57,10 +52,26 @@ function LoginForm() {
                         <Info className="h-4 w-4" color="red" />
                         <div>
                             <AlertTitle>Erreur</AlertTitle>
-                            <AlertDescription>{err}</AlertDescription>
+                            <AlertDescription>
+                                {Object.values(state.errors)[0]}
+                            </AlertDescription>
                         </div>
                     </Alert>
                 )}
+
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Nom et prénom</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Jean Dupont" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
                 <FormField
                     control={form.control}
@@ -71,14 +82,10 @@ function LoginForm() {
                             <FormControl>
                                 <Input
                                     type="email"
-                                    placeholder="exemple@email.com"
+                                    placeholder="email@domaine.com"
                                     {...field}
                                 />
                             </FormControl>
-                            <FormDescription>
-                                Pour recevoir les notifications concernant votre
-                                demande.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -97,21 +104,17 @@ function LoginForm() {
                                     {...field}
                                 />
                             </FormControl>
-                            <FormDescription>
-                                Minimum 8 caractères, au moins un chiffre et une
-                                majuscule.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isPending}>
-                    {isPending ? "En cours de création" : "Créer mon compte"}
+                <Button type="submit" className="w-full">
+                    Créer mon compte
                 </Button>
             </form>
         </Form>
     );
 }
 
-export default LoginForm;
+export default RegisterForm;

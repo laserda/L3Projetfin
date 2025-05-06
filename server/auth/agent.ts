@@ -8,10 +8,10 @@ import {
     createSession,
     deleteSession,
     getSession,
-} from "../sessions/admin_session";
+} from "../sessions/agent_session";
 import { redirect } from "next/navigation";
 
-import { loginSchema, registerSchema } from "@/validation/validation-citoyen";
+import { loginSchema, registerSchema } from "@/validation/validation-agent";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 
 export async function login(prevState: any, formData: FormData) {
@@ -23,8 +23,8 @@ export async function login(prevState: any, formData: FormData) {
         };
     }
     try {
-        const isCitoyen = await getAgentByEmail(result.data.email);
-        if (!isCitoyen) {
+        const isAgent = await getAgentByEmail(result.data.email);
+        if (!isAgent) {
             return {
                 errors: {
                     email: ["Informations incorrectes"],
@@ -33,7 +33,7 @@ export async function login(prevState: any, formData: FormData) {
         }
         const isPasswordCorrect = await verifyPassword(
             result.data.password,
-            isCitoyen.password
+            isAgent.password
         );
         if (!isPasswordCorrect) {
             return {
@@ -43,8 +43,10 @@ export async function login(prevState: any, formData: FormData) {
             };
         }
 
-        await createSession(isCitoyen.id, "admin");
-        return redirect("/");
+        await createSession(isAgent.id, isAgent.role);
+        return {
+            redirectTo: "/admin/dashboard",
+        };
     } catch (error) {
         console.log(error);
     }
@@ -59,8 +61,8 @@ export async function register(prevState: any, formData: FormData) {
         };
     }
     try {
-        const isCitoyen = await getAgentByEmail(result.data.email);
-        if (isCitoyen) {
+        const isAgent = await getAgentByEmail(result.data.email);
+        if (isAgent) {
             return {
                 errors: {
                     email: ["Cet email est déjà utilisé"],
@@ -79,7 +81,9 @@ export async function register(prevState: any, formData: FormData) {
             .returning();
 
         await createSession(newAgent[0].id, newAgent[0].role);
-        return redirect("/");
+        return {
+            redirectTo: "/admin/dashboard",
+        };
     } catch (e) {
         console.log(e);
     }
@@ -109,6 +113,11 @@ export async function getAgent() {
     const session = await getSession();
     if (!session) return null;
     return await getAgentById(session?.userId as string);
+}
+
+export async function getAllAgents() {
+    const agents = await db.select().from(agent);
+    return agents;
 }
 
 // // 📥 Créer un citoyen

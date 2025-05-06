@@ -13,29 +13,29 @@ import {
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { Logo } from "./Logo";
-import { authClient } from "@/lib/auth-client";
+// import { authClient } from "@/lib/auth-client";
 import LogOutButton from "./LogOutButton";
 
 const menuItems = [
     {
         label: "Tableau de bord",
         icon: <LayoutDashboard className="h-5 w-5" />,
-        href: "/dashboard",
+        href: "/admin/dashboard",
     },
     {
         label: "Demandes",
         icon: <FileText className="h-5 w-5" />,
-        href: "/dashboard/liste-demande",
+        href: "/admin/dashboard/liste-demande",
     },
     {
         label: "Statistiques",
         icon: <PieChart className="h-5 w-5" />,
-        href: "/dashboard/stats",
+        href: "/admin/dashboard/stats",
     },
     {
         label: "Agents",
         icon: <User className="h-5 w-5" />,
-        href: "/dashboard/agents",
+        href: "/admin/dashboard/agents",
     },
 ];
 
