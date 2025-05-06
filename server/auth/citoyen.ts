@@ -103,7 +103,7 @@ const getCitoyenByEmail = async (email: string) => {
 
 export async function logout() {
     await deleteSession();
-    redirect("/login");
+    redirect("/");
 }
 
 export async function getCitoyen() {

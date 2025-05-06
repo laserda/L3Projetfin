@@ -1,19 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { getAllAgents } from "@/server/auth/agent";
 // import { formatDate } from "@/utils";
-import { AgentForm } from "./agent-form";
+import RegisterForm from "./registerForm";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 function page() {
     const [agents, setAgents] = useState<any>([]);
     const getAgents = async () => {
-        const res = await authClient.admin.listUsers({
-            query: {
-                limit: 10,
-            },
-        });
-        const users = res.data?.users.filter((user) => user.role === "agent");
+        const res = await getAllAgents();
+        const users = res.filter((user) => user.role === "agent");
         setAgents(users);
     };
     useEffect(() => {
@@ -24,7 +28,19 @@ function page() {
         <>
             <div className="mb-6 flex justify-between items-center">
                 <h1 className="text-2xl font-bold mb-6">Agents</h1>
-                <AgentForm />
+
+                <Dialog>
+                    <DialogTrigger className={buttonVariants()}>
+                        Ajouter un agent
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Ajouter un nouvel agent</DialogTitle>
+                            <DialogDescription></DialogDescription>
+                        </DialogHeader>
+                        <RegisterForm />
+                    </DialogContent>
+                </Dialog>
             </div>
 
             <div className="overflow-x-auto">
