@@ -14,16 +14,17 @@ import { Input } from "@/components/ui/input";
 import { Info } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { useFormState } from "react";
-import { useActionState, useEffect } from "react";
+import { useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { LoginFormData, loginSchema } from "@/validation/validation-agent";
 import { login } from "@/server/auth/agent";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
-    const [state, formAction] = useActionState(login, undefined);
+    const router = useRouter();
+    const [isPending, setIsPending] = useState(false);
+    const [err, setErr] = useState("");
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -32,17 +33,30 @@ function LoginForm() {
             password: "",
         },
     });
+    const onSubmit = async (data: LoginFormData) => {
+        setErr("");
+        setIsPending(true);
 
-    useEffect(() => {
-        if (state?.redirectTo) {
-            redirect(state.redirectTo);
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        const res = await login(formData);
+
+        if (res?.errors) {
+            const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            setErr(errMessage);
+            setIsPending(false);
+            return;
         }
-    }, [state]);
+        setIsPending(false);
+        router.push("/");
+    };
 
     return (
         <Form {...form}>
-            <form action={formAction} className="space-y-6">
-                {state?.errors && (
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {err && (
                     <Alert
                         variant="destructive"
                         className="flex items-center border-red-500"
@@ -50,9 +64,7 @@ function LoginForm() {
                         <Info className="h-4 w-4" color="red" />
                         <div>
                             <AlertTitle>Erreur</AlertTitle>
-                            <AlertDescription>
-                                {Object.values(state.errors)[0]}
-                            </AlertDescription>
+                            <AlertDescription>{err}</AlertDescription>
                         </div>
                     </Alert>
                 )}
@@ -68,6 +80,7 @@ function LoginForm() {
                                     type="email"
                                     placeholder="exemple@email.com"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>
@@ -90,6 +103,7 @@ function LoginForm() {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>
@@ -101,7 +115,8 @@ function LoginForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isPending}>
+                    {isPending ? "..." : "Se connecter"}
                     Se connecter
                 </Button>
             </form>

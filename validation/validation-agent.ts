@@ -8,7 +8,7 @@ export const loginSchema = z.object({
         .trim(),
 });
 export const registerSchema = z.object({
-    name: z
+    nom: z
         .string()
         .min(3, { message: "Le nom doit contenir au moins 3 caractères" })
         .trim(),
@@ -17,7 +17,6 @@ export const registerSchema = z.object({
         .string()
         .min(8, { message: "Password must be at least 8 characters" })
         .trim(),
-    // role: z.enum(["admin", "agent"]).optional().default("agent"),
     role: z.enum(["admin", "agent"]).default("agent").optional(),
 
     // prenom: z

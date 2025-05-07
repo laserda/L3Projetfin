@@ -2,7 +2,6 @@
 
 import { db } from "@/db";
 import { citoyen } from "@/db/schema";
-import { eq } from "drizzle-orm";
 
 import {
     createSession,
@@ -14,12 +13,13 @@ import { redirect } from "next/navigation";
 import { loginSchema, registerSchema } from "@/validation/validation-citoyen";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(formData: FormData) {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
             errors: result.error.flatten().fieldErrors,
+            succes: false,
         };
     }
     try {
@@ -39,23 +39,28 @@ export async function login(prevState: any, formData: FormData) {
             return {
                 errors: {
                     password: ["Mot de passe incorrect"],
+                    succes: false,
                 },
             };
         }
 
         await createSession(isCitoyen.id);
-        return redirect("/");
+        return {
+            errors: null,
+            succes: true,
+        };
     } catch (error) {
         console.log(error);
     }
 }
 
-export async function register(prevState: any, formData: FormData) {
+export async function register(formData: FormData) {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
             errors: result.error.flatten().fieldErrors,
+            succes: false,
         };
     }
     try {
@@ -64,6 +69,7 @@ export async function register(prevState: any, formData: FormData) {
             return {
                 errors: {
                     email: ["Cet email est déjà utilisé"],
+                    succes: false,
                 },
             };
         }
@@ -80,7 +86,10 @@ export async function register(prevState: any, formData: FormData) {
             .returning();
 
         await createSession(newCitoyen[0].id);
-        return redirect("/");
+        return {
+            errors: null,
+            succes: true,
+        };
     } catch (e) {
         console.log(e);
     }

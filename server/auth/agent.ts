@@ -2,7 +2,6 @@
 
 import { db } from "@/db";
 import { agent } from "@/db/schema";
-import { eq } from "drizzle-orm";
 
 import {
     createSession,
@@ -14,12 +13,13 @@ import { redirect } from "next/navigation";
 import { loginSchema, registerSchema } from "@/validation/validation-agent";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(formData: FormData) {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
             errors: result.error.flatten().fieldErrors,
+            succes: false,
         };
     }
     try {
@@ -28,6 +28,7 @@ export async function login(prevState: any, formData: FormData) {
             return {
                 errors: {
                     email: ["Informations incorrectes"],
+                    succes: false,
                 },
             };
         }
@@ -39,25 +40,28 @@ export async function login(prevState: any, formData: FormData) {
             return {
                 errors: {
                     password: ["Mot de passe incorrect"],
+                    succes: false,
                 },
             };
         }
 
         await createSession(isAgent.id, isAgent.role);
         return {
-            redirectTo: "/admin/dashboard",
+            succes: false,
+            errors: null,
         };
     } catch (error) {
         console.log(error);
     }
 }
 
-export async function register(prevState: any, formData: FormData) {
+export async function register(formData: FormData) {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
             errors: result.error.flatten().fieldErrors,
+            succes: false,
         };
     }
     try {
@@ -66,6 +70,7 @@ export async function register(prevState: any, formData: FormData) {
             return {
                 errors: {
                     email: ["Cet email est déjà utilisé"],
+                    succes: false,
                 },
             };
         }
@@ -82,7 +87,8 @@ export async function register(prevState: any, formData: FormData) {
 
         await createSession(newAgent[0].id, newAgent[0].role);
         return {
-            redirectTo: "/admin/dashboard",
+            errors: null,
+            succes: true,
         };
     } catch (e) {
         console.log(e);

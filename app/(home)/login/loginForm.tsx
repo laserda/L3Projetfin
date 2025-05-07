@@ -15,16 +15,18 @@ import { Input } from "@/components/ui/input";
 import { Info } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useActionState, useState, useTransition } from "react";
+import { useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { LoginFormData, loginSchema } from "@/validation/validation-citoyen";
 import { login } from "@/server/auth/citoyen";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
-    const [isPending, startTransition] = useTransition();
-    const [state, loginAction] = useActionState(login, undefined);
+    const router = useRouter();
+    const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState("");
+
     const form = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -34,16 +36,23 @@ function LoginForm() {
     });
 
     const onSubmit = async (data: LoginFormData) => {
+        setErr("");
+        setIsPending(true);
+
         const formData = new FormData();
         Object.entries(data).forEach(([key, value]) => {
             formData.append(key, value);
         });
+        const res = await login(formData);
 
-        startTransition(() => {
-            loginAction(formData);
-        });
-        const errMessage = Object.values(state?.errors ?? {})[0]?.toString();
-        setErr(errMessage);
+        if (res?.errors) {
+            const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            setErr(errMessage);
+            setIsPending(false);
+            return;
+        }
+        setIsPending(false);
+        router.push("/");
     };
 
     return (
@@ -73,6 +82,7 @@ function LoginForm() {
                                     type="email"
                                     placeholder="exemple@email.com"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>
@@ -95,6 +105,7 @@ function LoginForm() {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>

@@ -23,11 +23,13 @@ import {
 } from "@/validation/validation-citoyen";
 import { register } from "@/server/auth/citoyen";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 function RegisterForm() {
-    const [isPending, startTransition] = useTransition();
-    const [state, loginAction] = useActionState(register, undefined);
+    const router = useRouter();
+    const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState("");
+
     const form = useForm({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -43,16 +45,23 @@ function RegisterForm() {
     });
 
     const onSubmit = async (data: RegisterFormData) => {
+        setIsPending(true);
+
         const formData = new FormData();
         Object.entries(data).forEach(([key, value]) => {
             formData.append(key, value);
         });
 
-        startTransition(() => {
-            loginAction(formData);
-        });
-        const errMessage = Object.values(state?.errors ?? {})[0].toString();
-        setErr(errMessage);
+        const res = await register(formData);
+
+        if (res?.errors) {
+            const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            setErr(errMessage);
+            setIsPending(false);
+            return;
+        }
+        setIsPending(false);
+        router.push("/");
     };
 
     return (
@@ -81,6 +90,7 @@ function RegisterForm() {
                                     <Input
                                         placeholder="Nom de famille"
                                         {...field}
+                                        disabled={isPending}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -94,7 +104,11 @@ function RegisterForm() {
                             <FormItem>
                                 <FormLabel>Prénom</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Prénom" {...field} />
+                                    <Input
+                                        placeholder="Prénom"
+                                        {...field}
+                                        disabled={isPending}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -114,6 +128,7 @@ function RegisterForm() {
                                         placeholder="date de naissance"
                                         {...field}
                                         type="date"
+                                        disabled={isPending}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -130,6 +145,7 @@ function RegisterForm() {
                                     <Input
                                         placeholder="Lieu de naissance"
                                         {...field}
+                                        disabled={isPending}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -149,6 +165,7 @@ function RegisterForm() {
                                     placeholder="+225 00 00 00 00"
                                     type="tel"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -166,6 +183,7 @@ function RegisterForm() {
                                 <Input
                                     placeholder="Adresse complète"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -184,6 +202,7 @@ function RegisterForm() {
                                     type="email"
                                     placeholder="exemple@email.com"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>
@@ -206,6 +225,7 @@ function RegisterForm() {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormDescription>

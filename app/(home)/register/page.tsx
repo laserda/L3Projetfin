@@ -10,8 +10,12 @@ import { Logo } from "@/components/Logo";
 import Link from "next/link";
 
 import RegisterForm from "./registerForm";
+import { getSession } from "@/server/sessions/citoyen_session";
+import { redirect } from "next/navigation";
 
-export default function SignUpForm() {
+export default async function SignUpForm() {
+    const session = await getSession();
+    if (session) redirect("/");
     return (
         <div className="flex justify-center items-center min-h-[80vh]">
             <Card className="min-w-[425px] max-w-md">
