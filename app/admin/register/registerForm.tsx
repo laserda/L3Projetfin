@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Info } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useActionState, useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
@@ -20,37 +20,47 @@ import {
     registerSchema,
 } from "@/validation/validation-agent";
 import { register } from "@/server/auth/agent";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 function RegisterForm() {
-    const [state, formAction] = useActionState(register, undefined);
-    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+    const [isPending, setIsPending] = useState(false);
+    const [err, setErr] = useState("");
 
     const form = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
             email: "",
             password: "",
-            name: "",
+            nom: "",
         },
     });
 
-    useEffect(() => {
-        if (state) setIsLoading(false);
-        if (state?.redirectTo) {
-            redirect(state.redirectTo);
+    const onSubmit = async (data: RegisterFormData) => {
+        setErr("");
+        setIsPending(true);
+
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        const res = await register(formData);
+
+        if (res?.errors) {
+            const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            setErr(errMessage);
+            setIsPending(false);
+            return;
         }
-    }, [state]);
-    const handleSubmit = (formData: FormData) => {
-        setIsLoading(true);
-        formAction(formData);
+        setIsPending(false);
+        router.push("/");
     };
 
     return (
         <Form {...form}>
-            <form action={handleSubmit} className="space-y-6">
-                {state?.errors && (
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {err && (
                     <Alert
                         variant="destructive"
                         className="flex items-center border-red-500"
@@ -58,21 +68,23 @@ function RegisterForm() {
                         <Info className="h-4 w-4" color="red" />
                         <div>
                             <AlertTitle>Erreur</AlertTitle>
-                            <AlertDescription>
-                                {Object.values(state.errors)[0]}
-                            </AlertDescription>
+                            <AlertDescription>{err}</AlertDescription>
                         </div>
                     </Alert>
                 )}
 
                 <FormField
                     control={form.control}
-                    name="name"
+                    name="nom"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Nom et prénom</FormLabel>
                             <FormControl>
-                                <Input placeholder="Jean Dupont" {...field} />
+                                <Input
+                                    placeholder="Jean Dupont"
+                                    {...field}
+                                    disabled={isPending}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -90,6 +102,7 @@ function RegisterForm() {
                                     type="email"
                                     placeholder="email@domaine.com"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -108,6 +121,7 @@ function RegisterForm() {
                                     type="password"
                                     placeholder="********"
                                     {...field}
+                                    disabled={isPending}
                                 />
                             </FormControl>
                             <FormMessage />
@@ -115,8 +129,8 @@ function RegisterForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full">
-                    Créer mon compte
+                <Button type="submit" className="w-full" disabled={isPending}>
+                    {isPending ? "En cours de création" : "Créer mon compte"}
                 </Button>
             </form>
         </Form>
