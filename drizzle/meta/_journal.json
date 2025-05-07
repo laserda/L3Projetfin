@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1745488774572,
+      "tag": "0000_damp_boomerang",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746520041478,
+      "tag": "0001_medical_shinobi_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746545961646,
+      "tag": "0002_bitter_madame_web",
+      "breakpoints": true
+    }
+  ]
+}
