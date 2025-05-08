@@ -14,8 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 enum TypeActe {
   Naissance
   Mariage
@@ -63,13 +61,13 @@ model Citoyen {
 model Demande {
   ID_Demande    String    @id @default(uuid())
   ID_Citoyen    String
-  Type_Acte     TypeActe
+  TypeActe     TypeActe
   Statut        StatutDemande
-  Date_Demande  DateTime
-  ID_Paiement   String      @unique
+  DateDemande  DateTime
+  ID_Paiement   String     @unique
 
-  citoyen       Citoyen       @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
-  paiement      Paiement      @relation(fields: [ID_Paiement], references: [ID_Paiement])
+  citoyen       Citoyen?      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
   document      Document_Acte?
   historique    Historique_Modifications[]
 
@@ -81,11 +79,11 @@ model Document_Acte {
   ID_Document_Acte    String     @id @default(uuid())
   ID_Demande          String     @unique
   ID_Agent            String
-  Date_Delivrance     DateTime
+  DateDelivrance     DateTime
   Fichier_PDF         String     // lien vers un fichier, ne pas stocker le PDF
-  Signature_Numerique String
-  Est_Archive         Boolean
-  Date_Archivage      DateTime
+  SignatureNumerique String
+  EstArchive         Boolean
+  DateArchivage      DateTime
 
   demande             Demande    @relation(fields: [ID_Demande], references: [ID_Demande])
   agent               Agent      @relation(fields: [ID_Agent], references: [ID_Agent])
@@ -98,8 +96,8 @@ model Document_Acte {
 model Paiement {
   ID_Paiement   String       @id @default(uuid())
   Montant       Decimal
-  Mode_Paiement ModePaiement
-  Date_Paiement DateTime
+  ModePaiement ModePaiement
+  DatePaiement DateTime
   Transaction_ID String      @unique
 
   demande       Demande?
@@ -118,11 +116,11 @@ model Agent {
 
 model Historique_Modifications {
   ID_Historique     String      @id @default(uuid())
-  Type_Entite       TypeEntite
+  TypeEntite       TypeEntite
   ID_Entite         String
   ID_Agent          String
   Action            String
-  Date_Modification DateTime
+  DateModification DateTime
   Ancienne_Valeur   String
   Nouvelle_Valeur   String
 

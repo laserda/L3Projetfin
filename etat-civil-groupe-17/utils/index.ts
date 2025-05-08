@@ -1,3 +1,4 @@
+import { TypeActe } from "@/lib/generated/prisma";
 // Formater les dates
 export const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -11,11 +12,11 @@ export const formatDate = (dateStr: string) => {
 // Obtenir le nom du type de demande
 export const getRequestTypeName = (type: string) => {
     switch (type) {
-        case "naissance":
+        case TypeActe.Naissance:
             return "Acte de naissance";
-        case "mariage":
+        case TypeActe.Mariage:
             return "Acte de mariage";
-        case "deces":
+        case TypeActe.Décès:
             return "Acte de décès";
         default:
             return type;
