@@ -31,9 +31,9 @@ function RegisterForm() {
     const form = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            email: "",
-            password: "",
-            nom: "",
+            Email: "",
+            Password: "",
+            Nom: "",
         },
     });
 
@@ -75,7 +75,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="nom"
+                    name="Nom"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Nom et prénom</FormLabel>
@@ -93,7 +93,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="Email"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -112,7 +112,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="Password"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Mot de passe</FormLabel>

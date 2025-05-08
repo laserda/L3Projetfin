@@ -13,7 +13,7 @@
 
     ```bash
     git clone <url-du-repo>
-    cd pct-groupe-17
+    cd etat-civil-groupe-17
     ```
 
 2. **Installer les dépendances :**
@@ -33,19 +33,21 @@
     Crée un fichier `.env.local` à la racine du projet et ajoute les variables suivantes (exemple issu du projet) :
 
     ```
-    DATABASE_URL="postgresql://<user>:<password>@<host>/<database>?sslmode=require"
+    DATABASE_URL="postgresql://utilisateur:motdepasse@localhost:5432/nom_de_la_base?schema=public"
     CITOYEN_SESSION_SECRET=ton_secret_session
     ADMIN_SESSION_SECRET=ton_secret_session
     ```
 
 4. **Configurer la base de données :**
 
-    - Le projet utilise Drizzle ORM. Le schéma se trouve dans `db/schema.ts`.
-    - Pour initialiser la base, adapte le fichier `sql.txt` ou utilise les outils Drizzle pour appliquer le schéma.
-    - Exemple de commande (à adapter selon ta configuration) :
-        ```bash
-        pnpm drizzle-kit push
-        ```
+    ```
+    npx prisma generate
+    NB: Au besoin, pour reinisialiser la BD, executer npx prisma migrate reset
+    npx prisma migrate dev --name initial
+
+    Pour visualiser et modifier les données de votre base
+    npx prisma studio
+    ```
 
 ## Scripts disponibles
 
@@ -54,12 +56,14 @@
 -   `pnpm start` : Lance l'application en mode production
 -   `pnpm lint` : Lint le code
 
+ou 
+
+-   npm run dev
+
 ## Structure du projet
 
 -   `app/` : Pages et routes Next.js
 -   `components/` : Composants React réutilisables
--   `db/` : Schéma et gestion de la base de données
--   `drizzle/` : Fichiers générés par Drizzle ORM
 -   `public/` : Fichiers statiques (icônes, images)
 -   `utils/`, `types/`, `validation/` : Utilitaires, types TypeScript, schémas de validation
 
@@ -67,7 +71,7 @@
 
 -   Next.js
 -   React
--   Drizzle ORM
+-   prisma
 -   PostgreSQL
 -   TailwindCSS
 -   Radix UI
@@ -79,7 +83,7 @@
 2. Lance le serveur de développement :
 
     ```bash
-    pnpm dev
+    pnpm dev ou npm run dev
     ```
 
     L'application sera accessible sur [http://localhost:3000](http://localhost:3000).

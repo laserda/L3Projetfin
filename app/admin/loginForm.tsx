@@ -29,8 +29,8 @@ function LoginForm() {
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
-            email: "",
-            password: "",
+            Email: "",
+            Password: "",
         },
     });
     const onSubmit = async (data: LoginFormData) => {
@@ -71,7 +71,7 @@ function LoginForm() {
 
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="Email"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -94,7 +94,7 @@ function LoginForm() {
 
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="Password"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Mot de passe</FormLabel>

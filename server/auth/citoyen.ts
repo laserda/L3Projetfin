@@ -1,7 +1,6 @@
 "use server";
 
-import { db } from "@/db";
-import { citoyen } from "@/db/schema";
+import { CitoyenRepository } from './repositories/citoyenRepository'
 
 import {
     createSession,
@@ -13,6 +12,8 @@ import { redirect } from "next/navigation";
 import { loginSchema, registerSchema } from "@/validation/validation-citoyen";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 
+const citoyenRepo = new CitoyenRepository()
+
 export async function login(formData: FormData) {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
@@ -23,7 +24,7 @@ export async function login(formData: FormData) {
         };
     }
     try {
-        const isCitoyen = await getCitoyenByEmail(result.data.email);
+        const isCitoyen = await getCitoyenByEmail(result.data.Email);
         if (!isCitoyen) {
             return {
                 errors: {
@@ -32,7 +33,7 @@ export async function login(formData: FormData) {
             };
         }
         const isPasswordCorrect = await verifyPassword(
-            result.data.password,
+            result.data.Password,
             isCitoyen.password
         );
         if (!isPasswordCorrect) {
@@ -64,7 +65,7 @@ export async function register(formData: FormData) {
         };
     }
     try {
-        const isCitoyen = await getCitoyenByEmail(result.data.email);
+        const isCitoyen = await getCitoyenByEmail(result.data.Email);
         if (isCitoyen) {
             return {
                 errors: {
@@ -74,18 +75,14 @@ export async function register(formData: FormData) {
             };
         }
 
-        const hashedPassword = await hashPassword(result.data.password);
+        const hashedPassword = await hashPassword(result.data.Password);
 
-        const newCitoyen = await db
-            .insert(citoyen)
-            .values({
-                ...result.data,
-                dateNaissance: new Date(result.data.dateNaissance),
-                password: hashedPassword,
-            })
-            .returning();
-
-        await createSession(newCitoyen[0].id);
+        const newCitoyen = await citoyenRepo.create({data: {
+            ...result.data,
+            DateNaissance: new Date("1993-01-01T00:00:00.000Z"),// a corriger new Date(result.data.DateNaissance),
+            Password: hashedPassword,
+        }})
+        await createSession(newCitoyen.ID_Citoyen);
         return {
             errors: null,
             succes: true,
@@ -96,18 +93,11 @@ export async function register(formData: FormData) {
 }
 
 export const getCitoyenById = async (id: string) => {
-    const user = await db.query.citoyen.findFirst({
-        where: (fields, { eq }) => eq(fields.id, id),
-        columns: {
-            password: false,
-        },
-    });
+    const user = await citoyenRepo.findById(id);
     return user;
 };
 const getCitoyenByEmail = async (email: string) => {
-    return await db.query.citoyen.findFirst({
-        where: (fields, { eq }) => eq(fields.email, email),
-    });
+    return await citoyenRepo.findByEmail(email);
 };
 
 export async function logout() {
@@ -120,32 +110,3 @@ export async function getCitoyen() {
     if (!session) return null;
     return await getCitoyenById(session?.userId as string);
 }
-
-// // 📥 Créer un citoyen
-// export const createCitoyen = async (data) => {
-//     return await db.insert(citoyen).values(data).returning();
-// };
-
-// // 📃 Obtenir tous les citoyens
-// export const getAllCitoyens = async () => {
-//     return await db.select().from(citoyen);
-// };
-
-// // 🔍 Obtenir un citoyen par ID
-
-// // ✏️ Mettre à jour un citoyen
-// export const updateCitoyen = async (
-//     id: string,
-//     updates: Partial<typeof citoyen.$inferInsert>
-// ) => {
-//     return await db
-//         .update(citoyen)
-//         .set(updates)
-//         .where(eq(citoyen.id, id))
-//         .returning();
-// };
-
-// // ❌ Supprimer un citoyen
-// export const deleteCitoyen = async (id: string) => {
-//     return await db.delete(citoyen).where(eq(citoyen.id, id));
-// };

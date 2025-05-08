@@ -1,8 +1,6 @@
 "use server";
 
-import { db } from "@/db";
-import { agent } from "@/db/schema";
-
+import { AgentRepository } from './repositories/agentRepository'
 import {
     createSession,
     deleteSession,
@@ -12,6 +10,10 @@ import { redirect } from "next/navigation";
 
 import { loginSchema, registerSchema } from "@/validation/validation-agent";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
+
+
+const agentRepo = new AgentRepository()
+
 
 export async function login(formData: FormData) {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
@@ -23,7 +25,7 @@ export async function login(formData: FormData) {
         };
     }
     try {
-        const isAgent = await getAgentByEmail(result.data.email);
+        const isAgent = await getAgentByEmail(result.data.Email);
         if (!isAgent) {
             return {
                 errors: {
@@ -33,7 +35,7 @@ export async function login(formData: FormData) {
             };
         }
         const isPasswordCorrect = await verifyPassword(
-            result.data.password,
+            result.data.Password,
             isAgent.password
         );
         if (!isPasswordCorrect) {
@@ -65,7 +67,7 @@ export async function register(formData: FormData) {
         };
     }
     try {
-        const isAgent = await getAgentByEmail(result.data.email);
+        const isAgent = await getAgentByEmail(result.data.Email);
         if (isAgent) {
             return {
                 errors: {
@@ -75,17 +77,14 @@ export async function register(formData: FormData) {
             };
         }
 
-        const hashedPassword = await hashPassword(result.data.password);
+        const hashedPassword = await hashPassword(result.data.Password);
 
-        const newAgent = await db
-            .insert(agent)
-            .values({
+        const newAgent = await agentRepo.create({data:{
                 ...result.data,
-                password: hashedPassword,
-            })
-            .returning();
+                Password: hashedPassword,
+            }});
 
-        await createSession(newAgent[0].id, newAgent[0].role);
+        await createSession(newAgent.ID_Agent, newAgent.role);
         return {
             errors: null,
             succes: true,
@@ -96,18 +95,11 @@ export async function register(formData: FormData) {
 }
 
 export const getAgentById = async (id: string) => {
-    const user = await db.query.agent.findFirst({
-        where: (fields, { eq }) => eq(fields.id, id),
-        columns: {
-            password: false,
-        },
-    });
+    const user = await agentRepo.findById(id);
     return user;
 };
 const getAgentByEmail = async (email: string) => {
-    return await db.query.agent.findFirst({
-        where: (fields, { eq }) => eq(fields.email, email),
-    });
+    return await agentRepo.findByEmail(email);
 };
 
 export async function logout() {
@@ -122,35 +114,6 @@ export async function getAgent() {
 }
 
 export async function getAllAgents() {
-    const agents = await db.select().from(agent);
+    const agents = await agentRepo.findAll();
     return agents;
 }
-
-// // 📥 Créer un citoyen
-// export const createCitoyen = async (data) => {
-//     return await db.insert(citoyen).values(data).returning();
-// };
-
-// // 📃 Obtenir tous les citoyens
-// export const getAllCitoyens = async () => {
-//     return await db.select().from(citoyen);
-// };
-
-// // 🔍 Obtenir un citoyen par ID
-
-// // ✏️ Mettre à jour un citoyen
-// export const updateCitoyen = async (
-//     id: string,
-//     updates: Partial<typeof citoyen.$inferInsert>
-// ) => {
-//     return await db
-//         .update(citoyen)
-//         .set(updates)
-//         .where(eq(citoyen.id, id))
-//         .returning();
-// };
-
-// // ❌ Supprimer un citoyen
-// export const deleteCitoyen = async (id: string) => {
-//     return await db.delete(citoyen).where(eq(citoyen.id, id));
-// };

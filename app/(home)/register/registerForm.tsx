@@ -33,14 +33,14 @@ function RegisterForm() {
     const form = useForm({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            nom: "",
-            prenom: "",
-            dateNaissance: "",
-            lieuNaissance: "",
-            telephone: "",
-            adresse: "",
-            email: "",
-            password: "",
+            Nom: "",
+            Prenom: "",
+            DateNaissance: "",
+            LieuNaissance: "",
+            Telephone: "",
+            Adresse: "",
+            Email: "",
+            Password: "",
         },
     });
 
@@ -51,7 +51,8 @@ function RegisterForm() {
         Object.entries(data).forEach(([key, value]) => {
             formData.append(key, value);
         });
-
+        
+        // Un try catch serai plus simple
         const res = await register(formData);
 
         if (res?.errors) {
@@ -82,7 +83,7 @@ function RegisterForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormField
                         control={form.control}
-                        name="nom"
+                        name="Nom"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Nom</FormLabel>
@@ -99,7 +100,7 @@ function RegisterForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="prenom"
+                        name="Prenom"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Prénom</FormLabel>
@@ -119,7 +120,7 @@ function RegisterForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormField
                         control={form.control}
-                        name="dateNaissance"
+                        name="DateNaissance"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Date de naissance</FormLabel>
@@ -137,7 +138,7 @@ function RegisterForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="lieuNaissance"
+                        name="LieuNaissance"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Lieu de naissance</FormLabel>
@@ -156,7 +157,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="telephone"
+                    name="Telephone"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Téléphone</FormLabel>
@@ -175,7 +176,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="adresse"
+                    name="Adresse"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Adresse</FormLabel>
@@ -193,7 +194,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="Email"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -216,7 +217,7 @@ function RegisterForm() {
 
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="Password"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Mot de passe</FormLabel>
