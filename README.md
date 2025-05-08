@@ -2,4 +2,4 @@
 
 ## Methodologie
 
-   UML : tout les diagrames son dans le fichier suivant L3 projet de fin d'année.drawio
+   UML : tous les diagrames sont dans le fichier suivant 'L3 projet de fin d'année.drawio'
