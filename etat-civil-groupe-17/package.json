@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^5.0.1",
-        "@prisma/client": "^6.7.0",
         "@radix-ui/react-checkbox": "^1.2.2",
         "@radix-ui/react-dialog": "^1.1.10",
         "@radix-ui/react-label": "^2.1.4",
@@ -44,6 +43,7 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@prisma/client": "^6.7.0",
         "@tailwindcss/postcss": "^4.1.4",
         "@types/bcrypt": "^5.0.2",
         "@types/node": "^20",

@@ -210,7 +210,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\lib\\generated\\prisma",
+      "value": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\etat-civil-groupe-17\\lib\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -224,7 +224,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\etat-civil-groupe-17\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -238,12 +238,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://user:password@localhost:5432/etat_civil?schema=public"
       }
     }
   },
