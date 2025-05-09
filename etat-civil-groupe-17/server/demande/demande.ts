@@ -29,9 +29,9 @@ export async function createDemande(formData: FormData) {
 
     try {
 
-        var session = await getSession();        
+        let session = await getSession();        
         console.log(session);
-        var user = await citoyenRepo.findById(session.userId);
+        let user = await citoyenRepo.findById(session?.userId);
         if(!user){
             const err = new Error("Une erreur est survenue");
             return {
@@ -41,12 +41,16 @@ export async function createDemande(formData: FormData) {
         }
 
         console.log(user);
+        // DateAct
         const newDemande = await demandeRepo.create({
             data: {
                 ...result.data,
-                ID_Citoyen: user.ID_Citoyen,
+                citoyen: {
+                    connect: { ID_Citoyen: user.ID_Citoyen }
+                },
                 Statut: StatutDemande.Soumise,
                 DateDemande: new Date("1993-01-01T00:00:00.000Z")
+
             }
         });
         

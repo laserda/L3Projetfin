@@ -64,9 +64,9 @@ model Demande {
   TypeActe    TypeActe
   Statut      StatutDemande
   DateDemande DateTime
-  ID_Paiement String        @unique
+  ID_Paiement String?       @unique
 
-  citoyen    Citoyen?                   @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  citoyen    Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
   paiement   Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
   document   Document_Acte?
   historique Historique_Modifications[]

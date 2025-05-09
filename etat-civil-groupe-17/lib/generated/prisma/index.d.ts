@@ -2793,7 +2793,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date
-    ID_Paiement: string
+    ID_Paiement: string | null
     _count: DemandeCountAggregateOutputType | null
     _min: DemandeMinAggregateOutputType | null
     _max: DemandeMaxAggregateOutputType | null
@@ -2820,7 +2820,7 @@ export namespace Prisma {
     Statut?: boolean
     DateDemande?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
     document?: boolean | Demande$documentArgs<ExtArgs>
     historique?: boolean | Demande$historiqueArgs<ExtArgs>
@@ -2834,7 +2834,7 @@ export namespace Prisma {
     Statut?: boolean
     DateDemande?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
@@ -2845,7 +2845,7 @@ export namespace Prisma {
     Statut?: boolean
     DateDemande?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
@@ -2860,25 +2860,25 @@ export namespace Prisma {
 
   export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "Statut" | "DateDemande" | "ID_Paiement", ExtArgs["result"]["demande"]>
   export type DemandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
     document?: boolean | Demande$documentArgs<ExtArgs>
     historique?: boolean | Demande$historiqueArgs<ExtArgs>
     _count?: boolean | DemandeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DemandeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
   }
   export type DemandeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | Demande$citoyenArgs<ExtArgs>
+    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     paiement?: boolean | Demande$paiementArgs<ExtArgs>
   }
 
   export type $DemandePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Demande"
     objects: {
-      citoyen: Prisma.$CitoyenPayload<ExtArgs> | null
+      citoyen: Prisma.$CitoyenPayload<ExtArgs>
       paiement: Prisma.$PaiementPayload<ExtArgs> | null
       document: Prisma.$Document_ActePayload<ExtArgs> | null
       historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
@@ -2889,7 +2889,7 @@ export namespace Prisma {
       TypeActe: $Enums.TypeActe
       Statut: $Enums.StatutDemande
       DateDemande: Date
-      ID_Paiement: string
+      ID_Paiement: string | null
     }, ExtArgs["result"]["demande"]>
     composites: {}
   }
@@ -3284,7 +3284,7 @@ export namespace Prisma {
    */
   export interface Prisma__DemandeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    citoyen<T extends Demande$citoyenArgs<ExtArgs> = {}>(args?: Subset<T, Demande$citoyenArgs<ExtArgs>>): Prisma__CitoyenClient<$Result.GetResult<Prisma.$CitoyenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    citoyen<T extends CitoyenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CitoyenDefaultArgs<ExtArgs>>): Prisma__CitoyenClient<$Result.GetResult<Prisma.$CitoyenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     paiement<T extends Demande$paiementArgs<ExtArgs> = {}>(args?: Subset<T, Demande$paiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     document<T extends Demande$documentArgs<ExtArgs> = {}>(args?: Subset<T, Demande$documentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     historique<T extends Demande$historiqueArgs<ExtArgs> = {}>(args?: Subset<T, Demande$historiqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3716,25 +3716,6 @@ export namespace Prisma {
      * Limit how many Demandes to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Demande.citoyen
-   */
-  export type Demande$citoyenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Citoyen
-     */
-    select?: CitoyenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Citoyen
-     */
-    omit?: CitoyenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CitoyenInclude<ExtArgs> | null
-    where?: CitoyenWhereInput
   }
 
   /**
@@ -8406,6 +8387,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -8631,8 +8620,8 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
-    ID_Paiement?: StringFilter<"Demande"> | string
-    citoyen?: XOR<CitoyenNullableScalarRelationFilter, CitoyenWhereInput> | null
+    ID_Paiement?: StringNullableFilter<"Demande"> | string | null
+    citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     historique?: Historique_ModificationsListRelationFilter
@@ -8644,7 +8633,7 @@ export namespace Prisma {
     TypeActe?: SortOrder
     Statut?: SortOrder
     DateDemande?: SortOrder
-    ID_Paiement?: SortOrder
+    ID_Paiement?: SortOrderInput | SortOrder
     citoyen?: CitoyenOrderByWithRelationInput
     paiement?: PaiementOrderByWithRelationInput
     document?: Document_ActeOrderByWithRelationInput
@@ -8661,7 +8650,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
-    citoyen?: XOR<CitoyenNullableScalarRelationFilter, CitoyenWhereInput> | null
+    citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     historique?: Historique_ModificationsListRelationFilter
@@ -8673,7 +8662,7 @@ export namespace Prisma {
     TypeActe?: SortOrder
     Statut?: SortOrder
     DateDemande?: SortOrder
-    ID_Paiement?: SortOrder
+    ID_Paiement?: SortOrderInput | SortOrder
     _count?: DemandeCountOrderByAggregateInput
     _max?: DemandeMaxOrderByAggregateInput
     _min?: DemandeMinOrderByAggregateInput
@@ -8688,7 +8677,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeWithAggregatesFilter<"Demande"> | $Enums.TypeActe
     Statut?: EnumStatutDemandeWithAggregatesFilter<"Demande"> | $Enums.StatutDemande
     DateDemande?: DateTimeWithAggregatesFilter<"Demande"> | Date | string
-    ID_Paiement?: StringWithAggregatesFilter<"Demande"> | string
+    ID_Paiement?: StringNullableWithAggregatesFilter<"Demande"> | string | null
   }
 
   export type Document_ActeWhereInput = {
@@ -9051,7 +9040,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    citoyen?: CitoyenCreateNestedOneWithoutDemandesInput
+    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     paiement?: PaiementCreateNestedOneWithoutDemandeInput
     document?: Document_ActeCreateNestedOneWithoutDemandeInput
     historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
@@ -9063,7 +9052,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
     document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
@@ -9073,7 +9062,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    citoyen?: CitoyenUpdateOneWithoutDemandesNestedInput
+    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
@@ -9085,7 +9074,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
@@ -9096,7 +9085,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
   }
 
   export type DemandeUpdateManyMutationInput = {
@@ -9112,7 +9101,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Document_ActeCreateInput = {
@@ -9513,9 +9502,24 @@ export namespace Prisma {
     not?: NestedEnumStatutDemandeFilter<$PrismaModel> | $Enums.StatutDemande
   }
 
-  export type CitoyenNullableScalarRelationFilter = {
-    is?: CitoyenWhereInput | null
-    isNot?: CitoyenWhereInput | null
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type CitoyenScalarRelationFilter = {
+    is?: CitoyenWhereInput
+    isNot?: CitoyenWhereInput
   }
 
   export type PaiementNullableScalarRelationFilter = {
@@ -9532,6 +9536,11 @@ export namespace Prisma {
     every?: Historique_ModificationsWhereInput
     some?: Historique_ModificationsWhereInput
     none?: Historique_ModificationsWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type Historique_ModificationsOrderByRelationAggregateInput = {
@@ -9583,6 +9592,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutDemandeFilter<$PrismaModel>
     _max?: NestedEnumStatutDemandeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -9919,12 +9946,10 @@ export namespace Prisma {
     set?: $Enums.StatutDemande
   }
 
-  export type CitoyenUpdateOneWithoutDemandesNestedInput = {
+  export type CitoyenUpdateOneRequiredWithoutDemandesNestedInput = {
     create?: XOR<CitoyenCreateWithoutDemandesInput, CitoyenUncheckedCreateWithoutDemandesInput>
     connectOrCreate?: CitoyenCreateOrConnectWithoutDemandesInput
     upsert?: CitoyenUpsertWithoutDemandesInput
-    disconnect?: CitoyenWhereInput | boolean
-    delete?: CitoyenWhereInput | boolean
     connect?: CitoyenWhereUniqueInput
     update?: XOR<XOR<CitoyenUpdateToOneWithWhereWithoutDemandesInput, CitoyenUpdateWithoutDemandesInput>, CitoyenUncheckedUpdateWithoutDemandesInput>
   }
@@ -9961,6 +9986,10 @@ export namespace Prisma {
     update?: Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput | Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput[]
     updateMany?: Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput | Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput[]
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput = {
@@ -10324,6 +10353,20 @@ export namespace Prisma {
     not?: NestedEnumStatutDemandeFilter<$PrismaModel> | $Enums.StatutDemande
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumTypeActeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeActe | EnumTypeActeFieldRefInput<$PrismaModel>
     in?: $Enums.TypeActe[] | ListEnumTypeActeFieldRefInput<$PrismaModel>
@@ -10342,6 +10385,34 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutDemandeFilter<$PrismaModel>
     _max?: NestedEnumStatutDemandeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -10450,7 +10521,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
     document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
@@ -10490,7 +10561,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
-    ID_Paiement?: StringFilter<"Demande"> | string
+    ID_Paiement?: StringNullableFilter<"Demande"> | string | null
   }
 
   export type CitoyenCreateWithoutDemandesInput = {
@@ -10731,7 +10802,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    citoyen?: CitoyenCreateNestedOneWithoutDemandesInput
+    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     paiement?: PaiementCreateNestedOneWithoutDemandeInput
     historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
@@ -10742,7 +10813,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
     historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
@@ -10821,7 +10892,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    citoyen?: CitoyenUpdateOneWithoutDemandesNestedInput
+    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
@@ -10832,7 +10903,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
@@ -10886,7 +10957,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    citoyen?: CitoyenCreateNestedOneWithoutDemandesInput
+    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     document?: Document_ActeCreateNestedOneWithoutDemandeInput
     historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
@@ -10922,7 +10993,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    citoyen?: CitoyenUpdateOneWithoutDemandesNestedInput
+    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
@@ -11074,7 +11145,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    citoyen?: CitoyenCreateNestedOneWithoutDemandesInput
+    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     paiement?: PaiementCreateNestedOneWithoutDemandeInput
     document?: Document_ActeCreateNestedOneWithoutDemandeInput
   }
@@ -11085,7 +11156,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
     document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
   }
 
@@ -11166,7 +11237,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    citoyen?: CitoyenUpdateOneWithoutDemandesNestedInput
+    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     document?: Document_ActeUpdateOneWithoutDemandeNestedInput
   }
@@ -11177,7 +11248,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
@@ -11219,7 +11290,7 @@ export namespace Prisma {
     TypeActe: $Enums.TypeActe
     Statut: $Enums.StatutDemande
     DateDemande: Date | string
-    ID_Paiement: string
+    ID_Paiement?: string | null
   }
 
   export type DemandeUpdateWithoutCitoyenInput = {
@@ -11237,7 +11308,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
@@ -11247,7 +11318,7 @@ export namespace Prisma {
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    ID_Paiement?: StringFieldUpdateOperationsInput | string
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Historique_ModificationsCreateManyDemandeInput = {
