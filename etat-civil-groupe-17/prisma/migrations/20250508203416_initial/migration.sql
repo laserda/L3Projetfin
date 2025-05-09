@@ -32,9 +32,9 @@ CREATE TABLE "Citoyen" (
 CREATE TABLE "Demande" (
     "ID_Demande" TEXT NOT NULL,
     "ID_Citoyen" TEXT NOT NULL,
-    "Type_Acte" "TypeActe" NOT NULL,
+    "TypeActe" "TypeActe" NOT NULL,
     "Statut" "StatutDemande" NOT NULL,
-    "Date_Demande" TIMESTAMP(3) NOT NULL,
+    "DateDemande" TIMESTAMP(3) NOT NULL,
     "ID_Paiement" TEXT NOT NULL,
 
     CONSTRAINT "Demande_pkey" PRIMARY KEY ("ID_Demande")
@@ -45,11 +45,11 @@ CREATE TABLE "Document_Acte" (
     "ID_Document_Acte" TEXT NOT NULL,
     "ID_Demande" TEXT NOT NULL,
     "ID_Agent" TEXT NOT NULL,
-    "Date_Delivrance" TIMESTAMP(3) NOT NULL,
+    "DateDelivrance" TIMESTAMP(3) NOT NULL,
     "Fichier_PDF" TEXT NOT NULL,
-    "Signature_Numerique" TEXT NOT NULL,
-    "Est_Archive" BOOLEAN NOT NULL,
-    "Date_Archivage" TIMESTAMP(3) NOT NULL,
+    "SignatureNumerique" TEXT NOT NULL,
+    "EstArchive" BOOLEAN NOT NULL,
+    "DateArchivage" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Document_Acte_pkey" PRIMARY KEY ("ID_Document_Acte")
 );
@@ -58,8 +58,8 @@ CREATE TABLE "Document_Acte" (
 CREATE TABLE "Paiement" (
     "ID_Paiement" TEXT NOT NULL,
     "Montant" DECIMAL(65,30) NOT NULL,
-    "Mode_Paiement" "ModePaiement" NOT NULL,
-    "Date_Paiement" TIMESTAMP(3) NOT NULL,
+    "ModePaiement" "ModePaiement" NOT NULL,
+    "DatePaiement" TIMESTAMP(3) NOT NULL,
     "Transaction_ID" TEXT NOT NULL,
 
     CONSTRAINT "Paiement_pkey" PRIMARY KEY ("ID_Paiement")
@@ -79,11 +79,11 @@ CREATE TABLE "Agent" (
 -- CreateTable
 CREATE TABLE "Historique_Modifications" (
     "ID_Historique" TEXT NOT NULL,
-    "Type_Entite" "TypeEntite" NOT NULL,
+    "TypeEntite" "TypeEntite" NOT NULL,
     "ID_Entite" TEXT NOT NULL,
     "ID_Agent" TEXT NOT NULL,
     "Action" TEXT NOT NULL,
-    "Date_Modification" TIMESTAMP(3) NOT NULL,
+    "DateModification" TIMESTAMP(3) NOT NULL,
     "Ancienne_Valeur" TEXT NOT NULL,
     "Nouvelle_Valeur" TEXT NOT NULL,
 
