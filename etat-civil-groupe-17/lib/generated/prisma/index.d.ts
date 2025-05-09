@@ -6028,6 +6028,7 @@ export namespace Prisma {
     Prenom: string | null
     Email: string | null
     Role: $Enums.RoleAgent | null
+    Password: string | null
   }
 
   export type AgentMaxAggregateOutputType = {
@@ -6036,6 +6037,7 @@ export namespace Prisma {
     Prenom: string | null
     Email: string | null
     Role: $Enums.RoleAgent | null
+    Password: string | null
   }
 
   export type AgentCountAggregateOutputType = {
@@ -6044,6 +6046,7 @@ export namespace Prisma {
     Prenom: number
     Email: number
     Role: number
+    Password: number
     _all: number
   }
 
@@ -6054,6 +6057,7 @@ export namespace Prisma {
     Prenom?: true
     Email?: true
     Role?: true
+    Password?: true
   }
 
   export type AgentMaxAggregateInputType = {
@@ -6062,6 +6066,7 @@ export namespace Prisma {
     Prenom?: true
     Email?: true
     Role?: true
+    Password?: true
   }
 
   export type AgentCountAggregateInputType = {
@@ -6070,6 +6075,7 @@ export namespace Prisma {
     Prenom?: true
     Email?: true
     Role?: true
+    Password?: true
     _all?: true
   }
 
@@ -6151,6 +6157,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     _count: AgentCountAggregateOutputType | null
     _min: AgentMinAggregateOutputType | null
     _max: AgentMaxAggregateOutputType | null
@@ -6176,6 +6183,7 @@ export namespace Prisma {
     Prenom?: boolean
     Email?: boolean
     Role?: boolean
+    Password?: boolean
     documents?: boolean | Agent$documentsArgs<ExtArgs>
     historiques?: boolean | Agent$historiquesArgs<ExtArgs>
     _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
@@ -6187,6 +6195,7 @@ export namespace Prisma {
     Prenom?: boolean
     Email?: boolean
     Role?: boolean
+    Password?: boolean
   }, ExtArgs["result"]["agent"]>
 
   export type AgentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6195,6 +6204,7 @@ export namespace Prisma {
     Prenom?: boolean
     Email?: boolean
     Role?: boolean
+    Password?: boolean
   }, ExtArgs["result"]["agent"]>
 
   export type AgentSelectScalar = {
@@ -6203,9 +6213,10 @@ export namespace Prisma {
     Prenom?: boolean
     Email?: boolean
     Role?: boolean
+    Password?: boolean
   }
 
-  export type AgentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Agent" | "Nom" | "Prenom" | "Email" | "Role", ExtArgs["result"]["agent"]>
+  export type AgentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Agent" | "Nom" | "Prenom" | "Email" | "Role" | "Password", ExtArgs["result"]["agent"]>
   export type AgentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     documents?: boolean | Agent$documentsArgs<ExtArgs>
     historiques?: boolean | Agent$historiquesArgs<ExtArgs>
@@ -6226,6 +6237,7 @@ export namespace Prisma {
       Prenom: string
       Email: string
       Role: $Enums.RoleAgent
+      Password: string
     }, ExtArgs["result"]["agent"]>
     composites: {}
   }
@@ -6656,6 +6668,7 @@ export namespace Prisma {
     readonly Prenom: FieldRef<"Agent", 'String'>
     readonly Email: FieldRef<"Agent", 'String'>
     readonly Role: FieldRef<"Agent", 'RoleAgent'>
+    readonly Password: FieldRef<"Agent", 'String'>
   }
     
 
@@ -8332,7 +8345,8 @@ export namespace Prisma {
     Nom: 'Nom',
     Prenom: 'Prenom',
     Email: 'Email',
-    Role: 'Role'
+    Role: 'Role',
+    Password: 'Password'
   };
 
   export type AgentScalarFieldEnum = (typeof AgentScalarFieldEnum)[keyof typeof AgentScalarFieldEnum]
@@ -8795,6 +8809,7 @@ export namespace Prisma {
     Prenom?: StringFilter<"Agent"> | string
     Email?: StringFilter<"Agent"> | string
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
+    Password?: StringFilter<"Agent"> | string
     documents?: Document_ActeListRelationFilter
     historiques?: Historique_ModificationsListRelationFilter
   }
@@ -8805,6 +8820,7 @@ export namespace Prisma {
     Prenom?: SortOrder
     Email?: SortOrder
     Role?: SortOrder
+    Password?: SortOrder
     documents?: Document_ActeOrderByRelationAggregateInput
     historiques?: Historique_ModificationsOrderByRelationAggregateInput
   }
@@ -8818,6 +8834,7 @@ export namespace Prisma {
     Nom?: StringFilter<"Agent"> | string
     Prenom?: StringFilter<"Agent"> | string
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
+    Password?: StringFilter<"Agent"> | string
     documents?: Document_ActeListRelationFilter
     historiques?: Historique_ModificationsListRelationFilter
   }, "ID_Agent" | "Email">
@@ -8828,6 +8845,7 @@ export namespace Prisma {
     Prenom?: SortOrder
     Email?: SortOrder
     Role?: SortOrder
+    Password?: SortOrder
     _count?: AgentCountOrderByAggregateInput
     _max?: AgentMaxOrderByAggregateInput
     _min?: AgentMinOrderByAggregateInput
@@ -8842,6 +8860,7 @@ export namespace Prisma {
     Prenom?: StringWithAggregatesFilter<"Agent"> | string
     Email?: StringWithAggregatesFilter<"Agent"> | string
     Role?: EnumRoleAgentWithAggregatesFilter<"Agent"> | $Enums.RoleAgent
+    Password?: StringWithAggregatesFilter<"Agent"> | string
   }
 
   export type Historique_ModificationsWhereInput = {
@@ -9222,6 +9241,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     documents?: Document_ActeCreateNestedManyWithoutAgentInput
     historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
@@ -9232,6 +9252,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
     historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
@@ -9242,6 +9263,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     documents?: Document_ActeUpdateManyWithoutAgentNestedInput
     historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
@@ -9252,6 +9274,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
     historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
@@ -9262,6 +9285,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
   }
 
   export type AgentUpdateManyMutationInput = {
@@ -9270,6 +9294,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
   }
 
   export type AgentUncheckedUpdateManyInput = {
@@ -9278,6 +9303,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
   }
 
   export type Historique_ModificationsCreateInput = {
@@ -9707,6 +9733,7 @@ export namespace Prisma {
     Prenom?: SortOrder
     Email?: SortOrder
     Role?: SortOrder
+    Password?: SortOrder
   }
 
   export type AgentMaxOrderByAggregateInput = {
@@ -9715,6 +9742,7 @@ export namespace Prisma {
     Prenom?: SortOrder
     Email?: SortOrder
     Role?: SortOrder
+    Password?: SortOrder
   }
 
   export type AgentMinOrderByAggregateInput = {
@@ -9723,6 +9751,7 @@ export namespace Prisma {
     Prenom?: SortOrder
     Email?: SortOrder
     Role?: SortOrder
+    Password?: SortOrder
   }
 
   export type EnumRoleAgentWithAggregatesFilter<$PrismaModel = never> = {
@@ -10715,6 +10744,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
 
@@ -10724,6 +10754,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
 
@@ -10811,6 +10842,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
 
@@ -10820,6 +10852,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
 
@@ -11010,6 +11043,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     documents?: Document_ActeCreateNestedManyWithoutAgentInput
   }
 
@@ -11019,6 +11053,7 @@ export namespace Prisma {
     Prenom: string
     Email: string
     Role: $Enums.RoleAgent
+    Password: string
     documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
   }
 
@@ -11096,6 +11131,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     documents?: Document_ActeUpdateManyWithoutAgentNestedInput
   }
 
@@ -11105,6 +11141,7 @@ export namespace Prisma {
     Prenom?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
+    Password?: StringFieldUpdateOperationsInput | string
     documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
   }
 

@@ -165,7 +165,8 @@ exports.Prisma.AgentScalarFieldEnum = {
   Nom: 'Nom',
   Prenom: 'Prenom',
   Email: 'Email',
-  Role: 'Role'
+  Role: 'Role',
+  Password: 'Password'
 };
 
 exports.Prisma.Historique_ModificationsScalarFieldEnum = {

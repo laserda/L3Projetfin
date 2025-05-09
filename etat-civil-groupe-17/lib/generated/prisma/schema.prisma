@@ -104,12 +104,12 @@ model Paiement {
 }
 
 model Agent {
-  ID_Agent String    @id @default(uuid())
-  Nom      String
-  Prenom   String
-  Email    String    @unique
-  Role     RoleAgent
-
+  ID_Agent    String                     @id @default(uuid())
+  Nom         String
+  Prenom      String
+  Email       String                     @unique
+  Role        RoleAgent
+  Password    String
   documents   Document_Acte[]
   historiques Historique_Modifications[]
 }
