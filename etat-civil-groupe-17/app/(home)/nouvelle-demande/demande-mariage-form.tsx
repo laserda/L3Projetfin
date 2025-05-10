@@ -15,7 +15,6 @@ import {
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -23,38 +22,24 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-
-import { getRequestTypeName } from "@/utils";
-import { RequestType } from "@/types";
+import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
 import { createDemande } from "@/server/demande/demande";
-import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validation-demande";
-import { CalendarIcon } from "lucide-react";
+import { createDemandeMariageSchema, CreateDemandeMariageFormData } from "@/validation/validation-demande";
+import { Info } from "lucide-react";
 import { TypeActe } from "@/lib/generated/prisma";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ErrorsMessage } from "@/enums/errors-message";
 
 const DemandeMariageForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const [err, setErr] = useState("");
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
     const form = useForm({
-        resolver: zodResolver(createDemandeSchema),
+        resolver: zodResolver(createDemandeMariageSchema),
         defaultValues: {
             TypeActe: TypeActe.Mariage,
         },
@@ -66,7 +51,7 @@ const DemandeMariageForm = () => {
         }
     }, [typeFromUrl, form]);
 
-    const onSubmit = async (data: CreateDemandeFormData) => {
+    const onSubmit = async (data: CreateDemandeMariageFormData) => {
         try {
 
             const formData = new FormData();
@@ -74,34 +59,22 @@ const DemandeMariageForm = () => {
                 formData.append(key, value);
             });
 
-            var res = await createDemande(formData);
-            // const requests = JSON.parse(
-            //     localStorage.getItem("requests") || "[]"
-            // );
-            // const newRequest = {
-            //     id: crypto.randomUUID(),
-            //     ...data,
-            //     statut: "pending",
-            //     created_at: new Date().toISOString(),
-            // };
-            // requests.push(newRequest);
-            // localStorage.setItem("requests", JSON.stringify(requests));
+            var newRequest = await createDemande(formData);
 
-            // console.log(
-            //     `Email envoyé à ${data.email} pour confirmer la demande d'acte ${data.type}`
-            // );
+            if (!newRequest.success) {
+                setErr(ErrorsMessage.errors);
+                return
+            }
 
-            // toast.success("Demande envoyée avec succès !", {
-            //     description: "Vous recevrez un email de confirmation sous peu.",
-            // });
+            router.push(`/confirmation/${newRequest.ID_Demande}`);
 
-            // router.push(`/confirmation/${newRequest.id}`);
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
                 description: "Veuillez réessayer plus tard.",
             });
         }
+
     };
 
     return (
@@ -120,44 +93,28 @@ const DemandeMariageForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-                            {/* <FormField
-                                control={form.control}
-                                name="TypeActe"                                
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Type de document</FormLabel>
-                                        <Select
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Sélectionnez un type de document" />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {Object.values(TypeActe).map((type) => (
-                                                    <SelectItem key={type} value={type}>
-                                                        {getRequestTypeName(type)}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            /> */}
-
-                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {err && (
+                                <Alert
+                                    variant="destructive"
+                                    className="flex items-center border-red-500"
+                                >
+                                    <Info className="h-4 w-4" color="red" />
+                                    <div>
+                                        <AlertTitle>Erreur</AlertTitle>
+                                        <AlertDescription>{err}</AlertDescription>
+                                    </div>
+                                </Alert>
+                            )}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="NumeroActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Numéro d'acte</FormLabel>
+                                            <FormLabel>Numéro de l'acte de mariage</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Numéro d'acte"
+                                                    placeholder="Numéro de l'acte de mariage"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -166,122 +123,52 @@ const DemandeMariageForm = () => {
                                     )}
                                 />
 
-                                {/* <FormField
+                                <FormField
                                     control={form.control}
-                                    name="prenom"
+                                    name="DateActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Prénom</FormLabel>
+                                            <FormLabel>Date du mariage</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Prénom"
+                                                    placeholder="Date du mariage"
                                                     {...field}
+                                                    type="date"
                                                 />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                /> */}
+                                />
                             </div>
-
-                            {/*<FormField
-                                control={form.control}
-                                name="parents"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Parents</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="Noms et prénoms des parents"
-                                                {...field}
-                                                value={field.value || ""}
-                                            />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Pour les actes de naissance,
-                                            indiquez les noms des parents. Pour
-                                            les actes de mariage, indiquez le
-                                            nom du conjoint.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
-                                    name="date"
+                                    name="Nom"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Date</FormLabel>
-
-                                            <Popover>
-                                                <PopoverTrigger asChild>
-                                                    <FormControl>
-                                                        <Button
-                                                            variant={"outline"}
-                                                            className={`"w-[240px] pl-3 text-left font-normal",
-                                                            ${!field.value && "text-muted-foreground"}`}
-                                                        >
-                                                            {field.value ? (
-                                                                <span>
-                                                                    {new Date(
-                                                                        field.value
-                                                                    ).toLocaleDateString(
-                                                                        "fr-FR"
-                                                                    )}
-                                                                </span>
-                                                            ) : (
-                                                                <span>
-                                                                    Date de
-                                                                    naissance,
-                                                                    mariage ou
-                                                                    décès
-                                                                </span>
-                                                            )}
-                                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                        </Button>
-                                                    </FormControl>
-                                                </PopoverTrigger>
-                                                <PopoverContent
-                                                    className="w-auto p-0"
-                                                    align="start"
-                                                >
-                                                    <Calendar
-                                                        mode="single"
-                                                        selected={
-                                                            new Date(
-                                                                field.value
-                                                            )
-                                                        }
-                                                        onSelect={
-                                                            field.onChange
-                                                        }
-                                                        disabled={(date) =>
-                                                            date > new Date() ||
-                                                            date <
-                                                                new Date(
-                                                                    "1900-01-01"
-                                                                )
-                                                        }
-                                                        initialFocus
-                                                    />
-                                                </PopoverContent>
-                                            </Popover>
+                                            <FormLabel>Nom de l'epoux</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Nom de l'epoux"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
 
                                 <FormField
                                     control={form.control}
-                                    name="lieu"
+                                    name="Prenom"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Lieu</FormLabel>
+                                            <FormLabel>Prenom de l'epoux</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Lieu de naissance, mariage ou décès"
+                                                    placeholder="Prénom de l'epoux"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -290,28 +177,6 @@ const DemandeMariageForm = () => {
                                     )}
                                 />
                             </div>
-
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="email"
-                                                placeholder="Votre adresse email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Pour recevoir les notifications
-                                            concernant votre demande
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />*/}
 
                             <div className="border-t pt-4">
                                 <div className="bg-gray-50 p-4 rounded-lg mb-4">
@@ -327,7 +192,7 @@ const DemandeMariageForm = () => {
                                         votre demande soit traitée.
                                     </p>
                                 </div>
-{/* 
+                                {/* 
                                 <FormField
                                     control={form.control}
                                     name="paymentConfirmed"

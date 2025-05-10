@@ -19,4 +19,17 @@ export const createDemandeSchema = z.object({
     }),
 })
   
+
+export const createDemandeMariageSchema = z.object({
+    TypeActe: z.nativeEnum(TypeActe),
+    NumeroActe: z.string(),
+    DemandePourTier: z.nativeEnum(DemandePourTier).optional().transform((val, ctx: any) => {
+        return DemandePourTier.Autre;
+    }),
+    Prenom: z.string(),
+    Nom: z.string(),
+    DateActe: z.string(),
+})
+  
 export type CreateDemandeFormData = z.infer<typeof createDemandeSchema>;
+export type CreateDemandeMariageFormData = z.infer<typeof createDemandeMariageSchema>;
