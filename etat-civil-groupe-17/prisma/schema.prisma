@@ -109,7 +109,7 @@ model Agent {
   Prenom     String
   Email      String       @unique
   Role       RoleAgent
-
+  Password      String
   documents  Document_Acte[]
   historiques Historique_Modifications[]
 }

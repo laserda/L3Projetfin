@@ -9,8 +9,14 @@ import {
 import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import LoginForm from "./loginForm";
+import { getSession } from "@/server/sessions/citoyen_session";
 
-const Page = () => {
+
+
+const Page = async () => {
+    const session = await getSession()
+    console.log(session);
+    
     return (
         <div className="flex justify-center items-center min-h-[80vh]">
             <Card className="w-full max-w-md min-w-[425px]">

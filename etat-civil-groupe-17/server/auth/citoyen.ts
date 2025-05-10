@@ -25,6 +25,8 @@ export async function login(formData: FormData) {
     }
     try {
         const isCitoyen = await getCitoyenByEmail(result.data.Email);
+
+        
         if (!isCitoyen) {
             return {
                 errors: {
@@ -34,7 +36,7 @@ export async function login(formData: FormData) {
         }
         const isPasswordCorrect = await verifyPassword(
             result.data.Password,
-            isCitoyen.password
+            isCitoyen.Password
         );
         if (!isPasswordCorrect) {
             return {
@@ -45,13 +47,17 @@ export async function login(formData: FormData) {
             };
         }
 
-        await createSession(isCitoyen.id);
+        await createSession(isCitoyen.ID_Citoyen);
         return {
             errors: null,
             succes: true,
         };
     } catch (error) {
         console.log(error);
+        return {
+            errors: error,
+            succes: false,
+        };
     }
 }
 
