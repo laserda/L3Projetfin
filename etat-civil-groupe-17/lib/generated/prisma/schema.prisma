@@ -21,8 +21,9 @@ enum TypeActe {
 }
 
 enum StatutDemande {
-  Soumise
-  En_traitement
+  SoumiseEnAttenteDePaiment
+  SoumisePayee
+  EnTraitement
   Validée
   Refusée
   Livrée
@@ -59,12 +60,17 @@ model Citoyen {
 }
 
 model Demande {
-  ID_Demande  String        @id @default(uuid())
-  ID_Citoyen  String
-  TypeActe    TypeActe
-  Statut      StatutDemande
-  DateDemande DateTime
-  ID_Paiement String?       @unique
+  ID_Demande      String        @id @default(uuid())
+  ID_Citoyen      String
+  TypeActe        TypeActe
+  NumeroActe      String        @default("")
+  Statut          StatutDemande
+  DemandePourTier Boolean       @default(false)
+  DateDemande     DateTime
+  DateNaissance   DateTime?
+  DateDeces       DateTime?
+  DateMariage     DateTime?
+  ID_Paiement     String?       @unique
 
   citoyen    Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
   paiement   Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
