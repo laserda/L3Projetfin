@@ -51,6 +51,8 @@ const DemandeNaissanceForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const [demandePourTier, setDemandePourTier] = useState<DemandePourTier>(DemandePourTier.Moi);
+
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
     const form = useForm({
@@ -74,30 +76,9 @@ const DemandeNaissanceForm = () => {
                 formData.append(key, value);
             });
 
-            console.log(formData)
+            var newRequest = await createDemande(formData);
 
-            var res = await createDemande(formData);
-            // const requests = JSON.parse(
-            //     localStorage.getItem("requests") || "[]"
-            // );
-            // const newRequest = {
-            //     id: crypto.randomUUID(),
-            //     ...data,
-            //     statut: "pending",
-            //     created_at: new Date().toISOString(),
-            // };
-            // requests.push(newRequest);
-            // localStorage.setItem("requests", JSON.stringify(requests));
-
-            // console.log(
-            //     `Email envoyé à ${data.email} pour confirmer la demande d'acte ${data.type}`
-            // );
-
-            // toast.success("Demande envoyée avec succès !", {
-            //     description: "Vous recevrez un email de confirmation sous peu.",
-            // });
-
-            // router.push(`/confirmation/${newRequest.id}`);
+            //router.push(`/confirmation/${newRequest.ID_Demande}`);
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
@@ -128,10 +109,13 @@ const DemandeNaissanceForm = () => {
                                 name="DemandePourTier"
                                 render={({ field }) => (
                                     <FormItem className="space-y-3">
-                                        <FormLabel>Vous fait la demande pour une autre personne ?</FormLabel>
+                                        <FormLabel>Pour qui faite vous la demande ?</FormLabel>
                                         <FormControl>
                                             <Select
-                                                onValueChange={field.onChange}
+                                                onValueChange={(e)=>{
+                                                    setDemandePourTier(e as DemandePourTier)
+                                                    field.onChange(e)
+                                                }}
                                                 {...field}
                                             >
                                                 <FormControl>
@@ -171,7 +155,7 @@ const DemandeNaissanceForm = () => {
                                     )}
                                 />
 
-                                <FormField
+                                {demandePourTier != DemandePourTier.Moi && <FormField
                                     control={form.control}
                                     name="DateActe"
                                     render={({ field }) => (
@@ -187,11 +171,11 @@ const DemandeNaissanceForm = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                />}
                             </div>
 
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                           {demandePourTier != DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="Nom"
@@ -225,7 +209,7 @@ const DemandeNaissanceForm = () => {
                                         </FormItem>
                                     )}
                                 />
-                            </div>
+                            </div>}
 
                             {/*<FormField
                                 control={form.control}
