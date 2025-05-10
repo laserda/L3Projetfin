@@ -40,7 +40,7 @@ export async function createDemande(formData: FormData) {
             };
         }
 
-        console.log(user);
+        console.log(result.data);
         // DateAct
         const newDemande = await demandeRepo.create({
             data: {
@@ -50,6 +50,7 @@ export async function createDemande(formData: FormData) {
                 },
                 Statut: StatutDemande.SoumiseEnAttenteDePaiment,
                 DateDemande: new Date("1993-01-01T00:00:00.000Z"),
+                DateActe:result.data.DateActe.length == 0 ? '' : `${result.data.DateActe}T00:00:00.000Z`,
             }
         });
         

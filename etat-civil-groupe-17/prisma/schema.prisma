@@ -20,6 +20,13 @@ enum TypeActe {
   Décès
 }
 
+enum DemandePourTier{
+  Moi
+  MonEnfant
+  UnMenbreFamile
+  Autre
+}
+
 enum StatutDemande {
   SoumiseEnAttenteDePaiment
   SoumisePayee
@@ -64,12 +71,12 @@ model Demande {
   ID_Citoyen    String
   TypeActe      TypeActe
   NumeroActe     String   @default("")
+  Nom            String   @default("")
+  Prenom         String   @default("")
   Statut        StatutDemande
-  DemandePourTier  Boolean   @default(false)
+  DemandePourTier  DemandePourTier 
   DateDemande   DateTime   
-  DateNaissance  DateTime?   
-  DateDeces     DateTime?   
-  DateMariage   DateTime?   
+  DateActe  DateTime?  
   ID_Paiement   String?     @unique
 
   citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])

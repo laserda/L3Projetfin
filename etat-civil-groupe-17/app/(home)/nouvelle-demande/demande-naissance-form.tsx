@@ -40,12 +40,12 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { getRequestTypeName } from "@/utils";
+import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
 import { RequestType } from "@/types";
 import { createDemande } from "@/server/demande/demande";
 import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validation-demande";
 import { CalendarIcon } from "lucide-react";
-import { TypeActe } from "@/lib/generated/prisma";
+import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
 
 const DemandeNaissanceForm = () => {
     const router = useRouter();
@@ -73,6 +73,8 @@ const DemandeNaissanceForm = () => {
             Object.entries(data).forEach(([key, value]) => {
                 formData.append(key, value);
             });
+
+            console.log(formData)
 
             var res = await createDemande(formData);
             // const requests = JSON.parse(
@@ -120,35 +122,38 @@ const DemandeNaissanceForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-                            {/* <FormField
+
+                            <FormField
                                 control={form.control}
-                                name="TypeActe"                                
+                                name="DemandePourTier"
                                 render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Type de document</FormLabel>
-                                        <Select
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Sélectionnez un type de document" />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {Object.values(TypeActe).map((type) => (
-                                                    <SelectItem key={type} value={type}>
-                                                        {getRequestTypeName(type)}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
+                                    <FormItem className="space-y-3">
+                                        <FormLabel>Vous fait la demande pour une autre personne ?</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={field.onChange}
+                                                {...field}
+                                            >
+                                                <FormControl>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Sélectionnez un type de document" />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent >
+                                                    {Object.values(DemandePourTier).map((type) => (
+                                                        <SelectItem key={type} value={type}>
+                                                            {getRequestDemandePourTier(type)}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            /> */}
+                            />
 
-                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="NumeroActe"
@@ -166,12 +171,50 @@ const DemandeNaissanceForm = () => {
                                     )}
                                 />
 
-                                {/* <FormField
+                                <FormField
                                     control={form.control}
-                                    name="prenom"
+                                    name="DateActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Prénom</FormLabel>
+                                            <FormLabel>Date de naissance</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="date de naissance"
+                                                    {...field}
+                                                    type="date"
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <FormField
+                                    control={form.control}
+                                    name="Nom"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Nom du tier</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Numéro d'acte"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="Prenom"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Prenom du tier </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     placeholder="Prénom"
@@ -181,7 +224,7 @@ const DemandeNaissanceForm = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                /> */}
+                                />
                             </div>
 
                             {/*<FormField
@@ -327,7 +370,7 @@ const DemandeNaissanceForm = () => {
                                         votre demande soit traitée.
                                     </p>
                                 </div>
-{/* 
+                                {/* 
                                 <FormField
                                     control={form.control}
                                     name="paymentConfirmed"

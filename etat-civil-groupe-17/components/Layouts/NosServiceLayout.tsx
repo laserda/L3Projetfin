@@ -2,6 +2,7 @@ import { FileText } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { TypeActe } from "@/lib/generated/prisma";
 
 
 
@@ -11,20 +12,20 @@ const features = [
         description:
             "Obtenez une copie de votre acte de naissance facilement et rapidement.",
         icon: <FileText className="h-10 w-10 text-ci-orange" />,
-        href: "/nouvelle-demande?type=Naissance",
+        href: `/nouvelle-demande?type=${TypeActe.Naissance}`,
     },
     {
         title: "Demande d'acte de mariage",
         description:
             "Demandez une copie de votre acte de mariage en quelques clics.",
         icon: <FileText className="h-10 w-10 text-ci-orange" />,
-        href: "/nouvelle-demande?type=Mariage",
+        href: `/nouvelle-demande?type=${TypeActe.Mariage}`,
     },
     {
         title: "Demande d'acte de décès",
         description: "Obtenez un certificat de décès simplement et rapidement.",
         icon: <FileText className="h-10 w-10 text-ci-orange" />,
-        href: "/nouvelle-demande?type=Décès",
+        href: `/nouvelle-demande?type=${TypeActe.Décès}`,
     },
 ];
 function NosServiceLayout() {

@@ -1,4 +1,4 @@
-import { TypeActe } from "@/lib/generated/prisma";
+import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
 // Formater les dates
 export const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -18,6 +18,20 @@ export const getRequestTypeName = (type: string) => {
             return "Acte de mariage";
         case TypeActe.Décès:
             return "Acte de décès";
+        default:
+            return type;
+    }
+};
+
+
+export const getRequestDemandePourTier = (type: string) => {
+    switch (type) {
+        case DemandePourTier.Moi:
+            return "Moi même";
+        case DemandePourTier.MonEnfant:
+            return "Mon enfant";
+        case DemandePourTier.UnMenbreFamile:
+            return "Un mebre de la famille";
         default:
             return type;
     }
