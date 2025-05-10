@@ -136,8 +136,13 @@ exports.Prisma.DemandeScalarFieldEnum = {
   ID_Demande: 'ID_Demande',
   ID_Citoyen: 'ID_Citoyen',
   TypeActe: 'TypeActe',
+  NumeroActe: 'NumeroActe',
   Statut: 'Statut',
+  DemandePourTier: 'DemandePourTier',
   DateDemande: 'DateDemande',
+  DateNaissance: 'DateNaissance',
+  DateDeces: 'DateDeces',
+  DateMariage: 'DateMariage',
   ID_Paiement: 'ID_Paiement'
 };
 
@@ -201,8 +206,9 @@ exports.TypeActe = exports.$Enums.TypeActe = {
 };
 
 exports.StatutDemande = exports.$Enums.StatutDemande = {
-  Soumise: 'Soumise',
-  En_traitement: 'En_traitement',
+  SoumiseEnAttenteDePaiment: 'SoumiseEnAttenteDePaiment',
+  SoumisePayee: 'SoumisePayee',
+  EnTraitement: 'EnTraitement',
   Validée: 'Validée',
   Refusée: 'Refusée',
   Livrée: 'Livrée'

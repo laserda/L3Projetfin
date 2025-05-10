@@ -48,9 +48,8 @@ export async function createDemande(formData: FormData) {
                 citoyen: {
                     connect: { ID_Citoyen: user.ID_Citoyen }
                 },
-                Statut: StatutDemande.Soumise,
-                DateDemande: new Date("1993-01-01T00:00:00.000Z")
-
+                Statut: StatutDemande.SoumiseEnAttenteDePaiment,
+                DateDemande: new Date("1993-01-01T00:00:00.000Z"),
             }
         });
         

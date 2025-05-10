@@ -47,7 +47,7 @@ import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validat
 import { CalendarIcon } from "lucide-react";
 import { TypeActe } from "@/lib/generated/prisma";
 
-const DemandeForm = () => {
+const DemandeDecesForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -56,7 +56,7 @@ const DemandeForm = () => {
     const form = useForm({
         resolver: zodResolver(createDemandeSchema),
         defaultValues: {
-            TypeActe: typeFromUrl ,
+            TypeActe: TypeActe.Décès,
         },
     });
 
@@ -104,25 +104,11 @@ const DemandeForm = () => {
         }
     };
 
-    const getFormTitle = () => {
-        const type = form.watch("TypeActe");
-        switch (type) {
-            case "Naissance":
-                return "Demande d'acte de naissance";
-            case "Mariage":
-                return "Demande d'acte de mariage";
-            case "Décès":
-                return "Demande d'acte de décès";
-            default:
-                return "Nouvelle demande";
-        }
-    };
-
     return (
         <div className="max-w-3xl mx-auto">
             <Card>
                 <CardHeader>
-                    <CardTitle>{getFormTitle()}</CardTitle>
+                    <CardTitle>Demande d'acte de décès</CardTitle>
                     <CardDescription>
                         Remplissez ce formulaire pour demander votre document
                         officiel.
@@ -134,9 +120,9 @@ const DemandeForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
-                                name="TypeActe"
+                                name="TypeActe"                                
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Type de document</FormLabel>
@@ -160,7 +146,7 @@ const DemandeForm = () => {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            /> */}
 
                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
@@ -388,4 +374,4 @@ const DemandeForm = () => {
     );
 };
 
-export default DemandeForm;
+export default DemandeDecesForm;
