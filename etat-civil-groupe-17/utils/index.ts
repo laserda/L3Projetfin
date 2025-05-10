@@ -36,7 +36,6 @@ export const getRequestDemandePourTier = (type: string) => {
             return type;
     }
 };
-<<<<<<< HEAD
 
 export const getDateTimeISOString = () => {
     const todayAtMidnight = new Date();
@@ -45,5 +44,3 @@ export const getDateTimeISOString = () => {
     return formattedDate;
 };
 
-=======
->>>>>>> 01d5ee7d8070ca0275bb4b8ecaa267485d1ecb35
