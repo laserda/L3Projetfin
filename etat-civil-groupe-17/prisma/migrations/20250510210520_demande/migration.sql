@@ -2,7 +2,10 @@
 CREATE TYPE "TypeActe" AS ENUM ('Naissance', 'Mariage', 'Décès');
 
 -- CreateEnum
-CREATE TYPE "StatutDemande" AS ENUM ('Soumise', 'En_traitement', 'Validée', 'Refusée', 'Livrée');
+CREATE TYPE "DemandePourTier" AS ENUM ('Moi', 'MonEnfant', 'UnMenbreFamile', 'Autre');
+
+-- CreateEnum
+CREATE TYPE "StatutDemande" AS ENUM ('SoumiseEnAttenteDePaiment', 'SoumisePayee', 'EnTraitement', 'Validée', 'Refusée', 'Livrée');
 
 -- CreateEnum
 CREATE TYPE "ModePaiement" AS ENUM ('Mobile_Money', 'Carte_Bancaire', 'Virement');
@@ -33,9 +36,14 @@ CREATE TABLE "Demande" (
     "ID_Demande" TEXT NOT NULL,
     "ID_Citoyen" TEXT NOT NULL,
     "TypeActe" "TypeActe" NOT NULL,
+    "NumeroActe" TEXT NOT NULL DEFAULT '',
+    "Nom" TEXT NOT NULL DEFAULT '',
+    "Prenom" TEXT NOT NULL DEFAULT '',
     "Statut" "StatutDemande" NOT NULL,
+    "DemandePourTier" "DemandePourTier" NOT NULL,
     "DateDemande" TIMESTAMP(3) NOT NULL,
-    "ID_Paiement" TEXT NOT NULL,
+    "DateActe" TIMESTAMP(3),
+    "ID_Paiement" TEXT,
 
     CONSTRAINT "Demande_pkey" PRIMARY KEY ("ID_Demande")
 );
@@ -72,6 +80,7 @@ CREATE TABLE "Agent" (
     "Prenom" TEXT NOT NULL,
     "Email" TEXT NOT NULL,
     "Role" "RoleAgent" NOT NULL,
+    "Password" TEXT NOT NULL,
 
     CONSTRAINT "Agent_pkey" PRIMARY KEY ("ID_Agent")
 );
@@ -127,7 +136,7 @@ CREATE INDEX "Historique_Modifications_ID_Entite_idx" ON "Historique_Modificatio
 ALTER TABLE "Demande" ADD CONSTRAINT "Demande_ID_Citoyen_fkey" FOREIGN KEY ("ID_Citoyen") REFERENCES "Citoyen"("ID_Citoyen") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Demande" ADD CONSTRAINT "Demande_ID_Paiement_fkey" FOREIGN KEY ("ID_Paiement") REFERENCES "Paiement"("ID_Paiement") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Demande" ADD CONSTRAINT "Demande_ID_Paiement_fkey" FOREIGN KEY ("ID_Paiement") REFERENCES "Paiement"("ID_Paiement") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Document_Acte" ADD CONSTRAINT "Document_Acte_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;

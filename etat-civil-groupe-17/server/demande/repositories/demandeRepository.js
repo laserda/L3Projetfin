@@ -11,9 +11,4 @@ export class DemandeRepository extends GenericRepository {
   //   })
   // }
 
-  // async findById(id) {
-  //   return await this.model.findUnique({
-  //     where: { ID_Agent: id },
-  //   })
-  // }
 }

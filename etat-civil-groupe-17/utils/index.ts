@@ -1,4 +1,4 @@
-import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
+import { DemandePourTier, StatutDemande, TypeActe } from "@/lib/generated/prisma";
 // Formater les dates
 export const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -22,6 +22,27 @@ export const getRequestTypeName = (type: string) => {
             return type;
     }
 };
+
+
+export const getStatusDemande = (status: string) => {
+    switch (status) {
+        case StatutDemande.SoumiseEnAttenteDePaiment:
+            return "En attente de paiement";
+        case StatutDemande.SoumisePayee:
+            return "En attente de traitement";
+        case StatutDemande.EnTraitement:
+            return "En cours de traitement";
+        case StatutDemande.Validée:
+            return "En attente de signature";
+        case StatutDemande.Livrée:
+            return "Livrée";
+        case StatutDemande.Refusée:
+            return "Refusée";
+        default:
+            return status;
+    }
+};
+
 
 
 export const getRequestDemandePourTier = (type: string) => {

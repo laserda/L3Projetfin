@@ -1440,11 +1440,11 @@ export namespace Prisma {
    */
 
   export type DemandeCountOutputType = {
-    historique: number
+    Historique: number
   }
 
   export type DemandeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    historique?: boolean | DemandeCountOutputTypeCountHistoriqueArgs
+    Historique?: boolean | DemandeCountOutputTypeCountHistoriqueArgs
   }
 
   // Custom InputTypes
@@ -1471,11 +1471,11 @@ export namespace Prisma {
    */
 
   export type Document_ActeCountOutputType = {
-    historique: number
+    Historique: number
   }
 
   export type Document_ActeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    historique?: boolean | Document_ActeCountOutputTypeCountHistoriqueArgs
+    Historique?: boolean | Document_ActeCountOutputTypeCountHistoriqueArgs
   }
 
   // Custom InputTypes
@@ -1502,13 +1502,13 @@ export namespace Prisma {
    */
 
   export type AgentCountOutputType = {
-    documents: number
-    historiques: number
+    Documents: number
+    Historiques: number
   }
 
   export type AgentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    documents?: boolean | AgentCountOutputTypeCountDocumentsArgs
-    historiques?: boolean | AgentCountOutputTypeCountHistoriquesArgs
+    Documents?: boolean | AgentCountOutputTypeCountDocumentsArgs
+    Historiques?: boolean | AgentCountOutputTypeCountHistoriquesArgs
   }
 
   // Custom InputTypes
@@ -2875,10 +2875,10 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
-    document?: boolean | Demande$documentArgs<ExtArgs>
-    historique?: boolean | Demande$historiqueArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
+    Document?: boolean | Demande$DocumentArgs<ExtArgs>
+    Historique?: boolean | Demande$HistoriqueArgs<ExtArgs>
     _count?: boolean | DemandeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
@@ -2894,8 +2894,8 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
   export type DemandeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2910,8 +2910,8 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
   export type DemandeSelectScalar = {
@@ -2930,28 +2930,28 @@ export namespace Prisma {
 
   export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "NumeroActe" | "Nom" | "Prenom" | "Statut" | "DemandePourTier" | "DateDemande" | "DateActe" | "ID_Paiement", ExtArgs["result"]["demande"]>
   export type DemandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
-    document?: boolean | Demande$documentArgs<ExtArgs>
-    historique?: boolean | Demande$historiqueArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
+    Document?: boolean | Demande$DocumentArgs<ExtArgs>
+    Historique?: boolean | Demande$HistoriqueArgs<ExtArgs>
     _count?: boolean | DemandeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DemandeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }
   export type DemandeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
-    paiement?: boolean | Demande$paiementArgs<ExtArgs>
+    Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
+    Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }
 
   export type $DemandePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Demande"
     objects: {
-      citoyen: Prisma.$CitoyenPayload<ExtArgs>
-      paiement: Prisma.$PaiementPayload<ExtArgs> | null
-      document: Prisma.$Document_ActePayload<ExtArgs> | null
-      historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
+      Citoyen: Prisma.$CitoyenPayload<ExtArgs>
+      Paiement: Prisma.$PaiementPayload<ExtArgs> | null
+      Document: Prisma.$Document_ActePayload<ExtArgs> | null
+      Historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Demande: string
@@ -3359,10 +3359,10 @@ export namespace Prisma {
    */
   export interface Prisma__DemandeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    citoyen<T extends CitoyenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CitoyenDefaultArgs<ExtArgs>>): Prisma__CitoyenClient<$Result.GetResult<Prisma.$CitoyenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    paiement<T extends Demande$paiementArgs<ExtArgs> = {}>(args?: Subset<T, Demande$paiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    document<T extends Demande$documentArgs<ExtArgs> = {}>(args?: Subset<T, Demande$documentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    historique<T extends Demande$historiqueArgs<ExtArgs> = {}>(args?: Subset<T, Demande$historiqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Citoyen<T extends CitoyenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CitoyenDefaultArgs<ExtArgs>>): Prisma__CitoyenClient<$Result.GetResult<Prisma.$CitoyenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Paiement<T extends Demande$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Demande$PaiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Document<T extends Demande$DocumentArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DocumentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Historique<T extends Demande$HistoriqueArgs<ExtArgs> = {}>(args?: Subset<T, Demande$HistoriqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3799,9 +3799,9 @@ export namespace Prisma {
   }
 
   /**
-   * Demande.paiement
+   * Demande.Paiement
    */
-  export type Demande$paiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Demande$PaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Paiement
      */
@@ -3818,9 +3818,9 @@ export namespace Prisma {
   }
 
   /**
-   * Demande.document
+   * Demande.Document
    */
-  export type Demande$documentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Demande$DocumentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Document_Acte
      */
@@ -3837,9 +3837,9 @@ export namespace Prisma {
   }
 
   /**
-   * Demande.historique
+   * Demande.Historique
    */
-  export type Demande$historiqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Demande$HistoriqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Historique_Modifications
      */
@@ -4067,9 +4067,9 @@ export namespace Prisma {
     SignatureNumerique?: boolean
     EstArchive?: boolean
     DateArchivage?: boolean
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    historique?: boolean | Document_Acte$historiqueArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Historique?: boolean | Document_Acte$HistoriqueArgs<ExtArgs>
     _count?: boolean | Document_ActeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["document_Acte"]>
 
@@ -4082,8 +4082,8 @@ export namespace Prisma {
     SignatureNumerique?: boolean
     EstArchive?: boolean
     DateArchivage?: boolean
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["document_Acte"]>
 
   export type Document_ActeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4095,8 +4095,8 @@ export namespace Prisma {
     SignatureNumerique?: boolean
     EstArchive?: boolean
     DateArchivage?: boolean
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["document_Acte"]>
 
   export type Document_ActeSelectScalar = {
@@ -4112,26 +4112,26 @@ export namespace Prisma {
 
   export type Document_ActeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Document_Acte" | "ID_Demande" | "ID_Agent" | "DateDelivrance" | "Fichier_PDF" | "SignatureNumerique" | "EstArchive" | "DateArchivage", ExtArgs["result"]["document_Acte"]>
   export type Document_ActeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    historique?: boolean | Document_Acte$historiqueArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Historique?: boolean | Document_Acte$HistoriqueArgs<ExtArgs>
     _count?: boolean | Document_ActeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type Document_ActeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
   }
   export type Document_ActeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    demande?: boolean | DemandeDefaultArgs<ExtArgs>
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
   }
 
   export type $Document_ActePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Document_Acte"
     objects: {
-      demande: Prisma.$DemandePayload<ExtArgs>
-      agent: Prisma.$AgentPayload<ExtArgs>
-      historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
+      Demande: Prisma.$DemandePayload<ExtArgs>
+      Agent: Prisma.$AgentPayload<ExtArgs>
+      Historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Document_Acte: string
@@ -4536,9 +4536,9 @@ export namespace Prisma {
    */
   export interface Prisma__Document_ActeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    demande<T extends DemandeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DemandeDefaultArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    historique<T extends Document_Acte$historiqueArgs<ExtArgs> = {}>(args?: Subset<T, Document_Acte$historiqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Demande<T extends DemandeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DemandeDefaultArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Historique<T extends Document_Acte$HistoriqueArgs<ExtArgs> = {}>(args?: Subset<T, Document_Acte$HistoriqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4972,9 +4972,9 @@ export namespace Prisma {
   }
 
   /**
-   * Document_Acte.historique
+   * Document_Acte.Historique
    */
-  export type Document_Acte$historiqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Document_Acte$HistoriqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Historique_Modifications
      */
@@ -5212,7 +5212,7 @@ export namespace Prisma {
     ModePaiement?: boolean
     DatePaiement?: boolean
     Transaction_ID?: boolean
-    demande?: boolean | Paiement$demandeArgs<ExtArgs>
+    Demande?: boolean | Paiement$DemandeArgs<ExtArgs>
   }, ExtArgs["result"]["paiement"]>
 
   export type PaiementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5241,7 +5241,7 @@ export namespace Prisma {
 
   export type PaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Paiement" | "Montant" | "ModePaiement" | "DatePaiement" | "Transaction_ID", ExtArgs["result"]["paiement"]>
   export type PaiementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    demande?: boolean | Paiement$demandeArgs<ExtArgs>
+    Demande?: boolean | Paiement$DemandeArgs<ExtArgs>
   }
   export type PaiementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type PaiementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5249,7 +5249,7 @@ export namespace Prisma {
   export type $PaiementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Paiement"
     objects: {
-      demande: Prisma.$DemandePayload<ExtArgs> | null
+      Demande: Prisma.$DemandePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Paiement: string
@@ -5651,7 +5651,7 @@ export namespace Prisma {
    */
   export interface Prisma__PaiementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    demande<T extends Paiement$demandeArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$demandeArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Demande<T extends Paiement$DemandeArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$DemandeArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6074,9 +6074,9 @@ export namespace Prisma {
   }
 
   /**
-   * Paiement.demande
+   * Paiement.Demande
    */
-  export type Paiement$demandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Paiement$DemandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Demande
      */
@@ -6283,8 +6283,8 @@ export namespace Prisma {
     Email?: boolean
     Role?: boolean
     Password?: boolean
-    documents?: boolean | Agent$documentsArgs<ExtArgs>
-    historiques?: boolean | Agent$historiquesArgs<ExtArgs>
+    Documents?: boolean | Agent$DocumentsArgs<ExtArgs>
+    Historiques?: boolean | Agent$HistoriquesArgs<ExtArgs>
     _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agent"]>
 
@@ -6317,8 +6317,8 @@ export namespace Prisma {
 
   export type AgentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Agent" | "Nom" | "Prenom" | "Email" | "Role" | "Password", ExtArgs["result"]["agent"]>
   export type AgentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    documents?: boolean | Agent$documentsArgs<ExtArgs>
-    historiques?: boolean | Agent$historiquesArgs<ExtArgs>
+    Documents?: boolean | Agent$DocumentsArgs<ExtArgs>
+    Historiques?: boolean | Agent$HistoriquesArgs<ExtArgs>
     _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AgentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6327,8 +6327,8 @@ export namespace Prisma {
   export type $AgentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Agent"
     objects: {
-      documents: Prisma.$Document_ActePayload<ExtArgs>[]
-      historiques: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
+      Documents: Prisma.$Document_ActePayload<ExtArgs>[]
+      Historiques: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Agent: string
@@ -6731,8 +6731,8 @@ export namespace Prisma {
    */
   export interface Prisma__AgentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    documents<T extends Agent$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Agent$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    historiques<T extends Agent$historiquesArgs<ExtArgs> = {}>(args?: Subset<T, Agent$historiquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Documents<T extends Agent$DocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Agent$DocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Historiques<T extends Agent$HistoriquesArgs<ExtArgs> = {}>(args?: Subset<T, Agent$HistoriquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7156,9 +7156,9 @@ export namespace Prisma {
   }
 
   /**
-   * Agent.documents
+   * Agent.Documents
    */
-  export type Agent$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Agent$DocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Document_Acte
      */
@@ -7180,9 +7180,9 @@ export namespace Prisma {
   }
 
   /**
-   * Agent.historiques
+   * Agent.Historiques
    */
-  export type Agent$historiquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Agent$HistoriquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Historique_Modifications
      */
@@ -7410,9 +7410,9 @@ export namespace Prisma {
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
   export type Historique_ModificationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7424,9 +7424,9 @@ export namespace Prisma {
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
   export type Historique_ModificationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7438,9 +7438,9 @@ export namespace Prisma {
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
   export type Historique_ModificationsSelectScalar = {
@@ -7456,27 +7456,27 @@ export namespace Prisma {
 
   export type Historique_ModificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Historique" | "TypeEntite" | "ID_Entite" | "ID_Agent" | "Action" | "DateModification" | "Ancienne_Valeur" | "Nouvelle_Valeur", ExtArgs["result"]["historique_Modifications"]>
   export type Historique_ModificationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }
   export type Historique_ModificationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }
   export type Historique_ModificationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    agent?: boolean | AgentDefaultArgs<ExtArgs>
-    demande?: boolean | Historique_Modifications$demandeArgs<ExtArgs>
-    document?: boolean | Historique_Modifications$documentArgs<ExtArgs>
+    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
+    Document?: boolean | Historique_Modifications$DocumentArgs<ExtArgs>
   }
 
   export type $Historique_ModificationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Historique_Modifications"
     objects: {
-      agent: Prisma.$AgentPayload<ExtArgs>
-      demande: Prisma.$DemandePayload<ExtArgs> | null
-      document: Prisma.$Document_ActePayload<ExtArgs> | null
+      Agent: Prisma.$AgentPayload<ExtArgs>
+      Demande: Prisma.$DemandePayload<ExtArgs> | null
+      Document: Prisma.$Document_ActePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Historique: string
@@ -7881,9 +7881,9 @@ export namespace Prisma {
    */
   export interface Prisma__Historique_ModificationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    demande<T extends Historique_Modifications$demandeArgs<ExtArgs> = {}>(args?: Subset<T, Historique_Modifications$demandeArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    document<T extends Historique_Modifications$documentArgs<ExtArgs> = {}>(args?: Subset<T, Historique_Modifications$documentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Demande<T extends Historique_Modifications$DemandeArgs<ExtArgs> = {}>(args?: Subset<T, Historique_Modifications$DemandeArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Document<T extends Historique_Modifications$DocumentArgs<ExtArgs> = {}>(args?: Subset<T, Historique_Modifications$DocumentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8317,9 +8317,9 @@ export namespace Prisma {
   }
 
   /**
-   * Historique_Modifications.demande
+   * Historique_Modifications.Demande
    */
-  export type Historique_Modifications$demandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Historique_Modifications$DemandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Demande
      */
@@ -8336,9 +8336,9 @@ export namespace Prisma {
   }
 
   /**
-   * Historique_Modifications.document
+   * Historique_Modifications.Document
    */
-  export type Historique_Modifications$documentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Historique_Modifications$DocumentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Document_Acte
      */
@@ -8739,10 +8739,10 @@ export namespace Prisma {
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableFilter<"Demande"> | string | null
-    citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
-    paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
-    document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
-    historique?: Historique_ModificationsListRelationFilter
+    Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
+    Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
+    Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
+    Historique?: Historique_ModificationsListRelationFilter
   }
 
   export type DemandeOrderByWithRelationInput = {
@@ -8757,10 +8757,10 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrderInput | SortOrder
     ID_Paiement?: SortOrderInput | SortOrder
-    citoyen?: CitoyenOrderByWithRelationInput
-    paiement?: PaiementOrderByWithRelationInput
-    document?: Document_ActeOrderByWithRelationInput
-    historique?: Historique_ModificationsOrderByRelationAggregateInput
+    Citoyen?: CitoyenOrderByWithRelationInput
+    Paiement?: PaiementOrderByWithRelationInput
+    Document?: Document_ActeOrderByWithRelationInput
+    Historique?: Historique_ModificationsOrderByRelationAggregateInput
   }
 
   export type DemandeWhereUniqueInput = Prisma.AtLeast<{
@@ -8778,10 +8778,10 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
-    citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
-    paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
-    document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
-    historique?: Historique_ModificationsListRelationFilter
+    Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
+    Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
+    Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
+    Historique?: Historique_ModificationsListRelationFilter
   }, "ID_Demande" | "ID_Paiement">
 
   export type DemandeOrderByWithAggregationInput = {
@@ -8830,9 +8830,9 @@ export namespace Prisma {
     SignatureNumerique?: StringFilter<"Document_Acte"> | string
     EstArchive?: BoolFilter<"Document_Acte"> | boolean
     DateArchivage?: DateTimeFilter<"Document_Acte"> | Date | string
-    demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
-    agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
-    historique?: Historique_ModificationsListRelationFilter
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    Historique?: Historique_ModificationsListRelationFilter
   }
 
   export type Document_ActeOrderByWithRelationInput = {
@@ -8844,9 +8844,9 @@ export namespace Prisma {
     SignatureNumerique?: SortOrder
     EstArchive?: SortOrder
     DateArchivage?: SortOrder
-    demande?: DemandeOrderByWithRelationInput
-    agent?: AgentOrderByWithRelationInput
-    historique?: Historique_ModificationsOrderByRelationAggregateInput
+    Demande?: DemandeOrderByWithRelationInput
+    Agent?: AgentOrderByWithRelationInput
+    Historique?: Historique_ModificationsOrderByRelationAggregateInput
   }
 
   export type Document_ActeWhereUniqueInput = Prisma.AtLeast<{
@@ -8861,9 +8861,9 @@ export namespace Prisma {
     SignatureNumerique?: StringFilter<"Document_Acte"> | string
     EstArchive?: BoolFilter<"Document_Acte"> | boolean
     DateArchivage?: DateTimeFilter<"Document_Acte"> | Date | string
-    demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
-    agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
-    historique?: Historique_ModificationsListRelationFilter
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    Historique?: Historique_ModificationsListRelationFilter
   }, "ID_Document_Acte" | "ID_Demande">
 
   export type Document_ActeOrderByWithAggregationInput = {
@@ -8903,7 +8903,7 @@ export namespace Prisma {
     ModePaiement?: EnumModePaiementFilter<"Paiement"> | $Enums.ModePaiement
     DatePaiement?: DateTimeFilter<"Paiement"> | Date | string
     Transaction_ID?: StringFilter<"Paiement"> | string
-    demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
+    Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
   }
 
   export type PaiementOrderByWithRelationInput = {
@@ -8912,7 +8912,7 @@ export namespace Prisma {
     ModePaiement?: SortOrder
     DatePaiement?: SortOrder
     Transaction_ID?: SortOrder
-    demande?: DemandeOrderByWithRelationInput
+    Demande?: DemandeOrderByWithRelationInput
   }
 
   export type PaiementWhereUniqueInput = Prisma.AtLeast<{
@@ -8924,7 +8924,7 @@ export namespace Prisma {
     Montant?: DecimalFilter<"Paiement"> | Decimal | DecimalJsLike | number | string
     ModePaiement?: EnumModePaiementFilter<"Paiement"> | $Enums.ModePaiement
     DatePaiement?: DateTimeFilter<"Paiement"> | Date | string
-    demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
+    Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
   }, "ID_Paiement" | "Transaction_ID">
 
   export type PaiementOrderByWithAggregationInput = {
@@ -8961,8 +8961,8 @@ export namespace Prisma {
     Email?: StringFilter<"Agent"> | string
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
     Password?: StringFilter<"Agent"> | string
-    documents?: Document_ActeListRelationFilter
-    historiques?: Historique_ModificationsListRelationFilter
+    Documents?: Document_ActeListRelationFilter
+    Historiques?: Historique_ModificationsListRelationFilter
   }
 
   export type AgentOrderByWithRelationInput = {
@@ -8972,8 +8972,8 @@ export namespace Prisma {
     Email?: SortOrder
     Role?: SortOrder
     Password?: SortOrder
-    documents?: Document_ActeOrderByRelationAggregateInput
-    historiques?: Historique_ModificationsOrderByRelationAggregateInput
+    Documents?: Document_ActeOrderByRelationAggregateInput
+    Historiques?: Historique_ModificationsOrderByRelationAggregateInput
   }
 
   export type AgentWhereUniqueInput = Prisma.AtLeast<{
@@ -8986,8 +8986,8 @@ export namespace Prisma {
     Prenom?: StringFilter<"Agent"> | string
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
     Password?: StringFilter<"Agent"> | string
-    documents?: Document_ActeListRelationFilter
-    historiques?: Historique_ModificationsListRelationFilter
+    Documents?: Document_ActeListRelationFilter
+    Historiques?: Historique_ModificationsListRelationFilter
   }, "ID_Agent" | "Email">
 
   export type AgentOrderByWithAggregationInput = {
@@ -9026,9 +9026,9 @@ export namespace Prisma {
     DateModification?: DateTimeFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringFilter<"Historique_Modifications"> | string
-    agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
-    demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
-    document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
+    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
+    Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
   }
 
   export type Historique_ModificationsOrderByWithRelationInput = {
@@ -9040,9 +9040,9 @@ export namespace Prisma {
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
-    agent?: AgentOrderByWithRelationInput
-    demande?: DemandeOrderByWithRelationInput
-    document?: Document_ActeOrderByWithRelationInput
+    Agent?: AgentOrderByWithRelationInput
+    Demande?: DemandeOrderByWithRelationInput
+    Document?: Document_ActeOrderByWithRelationInput
   }
 
   export type Historique_ModificationsWhereUniqueInput = Prisma.AtLeast<{
@@ -9057,9 +9057,9 @@ export namespace Prisma {
     DateModification?: DateTimeFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringFilter<"Historique_Modifications"> | string
-    agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
-    demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
-    document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
+    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
+    Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
   }, "ID_Historique">
 
   export type Historique_ModificationsOrderByWithAggregationInput = {
@@ -9188,10 +9188,10 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
-    paiement?: PaiementCreateNestedOneWithoutDemandeInput
-    document?: Document_ActeCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateInput = {
@@ -9206,8 +9206,8 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUpdateInput = {
@@ -9220,10 +9220,10 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
-    paiement?: PaiementUpdateOneWithoutDemandeNestedInput
-    document?: Document_ActeUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateInput = {
@@ -9238,8 +9238,8 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeCreateManyInput = {
@@ -9289,9 +9289,9 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    demande: DemandeCreateNestedOneWithoutDocumentInput
-    agent: AgentCreateNestedOneWithoutDocumentsInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
+    Demande: DemandeCreateNestedOneWithoutDocumentInput
+    Agent: AgentCreateNestedOneWithoutDocumentsInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeUncheckedCreateInput = {
@@ -9303,7 +9303,7 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeUpdateInput = {
@@ -9313,9 +9313,9 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
-    agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
+    Demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
   }
 
   export type Document_ActeUncheckedUpdateInput = {
@@ -9327,7 +9327,7 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type Document_ActeCreateManyInput = {
@@ -9367,7 +9367,7 @@ export namespace Prisma {
     ModePaiement: $Enums.ModePaiement
     DatePaiement: Date | string
     Transaction_ID: string
-    demande?: DemandeCreateNestedOneWithoutPaiementInput
+    Demande?: DemandeCreateNestedOneWithoutPaiementInput
   }
 
   export type PaiementUncheckedCreateInput = {
@@ -9376,7 +9376,7 @@ export namespace Prisma {
     ModePaiement: $Enums.ModePaiement
     DatePaiement: Date | string
     Transaction_ID: string
-    demande?: DemandeUncheckedCreateNestedOneWithoutPaiementInput
+    Demande?: DemandeUncheckedCreateNestedOneWithoutPaiementInput
   }
 
   export type PaiementUpdateInput = {
@@ -9385,7 +9385,7 @@ export namespace Prisma {
     ModePaiement?: EnumModePaiementFieldUpdateOperationsInput | $Enums.ModePaiement
     DatePaiement?: DateTimeFieldUpdateOperationsInput | Date | string
     Transaction_ID?: StringFieldUpdateOperationsInput | string
-    demande?: DemandeUpdateOneWithoutPaiementNestedInput
+    Demande?: DemandeUpdateOneWithoutPaiementNestedInput
   }
 
   export type PaiementUncheckedUpdateInput = {
@@ -9394,7 +9394,7 @@ export namespace Prisma {
     ModePaiement?: EnumModePaiementFieldUpdateOperationsInput | $Enums.ModePaiement
     DatePaiement?: DateTimeFieldUpdateOperationsInput | Date | string
     Transaction_ID?: StringFieldUpdateOperationsInput | string
-    demande?: DemandeUncheckedUpdateOneWithoutPaiementNestedInput
+    Demande?: DemandeUncheckedUpdateOneWithoutPaiementNestedInput
   }
 
   export type PaiementCreateManyInput = {
@@ -9428,8 +9428,8 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    documents?: Document_ActeCreateNestedManyWithoutAgentInput
-    historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
+    Documents?: Document_ActeCreateNestedManyWithoutAgentInput
+    Historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateInput = {
@@ -9439,8 +9439,8 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
-    historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
+    Documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
+    Historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUpdateInput = {
@@ -9450,8 +9450,8 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    documents?: Document_ActeUpdateManyWithoutAgentNestedInput
-    historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
+    Documents?: Document_ActeUpdateManyWithoutAgentNestedInput
+    Historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateInput = {
@@ -9461,8 +9461,8 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
-    historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
+    Documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
+    Historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentCreateManyInput = {
@@ -9499,9 +9499,9 @@ export namespace Prisma {
     DateModification: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    agent: AgentCreateNestedOneWithoutHistoriquesInput
-    demande?: DemandeCreateNestedOneWithoutHistoriqueInput
-    document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
+    Agent: AgentCreateNestedOneWithoutHistoriquesInput
+    Demande?: DemandeCreateNestedOneWithoutHistoriqueInput
+    Document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
   }
 
   export type Historique_ModificationsUncheckedCreateInput = {
@@ -9522,9 +9522,9 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
-    demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
-    document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
+    Demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
+    Document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
   }
 
   export type Historique_ModificationsUncheckedUpdateInput = {
@@ -10811,9 +10811,9 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    paiement?: PaiementCreateNestedOneWithoutDemandeInput
-    document?: Document_ActeCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutCitoyenInput = {
@@ -10827,8 +10827,8 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutCitoyenInput = {
@@ -10931,8 +10931,8 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    agent: AgentCreateNestedOneWithoutDocumentsInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
+    Agent: AgentCreateNestedOneWithoutDocumentsInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeUncheckedCreateWithoutDemandeInput = {
@@ -10943,7 +10943,7 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeCreateOrConnectWithoutDemandeInput = {
@@ -10958,8 +10958,8 @@ export namespace Prisma {
     DateModification: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    agent: AgentCreateNestedOneWithoutHistoriquesInput
-    document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
+    Agent: AgentCreateNestedOneWithoutHistoriquesInput
+    Document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
   }
 
   export type Historique_ModificationsUncheckedCreateWithoutDemandeInput = {
@@ -11062,8 +11062,8 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
   }
 
   export type Document_ActeUncheckedUpdateWithoutDemandeInput = {
@@ -11074,7 +11074,7 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type Historique_ModificationsUpsertWithWhereUniqueWithoutDemandeInput = {
@@ -11117,9 +11117,9 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
-    paiement?: PaiementCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutDocumentInput = {
@@ -11134,7 +11134,7 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutDocumentInput = {
@@ -11149,7 +11149,7 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
+    Historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateWithoutDocumentsInput = {
@@ -11159,7 +11159,7 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
+    Historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentCreateOrConnectWithoutDocumentsInput = {
@@ -11174,8 +11174,8 @@ export namespace Prisma {
     DateModification: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    agent: AgentCreateNestedOneWithoutHistoriquesInput
-    demande?: DemandeCreateNestedOneWithoutHistoriqueInput
+    Agent: AgentCreateNestedOneWithoutHistoriquesInput
+    Demande?: DemandeCreateNestedOneWithoutHistoriqueInput
   }
 
   export type Historique_ModificationsUncheckedCreateWithoutDocumentInput = {
@@ -11219,9 +11219,9 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
-    paiement?: PaiementUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutDocumentInput = {
@@ -11236,7 +11236,7 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type AgentUpsertWithoutDocumentsInput = {
@@ -11257,7 +11257,7 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
+    Historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateWithoutDocumentsInput = {
@@ -11267,7 +11267,7 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
+    Historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type Historique_ModificationsUpsertWithWhereUniqueWithoutDocumentInput = {
@@ -11296,9 +11296,9 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
-    document?: Document_ActeCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutPaiementInput = {
@@ -11312,8 +11312,8 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutPaiementInput = {
@@ -11342,9 +11342,9 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
-    document?: Document_ActeUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutPaiementInput = {
@@ -11358,8 +11358,8 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type Document_ActeCreateWithoutAgentInput = {
@@ -11369,8 +11369,8 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    demande: DemandeCreateNestedOneWithoutDocumentInput
-    historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
+    Demande: DemandeCreateNestedOneWithoutDocumentInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeUncheckedCreateWithoutAgentInput = {
@@ -11381,7 +11381,7 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type Document_ActeCreateOrConnectWithoutAgentInput = {
@@ -11401,8 +11401,8 @@ export namespace Prisma {
     DateModification: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    demande?: DemandeCreateNestedOneWithoutHistoriqueInput
-    document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
+    Demande?: DemandeCreateNestedOneWithoutHistoriqueInput
+    Document?: Document_ActeCreateNestedOneWithoutHistoriqueInput
   }
 
   export type Historique_ModificationsUncheckedCreateWithoutAgentInput = {
@@ -11478,7 +11478,7 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    documents?: Document_ActeCreateNestedManyWithoutAgentInput
+    Documents?: Document_ActeCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateWithoutHistoriquesInput = {
@@ -11488,7 +11488,7 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
+    Documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentCreateOrConnectWithoutHistoriquesInput = {
@@ -11506,9 +11506,9 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    citoyen: CitoyenCreateNestedOneWithoutDemandesInput
-    paiement?: PaiementCreateNestedOneWithoutDemandeInput
-    document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutHistoriqueInput = {
@@ -11523,7 +11523,7 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutHistoriqueInput = {
@@ -11538,8 +11538,8 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-    demande: DemandeCreateNestedOneWithoutDocumentInput
-    agent: AgentCreateNestedOneWithoutDocumentsInput
+    Demande: DemandeCreateNestedOneWithoutDocumentInput
+    Agent: AgentCreateNestedOneWithoutDocumentsInput
   }
 
   export type Document_ActeUncheckedCreateWithoutHistoriqueInput = {
@@ -11576,7 +11576,7 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    documents?: Document_ActeUpdateManyWithoutAgentNestedInput
+    Documents?: Document_ActeUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateWithoutHistoriquesInput = {
@@ -11586,7 +11586,7 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
+    Documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type DemandeUpsertWithoutHistoriqueInput = {
@@ -11610,9 +11610,9 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
-    paiement?: PaiementUpdateOneWithoutDemandeNestedInput
-    document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutHistoriqueInput = {
@@ -11627,7 +11627,7 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type Document_ActeUpsertWithoutHistoriqueInput = {
@@ -11648,8 +11648,8 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
-    agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
+    Demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutDocumentsNestedInput
   }
 
   export type Document_ActeUncheckedUpdateWithoutHistoriqueInput = {
@@ -11686,9 +11686,9 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    paiement?: PaiementUpdateOneWithoutDemandeNestedInput
-    document?: Document_ActeUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutCitoyenInput = {
@@ -11702,8 +11702,8 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateManyWithoutCitoyenInput = {
@@ -11736,8 +11736,8 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
-    document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
+    Document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
   }
 
   export type Historique_ModificationsUncheckedUpdateWithoutDemandeInput = {
@@ -11777,8 +11777,8 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
-    demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
+    Agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
+    Demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
   }
 
   export type Historique_ModificationsUncheckedUpdateWithoutDocumentInput = {
@@ -11828,8 +11828,8 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
-    historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
+    Demande?: DemandeUpdateOneRequiredWithoutDocumentNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDocumentNestedInput
   }
 
   export type Document_ActeUncheckedUpdateWithoutAgentInput = {
@@ -11840,7 +11840,7 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-    historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type Document_ActeUncheckedUpdateManyWithoutAgentInput = {
@@ -11860,8 +11860,8 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
-    document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
+    Demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
+    Document?: Document_ActeUpdateOneWithoutHistoriqueNestedInput
   }
 
   export type Historique_ModificationsUncheckedUpdateWithoutAgentInput = {

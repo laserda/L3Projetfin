@@ -41,17 +41,19 @@ import {
 } from "@/components/ui/popover";
 
 import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
-import { RequestType } from "@/types";
 import { createDemande } from "@/server/demande/demande";
 import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validation-demande";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Info } from "lucide-react";
 import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ErrorsMessage } from "@/enums/errors-message";
 
 const DemandeNaissanceForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const [demandePourTier, setDemandePourTier] = useState<DemandePourTier>(DemandePourTier.Moi);
+    const [err, setErr] = useState("");
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
@@ -78,7 +80,13 @@ const DemandeNaissanceForm = () => {
 
             var newRequest = await createDemande(formData);
 
-            //router.push(`/confirmation/${newRequest.ID_Demande}`);
+            if (!newRequest.success) {
+                setErr(ErrorsMessage.errors);
+                return
+            }
+
+            router.push(`/confirmation/${newRequest.ID_Demande}`);
+
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
@@ -103,7 +111,18 @@ const DemandeNaissanceForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-
+                            {err && (
+                                <Alert
+                                    variant="destructive"
+                                    className="flex items-center border-red-500"
+                                >
+                                    <Info className="h-4 w-4" color="red" />
+                                    <div>
+                                        <AlertTitle>Erreur</AlertTitle>
+                                        <AlertDescription>{err}</AlertDescription>
+                                    </div>
+                                </Alert>
+                            )}
                             <FormField
                                 control={form.control}
                                 name="DemandePourTier"
@@ -112,7 +131,7 @@ const DemandeNaissanceForm = () => {
                                         <FormLabel>Pour qui faite vous la demande ?</FormLabel>
                                         <FormControl>
                                             <Select
-                                                onValueChange={(e)=>{
+                                                onValueChange={(e) => {
                                                     setDemandePourTier(e as DemandePourTier)
                                                     field.onChange(e)
                                                 }}
@@ -175,7 +194,7 @@ const DemandeNaissanceForm = () => {
                             </div>
 
 
-                           {demandePourTier != DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {demandePourTier != DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="Nom"

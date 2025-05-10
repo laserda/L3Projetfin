@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 
-import { Request } from "@/types";
+import { DemandeResquest, Request } from "@/types";
 import {
     Card,
     CardContent,
@@ -14,21 +14,25 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, FileText } from "lucide-react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { formatDate, getRequestTypeName } from "@/utils";
+import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+import { getDemande } from "@/server/demande/demande";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
-    const [request, setRequest] = useState<Request | null>(null);
+    const [request, setRequest] = useState<DemandeResquest | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchRequest = () => {
+        const fetchRequest = async () => {
             setLoading(true);
             try {
-                const requests = JSON.parse(
-                    localStorage.getItem("requests") || "[]"
-                );
-                const foundRequest = requests.find((r: Request) => r.id === id);
+                // const requests = JSON.parse(
+                //     localStorage.getItem("requests") || "[]"
+                // );
+                // const foundRequest = requests.find((r: Request) => r.id === id);
+                const foundRequest = await getDemande(id);
+                console.log(id)
+                console.log(foundRequest)
 
                 if (foundRequest) {
                     setRequest(foundRequest);
@@ -101,54 +105,54 @@ const ConfirmationPage: FC = () => {
                         <div className="space-y-3 text-sm">
                             <p>
                                 <span className="font-medium">Référence :</span>{" "}
-                                {request.id.substring(0, 8).toUpperCase()}
+                                {request.ID_Demande}
                             </p>
                             <p>
                                 <span className="font-medium">
                                     Type de document :
                                 </span>{" "}
-                                {getRequestTypeName(request.type)}
+                                {getRequestTypeName(request.TypeActe)}
                             </p>
                             <p>
                                 <span className="font-medium">Nom :</span>{" "}
-                                {request.nom}
+                                {request.Nom}
                             </p>
                             <p>
                                 <span className="font-medium">Prénom :</span>{" "}
-                                {request.prenom}
+                                {request.Prenom}
                             </p>
-                            {request.parents && (
+                            {/* {request.parents && (
                                 <p>
                                     <span className="font-medium">
                                         Parents :
                                     </span>{" "}
                                     {request.parents}
                                 </p>
-                            )}
+                            )} */}
                             <p>
                                 <span className="font-medium">Date :</span>{" "}
-                                {request.date}
+                                {request.DateActe?.toDateString()}
                             </p>
-                            <p>
+                            {/* <p>
                                 <span className="font-medium">Lieu :</span>{" "}
                                 {request.lieu}
-                            </p>
+                            </p> */}
                             <p>
                                 <span className="font-medium">Email :</span>{" "}
-                                {request.email}
+                                {request.Citoyen.Email}
                             </p>
                             <p>
                                 <span className="font-medium">
                                     Date de soumission :
                                 </span>{" "}
-                                {formatDate(request.created_at)}
+                                {formatDate(request.DateDemande.toDateString())}
                             </p>
                             <p>
                                 <span className="font-medium">
                                     Statut actuel :
                                 </span>{" "}
                                 <span className="text-yellow-600 font-medium">
-                                    En attente de traitement
+                                    {getStatusDemande(request.Statut)}
                                 </span>
                             </p>
                         </div>
@@ -170,7 +174,7 @@ const ConfirmationPage: FC = () => {
                                 <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                                 <span>
                                     Vous recevrez un email de confirmation à
-                                    l'adresse {request.email}.
+                                    l'adresse {request.Citoyen.Email}.
                                 </span>
                             </li>
                             <li className="flex items-start">

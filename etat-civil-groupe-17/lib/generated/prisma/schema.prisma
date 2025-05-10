@@ -79,10 +79,10 @@ model Demande {
   DateActe        DateTime?
   ID_Paiement     String?         @unique
 
-  citoyen    Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
-  paiement   Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
-  document   Document_Acte?
-  historique Historique_Modifications[]
+  Citoyen    Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  Paiement   Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
+  Document   Document_Acte?
+  Historique Historique_Modifications[]
 
   @@index([ID_Citoyen])
   @@index([ID_Paiement])
@@ -98,9 +98,9 @@ model Document_Acte {
   EstArchive         Boolean
   DateArchivage      DateTime
 
-  demande    Demande                    @relation(fields: [ID_Demande], references: [ID_Demande])
-  agent      Agent                      @relation(fields: [ID_Agent], references: [ID_Agent])
-  historique Historique_Modifications[]
+  Demande    Demande                    @relation(fields: [ID_Demande], references: [ID_Demande])
+  Agent      Agent                      @relation(fields: [ID_Agent], references: [ID_Agent])
+  Historique Historique_Modifications[]
 
   @@index([ID_Demande])
   @@index([ID_Agent])
@@ -113,7 +113,7 @@ model Paiement {
   DatePaiement   DateTime
   Transaction_ID String       @unique
 
-  demande Demande?
+  Demande Demande?
 }
 
 model Agent {
@@ -123,8 +123,8 @@ model Agent {
   Email       String                     @unique
   Role        RoleAgent
   Password    String
-  documents   Document_Acte[]
-  historiques Historique_Modifications[]
+  Documents   Document_Acte[]
+  Historiques Historique_Modifications[]
 }
 
 model Historique_Modifications {
@@ -137,9 +137,9 @@ model Historique_Modifications {
   Ancienne_Valeur  String
   Nouvelle_Valeur  String
 
-  agent    Agent          @relation(fields: [ID_Agent], references: [ID_Agent])
-  demande  Demande?       @relation(fields: [ID_Entite], references: [ID_Demande], map: "fk_demande")
-  document Document_Acte? @relation(fields: [ID_Entite], references: [ID_Document_Acte], map: "fk_acte")
+  Agent    Agent          @relation(fields: [ID_Agent], references: [ID_Agent])
+  Demande  Demande?       @relation(fields: [ID_Entite], references: [ID_Demande], map: "fk_demande")
+  Document Document_Acte? @relation(fields: [ID_Entite], references: [ID_Document_Acte], map: "fk_acte")
 
   @@index([ID_Agent])
   @@index([ID_Entite])

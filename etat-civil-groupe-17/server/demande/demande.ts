@@ -13,6 +13,7 @@ import { createDemandeSchema } from '@/validation/validation-demande';
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
+import { ErrorsMessage } from '@/enums/errors-message';
 
 const demandeRepo = new DemandeRepository()
 const citoyenRepo = new CitoyenRepository()
@@ -24,7 +25,7 @@ export async function createDemande(formData: FormData) {
     if (!result.success) {
         return {
             errors: result.error.flatten().fieldErrors,
-            succes: false,
+            success: false,
         };
     }
 
@@ -56,7 +57,7 @@ export async function createDemande(formData: FormData) {
         const newDemande = await demandeRepo.create({
             data: {
                 ...result.data,
-                citoyen: {
+                Citoyen: {
                     connect: { ID_Citoyen: user.ID_Citoyen }
                 },
                 Statut: StatutDemande.SoumiseEnAttenteDePaiment,
@@ -68,14 +69,23 @@ export async function createDemande(formData: FormData) {
         console.log(newDemande);
 
         return {
-            succes: true,
+            success: true,
             ID_Demande: newDemande.ID_Demande,
         };
     } catch (error) {
         console.log(error)
         return {
-            succes: false,
-            errors: error,
+            success: false,
+            errors: [ErrorsMessage.errors],
         };
     }
+}
+
+export async function getDemande(ID_Demande: string){
+    return await demandeRepo.findOne({
+        where: { ID_Demande: ID_Demande },
+        include:{
+            Citoyen:true
+        }
+      });
 }
