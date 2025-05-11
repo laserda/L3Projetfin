@@ -135,9 +135,14 @@ exports.Prisma.CitoyenScalarFieldEnum = {
 exports.Prisma.DemandeScalarFieldEnum = {
   ID_Demande: 'ID_Demande',
   ID_Citoyen: 'ID_Citoyen',
-  Type_Acte: 'Type_Acte',
+  TypeActe: 'TypeActe',
+  NumeroActe: 'NumeroActe',
+  Nom: 'Nom',
+  Prenom: 'Prenom',
   Statut: 'Statut',
-  Date_Demande: 'Date_Demande',
+  DemandePourTier: 'DemandePourTier',
+  DateDemande: 'DateDemande',
+  DateActe: 'DateActe',
   ID_Paiement: 'ID_Paiement'
 };
 
@@ -145,18 +150,18 @@ exports.Prisma.Document_ActeScalarFieldEnum = {
   ID_Document_Acte: 'ID_Document_Acte',
   ID_Demande: 'ID_Demande',
   ID_Agent: 'ID_Agent',
-  Date_Delivrance: 'Date_Delivrance',
+  DateDelivrance: 'DateDelivrance',
   Fichier_PDF: 'Fichier_PDF',
-  Signature_Numerique: 'Signature_Numerique',
-  Est_Archive: 'Est_Archive',
-  Date_Archivage: 'Date_Archivage'
+  SignatureNumerique: 'SignatureNumerique',
+  EstArchive: 'EstArchive',
+  DateArchivage: 'DateArchivage'
 };
 
 exports.Prisma.PaiementScalarFieldEnum = {
   ID_Paiement: 'ID_Paiement',
   Montant: 'Montant',
-  Mode_Paiement: 'Mode_Paiement',
-  Date_Paiement: 'Date_Paiement',
+  ModePaiement: 'ModePaiement',
+  DatePaiement: 'DatePaiement',
   Transaction_ID: 'Transaction_ID'
 };
 
@@ -171,11 +176,11 @@ exports.Prisma.AgentScalarFieldEnum = {
 
 exports.Prisma.Historique_ModificationsScalarFieldEnum = {
   ID_Historique: 'ID_Historique',
-  Type_Entite: 'Type_Entite',
+  TypeEntite: 'TypeEntite',
   ID_Entite: 'ID_Entite',
   ID_Agent: 'ID_Agent',
   Action: 'Action',
-  Date_Modification: 'Date_Modification',
+  DateModification: 'DateModification',
   Ancienne_Valeur: 'Ancienne_Valeur',
   Nouvelle_Valeur: 'Nouvelle_Valeur'
 };
@@ -189,6 +194,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.TypeActe = exports.$Enums.TypeActe = {
   Naissance: 'Naissance',
   Mariage: 'Mariage',
@@ -196,11 +206,19 @@ exports.TypeActe = exports.$Enums.TypeActe = {
 };
 
 exports.StatutDemande = exports.$Enums.StatutDemande = {
-  Soumise: 'Soumise',
-  En_traitement: 'En_traitement',
+  SoumiseEnAttenteDePaiment: 'SoumiseEnAttenteDePaiment',
+  SoumisePayee: 'SoumisePayee',
+  EnTraitement: 'EnTraitement',
   Validée: 'Validée',
   Refusée: 'Refusée',
   Livrée: 'Livrée'
+};
+
+exports.DemandePourTier = exports.$Enums.DemandePourTier = {
+  Moi: 'Moi',
+  MonEnfant: 'MonEnfant',
+  UnMenbreFamile: 'UnMenbreFamile',
+  Autre: 'Autre'
 };
 
 exports.ModePaiement = exports.$Enums.ModePaiement = {

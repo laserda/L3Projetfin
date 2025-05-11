@@ -40,59 +40,62 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { getRequestTypeName } from "@/utils";
 import { RequestType } from "@/types";
-// import { demandeFormSchema, DemandeFormValues } from "@/validation";
+import { createDemande } from "@/server/demande/demande";
+import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validation-demande";
 import { CalendarIcon } from "lucide-react";
+import { TypeActe } from "@/lib/generated/prisma";
 
 const DemandeForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const typeFromUrl = searchParams.get("type") as RequestType | null;
+    const typeFromUrl = searchParams.get("type") as TypeActe;
 
     const form = useForm({
-        // resolver: zodResolver(demandeFormSchema),
+        resolver: zodResolver(createDemandeSchema),
         defaultValues: {
-            type: typeFromUrl || "naissance",
-            nom: "",
-            prenom: "",
-            parents: "",
-            date: "",
-            lieu: "",
-            email: "",
-            paymentConfirmed: false,
+            TypeActe: typeFromUrl ,
         },
     });
 
     useEffect(() => {
         if (typeFromUrl) {
-            form.setValue("type", typeFromUrl);
+            form.setValue("TypeActe", typeFromUrl);
         }
     }, [typeFromUrl, form]);
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: CreateDemandeFormData) => {
         try {
-            const requests = JSON.parse(
-                localStorage.getItem("requests") || "[]"
-            );
-            const newRequest = {
-                id: crypto.randomUUID(),
-                ...data,
-                statut: "pending",
-                created_at: new Date().toISOString(),
-            };
-            requests.push(newRequest);
-            localStorage.setItem("requests", JSON.stringify(requests));
 
-            console.log(
-                `Email envoyé à ${data.email} pour confirmer la demande d'acte ${data.type}`
-            );
-
-            toast.success("Demande envoyée avec succès !", {
-                description: "Vous recevrez un email de confirmation sous peu.",
+            const formData = new FormData();
+            Object.entries(data).forEach(([key, value]) => {
+                formData.append(key, value);
             });
 
-            router.push(`/confirmation/${newRequest.id}`);
+            var res = await createDemande(formData);
+            // const requests = JSON.parse(
+            //     localStorage.getItem("requests") || "[]"
+            // );
+            // const newRequest = {
+            //     id: crypto.randomUUID(),
+            //     ...data,
+            //     statut: "pending",
+            //     created_at: new Date().toISOString(),
+            // };
+            // requests.push(newRequest);
+            // localStorage.setItem("requests", JSON.stringify(requests));
+
+            // console.log(
+            //     `Email envoyé à ${data.email} pour confirmer la demande d'acte ${data.type}`
+            // );
+
+            // toast.success("Demande envoyée avec succès !", {
+            //     description: "Vous recevrez un email de confirmation sous peu.",
+            // });
+
+            // router.push(`/confirmation/${newRequest.id}`);
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
@@ -102,13 +105,13 @@ const DemandeForm = () => {
     };
 
     const getFormTitle = () => {
-        const type = form.watch("type");
+        const type = form.watch("TypeActe");
         switch (type) {
-            case "naissance":
+            case "Naissance":
                 return "Demande d'acte de naissance";
-            case "mariage":
+            case "Mariage":
                 return "Demande d'acte de mariage";
-            case "deces":
+            case "Décès":
                 return "Demande d'acte de décès";
             default:
                 return "Nouvelle demande";
@@ -133,7 +136,7 @@ const DemandeForm = () => {
                         >
                             <FormField
                                 control={form.control}
-                                name="type"
+                                name="TypeActe"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Type de document</FormLabel>
@@ -147,15 +150,11 @@ const DemandeForm = () => {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem value="naissance">
-                                                    Acte de naissance
-                                                </SelectItem>
-                                                <SelectItem value="mariage">
-                                                    Acte de mariage
-                                                </SelectItem>
-                                                <SelectItem value="deces">
-                                                    Acte de décès
-                                                </SelectItem>
+                                                {Object.values(TypeActe).map((type) => (
+                                                    <SelectItem key={type} value={type}>
+                                                        {getRequestTypeName(type)}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
@@ -163,16 +162,16 @@ const DemandeForm = () => {
                                 )}
                             />
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
-                                    name="nom"
+                                    name="NumeroActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Nom</FormLabel>
+                                            <FormLabel>Numéro d'acte</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Nom de famille"
+                                                    placeholder="Numéro d'acte"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -181,7 +180,7 @@ const DemandeForm = () => {
                                     )}
                                 />
 
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="prenom"
                                     render={({ field }) => (
@@ -196,10 +195,10 @@ const DemandeForm = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                             </div>
 
-                            <FormField
+                            {/*<FormField
                                 control={form.control}
                                 name="parents"
                                 render={({ field }) => (
@@ -237,7 +236,7 @@ const DemandeForm = () => {
                                                         <Button
                                                             variant={"outline"}
                                                             className={`"w-[240px] pl-3 text-left font-normal",
-                        ${!field.value && "text-muted-foreground"}`}
+                                                            ${!field.value && "text-muted-foreground"}`}
                                                         >
                                                             {field.value ? (
                                                                 <span>
@@ -284,11 +283,6 @@ const DemandeForm = () => {
                                                     />
                                                 </PopoverContent>
                                             </Popover>
-                                            {/* <FormDescription>
-                                                Date de naissance, mariage ou
-                                                décès
-                                            </FormDescription>
-                                            <FormMessage /> */}
                                         </FormItem>
                                     )}
                                 />
@@ -331,7 +325,7 @@ const DemandeForm = () => {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            />*/}
 
                             <div className="border-t pt-4">
                                 <div className="bg-gray-50 p-4 rounded-lg mb-4">
@@ -347,7 +341,7 @@ const DemandeForm = () => {
                                         votre demande soit traitée.
                                     </p>
                                 </div>
-
+{/* 
                                 <FormField
                                     control={form.control}
                                     name="paymentConfirmed"
@@ -375,7 +369,7 @@ const DemandeForm = () => {
                                             </div>
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                             </div>
 
                             <div className="flex justify-end">

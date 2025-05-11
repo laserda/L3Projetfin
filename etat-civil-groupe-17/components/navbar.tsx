@@ -21,7 +21,7 @@ export const Navbar = async () => {
 
   const navLinks = [
     { href: "/", label: "Accueil" },
-    { href: "/nouvelle-demande", label: "Nouvelle Demande" },
+    { href: "/nos-service", label: "Nouvelle Demande" },
     ...(user ? [{ href: "/citoyen-dashboard", label: "Mon espace" }] : []),
     { href: "/suivi-demande", label: "Suivi Demande" },
   ];

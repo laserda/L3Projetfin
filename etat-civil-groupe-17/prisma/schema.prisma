@@ -20,9 +20,17 @@ enum TypeActe {
   Décès
 }
 
+enum DemandePourTier{
+  Moi
+  MonEnfant
+  UnMenbreFamile
+  Autre
+}
+
 enum StatutDemande {
-  Soumise
-  En_traitement
+  SoumiseEnAttenteDePaiment
+  SoumisePayee
+  EnTraitement
   Validée
   Refusée
   Livrée
@@ -61,15 +69,20 @@ model Citoyen {
 model Demande {
   ID_Demande    String    @id @default(uuid())
   ID_Citoyen    String
-  Type_Acte     TypeActe
+  TypeActe      TypeActe
+  NumeroActe     String   @default("")
+  Nom            String   @default("")
+  Prenom         String   @default("")
   Statut        StatutDemande
-  Date_Demande  DateTime
-  ID_Paiement   String      @unique
+  DemandePourTier  DemandePourTier 
+  DateDemande   DateTime   
+  DateActe  DateTime?  
+  ID_Paiement   String?     @unique
 
-  citoyen       Citoyen       @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
-  paiement      Paiement      @relation(fields: [ID_Paiement], references: [ID_Paiement])
-  document      Document_Acte?
-  historique    Historique_Modifications[]
+  Citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
+  Document      Document_Acte?
+  Historique    Historique_Modifications[]
 
   @@index([ID_Citoyen])
   @@index([ID_Paiement])
@@ -79,15 +92,15 @@ model Document_Acte {
   ID_Document_Acte    String     @id @default(uuid())
   ID_Demande          String     @unique
   ID_Agent            String
-  Date_Delivrance     DateTime
+  DateDelivrance     DateTime
   Fichier_PDF         String     // lien vers un fichier, ne pas stocker le PDF
-  Signature_Numerique String
-  Est_Archive         Boolean
-  Date_Archivage      DateTime
+  SignatureNumerique String
+  EstArchive         Boolean
+  DateArchivage      DateTime
 
-  demande             Demande    @relation(fields: [ID_Demande], references: [ID_Demande])
-  agent               Agent      @relation(fields: [ID_Agent], references: [ID_Agent])
-  historique          Historique_Modifications[]
+  Demande             Demande    @relation(fields: [ID_Demande], references: [ID_Demande])
+  Agent               Agent      @relation(fields: [ID_Agent], references: [ID_Agent])
+  Historique          Historique_Modifications[]
 
   @@index([ID_Demande])
   @@index([ID_Agent])
@@ -96,11 +109,11 @@ model Document_Acte {
 model Paiement {
   ID_Paiement   String       @id @default(uuid())
   Montant       Decimal
-  Mode_Paiement ModePaiement
-  Date_Paiement DateTime
+  ModePaiement ModePaiement
+  DatePaiement DateTime
   Transaction_ID String      @unique
 
-  demande       Demande?
+  Demande       Demande?
 }
 
 model Agent {
@@ -110,23 +123,23 @@ model Agent {
   Email      String       @unique
   Role       RoleAgent
   Password      String
-  documents  Document_Acte[]
-  historiques Historique_Modifications[]
+  Documents  Document_Acte[]
+  Historiques Historique_Modifications[]
 }
 
 model Historique_Modifications {
   ID_Historique     String      @id @default(uuid())
-  Type_Entite       TypeEntite
+  TypeEntite       TypeEntite
   ID_Entite         String
   ID_Agent          String
   Action            String
-  Date_Modification DateTime
+  DateModification DateTime
   Ancienne_Valeur   String
   Nouvelle_Valeur   String
 
-  agent             Agent       @relation(fields: [ID_Agent], references: [ID_Agent])
-  demande     Demande? @relation(fields: [ID_Entite], references: [ID_Demande], map: "fk_demande")
-  document    Document_Acte? @relation(fields: [ID_Entite], references: [ID_Document_Acte], map: "fk_acte")
+  Agent             Agent       @relation(fields: [ID_Agent], references: [ID_Agent])
+  Demande     Demande? @relation(fields: [ID_Entite], references: [ID_Demande], map: "fk_demande")
+  Document    Document_Acte? @relation(fields: [ID_Entite], references: [ID_Document_Acte], map: "fk_acte")
 
   @@index([ID_Agent])
   @@index([ID_Entite])
