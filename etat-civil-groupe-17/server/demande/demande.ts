@@ -89,3 +89,11 @@ export async function getDemande(ID_Demande: string){
         }
       });
 }
+
+export async function getSuivieDesDemande(){
+    return await demandeRepo.findAll({
+        include:{
+            Citoyen:true
+        }
+      });
+}
