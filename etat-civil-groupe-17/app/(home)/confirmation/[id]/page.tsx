@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 
-import { DemandeResquest, Request } from "@/types";
+import { DemandeResquest } from "@/types";
 import {
     Card,
     CardContent,
@@ -15,7 +15,7 @@ import { CheckCircle, ArrowRight, FileText } from "lucide-react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
-import { getDemande } from "@/server/demande/demande";
+import { getDemandePayer } from "@/server/demande/demande";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -30,9 +30,7 @@ const ConfirmationPage: FC = () => {
                 //     localStorage.getItem("requests") || "[]"
                 // );
                 // const foundRequest = requests.find((r: Request) => r.id === id);
-                const foundRequest = await getDemande(id);
-                console.log(id)
-                console.log(foundRequest)
+                const foundRequest = await getDemandePayer(id);
 
                 if (foundRequest) {
                     setRequest(foundRequest);
