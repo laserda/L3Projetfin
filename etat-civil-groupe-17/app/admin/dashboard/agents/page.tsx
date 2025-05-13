@@ -11,6 +11,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import Link from "next/link";
+import { Loader } from "@/components/Loader";
 
 function page() {
     const [agents, setAgents] = useState<any>([]);
@@ -28,13 +29,7 @@ function page() {
     }, [refresh]);
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">Chargement...</div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (

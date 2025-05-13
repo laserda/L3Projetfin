@@ -3,14 +3,10 @@
 import { DemandeRepository } from './repositories/demandeRepository'
 import { CitoyenRepository } from '../auth/repositories/citoyenRepository';
 import {
-    createSession,
-    deleteSession,
     getSession,
-} from "../sessions/agent_session";
-import { redirect } from "next/navigation";
+} from "../sessions/citoyen_session";
 
 import { createDemandeSchema } from '@/validation/validation-demande';
-import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
@@ -163,9 +159,19 @@ export async function getDemandeEnAttenteDePaiement(ID_Demande: string) {
 }
 
 export async function getSuivieDesDemande() {
+    const session = await getSession();
+    if (!session) {
+        return {
+            success: false,
+            errors: [ErrorsMessage.errors],
+        };
+    }
     return await demandeRepo.findAll({
         include: {
             Citoyen: true
+        },
+        where: {
+            ID_Citoyen: session?.userId
         }
     });
 }

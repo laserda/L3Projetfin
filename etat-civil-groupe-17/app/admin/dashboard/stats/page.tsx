@@ -26,6 +26,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDemandes } from "@/server/admin/demande";
 import { Demande } from "@/lib/generated/prisma";
+import { Loader } from "@/components/Loader";
 
 const Page = () => {
     const [requests, setRequests] = useState<Demande[]>([]);
@@ -168,15 +169,7 @@ const Page = () => {
     };
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (

@@ -76,9 +76,9 @@ const PaiementPage: FC = () => {
 
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: request?.Citoyen.Email || '',
+        email: request?.Citoyen.Email,
         amount: montant * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        publicKey: process.env.NEXT_PUBLIC_KEY || '',
+        publicKey: process.env.NEXT_PUBLIC_KEY,
         currency: "XOF" // CFA Franc BCEAO
     };
 
@@ -219,15 +219,16 @@ const PaiementPage: FC = () => {
                     </div>
 
                     <div className="flex justify-end">
-                        <PaystackConsumerNoSSR {...config}>
-                            {({ initializePayment }) => (
-                                <Button
-                                    onClick={() => initializePayment()}
-                                    className="bg-ci-orange hover:bg-ci-orange/90">
-                                    Payer
-                                </Button>
-                            )}
+
+                        <PaystackConsumerNoSSR {...componentProps} >
+                            {({ initializePayment }) => <Button
+                                onClick={() => initializePayment(handlePaystackSuccessAction, handlePaystackCloseAction)}
+                                className="bg-ci-orange hover:bg-ci-orange/90">
+                                Payer
+                            </Button>}
                         </PaystackConsumerNoSSR>
+                        {/* <PaystackButtonNoSSR {...componentProps} className="bg-ci-orange hover:bg-ci-orange/90" /> */}
+
                     </div>
                 </CardContent>
             </Card>

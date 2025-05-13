@@ -33,6 +33,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Demande, StatutDemande } from "@/lib/generated/prisma";
 import { getDemande, updateDemandeStatus } from "@/server/admin/demande";
+import { Loader } from "@/components/Loader";
 
 const DemandeDetailPage = () => {
     const params = useParams();
@@ -152,15 +153,7 @@ const DemandeDetailPage = () => {
     };
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     if (!request) {

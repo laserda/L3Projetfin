@@ -16,6 +16,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { getDemandePayer } from "@/server/demande/demande";
+import { Loader } from "@/components/Loader";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -49,13 +50,7 @@ const ConfirmationPage: FC = () => {
     }, [id]);
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center min-h-[60vh]">
-                <div className="animate-pulse text-ci-orange">
-                    Chargement...
-                </div>
-            </div>
-        );
+        return <Loader />;
     }
 
     if (!request) {

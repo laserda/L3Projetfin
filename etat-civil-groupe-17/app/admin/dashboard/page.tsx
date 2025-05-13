@@ -26,6 +26,7 @@ import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { useEffect, useState } from "react";
 import { Demande } from "@/lib/generated/prisma";
 import { getDemandes } from "@/server/admin/demande";
+import { Loader } from "@/components/Loader";
 
 const DashboardIndexPage = () => {
     const [demandes, setDemandes] = useState<Demande[]>([])
@@ -126,9 +127,7 @@ const DashboardIndexPage = () => {
 
 
     if (isLoading) {
-        return <div className="flex justify-center items-center h-screen">
-            <p className="text-primary animate-pulse text-xl">Chargement...</p>
-        </div>
+        return <Loader />;
     }
 
     return (

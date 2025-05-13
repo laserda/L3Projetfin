@@ -33,6 +33,7 @@ import { getDemandes } from "@/server/admin/demande";
 import { Demande, StatutDemande, TypeActe } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+import { Loader } from "@/components/Loader";
 
 const DemandesListPage: FC = () => {
     const [requests, setRequests] = useState<Demande[]>([]);
@@ -146,15 +147,7 @@ const DemandesListPage: FC = () => {
 
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-screen">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (

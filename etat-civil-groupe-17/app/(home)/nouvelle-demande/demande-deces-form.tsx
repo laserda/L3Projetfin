@@ -23,20 +23,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-
-import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
 import { createDemande } from "@/server/demande/demande";
 import { createDemandeMariageSchema, CreateDemandeMariageFormData } from "@/validation/validation-demande";
-import { Info } from "lucide-react";
-import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { TypeActe } from "@/lib/generated/prisma";
 import { ErrorsMessage } from "@/enums/errors-message";
 
 const DemandeDecesForm = () => {
@@ -190,35 +179,7 @@ const DemandeDecesForm = () => {
                                         votre demande soit traitée.
                                     </p>
                                 </div>
-                                {/* 
-                                <FormField
-                                    control={form.control}
-                                    name="paymentConfirmed"
-                                    render={({ field }) => (
-                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={field.value}
-                                                    onCheckedChange={
-                                                        field.onChange
-                                                    }
-                                                />
-                                            </FormControl>
-                                            <div className="space-y-1 leading-none">
-                                                <FormLabel>
-                                                    Je confirme avoir payé les
-                                                    frais de timbre de 1000 FCFA
-                                                </FormLabel>
-                                                <FormDescription>
-                                                    En cochant cette case, vous
-                                                    confirmez avoir effectué le
-                                                    paiement.
-                                                </FormDescription>
-                                                <FormMessage />
-                                            </div>
-                                        </FormItem>
-                                    )}
-                                /> */}
+
                             </div>
 
                             <div className="flex justify-end">
