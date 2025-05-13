@@ -14,10 +14,10 @@ import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
+import { paiementSchema } from '@/validation/validation-paiement';
 
 const demandeRepo = new DemandeRepository()
 const citoyenRepo = new CitoyenRepository()
-
 
 export async function createDemande(formData: FormData) {
     const result = createDemandeSchema.safeParse(Object.fromEntries(formData));
@@ -31,10 +31,10 @@ export async function createDemande(formData: FormData) {
 
     try {
 
-        let session = await getSession();        
+        let session = await getSession();
         console.log(session);
         let user = await citoyenRepo.findById(session?.userId);
-        if(!user){
+        if (!user) {
             const err = new Error("Une erreur est survenue");
             return {
                 succes: false,
@@ -42,16 +42,13 @@ export async function createDemande(formData: FormData) {
             };
         }
 
-        if(result.data.DemandePourTier == DemandePourTier.Moi){
+        if (result.data.DemandePourTier == DemandePourTier.Moi) {
             result.data.Nom = user.Nom;
             result.data.Prenom = user.Prenom;
             result.data.DateActe = user.DateNaissance.toISOString();
-        }else{
+        } else {
             result.data.DateActe = `${result.data.DateActe}T00:00:00.000Z`;
         }
-        console.log(result.data);
-        
-
 
         // DateAct
         const newDemande = await demandeRepo.create({
@@ -62,10 +59,10 @@ export async function createDemande(formData: FormData) {
                 },
                 Statut: StatutDemande.SoumiseEnAttenteDePaiment,
                 DateDemande: getDateTimeISOString(),
-                DateActe:`${result.data.DateActe}`,
+                DateActe: `${result.data.DateActe}`,
             }
         });
-        
+
         console.log(newDemande);
 
         return {
@@ -81,19 +78,94 @@ export async function createDemande(formData: FormData) {
     }
 }
 
-export async function getDemande(ID_Demande: string){
-    return await demandeRepo.findOne({
-        where: { ID_Demande: ID_Demande },
-        include:{
-            Citoyen:true
+
+export async function createPaimentDemande(paiement: any, ID_Demande: string) {
+
+    try {
+
+        let session = await getSession();
+        console.log(session);
+        let user = await citoyenRepo.findById(session?.userId);
+        if (!user) {
+            const err = new Error("Une erreur est survenue");
+            return {
+                succes: false,
+                errors: err,
+            };
         }
-      });
+
+        console.log(paiement);
+        const newDemande = await demandeRepo.update({
+            where: { ID_Demande: ID_Demande },
+            data: {
+                Statut: StatutDemande.SoumisePayee,
+                Paiement: {
+                    create: {
+                        ...paiement,
+                        DatePaiement: getDateTimeISOString()
+                    },
+                },
+            },
+            include: {
+                Paiement: true
+            }
+
+        });
+
+        console.log(newDemande);
+
+        return {
+            success: true,
+            ID_Demande: newDemande.ID_Demande,
+        };
+    } catch (error) {
+        console.log(error)
+        return {
+            success: false,
+            errors: [ErrorsMessage.errors],
+        };
+    }
 }
 
-export async function getSuivieDesDemande(){
-    return await demandeRepo.findAll({
-        include:{
-            Citoyen:true
+export async function getDemande(ID_Demande: string) {
+    return await demandeRepo.findOne({
+        where: {
+            ID_Demande: ID_Demande
+        },
+        include: {
+            Citoyen: true
         }
-      });
+    });
+}
+
+export async function getDemandePayer(ID_Demande: string) {
+    return await demandeRepo.findOne({
+        where: {
+            ID_Demande: ID_Demande,
+            Statut: { not: StatutDemande.SoumiseEnAttenteDePaiment }
+        },
+        include: {
+            Citoyen: true
+        }
+    });
+}
+
+export async function getDemandeEnAttenteDePaiement(ID_Demande: string) {
+    return await demandeRepo.findOne({
+        where: {
+            ID_Demande: ID_Demande,
+            Statut: StatutDemande.SoumiseEnAttenteDePaiment
+        },
+        include: {
+            Citoyen: true
+        }
+    });
+}
+
+export async function getSuivieDesDemande() {
+    return await demandeRepo.findAll({
+        include: {
+            Citoyen: true
+        }
+    });
 }

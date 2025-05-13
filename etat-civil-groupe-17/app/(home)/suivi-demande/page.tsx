@@ -390,12 +390,12 @@ const SuiviPage = () => {
                                                         request.Statut == StatutDemande.SoumiseEnAttenteDePaiment
                                                             ?
                                                             <Button
-                                                                variant="outline"
                                                                 size="sm"
+                                                                className="bg-ci-orange hover:bg-ci-orange/90"
                                                                 onClick={() => {
 
 
-                                                                    router.push(`/confirmation/${request.ID_Demande}`);
+                                                                    router.push(`/paiement/${request.ID_Demande}`);
                                                                 }}
                                                             >
                                                                 Payer

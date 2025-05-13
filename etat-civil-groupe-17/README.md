@@ -36,6 +36,7 @@
     DATABASE_URL="postgresql://utilisateur:motdepasse@localhost:5432/nom_de_la_base?schema=public"
     CITOYEN_SESSION_SECRET=ton_secret_session
     ADMIN_SESSION_SECRET=ton_secret_session
+    PUBLIC_KEY=ton_PUBLIC_KEY
     ```
 
 4. **Configurer la base de données :**
