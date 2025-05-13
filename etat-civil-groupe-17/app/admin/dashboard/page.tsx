@@ -22,42 +22,97 @@ import {
 } from "recharts";
 import { ArrowUp, FileText, Clock, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { stats, recentRequests } from "./data";
-import { formatDate, getRequestTypeName } from "@/utils";
+import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+import { useEffect, useState } from "react";
+import { Demande } from "@/lib/generated/prisma";
+import { getDemandes } from "@/server/admin/demande";
+import { Loader } from "@/components/Loader";
 
 const DashboardIndexPage = () => {
+    const [demandes, setDemandes] = useState<Demande[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const fetchDemandes = async () => {
+        setIsLoading(true)
+        const res = await getDemandes();
+        setDemandes(res);
+        setIsLoading(false)
+    }
+    const demandesNaissance = demandes.filter(demande => demande.TypeActe === "Naissance")
+    const demandesMariage = demandes.filter(demande => demande.TypeActe === "Mariage")
+    const demandesDeces = demandes.filter(demande => demande.TypeActe === "Décès")
+
+    const enAttente = demandes.filter(demande => demande.Statut === "SoumiseEnAttenteDePaiment")
+    const enTraitement = demandes.filter(demande => demande.Statut === "EnTraitement")
+    const valide = demandes.filter(demande => demande.Statut === "Validée")
+    const refuse = demandes.filter(demande => demande.Statut === "Refusée")
+
+    // Les 5 dernières demandes reçues
+    const recentDemandes = [...demandes].sort((a, b) => {
+        return new Date(b.DateDemande).getTime() - new Date(a.DateDemande).getTime();
+    }).slice(0, 5)
+
+    useEffect(() => {
+        fetchDemandes();
+    }, []);
     const pieChartData = [
-        { name: "Naissance", value: stats.byType.naissance, color: "#2563EB" },
-        { name: "Mariage", value: stats.byType.mariage, color: "#F59E0B" },
-        { name: "Décès", value: stats.byType.deces, color: "#6B7280" },
+        { name: "Naissance", value: demandesNaissance.length, color: "#2563EB" },
+        { name: "Mariage", value: demandesMariage.length, color: "#F59E0B" },
+        { name: "Décès", value: demandesDeces.length, color: "#6B7280" },
     ];
 
     const statusChartData = [
-        { name: "En attente", value: stats.pending, color: "#F59E0B" },
-        { name: "En traitement", value: stats.inProgress, color: "#3B82F6" },
-        { name: "Approuvées", value: stats.approved, color: "#10B981" },
-        { name: "Rejetées", value: stats.rejected, color: "#EF4444" },
+        { name: "En attente", value: enAttente.length, color: "#F59E0B" },
+        { name: "En traitement", value: enTraitement.length, color: "#3B82F6" },
+        { name: "Approuvées", value: valide.length, color: "#10B981" },
+        { name: "Rejetées", value: refuse.length, color: "#EF4444" },
     ];
+
+    const generalStats = [
+        {
+            title: "Total demandes",
+            value: demandes.length,
+            Icon: FileText,
+            color: "bg-blue-100",
+        },
+        {
+            title: "En attente",
+            value: enAttente.length,
+            Icon: Clock,
+            color: "bg-yellow-100",
+        },
+        {
+            title: "Validées",
+            value: valide.length,
+            Icon: Check,
+            color: "bg-green-100",
+        },
+        {
+            title: "Refusées",
+            value: refuse.length,
+            Icon: X,
+            color: "bg-red-100",
+        },
+    ]
 
     // Obtenir l'icône et la couleur selon le statut
     const getStatusInfo = (status: string) => {
         switch (status) {
-            case "pending":
+            case "SoumiseEnAttenteDePaiment":
                 return {
                     icon: <Clock className="h-4 w-4" />,
                     color: "text-yellow-500",
                 };
-            case "approved":
+            case "Validée":
                 return {
                     icon: <Check className="h-4 w-4" />,
                     color: "text-green-500",
                 };
-            case "rejected":
+            case "Refusée":
                 return {
                     icon: <X className="h-4 w-4" />,
                     color: "text-red-500",
                 };
-            case "inProgress":
+            case "EnTraitement":
                 return {
                     icon: <ArrowUp className="h-4 w-4" />,
                     color: "text-blue-500",
@@ -70,38 +125,18 @@ const DashboardIndexPage = () => {
         }
     };
 
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <>
             <div>
                 <h1 className="text-2xl font-bold mb-6">Tableau de bord</h1>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                {[
-                    {
-                        title: "Total demandes",
-                        value: stats.total,
-                        Icon: FileText,
-                        color: "bg-blue-100",
-                    },
-                    {
-                        title: "En attente",
-                        value: stats.pending,
-                        Icon: Clock,
-                        color: "bg-yellow-100",
-                    },
-                    {
-                        title: "Approuvées",
-                        value: stats.approved,
-                        Icon: Check,
-                        color: "bg-green-100",
-                    },
-                    {
-                        title: "Rejetées",
-                        value: stats.rejected,
-                        Icon: X,
-                        color: "bg-red-100",
-                    },
-                ].map((card, idx) => (
+                {generalStats.map((card, idx) => (
                     <Card key={idx}>
                         <CardContent className="p-6">
                             <div className="flex justify-between items-center">
@@ -216,7 +251,7 @@ const DashboardIndexPage = () => {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {recentRequests.length === 0 ? (
+                    {recentDemandes.length === 0 ? (
                         <p className="text-center py-8 text-gray-500">
                             Aucune demande n'a encore été enregistrée.
                         </p>
@@ -246,31 +281,31 @@ const DashboardIndexPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {recentRequests.map((request) => {
+                                    {recentDemandes.map((request) => {
                                         const statusInfo = getStatusInfo(
-                                            request.statut
+                                            request.Statut
                                         );
                                         return (
                                             <tr
-                                                key={request.id}
+                                                key={request.ID_Demande}
                                                 className="border-b hover:bg-gray-50"
                                             >
                                                 <td className="py-3 px-4">
-                                                    {request.id
+                                                    {request.ID_Demande
                                                         .substring(0, 8)
                                                         .toUpperCase()}
                                                 </td>
                                                 <td className="py-3 px-4">
                                                     {getRequestTypeName(
-                                                        request.type
+                                                        request.TypeActe
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4">
-                                                    {request.nom}
+                                                    {request.Nom}
                                                 </td>
                                                 <td className="py-3 px-4">
                                                     {formatDate(
-                                                        request.created_at
+                                                        request.DateDemande.toDateString()
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4">
@@ -279,7 +314,7 @@ const DashboardIndexPage = () => {
                                                     >
                                                         {statusInfo.icon}
                                                         <span className="ml-2 text-sm">
-                                                            {request.statut}
+                                                            {getStatusDemande(request.Statut)}
                                                         </span>
                                                     </span>
                                                 </td>

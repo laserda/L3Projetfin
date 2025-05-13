@@ -1,7 +1,6 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 
-import { Request, RequestStatus, RequestType } from "@/types";
 import {
     Card,
     CardContent,
@@ -10,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
     Select,
     SelectContent,
@@ -30,45 +29,36 @@ import {
     RefreshCw,
 } from "lucide-react";
 
-import { stats, recentRequests } from "../data";
+import { getDemandes } from "@/server/admin/demande";
+import { Demande, StatutDemande, TypeActe } from "@/lib/generated/prisma";
+import Link from "next/link";
+import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+import { Loader } from "@/components/Loader";
 
 const DemandesListPage: FC = () => {
-    //   const navigate = useNavigate();
-    //   const { user, isAdmin, logout } = useAuth();
-    const [requests, setRequests] = useState<Request[]>([]);
-    const [filteredRequests, setFilteredRequests] = useState<Request[]>([]);
+    const [requests, setRequests] = useState<Demande[]>([]);
+    const [filteredRequests, setFilteredRequests] = useState<Demande[]>([]);
     const [loading, setLoading] = useState(true);
 
     // Filtres
     const [searchTerm, setSearchTerm] = useState("");
-    const [statusFilter, setStatusFilter] = useState<RequestStatus | "all">(
+    const [statusFilter, setStatusFilter] = useState<StatutDemande | "all">(
         "all"
     );
-    const [typeFilter, setTypeFilter] = useState<RequestType | "all">("all");
+    const [typeFilter, setTypeFilter] = useState<TypeActe | "all">("all");
 
-    // Rediriger si l'utilisateur n'est pas connecté ou n'est pas admin
-    //   useEffect(() => {
-    //     if (!user) {
-    //       navigate('/login');
-    //     } else if (!isAdmin) {
-    //       navigate('/');
-    //     }
-    //   }, [user, isAdmin, navigate]);
 
     // Charger les demandes
     useEffect(() => {
-        const fetchRequests = () => {
+        const fetchRequests = async () => {
             setLoading(true);
             try {
-                // Simuler une requête Supabase
-                const storedRequests: Request[] = recentRequests;
+                const storedRequests = await getDemandes();
 
                 // Trier par date de création (plus récent d'abord)
-                const sortedRequests = [...storedRequests].sort(
-                    (a, b) =>
-                        new Date(b.created_at).getTime() -
-                        new Date(a.created_at).getTime()
-                );
+                const sortedRequests = [...storedRequests].sort((a, b) => {
+                    return new Date(b.DateDemande).getTime() - new Date(a.DateDemande).getTime();
+                })
 
                 setRequests(sortedRequests);
                 setFilteredRequests(sortedRequests);
@@ -91,21 +81,21 @@ const DemandesListPage: FC = () => {
             const term = searchTerm.toLowerCase();
             result = result.filter(
                 (req) =>
-                    req.id.toLowerCase().includes(term) ||
-                    req.nom.toLowerCase().includes(term) ||
-                    req.prenom.toLowerCase().includes(term) ||
-                    req.email.toLowerCase().includes(term)
+                    req.ID_Demande.toLowerCase().includes(term) ||
+                    req.Nom.toLowerCase().includes(term) ||
+                    req.Prenom.toLowerCase().includes(term) ||
+                    req.NumeroActe.toLowerCase().includes(term)
             );
         }
 
         // Filtre par statut
         if (statusFilter !== "all") {
-            result = result.filter((req) => req.statut === statusFilter);
+            result = result.filter((req) => req.Statut === statusFilter);
         }
 
         // Filtre par type
         if (typeFilter !== "all") {
-            result = result.filter((req) => req.type === typeFilter);
+            result = result.filter((req) => req.TypeActe === typeFilter);
         }
 
         setFilteredRequests(result);
@@ -118,52 +108,28 @@ const DemandesListPage: FC = () => {
         setTypeFilter("all");
     };
 
-    // Formater les dates
-    const formatDate = (dateStr: string) => {
-        const date = new Date(dateStr);
-        return new Intl.DateTimeFormat("fr-FR", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-        }).format(date);
-    };
-
-    // Obtenir le nom du type de demande
-    const getRequestTypeName = (type: string) => {
-        switch (type) {
-            case "naissance":
-                return "Naissance";
-            case "mariage":
-                return "Mariage";
-            case "deces":
-                return "Décès";
-            default:
-                return type;
-        }
-    };
-
     // Obtenir l'icône et la couleur selon le statut
     const getStatusInfo = (status: string) => {
         switch (status) {
-            case "pending":
+            case "SoumiseEnAttenteDePaiment":
                 return {
                     icon: <Clock className="h-4 w-4" />,
                     color: "text-yellow-500",
                     badge: "bg-yellow-50 text-yellow-700 border-yellow-200",
                 };
-            case "approved":
+            case "Validée":
                 return {
                     icon: <Check className="h-4 w-4" />,
                     color: "text-green-500",
                     badge: "bg-green-50 text-green-700 border-green-200",
                 };
-            case "rejected":
+            case "Refusée":
                 return {
                     icon: <X className="h-4 w-4" />,
                     color: "text-red-500",
                     badge: "bg-red-50 text-red-700 border-red-200",
                 };
-            case "inProgress":
+            case "EnTraitement":
                 return {
                     icon: <ArrowUp className="h-4 w-4" />,
                     color: "text-blue-500",
@@ -178,32 +144,10 @@ const DemandesListPage: FC = () => {
         }
     };
 
-    // Obtenir le texte du statut
-    const getStatusText = (status: string) => {
-        switch (status) {
-            case "pending":
-                return "En attente";
-            case "approved":
-                return "Approuvée";
-            case "rejected":
-                return "Rejetée";
-            case "inProgress":
-                return "En traitement";
-            default:
-                return status;
-        }
-    };
+
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (
@@ -264,7 +208,7 @@ const DemandesListPage: FC = () => {
                                 value={statusFilter}
                                 onValueChange={(value) =>
                                     setStatusFilter(
-                                        value as RequestStatus | "all"
+                                        value as StatutDemande | "all"
                                     )
                                 }
                             >
@@ -275,17 +219,17 @@ const DemandesListPage: FC = () => {
                                     <SelectItem value="all">
                                         Tous les statuts
                                     </SelectItem>
-                                    <SelectItem value="pending">
+                                    <SelectItem value="SoumiseEnAttenteDePaiment">
                                         En attente
                                     </SelectItem>
-                                    <SelectItem value="inProgress">
+                                    <SelectItem value="EnTraitement">
                                         En traitement
                                     </SelectItem>
-                                    <SelectItem value="approved">
-                                        Approuvées
+                                    <SelectItem value="Validée">
+                                        Validées
                                     </SelectItem>
-                                    <SelectItem value="rejected">
-                                        Rejetées
+                                    <SelectItem value="Refusée">
+                                        Refusées
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
@@ -301,7 +245,7 @@ const DemandesListPage: FC = () => {
                             <Select
                                 value={typeFilter}
                                 onValueChange={(value) =>
-                                    setTypeFilter(value as RequestType | "all")
+                                    setTypeFilter(value as TypeActe | "all")
                                 }
                             >
                                 <SelectTrigger id="type-filter">
@@ -311,13 +255,13 @@ const DemandesListPage: FC = () => {
                                     <SelectItem value="all">
                                         Tous les types
                                     </SelectItem>
-                                    <SelectItem value="naissance">
+                                    <SelectItem value="Naissance">
                                         Naissance
                                     </SelectItem>
-                                    <SelectItem value="mariage">
+                                    <SelectItem value="Mariage">
                                         Mariage
                                     </SelectItem>
-                                    <SelectItem value="deces">Décès</SelectItem>
+                                    <SelectItem value="Décès">Décès</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -361,7 +305,7 @@ const DemandesListPage: FC = () => {
                                             Nom
                                         </th>
                                         <th className="text-left py-3 px-4 font-medium">
-                                            Email
+                                            Numéro d acte
                                         </th>
                                         <th className="text-left py-3 px-4 font-medium">
                                             Date
@@ -377,32 +321,32 @@ const DemandesListPage: FC = () => {
                                 <tbody>
                                     {filteredRequests.map((request) => {
                                         const statusInfo = getStatusInfo(
-                                            request.statut
+                                            request.Statut
                                         );
                                         return (
                                             <tr
-                                                key={request.id}
+                                                key={request.ID_Demande}
                                                 className="border-b hover:bg-gray-50"
                                             >
                                                 <td className="py-3 px-4 font-medium">
-                                                    {request.id
+                                                    {request.ID_Demande
                                                         .substring(0, 8)
                                                         .toUpperCase()}
                                                 </td>
                                                 <td className="py-3 px-4">
                                                     {getRequestTypeName(
-                                                        request.type
+                                                        request.TypeActe
                                                     )}
                                                 </td>
-                                                <td className="py-3 px-4">{`${request.nom} ${request.prenom}`}</td>
+                                                <td className="py-3 px-4">{`${request.Nom} ${request.Prenom}`}</td>
                                                 <td className="py-3 px-4">
                                                     <span className="max-w-[150px] truncate inline-block">
-                                                        {request.email}
+                                                        {request.NumeroActe}
                                                     </span>
                                                 </td>
                                                 <td className="py-3 px-4">
                                                     {formatDate(
-                                                        request.created_at
+                                                        request.DateDemande.toDateString()
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4">
@@ -415,21 +359,20 @@ const DemandesListPage: FC = () => {
                                                         <span className="flex items-center">
                                                             {statusInfo.icon}
                                                             <span className="ml-1">
-                                                                {getStatusText(
-                                                                    request.statut
+                                                                {getStatusDemande(
+                                                                    request.Statut
                                                                 )}
                                                             </span>
                                                         </span>
                                                     </Badge>
                                                 </td>
                                                 <td className="py-3 px-4 text-right">
-                                                    <Button
-                                                        variant="outline"
-                                                        size="sm"
-                                                        onClick={() => {}}
+                                                    <Link
+                                                        href={`/admin/dashboard/details-demande/${request.ID_Demande}`}
+                                                        className={buttonVariants({ variant: "outline" })}
                                                     >
                                                         Détails
-                                                    </Button>
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         );

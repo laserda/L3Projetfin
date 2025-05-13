@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-import { Request, RequestStatus } from "@/types";
 import {
     Card,
     CardContent,
@@ -32,31 +31,32 @@ import {
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Demande, StatutDemande } from "@/lib/generated/prisma";
+import { getDemande, updateDemandeStatus } from "@/server/admin/demande";
+import { Loader } from "@/components/Loader";
 
 const DemandeDetailPage = () => {
     const params = useParams();
     const id = params?.id as string;
+    const router = useRouter();
 
-    const [request, setRequest] = useState<Request | null>(null);
+    const [request, setRequest] = useState<Demande>();
     const [loading, setLoading] = useState(true);
     const [currentStatus, setCurrentStatus] =
-        useState<RequestStatus>("pending");
+        useState<StatutDemande>("SoumisePayee");
     const [updatingStatus, setUpdatingStatus] = useState(false);
     const [generatingPdf, setGeneratingPdf] = useState(false);
     const [sendingEmail, setSendingEmail] = useState(false);
 
     useEffect(() => {
-        const fetchRequest = () => {
+        const fetchRequest = async () => {
             setLoading(true);
             try {
-                const requests: Request[] = JSON.parse(
-                    localStorage.getItem("requests") || "[]"
-                );
-                const foundRequest = requests.find((r) => r.id === id);
+                const foundRequest: Demande = await getDemande(id);
 
                 if (foundRequest) {
                     setRequest(foundRequest);
-                    setCurrentStatus(foundRequest.statut);
+                    setCurrentStatus(foundRequest.Statut);
                 }
             } catch (error) {
                 console.error(
@@ -72,37 +72,10 @@ const DemandeDetailPage = () => {
     }, [id]);
 
     const updateStatus = async () => {
-        if (!request || currentStatus === request.statut) return;
-
         setUpdatingStatus(true);
-        try {
-            const requests: Request[] = JSON.parse(
-                localStorage.getItem("requests") || "[]"
-            );
-            const updatedRequests = requests.map((r) => {
-                if (r.id === id) {
-                    return { ...r, statut: currentStatus };
-                }
-                return r;
-            });
-
-            localStorage.setItem("requests", JSON.stringify(updatedRequests));
-
-            setRequest((prev) =>
-                prev ? { ...prev, statut: currentStatus } : null
-            );
-
-            toast.success("Statut mis à jour avec succès");
-
-            console.log(
-                `Email envoyé à ${request.email} pour notifier du changement de statut: ${currentStatus}`
-            );
-        } catch (error) {
-            console.error("Erreur lors de la mise à jour du statut:", error);
-            toast.error("Erreur lors de la mise à jour du statut");
-        } finally {
-            setUpdatingStatus(false);
-        }
+        const res = await updateDemandeStatus(id, currentStatus)
+        setUpdatingStatus(false);
+        setRequest(res);
     };
 
     const generatePdf = async () => {
@@ -117,7 +90,7 @@ const DemandeDetailPage = () => {
                     "Le document a été généré et est prêt à être téléchargé.",
             });
 
-            console.log(`PDF généré pour la demande ${request.id}`);
+            console.log(`PDF généré pour la demande ${request.ID_Demande}`);
         } catch (error) {
             console.error("Erreur lors de la génération du PDF:", error);
             toast.error("Erreur lors de la génération du PDF");
@@ -127,72 +100,44 @@ const DemandeDetailPage = () => {
     };
 
     const sendEmail = async () => {
-        if (!request) return;
 
-        setSendingEmail(true);
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            toast.success("Email envoyé avec succès", {
-                description: `Un email a été envoyé à ${request.email}`,
-            });
-
-            console.log(
-                `Email envoyé à ${request.email} pour la demande ${request.id}`
-            );
-        } catch (error) {
-            console.error("Erreur lors de l'envoi de l'email:", error);
-            toast.error("Erreur lors de l'envoi de l'email");
-        } finally {
-            setSendingEmail(false);
-        }
     };
 
-    const formatDate = (dateStr: string) => {
-        const date = new Date(dateStr);
-        return new Intl.DateTimeFormat("fr-FR", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-        }).format(date);
-    };
 
     const getRequestTypeName = (type: string) => {
         switch (type) {
-            case "naissance":
+            case "Naissance":
                 return "Acte de naissance";
-            case "mariage":
+            case "Mariage":
                 return "Acte de mariage";
-            case "deces":
+            case "Décès":
                 return "Acte de décès";
             default:
                 return type;
         }
     };
 
-    const getStatusInfo = (status: string) => {
+    const getStatusInfo = (status: StatutDemande) => {
         switch (status) {
-            case "pending":
+            case "SoumisePayee":
                 return {
                     icon: <Clock className="h-5 w-5" />,
                     color: "text-yellow-500",
                     bg: "bg-yellow-100",
                 };
-            case "approved":
+            case "Validée":
                 return {
                     icon: <Check className="h-5 w-5" />,
                     color: "text-green-500",
                     bg: "bg-green-100",
                 };
-            case "rejected":
+            case "Refusée":
                 return {
                     icon: <X className="h-5 w-5" />,
                     color: "text-red-500",
                     bg: "bg-red-100",
                 };
-            case "inProgress":
+            case "EnTraitement":
                 return {
                     icon: <ArrowUp className="h-5 w-5" />,
                     color: "text-blue-500",
@@ -208,15 +153,7 @@ const DemandeDetailPage = () => {
     };
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     if (!request) {
@@ -233,19 +170,21 @@ const DemandeDetailPage = () => {
                         </CardDescription>
                     </CardHeader>
                     <CardFooter>
-                        <Button onClick={() => {}}>Retour à la liste</Button>
+                        <Button onClick={() => { }}>Retour à la liste</Button>
                     </CardFooter>
                 </Card>
             </>
         );
     }
 
-    const statusInfo = getStatusInfo(request.statut);
+    const statusInfo = getStatusInfo(request.Statut);
 
     return (
         <>
             <div className="flex items-center mb-6">
-                <Button variant="ghost" onClick={() => {}} className="mr-4">
+                <Button variant="ghost" onClick={() => {
+                    router.back()
+                }} className="mr-4">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Retour
                 </Button>
@@ -258,12 +197,12 @@ const DemandeDetailPage = () => {
                         <CardHeader>
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <CardTitle>
-                                        {getRequestTypeName(request.type)}
+                                    <CardTitle className="mb-2">
+                                        {getRequestTypeName(request.TypeActe)}
                                     </CardTitle>
                                     <CardDescription>
                                         Référence:{" "}
-                                        {request.id
+                                        {request.ID_Demande
                                             .substring(0, 8)
                                             .toUpperCase()}
                                     </CardDescription>
@@ -273,13 +212,13 @@ const DemandeDetailPage = () => {
                                 >
                                     {statusInfo.icon}
                                     <span className="font-medium">
-                                        {request.statut === "pending" &&
-                                            "En attente"}
-                                        {request.statut === "approved" &&
-                                            "Approuvée"}
-                                        {request.statut === "rejected" &&
-                                            "Rejetée"}
-                                        {request.statut === "inProgress" &&
+                                        {request.Statut === "SoumiseEnAttenteDePaiment" &&
+                                            "En attente de paiement"}
+                                        {request.Statut === "Validée" &&
+                                            "Validée"}
+                                        {request.Statut === "Refusée" &&
+                                            "Refusée"}
+                                        {request.Statut === "EnTraitement" &&
                                             "En traitement"}
                                     </span>
                                 </div>
@@ -305,7 +244,7 @@ const DemandeDetailPage = () => {
                                                     Nom
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.nom}
+                                                    {request.Nom}
                                                 </p>
                                             </div>
                                             <div>
@@ -313,7 +252,7 @@ const DemandeDetailPage = () => {
                                                     Prénom
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.prenom}
+                                                    {request.Prenom}
                                                 </p>
                                             </div>
                                             <div>
@@ -321,40 +260,16 @@ const DemandeDetailPage = () => {
                                                     Date
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.date}
+                                                    {request.DateDemande.toDateString()}
                                                 </p>
                                             </div>
-                                            <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
-                                                    Lieu
-                                                </h3>
-                                                <p className="mt-1">
-                                                    {request.lieu}
-                                                </p>
-                                            </div>
-                                            <div className="md:col-span-2">
-                                                <h3 className="text-sm font-medium text-gray-500">
-                                                    Parents
-                                                </h3>
-                                                <p className="mt-1">
-                                                    {request.parents ||
-                                                        "Non spécifié"}
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
-                                                    Email
-                                                </h3>
-                                                <p className="mt-1">
-                                                    {request.email}
-                                                </p>
-                                            </div>
+
                                             <div>
                                                 <h3 className="text-sm font-medium text-gray-500">
                                                     Paiement
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.paymentConfirmed ? (
+                                                    {request.ID_Paiement ? (
                                                         <Badge
                                                             variant="outline"
                                                             className="bg-green-50 text-green-600 border-green-200"
@@ -382,7 +297,7 @@ const DemandeDetailPage = () => {
                                                 Date de soumission
                                             </h3>
                                             <p>
-                                                {formatDate(request.created_at)}
+                                                {(request.DateDemande.toString())}
                                             </p>
                                         </div>
                                     </div>
@@ -401,8 +316,8 @@ const DemandeDetailPage = () => {
                                                     Demande créée
                                                 </p>
                                                 <p className="text-sm text-gray-500">
-                                                    {formatDate(
-                                                        request.created_at
+                                                    {(
+                                                        request.DateDemande.toString()
                                                     )}
                                                 </p>
                                                 <p className="text-sm mt-1">
@@ -423,8 +338,8 @@ const DemandeDetailPage = () => {
                                                     Statut initial
                                                 </p>
                                                 <p className="text-sm text-gray-500">
-                                                    {formatDate(
-                                                        request.created_at
+                                                    {(
+                                                        request.Statut
                                                     )}
                                                 </p>
                                                 <p className="text-sm mt-1">
@@ -434,7 +349,7 @@ const DemandeDetailPage = () => {
                                             </div>
                                         </div>
 
-                                        {request.statut !== "pending" && (
+                                        {request.Statut !== "SoumiseEnAttenteDePaiment" && (
                                             <div className="flex items-start">
                                                 <div className="flex-shrink-0 mr-3">
                                                     <div
@@ -445,28 +360,28 @@ const DemandeDetailPage = () => {
                                                 </div>
                                                 <div>
                                                     <p className="font-medium">
-                                                        {request.statut ===
-                                                            "approved" &&
-                                                            "Demande approuvée"}
-                                                        {request.statut ===
-                                                            "rejected" &&
-                                                            "Demande rejetée"}
-                                                        {request.statut ===
-                                                            "inProgress" &&
+                                                        {request.Statut ===
+                                                            "Validée" &&
+                                                            "Demande validée"}
+                                                        {request.Statut ===
+                                                            "Refusée" &&
+                                                            "Demande Refusée"}
+                                                        {request.Statut ===
+                                                            "EnTraitement" &&
                                                             "Demande en traitement"}
                                                     </p>
                                                     <p className="text-sm text-gray-500">
                                                         Date inconnue
                                                     </p>
                                                     <p className="text-sm mt-1">
-                                                        {request.statut ===
-                                                            "approved" &&
+                                                        {request.Statut ===
+                                                            "Validée" &&
                                                             "La demande a été approuvée par un agent."}
-                                                        {request.statut ===
-                                                            "rejected" &&
+                                                        {request.Statut ===
+                                                            "Refusée" &&
                                                             "La demande a été rejetée par un agent."}
-                                                        {request.statut ===
-                                                            "inProgress" &&
+                                                        {request.Statut ===
+                                                            "EnTraitement" &&
                                                             "La demande est en cours de traitement."}
                                                     </p>
                                                 </div>
@@ -492,28 +407,26 @@ const DemandeDetailPage = () => {
                                 <h3 className="text-sm font-medium mb-2">
                                     Modifier le statut
                                 </h3>
-                                <Select
-                                    value={currentStatus}
-                                    onValueChange={(value) =>
-                                        setCurrentStatus(value as RequestStatus)
-                                    }
-                                >
-                                    <SelectTrigger>
+                                {/* Ajouter pour fixer un bug sur le Select */}
+                                <Select></Select>
+                                <Select onValueChange={(value: StatutDemande) => setCurrentStatus(value)}>
+                                    <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Choisir un statut" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="pending">
+                                        <SelectItem value="SoumisePayee">
                                             En attente
                                         </SelectItem>
-                                        <SelectItem value="inProgress">
+                                        <SelectItem value="EnTraitement">
                                             En traitement
                                         </SelectItem>
-                                        <SelectItem value="approved">
-                                            Approuvée
+                                        <SelectItem value="Validée">
+                                            Validée
                                         </SelectItem>
-                                        <SelectItem value="rejected">
-                                            Rejetée
+                                        <SelectItem value="Refusée">
+                                            Refusée
                                         </SelectItem>
+                                        {/* </SelectGroup> */}
                                     </SelectContent>
                                 </Select>
 
@@ -521,7 +434,7 @@ const DemandeDetailPage = () => {
                                     className="w-full mt-2"
                                     disabled={
                                         updatingStatus ||
-                                        currentStatus === request.statut
+                                        currentStatus === request.Statut
                                     }
                                     onClick={updateStatus}
                                 >

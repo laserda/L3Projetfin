@@ -1,7 +1,6 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Request } from "@/types";
 import {
     Card,
     CardContent,
@@ -25,28 +24,20 @@ import {
     Line,
 } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { stats, recentRequests } from "../data";
+import { getDemandes } from "@/server/admin/demande";
+import { Demande } from "@/lib/generated/prisma";
+import { Loader } from "@/components/Loader";
 
 const Page = () => {
-    const [requests, setRequests] = useState<Request[]>([]);
+    const [requests, setRequests] = useState<Demande[]>([]);
     const [loading, setLoading] = useState(true);
-
-    // Rediriger si l'utilisateur n'est pas connecté ou n'est pas admin
-    //   useEffect(() => {
-    //     if (!user) {
-    //       navigate('/login');
-    //     } else if (!isAdmin) {
-    //       navigate('/');
-    //     }
-    //   }, [user, isAdmin, navigate]);
 
     // Charger les demandes
     useEffect(() => {
-        const fetchRequests = () => {
+        const fetchRequests = async () => {
             setLoading(true);
             try {
-                // Simuler une requête Supabase
-                const storedRequests: Request[] = recentRequests;
+                const storedRequests = await getDemandes();
                 setRequests(storedRequests);
             } catch (error) {
                 console.error("Erreur lors du chargement des demandes:", error);
@@ -64,17 +55,17 @@ const Page = () => {
         const byType = [
             {
                 name: "Naissance",
-                value: requests.filter((r) => r.type === "naissance").length,
+                value: requests.filter((r) => r.TypeActe === "Naissance").length,
                 color: "#2563EB",
             },
             {
                 name: "Mariage",
-                value: requests.filter((r) => r.type === "mariage").length,
+                value: requests.filter((r) => r.TypeActe === "Mariage").length,
                 color: "#F59E0B",
             },
             {
                 name: "Décès",
-                value: requests.filter((r) => r.type === "deces").length,
+                value: requests.filter((r) => r.TypeActe === "Décès").length,
                 color: "#6B7280",
             },
         ];
@@ -83,22 +74,22 @@ const Page = () => {
         const byStatus = [
             {
                 name: "En attente",
-                value: requests.filter((r) => r.statut === "pending").length,
+                value: requests.filter((r) => r.Statut === "SoumiseEnAttenteDePaiment").length,
                 color: "#F59E0B",
             },
             {
                 name: "En traitement",
-                value: requests.filter((r) => r.statut === "inProgress").length,
+                value: requests.filter((r) => r.Statut === "EnTraitement").length,
                 color: "#3B82F6",
             },
             {
-                name: "Approuvées",
-                value: requests.filter((r) => r.statut === "approved").length,
+                name: "Validées",
+                value: requests.filter((r) => r.Statut === "Validée").length,
                 color: "#10B981",
             },
             {
-                name: "Rejetées",
-                value: requests.filter((r) => r.statut === "rejected").length,
+                name: "Refusées",
+                value: requests.filter((r) => r.Statut === "Refusée").length,
                 color: "#EF4444",
             },
         ];
@@ -107,7 +98,7 @@ const Page = () => {
         const byMonth: Record<string, Record<string, number>> = {};
 
         requests.forEach((req) => {
-            const date = new Date(req.created_at);
+            const date = new Date(req.DateDemande);
             const monthYear = `${date.getMonth() + 1}/${date.getFullYear()}`;
 
             if (!byMonth[monthYear]) {
@@ -119,7 +110,7 @@ const Page = () => {
                 };
             }
 
-            byMonth[monthYear][req.type]++;
+            byMonth[monthYear][req.TypeActe]++;
             byMonth[monthYear].total++;
         });
 
@@ -178,15 +169,7 @@ const Page = () => {
     };
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (

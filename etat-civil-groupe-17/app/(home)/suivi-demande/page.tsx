@@ -34,6 +34,7 @@ import { StatutDemande, TypeActe } from "@/lib/generated/prisma";
 import { getSuivieDesDemande } from "@/server/demande/demande";
 import { getRequestTypeName, getStatusDemande } from "@/utils";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/components/Loader";
 
 const SuiviPage = () => {
     const router = useRouter();
@@ -167,15 +168,7 @@ const SuiviPage = () => {
 
 
     if (loading) {
-        return (
-            <>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-pulse text-ci-orange">
-                        Chargement...
-                    </div>
-                </div>
-            </>
-        );
+        return <Loader />;
     }
 
     return (
