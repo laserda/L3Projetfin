@@ -1,4 +1,4 @@
-import { StatutDemande, TypeActe } from "@/lib/generated/prisma";
+import { RoleAgent, StatutDemande, TypeActe } from "@/lib/generated/prisma";
 
 export interface Request {
     id: string;
@@ -17,7 +17,7 @@ export interface Request {
 export interface User {
     id: string;
     email: string;
-    role: "admin" | "user";
+    role: RoleAgent;
 }
 
 export interface RequestFormData {
@@ -49,7 +49,7 @@ export interface CitoyenResquest {
     Email: string;
 }
 
-export interface DemandeResquest{
+export interface DemandeResquest {
     DateActe: Date;
     DateDemande: Date;
     ID_Demande: string;
