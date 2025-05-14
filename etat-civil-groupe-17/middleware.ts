@@ -61,6 +61,18 @@ export async function requireAdmin(request: NextRequest) {
     }
 }
 
+export async function secureNouvelleDemande(request: NextRequest) {
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session")?.value;
+    const decryptedSession = await decrypt(session);
+
+    if (!decryptedSession) {
+        return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    return NextResponse.next();
+}
+
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
@@ -77,9 +89,15 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
+    // Sécuriser la page nouvelle-demande
+    if (pathname === "/nouvelle-demande") {
+        const response = await secureNouvelleDemande(request);
+        if (response.status !== 200) return response;
+    }
+
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/dashboard", "/login", "/register", "/admin/:path*"],
+    matcher: ["/dashboard", "/login", "/register", "/admin/:path*", "/nouvelle-demande"],
 };

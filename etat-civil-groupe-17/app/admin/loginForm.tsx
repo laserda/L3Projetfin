@@ -120,7 +120,6 @@ function LoginForm() {
 
                 <Button type="submit" className="w-full" disabled={isPending}>
                     {isPending ? "..." : "Se connecter"}
-                    Se connecter
                 </Button>
             </form>
         </Form>

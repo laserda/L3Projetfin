@@ -32,6 +32,7 @@ const DemandeDecesForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [err, setErr] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
@@ -50,13 +51,13 @@ const DemandeDecesForm = () => {
 
     const onSubmit = async (data: CreateDemandeMariageFormData) => {
         try {
-
+            setIsLoading(true)
             const formData = new FormData();
             Object.entries(data).forEach(([key, value]) => {
                 formData.append(key, value);
             });
 
-            var newRequest = await createDemande(formData);
+            const newRequest = await createDemande(formData);
 
             if (!newRequest.success) {
                 setErr(ErrorsMessage.errors);
@@ -64,7 +65,7 @@ const DemandeDecesForm = () => {
             }
 
             router.push(`/confirmation/${newRequest.ID_Demande}`);
-
+            setIsLoading(false)
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
@@ -185,7 +186,7 @@ const DemandeDecesForm = () => {
                             <div className="flex justify-end">
                                 <Button
                                     type="submit"
-                                    className="bg-ci-orange hover:bg-ci-orange/90"
+                                    disabled={isLoading}
                                 >
                                     Soumettre ma demande
                                 </Button>

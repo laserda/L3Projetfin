@@ -74,7 +74,7 @@ const Page = () => {
         const byStatus = [
             {
                 name: "En attente",
-                value: requests.filter((r) => r.Statut === "SoumiseEnAttenteDePaiment").length,
+                value: requests.filter((r) => r.Statut === "SoumisePayee").length,
                 color: "#F59E0B",
             },
             {

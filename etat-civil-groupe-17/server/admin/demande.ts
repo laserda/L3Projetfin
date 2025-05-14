@@ -5,7 +5,6 @@ import { CitoyenRepository } from "../auth/repositories/citoyenRepository";
 import { getSession } from "../sessions/citoyen_session";
 
 import { createDemandeSchema } from "@/validation/validation-demande";
-import { hashPassword, verifyPassword } from "@/lib/hashPassword";
 import { DemandePourTier, StatutDemande } from "@/lib/generated/prisma";
 import { getDateTimeISOString } from "@/utils";
 import { ErrorsMessage } from "@/enums/errors-message";
@@ -81,7 +80,13 @@ export async function getDemande(ID_Demande: string) {
     });
 }
 export async function getDemandes() {
-    return await demandeRepo.findAll();
+    return await demandeRepo.findAll({
+        where: {
+            Statut: {
+                not: 'SoumiseEnAttenteDePaiment'
+            }
+        }
+    });
 }
 
 export async function getSuivieDesDemande() {
