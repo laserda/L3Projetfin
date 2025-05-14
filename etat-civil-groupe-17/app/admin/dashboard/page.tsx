@@ -41,7 +41,7 @@ const DashboardIndexPage = () => {
     const demandesMariage = demandes.filter(demande => demande.TypeActe === "Mariage")
     const demandesDeces = demandes.filter(demande => demande.TypeActe === "Décès")
 
-    const enAttente = demandes.filter(demande => demande.Statut === "SoumiseEnAttenteDePaiment")
+    const enAttente = demandes.filter(demande => demande.Statut === "SoumisePayee")
     const enTraitement = demandes.filter(demande => demande.Statut === "EnTraitement")
     const valide = demandes.filter(demande => demande.Statut === "Validée")
     const refuse = demandes.filter(demande => demande.Statut === "Refusée")

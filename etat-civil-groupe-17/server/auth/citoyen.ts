@@ -26,7 +26,7 @@ export async function login(formData: FormData) {
     try {
         const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
-        
+
         if (!isCitoyen) {
             return {
                 errors: {
@@ -55,7 +55,7 @@ export async function login(formData: FormData) {
     } catch (error) {
         console.log(error);
         return {
-            errors: error,
+            errors: 'Une erreur est survenue',
             succes: false,
         };
     }
@@ -83,11 +83,13 @@ export async function register(formData: FormData) {
 
         const hashedPassword = await hashPassword(result.data.Password);
 
-        const newCitoyen = await citoyenRepo.create({data: {
-            ...result.data,
-            DateNaissance: new Date("1993-01-01T00:00:00.000Z"),// a corriger new Date(result.data.DateNaissance),
-            Password: hashedPassword,
-        }})
+        const newCitoyen = await citoyenRepo.create({
+            data: {
+                ...result.data,
+                DateNaissance: new Date("1993-01-01T00:00:00.000Z"),// a corriger new Date(result.data.DateNaissance),
+                Password: hashedPassword,
+            }
+        })
         await createSession(newCitoyen.ID_Citoyen);
         return {
             errors: null,

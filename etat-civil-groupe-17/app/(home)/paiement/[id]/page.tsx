@@ -90,10 +90,7 @@ const PaiementPage: FC = () => {
             ModePaiement: ModePaiement.Carte_Bancaire,
             Transaction_ID: config.reference,
         };
-
-        console.log(paiement);
-        var newRequest = await createPaimentDemande(paiement, id);
-
+        const newRequest = await createPaimentDemande(paiement, id);
         if (!newRequest.success) {
             setErr(ErrorsMessage.errors);
             return
@@ -122,10 +119,6 @@ const PaiementPage: FC = () => {
         const fetchRequest = async () => {
             setLoading(true);
             try {
-                // const requests = JSON.parse(
-                //     localStorage.getItem("requests") || "[]"
-                // );
-                // const foundRequest = requests.find((r: Request) => r.id === id);
                 const foundRequest = await getDemandeEnAttenteDePaiement(id);
                 console.log(id)
                 console.log(foundRequest)
@@ -223,7 +216,8 @@ const PaiementPage: FC = () => {
                         <PaystackConsumerNoSSR {...componentProps} >
                             {({ initializePayment }) => <Button
                                 onClick={() => initializePayment(handlePaystackSuccessAction, handlePaystackCloseAction)}
-                                className="bg-ci-orange hover:bg-ci-orange/90">
+                            // className="bg-ci-orange hover:bg-ci-orange/90"
+                            >
                                 Payer
                             </Button>}
                         </PaystackConsumerNoSSR>

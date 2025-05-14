@@ -73,7 +73,7 @@ const DemandeDetailPage = () => {
 
     const updateStatus = async () => {
         setUpdatingStatus(true);
-        const res = await updateDemandeStatus(id, currentStatus)
+        const res = await updateDemandeStatus(id, 'EnTraitement')
         setUpdatingStatus(false);
         setRequest(res);
     };
@@ -405,10 +405,10 @@ const DemandeDetailPage = () => {
                         <CardContent className="space-y-6">
                             <div>
                                 <h3 className="text-sm font-medium mb-2">
-                                    Modifier le statut
+                                    M'occuper de la demande
                                 </h3>
                                 {/* Ajouter pour fixer un bug sur le Select */}
-                                <Select></Select>
+                                {/* <Select></Select>
                                 <Select onValueChange={(value: StatutDemande) => setCurrentStatus(value)}>
                                     <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Choisir un statut" />
@@ -426,21 +426,20 @@ const DemandeDetailPage = () => {
                                         <SelectItem value="Refusée">
                                             Refusée
                                         </SelectItem>
-                                        {/* </SelectGroup> */}
                                     </SelectContent>
-                                </Select>
+                                </Select> */}
 
                                 <Button
                                     className="w-full mt-2"
                                     disabled={
                                         updatingStatus ||
-                                        currentStatus === request.Statut
+                                        request.Statut === "EnTraitement"
                                     }
                                     onClick={updateStatus}
                                 >
                                     {updatingStatus
-                                        ? "Mise à jour..."
-                                        : "Mettre à jour le statut"}
+                                        ? "..."
+                                        : "M'occuper de la demande"}
                                 </Button>
                             </div>
 
