@@ -31,7 +31,7 @@ const features = [
 function NosServiceLayout() {
     return (
         <>
-            <section className="py-8">
+            <section className="py-8" id="nos-service">
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                     Nos services
                 </h2>

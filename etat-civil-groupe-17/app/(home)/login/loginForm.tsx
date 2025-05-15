@@ -121,7 +121,7 @@ function LoginForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isPending}>
+                <Button type="submit" className="w-full" isLoading={isPending}>
                     {isPending ? "En cours de connexion" : "Se connecter"}
                 </Button>
             </form>

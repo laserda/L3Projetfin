@@ -90,7 +90,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // Sécuriser la page nouvelle-demande
-    if (pathname === "/nouvelle-demande") {
+    if (pathname === "/nouvelle-demande" || pathname === "/suivi-demande") {
         const response = await secureNouvelleDemande(request);
         if (response.status !== 200) return response;
     }
@@ -99,5 +99,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/dashboard", "/login", "/register", "/admin/:path*", "/nouvelle-demande"],
+    matcher: ["/dashboard", "/login", "/register", "/admin/:path*", "/nouvelle-demande", "/suivi-demande"],
 };

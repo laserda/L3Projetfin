@@ -63,4 +63,5 @@ export interface DemandeResquest {
 export interface ResultData {
     success?: boolean;
     error?: string;
+    data?: any;
 }

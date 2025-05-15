@@ -54,8 +54,9 @@ const PaiementPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [request, setRequest] = useState<DemandeResquest | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const montant = 1000;
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm({
         resolver: zodResolver(paiementSchema),
@@ -93,6 +94,7 @@ const PaiementPage: FC = () => {
         const newRequest = await createPaimentDemande(paiement, id);
         if (!newRequest.success) {
             setErr(ErrorsMessage.errors);
+            setIsLoading(false);
             return
         }
 
@@ -101,9 +103,9 @@ const PaiementPage: FC = () => {
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('closed')
-        setErr(ErrorsMessage.errors);
+        // implementation for  whatever you want to do when the Paystack dialog closed.        
+        setIsLoading(false);
+
     }
 
     const componentProps = {
@@ -120,9 +122,6 @@ const PaiementPage: FC = () => {
             setLoading(true);
             try {
                 const foundRequest = await getDemandeEnAttenteDePaiement(id);
-                console.log(id)
-                console.log(foundRequest)
-
                 if (foundRequest) {
                     setRequest(foundRequest);
                 }
@@ -215,8 +214,11 @@ const PaiementPage: FC = () => {
 
                         <PaystackConsumerNoSSR {...componentProps} >
                             {({ initializePayment }) => <Button
-                                onClick={() => initializePayment(handlePaystackSuccessAction, handlePaystackCloseAction)}
-                            // className="bg-ci-orange hover:bg-ci-orange/90"
+                                isLoading={isLoading}
+                                onClick={() => {
+                                    setIsLoading(true);
+                                    initializePayment(handlePaystackSuccessAction, handlePaystackCloseAction)
+                                }}
                             >
                                 Payer
                             </Button>}

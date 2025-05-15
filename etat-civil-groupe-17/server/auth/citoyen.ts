@@ -54,23 +54,19 @@ export async function login(formData: FormData): Promise<ResultData> {
     }
 }
 
-export async function register(formData: FormData) {
+export async function register(formData: FormData): Promise<ResultData> {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
-            errors: result.error.flatten().fieldErrors,
-            succes: false,
+            error: ErrorsMessage.errors
         };
     }
     try {
         const isCitoyen = await getCitoyenByEmail(result.data.Email);
         if (isCitoyen) {
             return {
-                errors: {
-                    email: ["Cet email est déjà utilisé"],
-                    succes: false,
-                },
+                error: "Cet email est déjà utilisé",
             };
         }
 
@@ -85,11 +81,12 @@ export async function register(formData: FormData) {
         })
         await createSession(newCitoyen.ID_Citoyen);
         return {
-            errors: null,
-            succes: true,
+            success: true,
         };
     } catch (e) {
-        console.log(e);
+        return {
+            error: ErrorsMessage.errors
+        };
     }
 }
 
