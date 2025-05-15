@@ -11,27 +11,26 @@ import { redirect } from "next/navigation";
 
 import { loginSchema, registerSchema } from "@/validation/validation-citoyen";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
-
+import { ErrorsMessage } from '@/enums/errors-message';
+import { ResultData } from '@/types';
 const citoyenRepo = new CitoyenRepository()
 
-export async function login(formData: FormData) {
-    const result = loginSchema.safeParse(Object.fromEntries(formData));
+export async function login(formData: FormData): Promise<ResultData> {
 
-    if (!result.success) {
-        return {
-            errors: result.error.flatten().fieldErrors,
-            succes: false,
-        };
-    }
     try {
-        const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
+        const result = loginSchema.safeParse(Object.fromEntries(formData));
+        if (!result.success) {
+            return {
+                error: ErrorsMessage.errors,
+            };
+        }
+
+        const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
         if (!isCitoyen) {
             return {
-                errors: {
-                    email: ["Email ou Mot de passe incorrect"],
-                },
+                error: "Email ou Mot de passe incorrect"
             };
         }
         const isPasswordCorrect = await verifyPassword(
@@ -40,23 +39,17 @@ export async function login(formData: FormData) {
         );
         if (!isPasswordCorrect) {
             return {
-                errors: {
-                    password: ["Email ou Mot de passe incorrect"],
-                    succes: false,
-                },
+                error: "Email ou Mot de passe incorrect",
             };
         }
 
         await createSession(isCitoyen.ID_Citoyen);
         return {
-            errors: null,
-            succes: true,
+            success: true,
         };
     } catch (error) {
-        console.log(error);
         return {
-            errors: 'Une erreur est survenue',
-            succes: false,
+            error: ErrorsMessage.errors,
         };
     }
 }

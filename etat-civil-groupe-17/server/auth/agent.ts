@@ -10,26 +10,24 @@ import { redirect } from "next/navigation";
 
 import { loginSchema, registerSchema } from "@/validation/validation-agent";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
+import { ResultData } from "@/types";
+import { ErrorsMessage } from "@/enums/errors-message";
 
 const agentRepo = new AgentRepository();
 
-export async function login(formData: FormData) {
+export async function login(formData: FormData): Promise<ResultData> {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
-            errors: result.error.flatten().fieldErrors,
-            succes: false,
+            error: ErrorsMessage.errors
         };
     }
     try {
         const isAgent = await getAgentByEmail(result.data.Email);
         if (!isAgent) {
             return {
-                errors: {
-                    email: ["Email ou Mot de passe incorrect"],
-                    succes: false,
-                },
+                error: "Email ou Mot de passe incorrect",
             };
         }
         const isPasswordCorrect = await verifyPassword(
@@ -38,20 +36,18 @@ export async function login(formData: FormData) {
         );
         if (!isPasswordCorrect) {
             return {
-                errors: {
-                    password: ["Email ou Mot de passe incorrect"],
-                    succes: false,
-                },
+                error: "Email ou Mot de passe incorrect",
             };
         }
 
         await createSession(isAgent.ID_Agent, isAgent.Role);
         return {
-            succes: false,
-            errors: null,
+            success: true,
         };
     } catch (error) {
-        console.log(error);
+        return {
+            error: ErrorsMessage.errors
+        };
     }
 }
 

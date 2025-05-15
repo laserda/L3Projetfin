@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 function LoginForm() {
     const router = useRouter();
     const [isPending, setIsPending] = useState(false);
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm({
         resolver: zodResolver(loginSchema),
@@ -45,17 +45,17 @@ function LoginForm() {
         });
         try {
             const res = await login(formData);
-            if (res.errors) {
-                const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            if (!res.success) {
+                const errMessage = res?.error?.toString();
                 setErr(errMessage);
+                setIsPending(false);
             } else {
                 router.push("/");
             }
 
-            setIsPending(false);
-        } catch (error) {
+        } catch (error: any) {
 
-            setErr(error as string);
+            setErr(error.errors);
             setIsPending(false);
             return;
         }
