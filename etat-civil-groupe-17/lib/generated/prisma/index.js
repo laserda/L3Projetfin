@@ -229,7 +229,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\new\\L3Projetfin\\etat-civil-groupe-17\\lib\\generated\\prisma",
+      "value": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\etat-civil-groupe-17\\lib\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -243,7 +243,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\Desktop\\new\\L3Projetfin\\etat-civil-groupe-17\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Workspace\\UVCI\\L3\\S6\\projet\\L3Projetfin\\etat-civil-groupe-17\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -261,7 +261,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://neondb_owner:npg_a2YLV6UOkRgI@ep-mute-band-a4ol8gvd-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
+        "value": "postgresql://user:password@localhost:5432/etat_civil?schema=public"
       }
     }
   },

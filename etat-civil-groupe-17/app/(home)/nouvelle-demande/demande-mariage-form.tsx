@@ -67,7 +67,7 @@ const DemandeMariageForm = () => {
                 return
             }
 
-            router.push(`/confirmation/${newRequest.ID_Demande}`);
+            router.push(`/paiement/${newRequest.ID_Demande}`);
             setIsLoading(false)
         } catch (error) {
             console.error("Erreur lors de la soumission:", error);

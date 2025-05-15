@@ -30,7 +30,7 @@ export async function login(formData: FormData) {
         if (!isCitoyen) {
             return {
                 errors: {
-                    email: ["Informations incorrectes"],
+                    email: ["Email ou Mot de passe incorrect"],
                 },
             };
         }
@@ -41,7 +41,7 @@ export async function login(formData: FormData) {
         if (!isPasswordCorrect) {
             return {
                 errors: {
-                    password: ["Mot de passe incorrect"],
+                    password: ["Email ou Mot de passe incorrect"],
                     succes: false,
                 },
             };
