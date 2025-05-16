@@ -24,11 +24,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import dynamic from "next/dynamic";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { useRouter } from "next/navigation";
+import { PaystackConsumer } from "react-paystack";
 
-const PaystackConsumerNoSSR = dynamic(
-    () => import("react-paystack").then((mod) => mod.PaystackConsumer),
-    { ssr: false }
-);
+
 
 interface PaystackConfig {
     reference: string;
@@ -108,7 +106,7 @@ const PaiementPage: FC = () => {
 
     }
 
-    const componentProps = {
+    const componentProps: any = {
         ...config,
         text: 'Paystack Button Implementation',
         onSuccess: (reference: PaystackResponse) => handlePaystackSuccessAction(reference),
@@ -212,7 +210,7 @@ const PaiementPage: FC = () => {
 
                     <div className="flex justify-end">
 
-                        <PaystackConsumerNoSSR {...componentProps} >
+                        <PaystackConsumer {...componentProps} >
                             {({ initializePayment }) => <Button
                                 isLoading={isLoading}
                                 onClick={() => {
@@ -222,7 +220,7 @@ const PaiementPage: FC = () => {
                             >
                                 Payer
                             </Button>}
-                        </PaystackConsumerNoSSR>
+                        </PaystackConsumer>
                         {/* <PaystackButtonNoSSR {...componentProps} className="bg-ci-orange hover:bg-ci-orange/90" /> */}
 
                     </div>

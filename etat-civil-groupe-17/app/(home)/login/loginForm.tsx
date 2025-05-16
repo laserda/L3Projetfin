@@ -45,6 +45,7 @@ function LoginForm() {
         });
         try {
             const res = await login(formData);
+            console.log(res)
             if (!res.success) {
                 const errMessage = res?.error?.toString();
                 setErr(errMessage);
@@ -54,7 +55,7 @@ function LoginForm() {
             }
 
         } catch (error: any) {
-
+            console.log(error)
             setErr(error.errors);
             setIsPending(false);
             return;

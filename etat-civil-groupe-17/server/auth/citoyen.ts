@@ -16,15 +16,17 @@ import { ResultData } from '@/types';
 const citoyenRepo = new CitoyenRepository()
 
 export async function login(formData: FormData): Promise<ResultData> {
+    console.log("login")
+    const result = loginSchema.safeParse(Object.fromEntries(formData));
+    if (!result.success) {
+        return {
+            error: ErrorsMessage.errors,
+            data: "error"
+        };
+    }
 
     try {
 
-        const result = loginSchema.safeParse(Object.fromEntries(formData));
-        if (!result.success) {
-            return {
-                error: ErrorsMessage.errors,
-            };
-        }
 
         const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
@@ -48,8 +50,10 @@ export async function login(formData: FormData): Promise<ResultData> {
             success: true,
         };
     } catch (error) {
+        console.log(`login ${error}`)
         return {
             error: ErrorsMessage.errors,
+            data: error
         };
     }
 }
@@ -84,6 +88,7 @@ export async function register(formData: FormData): Promise<ResultData> {
             success: true,
         };
     } catch (e) {
+        console.log(`register ${e}`)
         return {
             error: ErrorsMessage.errors
         };

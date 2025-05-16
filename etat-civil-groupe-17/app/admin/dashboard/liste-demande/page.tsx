@@ -219,18 +219,11 @@ const DemandesListPage: FC = () => {
                                     <SelectItem value="all">
                                         Tous les statuts
                                     </SelectItem>
-                                    <SelectItem value="SoumiseEnAttenteDePaiment">
-                                        En attente
-                                    </SelectItem>
-                                    <SelectItem value="EnTraitement">
-                                        En traitement
-                                    </SelectItem>
-                                    <SelectItem value="Validée">
-                                        Validées
-                                    </SelectItem>
-                                    <SelectItem value="Refusée">
-                                        Refusées
-                                    </SelectItem>
+                                    {Object.values(StatutDemande).filter(s => s != StatutDemande.SoumiseEnAttenteDePaiment).map((type) => (
+                                        <SelectItem key={type} value={type}>
+                                            {getStatusDemande(type)}
+                                        </SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
                         </div>
@@ -255,13 +248,11 @@ const DemandesListPage: FC = () => {
                                     <SelectItem value="all">
                                         Tous les types
                                     </SelectItem>
-                                    <SelectItem value="Naissance">
-                                        Naissance
-                                    </SelectItem>
-                                    <SelectItem value="Mariage">
-                                        Mariage
-                                    </SelectItem>
-                                    <SelectItem value="Décès">Décès</SelectItem>
+                                    {Object.values(TypeActe).map((type) => (
+                                        <SelectItem key={type} value={type}>
+                                            {getRequestTypeName(type)}
+                                        </SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
                         </div>
