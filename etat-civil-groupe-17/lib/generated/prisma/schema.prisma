@@ -144,3 +144,12 @@ model Historique_Modifications {
   @@index([ID_Agent])
   @@index([ID_Entite])
 }
+
+model FraisTimbre {
+  ID_FraisTimbre Int      @id @default(autoincrement())
+  TypeActe       TypeActe @unique
+  PrixTimbre     Float
+  FraisDossier   Float?   @default(0)
+  CreatedAt      DateTime @default(now())
+  UpdatedAt      DateTime @updatedAt
+}
