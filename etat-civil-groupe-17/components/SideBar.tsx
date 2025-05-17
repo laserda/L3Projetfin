@@ -7,6 +7,7 @@ import {
     Menu,
     PieChart,
     User,
+    HandCoins,
     X,
 } from "lucide-react";
 import Link from "next/link";
@@ -47,6 +48,10 @@ function SideBar() {
             label: "Agents",
             icon: <User className="h-5 w-5" />,
             href: "/admin/dashboard/agents",
+        }, {
+            label: "Tarifs",
+            icon: <HandCoins className="h-5 w-5" />,
+            href: "/admin/dashboard/tarif",
         }] : []),
 
     ];

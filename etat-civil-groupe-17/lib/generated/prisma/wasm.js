@@ -185,6 +185,15 @@ exports.Prisma.Historique_ModificationsScalarFieldEnum = {
   Nouvelle_Valeur: 'Nouvelle_Valeur'
 };
 
+exports.Prisma.FraisTimbreScalarFieldEnum = {
+  ID_FraisTimbre: 'ID_FraisTimbre',
+  TypeActe: 'TypeActe',
+  PrixTimbre: 'PrixTimbre',
+  FraisDossier: 'FraisDossier',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -243,7 +252,8 @@ exports.Prisma.ModelName = {
   Document_Acte: 'Document_Acte',
   Paiement: 'Paiement',
   Agent: 'Agent',
-  Historique_Modifications: 'Historique_Modifications'
+  Historique_Modifications: 'Historique_Modifications',
+  FraisTimbre: 'FraisTimbre'
 };
 
 /**

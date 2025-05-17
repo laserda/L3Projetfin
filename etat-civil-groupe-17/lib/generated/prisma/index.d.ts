@@ -43,6 +43,11 @@ export type Agent = $Result.DefaultSelection<Prisma.$AgentPayload>
  * 
  */
 export type Historique_Modifications = $Result.DefaultSelection<Prisma.$Historique_ModificationsPayload>
+/**
+ * Model FraisTimbre
+ * 
+ */
+export type FraisTimbre = $Result.DefaultSelection<Prisma.$FraisTimbrePayload>
 
 /**
  * Enums
@@ -313,6 +318,16 @@ export class PrismaClient<
     * ```
     */
   get historique_Modifications(): Prisma.Historique_ModificationsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.fraisTimbre`: Exposes CRUD operations for the **FraisTimbre** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FraisTimbres
+    * const fraisTimbres = await prisma.fraisTimbre.findMany()
+    * ```
+    */
+  get fraisTimbre(): Prisma.FraisTimbreDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -758,7 +773,8 @@ export namespace Prisma {
     Document_Acte: 'Document_Acte',
     Paiement: 'Paiement',
     Agent: 'Agent',
-    Historique_Modifications: 'Historique_Modifications'
+    Historique_Modifications: 'Historique_Modifications',
+    FraisTimbre: 'FraisTimbre'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -777,7 +793,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "citoyen" | "demande" | "document_Acte" | "paiement" | "agent" | "historique_Modifications"
+      modelProps: "citoyen" | "demande" | "document_Acte" | "paiement" | "agent" | "historique_Modifications" | "fraisTimbre"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1225,6 +1241,80 @@ export namespace Prisma {
           }
         }
       }
+      FraisTimbre: {
+        payload: Prisma.$FraisTimbrePayload<ExtArgs>
+        fields: Prisma.FraisTimbreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FraisTimbreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FraisTimbreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          findFirst: {
+            args: Prisma.FraisTimbreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FraisTimbreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          findMany: {
+            args: Prisma.FraisTimbreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>[]
+          }
+          create: {
+            args: Prisma.FraisTimbreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          createMany: {
+            args: Prisma.FraisTimbreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FraisTimbreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>[]
+          }
+          delete: {
+            args: Prisma.FraisTimbreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          update: {
+            args: Prisma.FraisTimbreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          deleteMany: {
+            args: Prisma.FraisTimbreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FraisTimbreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FraisTimbreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>[]
+          }
+          upsert: {
+            args: Prisma.FraisTimbreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FraisTimbrePayload>
+          }
+          aggregate: {
+            args: Prisma.FraisTimbreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFraisTimbre>
+          }
+          groupBy: {
+            args: Prisma.FraisTimbreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FraisTimbreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FraisTimbreCountArgs<ExtArgs>
+            result: $Utils.Optional<FraisTimbreCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1315,6 +1405,7 @@ export namespace Prisma {
     paiement?: PaiementOmit
     agent?: AgentOmit
     historique_Modifications?: Historique_ModificationsOmit
+    fraisTimbre?: FraisTimbreOmit
   }
 
   /* Types for Logging */
@@ -8374,6 +8465,1056 @@ export namespace Prisma {
 
 
   /**
+   * Model FraisTimbre
+   */
+
+  export type AggregateFraisTimbre = {
+    _count: FraisTimbreCountAggregateOutputType | null
+    _avg: FraisTimbreAvgAggregateOutputType | null
+    _sum: FraisTimbreSumAggregateOutputType | null
+    _min: FraisTimbreMinAggregateOutputType | null
+    _max: FraisTimbreMaxAggregateOutputType | null
+  }
+
+  export type FraisTimbreAvgAggregateOutputType = {
+    ID_FraisTimbre: number | null
+    PrixTimbre: number | null
+    FraisDossier: number | null
+  }
+
+  export type FraisTimbreSumAggregateOutputType = {
+    ID_FraisTimbre: number | null
+    PrixTimbre: number | null
+    FraisDossier: number | null
+  }
+
+  export type FraisTimbreMinAggregateOutputType = {
+    ID_FraisTimbre: number | null
+    TypeActe: $Enums.TypeActe | null
+    PrixTimbre: number | null
+    FraisDossier: number | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type FraisTimbreMaxAggregateOutputType = {
+    ID_FraisTimbre: number | null
+    TypeActe: $Enums.TypeActe | null
+    PrixTimbre: number | null
+    FraisDossier: number | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type FraisTimbreCountAggregateOutputType = {
+    ID_FraisTimbre: number
+    TypeActe: number
+    PrixTimbre: number
+    FraisDossier: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type FraisTimbreAvgAggregateInputType = {
+    ID_FraisTimbre?: true
+    PrixTimbre?: true
+    FraisDossier?: true
+  }
+
+  export type FraisTimbreSumAggregateInputType = {
+    ID_FraisTimbre?: true
+    PrixTimbre?: true
+    FraisDossier?: true
+  }
+
+  export type FraisTimbreMinAggregateInputType = {
+    ID_FraisTimbre?: true
+    TypeActe?: true
+    PrixTimbre?: true
+    FraisDossier?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type FraisTimbreMaxAggregateInputType = {
+    ID_FraisTimbre?: true
+    TypeActe?: true
+    PrixTimbre?: true
+    FraisDossier?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type FraisTimbreCountAggregateInputType = {
+    ID_FraisTimbre?: true
+    TypeActe?: true
+    PrixTimbre?: true
+    FraisDossier?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type FraisTimbreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FraisTimbre to aggregate.
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FraisTimbres to fetch.
+     */
+    orderBy?: FraisTimbreOrderByWithRelationInput | FraisTimbreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FraisTimbreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FraisTimbres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FraisTimbres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FraisTimbres
+    **/
+    _count?: true | FraisTimbreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FraisTimbreAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FraisTimbreSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FraisTimbreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FraisTimbreMaxAggregateInputType
+  }
+
+  export type GetFraisTimbreAggregateType<T extends FraisTimbreAggregateArgs> = {
+        [P in keyof T & keyof AggregateFraisTimbre]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFraisTimbre[P]>
+      : GetScalarType<T[P], AggregateFraisTimbre[P]>
+  }
+
+
+
+
+  export type FraisTimbreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FraisTimbreWhereInput
+    orderBy?: FraisTimbreOrderByWithAggregationInput | FraisTimbreOrderByWithAggregationInput[]
+    by: FraisTimbreScalarFieldEnum[] | FraisTimbreScalarFieldEnum
+    having?: FraisTimbreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FraisTimbreCountAggregateInputType | true
+    _avg?: FraisTimbreAvgAggregateInputType
+    _sum?: FraisTimbreSumAggregateInputType
+    _min?: FraisTimbreMinAggregateInputType
+    _max?: FraisTimbreMaxAggregateInputType
+  }
+
+  export type FraisTimbreGroupByOutputType = {
+    ID_FraisTimbre: number
+    TypeActe: $Enums.TypeActe
+    PrixTimbre: number
+    FraisDossier: number | null
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: FraisTimbreCountAggregateOutputType | null
+    _avg: FraisTimbreAvgAggregateOutputType | null
+    _sum: FraisTimbreSumAggregateOutputType | null
+    _min: FraisTimbreMinAggregateOutputType | null
+    _max: FraisTimbreMaxAggregateOutputType | null
+  }
+
+  type GetFraisTimbreGroupByPayload<T extends FraisTimbreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FraisTimbreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FraisTimbreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FraisTimbreGroupByOutputType[P]>
+            : GetScalarType<T[P], FraisTimbreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FraisTimbreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_FraisTimbre?: boolean
+    TypeActe?: boolean
+    PrixTimbre?: boolean
+    FraisDossier?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["fraisTimbre"]>
+
+  export type FraisTimbreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_FraisTimbre?: boolean
+    TypeActe?: boolean
+    PrixTimbre?: boolean
+    FraisDossier?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["fraisTimbre"]>
+
+  export type FraisTimbreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_FraisTimbre?: boolean
+    TypeActe?: boolean
+    PrixTimbre?: boolean
+    FraisDossier?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["fraisTimbre"]>
+
+  export type FraisTimbreSelectScalar = {
+    ID_FraisTimbre?: boolean
+    TypeActe?: boolean
+    PrixTimbre?: boolean
+    FraisDossier?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type FraisTimbreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_FraisTimbre" | "TypeActe" | "PrixTimbre" | "FraisDossier" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["fraisTimbre"]>
+
+  export type $FraisTimbrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FraisTimbre"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      ID_FraisTimbre: number
+      TypeActe: $Enums.TypeActe
+      PrixTimbre: number
+      FraisDossier: number | null
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["fraisTimbre"]>
+    composites: {}
+  }
+
+  type FraisTimbreGetPayload<S extends boolean | null | undefined | FraisTimbreDefaultArgs> = $Result.GetResult<Prisma.$FraisTimbrePayload, S>
+
+  type FraisTimbreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FraisTimbreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FraisTimbreCountAggregateInputType | true
+    }
+
+  export interface FraisTimbreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FraisTimbre'], meta: { name: 'FraisTimbre' } }
+    /**
+     * Find zero or one FraisTimbre that matches the filter.
+     * @param {FraisTimbreFindUniqueArgs} args - Arguments to find a FraisTimbre
+     * @example
+     * // Get one FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FraisTimbreFindUniqueArgs>(args: SelectSubset<T, FraisTimbreFindUniqueArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FraisTimbre that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FraisTimbreFindUniqueOrThrowArgs} args - Arguments to find a FraisTimbre
+     * @example
+     * // Get one FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FraisTimbreFindUniqueOrThrowArgs>(args: SelectSubset<T, FraisTimbreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FraisTimbre that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreFindFirstArgs} args - Arguments to find a FraisTimbre
+     * @example
+     * // Get one FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FraisTimbreFindFirstArgs>(args?: SelectSubset<T, FraisTimbreFindFirstArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FraisTimbre that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreFindFirstOrThrowArgs} args - Arguments to find a FraisTimbre
+     * @example
+     * // Get one FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FraisTimbreFindFirstOrThrowArgs>(args?: SelectSubset<T, FraisTimbreFindFirstOrThrowArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FraisTimbres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FraisTimbres
+     * const fraisTimbres = await prisma.fraisTimbre.findMany()
+     * 
+     * // Get first 10 FraisTimbres
+     * const fraisTimbres = await prisma.fraisTimbre.findMany({ take: 10 })
+     * 
+     * // Only select the `ID_FraisTimbre`
+     * const fraisTimbreWithID_FraisTimbreOnly = await prisma.fraisTimbre.findMany({ select: { ID_FraisTimbre: true } })
+     * 
+     */
+    findMany<T extends FraisTimbreFindManyArgs>(args?: SelectSubset<T, FraisTimbreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FraisTimbre.
+     * @param {FraisTimbreCreateArgs} args - Arguments to create a FraisTimbre.
+     * @example
+     * // Create one FraisTimbre
+     * const FraisTimbre = await prisma.fraisTimbre.create({
+     *   data: {
+     *     // ... data to create a FraisTimbre
+     *   }
+     * })
+     * 
+     */
+    create<T extends FraisTimbreCreateArgs>(args: SelectSubset<T, FraisTimbreCreateArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FraisTimbres.
+     * @param {FraisTimbreCreateManyArgs} args - Arguments to create many FraisTimbres.
+     * @example
+     * // Create many FraisTimbres
+     * const fraisTimbre = await prisma.fraisTimbre.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FraisTimbreCreateManyArgs>(args?: SelectSubset<T, FraisTimbreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FraisTimbres and returns the data saved in the database.
+     * @param {FraisTimbreCreateManyAndReturnArgs} args - Arguments to create many FraisTimbres.
+     * @example
+     * // Create many FraisTimbres
+     * const fraisTimbre = await prisma.fraisTimbre.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FraisTimbres and only return the `ID_FraisTimbre`
+     * const fraisTimbreWithID_FraisTimbreOnly = await prisma.fraisTimbre.createManyAndReturn({
+     *   select: { ID_FraisTimbre: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FraisTimbreCreateManyAndReturnArgs>(args?: SelectSubset<T, FraisTimbreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FraisTimbre.
+     * @param {FraisTimbreDeleteArgs} args - Arguments to delete one FraisTimbre.
+     * @example
+     * // Delete one FraisTimbre
+     * const FraisTimbre = await prisma.fraisTimbre.delete({
+     *   where: {
+     *     // ... filter to delete one FraisTimbre
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FraisTimbreDeleteArgs>(args: SelectSubset<T, FraisTimbreDeleteArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FraisTimbre.
+     * @param {FraisTimbreUpdateArgs} args - Arguments to update one FraisTimbre.
+     * @example
+     * // Update one FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FraisTimbreUpdateArgs>(args: SelectSubset<T, FraisTimbreUpdateArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FraisTimbres.
+     * @param {FraisTimbreDeleteManyArgs} args - Arguments to filter FraisTimbres to delete.
+     * @example
+     * // Delete a few FraisTimbres
+     * const { count } = await prisma.fraisTimbre.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FraisTimbreDeleteManyArgs>(args?: SelectSubset<T, FraisTimbreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FraisTimbres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FraisTimbres
+     * const fraisTimbre = await prisma.fraisTimbre.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FraisTimbreUpdateManyArgs>(args: SelectSubset<T, FraisTimbreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FraisTimbres and returns the data updated in the database.
+     * @param {FraisTimbreUpdateManyAndReturnArgs} args - Arguments to update many FraisTimbres.
+     * @example
+     * // Update many FraisTimbres
+     * const fraisTimbre = await prisma.fraisTimbre.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FraisTimbres and only return the `ID_FraisTimbre`
+     * const fraisTimbreWithID_FraisTimbreOnly = await prisma.fraisTimbre.updateManyAndReturn({
+     *   select: { ID_FraisTimbre: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FraisTimbreUpdateManyAndReturnArgs>(args: SelectSubset<T, FraisTimbreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FraisTimbre.
+     * @param {FraisTimbreUpsertArgs} args - Arguments to update or create a FraisTimbre.
+     * @example
+     * // Update or create a FraisTimbre
+     * const fraisTimbre = await prisma.fraisTimbre.upsert({
+     *   create: {
+     *     // ... data to create a FraisTimbre
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FraisTimbre we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FraisTimbreUpsertArgs>(args: SelectSubset<T, FraisTimbreUpsertArgs<ExtArgs>>): Prisma__FraisTimbreClient<$Result.GetResult<Prisma.$FraisTimbrePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FraisTimbres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreCountArgs} args - Arguments to filter FraisTimbres to count.
+     * @example
+     * // Count the number of FraisTimbres
+     * const count = await prisma.fraisTimbre.count({
+     *   where: {
+     *     // ... the filter for the FraisTimbres we want to count
+     *   }
+     * })
+    **/
+    count<T extends FraisTimbreCountArgs>(
+      args?: Subset<T, FraisTimbreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FraisTimbreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FraisTimbre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FraisTimbreAggregateArgs>(args: Subset<T, FraisTimbreAggregateArgs>): Prisma.PrismaPromise<GetFraisTimbreAggregateType<T>>
+
+    /**
+     * Group by FraisTimbre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FraisTimbreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FraisTimbreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FraisTimbreGroupByArgs['orderBy'] }
+        : { orderBy?: FraisTimbreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FraisTimbreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFraisTimbreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FraisTimbre model
+   */
+  readonly fields: FraisTimbreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FraisTimbre.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FraisTimbreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FraisTimbre model
+   */
+  interface FraisTimbreFieldRefs {
+    readonly ID_FraisTimbre: FieldRef<"FraisTimbre", 'Int'>
+    readonly TypeActe: FieldRef<"FraisTimbre", 'TypeActe'>
+    readonly PrixTimbre: FieldRef<"FraisTimbre", 'Float'>
+    readonly FraisDossier: FieldRef<"FraisTimbre", 'Float'>
+    readonly CreatedAt: FieldRef<"FraisTimbre", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"FraisTimbre", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FraisTimbre findUnique
+   */
+  export type FraisTimbreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter, which FraisTimbre to fetch.
+     */
+    where: FraisTimbreWhereUniqueInput
+  }
+
+  /**
+   * FraisTimbre findUniqueOrThrow
+   */
+  export type FraisTimbreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter, which FraisTimbre to fetch.
+     */
+    where: FraisTimbreWhereUniqueInput
+  }
+
+  /**
+   * FraisTimbre findFirst
+   */
+  export type FraisTimbreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter, which FraisTimbre to fetch.
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FraisTimbres to fetch.
+     */
+    orderBy?: FraisTimbreOrderByWithRelationInput | FraisTimbreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FraisTimbres.
+     */
+    cursor?: FraisTimbreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FraisTimbres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FraisTimbres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FraisTimbres.
+     */
+    distinct?: FraisTimbreScalarFieldEnum | FraisTimbreScalarFieldEnum[]
+  }
+
+  /**
+   * FraisTimbre findFirstOrThrow
+   */
+  export type FraisTimbreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter, which FraisTimbre to fetch.
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FraisTimbres to fetch.
+     */
+    orderBy?: FraisTimbreOrderByWithRelationInput | FraisTimbreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FraisTimbres.
+     */
+    cursor?: FraisTimbreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FraisTimbres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FraisTimbres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FraisTimbres.
+     */
+    distinct?: FraisTimbreScalarFieldEnum | FraisTimbreScalarFieldEnum[]
+  }
+
+  /**
+   * FraisTimbre findMany
+   */
+  export type FraisTimbreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter, which FraisTimbres to fetch.
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FraisTimbres to fetch.
+     */
+    orderBy?: FraisTimbreOrderByWithRelationInput | FraisTimbreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FraisTimbres.
+     */
+    cursor?: FraisTimbreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FraisTimbres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FraisTimbres.
+     */
+    skip?: number
+    distinct?: FraisTimbreScalarFieldEnum | FraisTimbreScalarFieldEnum[]
+  }
+
+  /**
+   * FraisTimbre create
+   */
+  export type FraisTimbreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FraisTimbre.
+     */
+    data: XOR<FraisTimbreCreateInput, FraisTimbreUncheckedCreateInput>
+  }
+
+  /**
+   * FraisTimbre createMany
+   */
+  export type FraisTimbreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FraisTimbres.
+     */
+    data: FraisTimbreCreateManyInput | FraisTimbreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FraisTimbre createManyAndReturn
+   */
+  export type FraisTimbreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * The data used to create many FraisTimbres.
+     */
+    data: FraisTimbreCreateManyInput | FraisTimbreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FraisTimbre update
+   */
+  export type FraisTimbreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FraisTimbre.
+     */
+    data: XOR<FraisTimbreUpdateInput, FraisTimbreUncheckedUpdateInput>
+    /**
+     * Choose, which FraisTimbre to update.
+     */
+    where: FraisTimbreWhereUniqueInput
+  }
+
+  /**
+   * FraisTimbre updateMany
+   */
+  export type FraisTimbreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FraisTimbres.
+     */
+    data: XOR<FraisTimbreUpdateManyMutationInput, FraisTimbreUncheckedUpdateManyInput>
+    /**
+     * Filter which FraisTimbres to update
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * Limit how many FraisTimbres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FraisTimbre updateManyAndReturn
+   */
+  export type FraisTimbreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * The data used to update FraisTimbres.
+     */
+    data: XOR<FraisTimbreUpdateManyMutationInput, FraisTimbreUncheckedUpdateManyInput>
+    /**
+     * Filter which FraisTimbres to update
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * Limit how many FraisTimbres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FraisTimbre upsert
+   */
+  export type FraisTimbreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FraisTimbre to update in case it exists.
+     */
+    where: FraisTimbreWhereUniqueInput
+    /**
+     * In case the FraisTimbre found by the `where` argument doesn't exist, create a new FraisTimbre with this data.
+     */
+    create: XOR<FraisTimbreCreateInput, FraisTimbreUncheckedCreateInput>
+    /**
+     * In case the FraisTimbre was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FraisTimbreUpdateInput, FraisTimbreUncheckedUpdateInput>
+  }
+
+  /**
+   * FraisTimbre delete
+   */
+  export type FraisTimbreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+    /**
+     * Filter which FraisTimbre to delete.
+     */
+    where: FraisTimbreWhereUniqueInput
+  }
+
+  /**
+   * FraisTimbre deleteMany
+   */
+  export type FraisTimbreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FraisTimbres to delete
+     */
+    where?: FraisTimbreWhereInput
+    /**
+     * Limit how many FraisTimbres to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FraisTimbre without action
+   */
+  export type FraisTimbreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FraisTimbre
+     */
+    select?: FraisTimbreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FraisTimbre
+     */
+    omit?: FraisTimbreOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8468,6 +9609,18 @@ export namespace Prisma {
   };
 
   export type Historique_ModificationsScalarFieldEnum = (typeof Historique_ModificationsScalarFieldEnum)[keyof typeof Historique_ModificationsScalarFieldEnum]
+
+
+  export const FraisTimbreScalarFieldEnum: {
+    ID_FraisTimbre: 'ID_FraisTimbre',
+    TypeActe: 'TypeActe',
+    PrixTimbre: 'PrixTimbre',
+    FraisDossier: 'FraisDossier',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type FraisTimbreScalarFieldEnum = (typeof FraisTimbreScalarFieldEnum)[keyof typeof FraisTimbreScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8643,6 +9796,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -9088,6 +10255,65 @@ export namespace Prisma {
     DateModification?: DateTimeWithAggregatesFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringWithAggregatesFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringWithAggregatesFilter<"Historique_Modifications"> | string
+  }
+
+  export type FraisTimbreWhereInput = {
+    AND?: FraisTimbreWhereInput | FraisTimbreWhereInput[]
+    OR?: FraisTimbreWhereInput[]
+    NOT?: FraisTimbreWhereInput | FraisTimbreWhereInput[]
+    ID_FraisTimbre?: IntFilter<"FraisTimbre"> | number
+    TypeActe?: EnumTypeActeFilter<"FraisTimbre"> | $Enums.TypeActe
+    PrixTimbre?: FloatFilter<"FraisTimbre"> | number
+    FraisDossier?: FloatNullableFilter<"FraisTimbre"> | number | null
+    CreatedAt?: DateTimeFilter<"FraisTimbre"> | Date | string
+    UpdatedAt?: DateTimeFilter<"FraisTimbre"> | Date | string
+  }
+
+  export type FraisTimbreOrderByWithRelationInput = {
+    ID_FraisTimbre?: SortOrder
+    TypeActe?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type FraisTimbreWhereUniqueInput = Prisma.AtLeast<{
+    ID_FraisTimbre?: number
+    TypeActe?: $Enums.TypeActe
+    AND?: FraisTimbreWhereInput | FraisTimbreWhereInput[]
+    OR?: FraisTimbreWhereInput[]
+    NOT?: FraisTimbreWhereInput | FraisTimbreWhereInput[]
+    PrixTimbre?: FloatFilter<"FraisTimbre"> | number
+    FraisDossier?: FloatNullableFilter<"FraisTimbre"> | number | null
+    CreatedAt?: DateTimeFilter<"FraisTimbre"> | Date | string
+    UpdatedAt?: DateTimeFilter<"FraisTimbre"> | Date | string
+  }, "ID_FraisTimbre" | "TypeActe">
+
+  export type FraisTimbreOrderByWithAggregationInput = {
+    ID_FraisTimbre?: SortOrder
+    TypeActe?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: FraisTimbreCountOrderByAggregateInput
+    _avg?: FraisTimbreAvgOrderByAggregateInput
+    _max?: FraisTimbreMaxOrderByAggregateInput
+    _min?: FraisTimbreMinOrderByAggregateInput
+    _sum?: FraisTimbreSumOrderByAggregateInput
+  }
+
+  export type FraisTimbreScalarWhereWithAggregatesInput = {
+    AND?: FraisTimbreScalarWhereWithAggregatesInput | FraisTimbreScalarWhereWithAggregatesInput[]
+    OR?: FraisTimbreScalarWhereWithAggregatesInput[]
+    NOT?: FraisTimbreScalarWhereWithAggregatesInput | FraisTimbreScalarWhereWithAggregatesInput[]
+    ID_FraisTimbre?: IntWithAggregatesFilter<"FraisTimbre"> | number
+    TypeActe?: EnumTypeActeWithAggregatesFilter<"FraisTimbre"> | $Enums.TypeActe
+    PrixTimbre?: FloatWithAggregatesFilter<"FraisTimbre"> | number
+    FraisDossier?: FloatNullableWithAggregatesFilter<"FraisTimbre"> | number | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"FraisTimbre"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"FraisTimbre"> | Date | string
   }
 
   export type CitoyenCreateInput = {
@@ -9567,6 +10793,66 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FraisTimbreCreateInput = {
+    TypeActe: $Enums.TypeActe
+    PrixTimbre: number
+    FraisDossier?: number | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type FraisTimbreUncheckedCreateInput = {
+    ID_FraisTimbre?: number
+    TypeActe: $Enums.TypeActe
+    PrixTimbre: number
+    FraisDossier?: number | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type FraisTimbreUpdateInput = {
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    PrixTimbre?: FloatFieldUpdateOperationsInput | number
+    FraisDossier?: NullableFloatFieldUpdateOperationsInput | number | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FraisTimbreUncheckedUpdateInput = {
+    ID_FraisTimbre?: IntFieldUpdateOperationsInput | number
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    PrixTimbre?: FloatFieldUpdateOperationsInput | number
+    FraisDossier?: NullableFloatFieldUpdateOperationsInput | number | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FraisTimbreCreateManyInput = {
+    ID_FraisTimbre?: number
+    TypeActe: $Enums.TypeActe
+    PrixTimbre: number
+    FraisDossier?: number | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type FraisTimbreUpdateManyMutationInput = {
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    PrixTimbre?: FloatFieldUpdateOperationsInput | number
+    FraisDossier?: NullableFloatFieldUpdateOperationsInput | number | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FraisTimbreUncheckedUpdateManyInput = {
+    ID_FraisTimbre?: IntFieldUpdateOperationsInput | number
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    PrixTimbre?: FloatFieldUpdateOperationsInput | number
+    FraisDossier?: NullableFloatFieldUpdateOperationsInput | number | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -10095,6 +11381,126 @@ export namespace Prisma {
     _max?: NestedEnumTypeEntiteFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FraisTimbreCountOrderByAggregateInput = {
+    ID_FraisTimbre?: SortOrder
+    TypeActe?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type FraisTimbreAvgOrderByAggregateInput = {
+    ID_FraisTimbre?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrder
+  }
+
+  export type FraisTimbreMaxOrderByAggregateInput = {
+    ID_FraisTimbre?: SortOrder
+    TypeActe?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type FraisTimbreMinOrderByAggregateInput = {
+    ID_FraisTimbre?: SortOrder
+    TypeActe?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type FraisTimbreSumOrderByAggregateInput = {
+    ID_FraisTimbre?: SortOrder
+    PrixTimbre?: SortOrder
+    FraisDossier?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type DemandeCreateNestedManyWithoutCitoyenInput = {
     create?: XOR<DemandeCreateWithoutCitoyenInput, DemandeUncheckedCreateWithoutCitoyenInput> | DemandeCreateWithoutCitoyenInput[] | DemandeUncheckedCreateWithoutCitoyenInput[]
     connectOrCreate?: DemandeCreateOrConnectWithoutCitoyenInput | DemandeCreateOrConnectWithoutCitoyenInput[]
@@ -10525,6 +11931,30 @@ export namespace Prisma {
     update?: XOR<XOR<Document_ActeUpdateToOneWithWhereWithoutHistoriqueInput, Document_ActeUpdateWithoutHistoriqueInput>, Document_ActeUncheckedUpdateWithoutHistoriqueInput>
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10799,6 +12229,76 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeEntiteFilter<$PrismaModel>
     _max?: NestedEnumTypeEntiteFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type DemandeCreateWithoutCitoyenInput = {
