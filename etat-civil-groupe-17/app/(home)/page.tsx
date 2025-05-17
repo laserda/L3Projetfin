@@ -22,7 +22,7 @@ export default async function HomePage() {
                     demandes et recevez vos documents sans vous déplacer.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                    <Link href="/nos-service">
+                    <Link href="#nos-service">
                         <Button
                             size="lg"
                             className="bg-ci-orange hover:bg-ci-orange/90"

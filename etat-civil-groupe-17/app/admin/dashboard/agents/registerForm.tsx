@@ -32,7 +32,7 @@ import { useForm } from "react-hook-form";
 
 function RegisterForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: any }) {
     const [isPending, setIsPending] = useState(false);
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
@@ -56,8 +56,8 @@ function RegisterForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: a
         try {
             const res = await register(formData);
 
-            if (res?.errors) {
-                const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            if (!res.success) {
+                const errMessage = res.error;
                 setErr(errMessage);
             } else {
                 setIsOpen(false);

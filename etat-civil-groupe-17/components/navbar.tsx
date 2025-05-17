@@ -1,4 +1,4 @@
-// "use client";
+//"use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Logo } from "./Logo";
@@ -17,12 +17,19 @@ import LogOutButton from "./LogOutButton";
 import { getCitoyen } from "@/server/auth/citoyen";
 
 export const Navbar = async () => {
+
     const user = await getCitoyen();
+
+    // useEffect(() => {
+    //     // Set the base URL using location
+    //     setBaseUrl(`${location.protocol}//${location.host}`);
+
+    // }, []);
 
     const navLinks = [
         { href: "/", label: "Accueil" },
-        { href: "/nos-service", label: "Nouvelle Demande" },
-        ...(user ? [{ href: "/suivi-demande", label: "Mon espace" }] : []),
+        { href: `../#nos-service`, label: "Nouvelle Demande" },
+        ...(user ? [{ href: "/suivi-demande", label: "Suivi mes demandes" }] : []),
 
     ];
 

@@ -11,17 +11,17 @@ import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
 import { paiementSchema } from '@/validation/validation-paiement';
+import { ResultData } from '@/types';
 
 const demandeRepo = new DemandeRepository()
 const citoyenRepo = new CitoyenRepository()
 
-export async function createDemande(formData: FormData) {
+export async function createDemande(formData: FormData): Promise<ResultData> {
     const result = createDemandeSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
-            errors: result.error.flatten().fieldErrors,
-            success: false,
+            error: ErrorsMessage.errors,
         };
     }
 
@@ -31,10 +31,8 @@ export async function createDemande(formData: FormData) {
         console.log(session);
         let user = await citoyenRepo.findById(session?.userId);
         if (!user) {
-            const err = new Error("Une erreur est survenue");
             return {
-                succes: false,
-                errors: err,
+                error: ErrorsMessage.errors,
             };
         }
 
@@ -59,17 +57,13 @@ export async function createDemande(formData: FormData) {
             }
         });
 
-        console.log(newDemande);
-
         return {
             success: true,
-            ID_Demande: newDemande.ID_Demande,
+            data: newDemande.ID_Demande,
         };
     } catch (error) {
-        console.log(error)
         return {
-            success: false,
-            errors: [ErrorsMessage.errors],
+            error: ErrorsMessage.errors,
         };
     }
 }

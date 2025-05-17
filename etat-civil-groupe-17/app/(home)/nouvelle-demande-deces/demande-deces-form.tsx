@@ -23,18 +23,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
 import { createDemande } from "@/server/demande/demande";
 import { createDemandeMariageSchema, CreateDemandeMariageFormData } from "@/validation/validation-demande";
-import { Info } from "lucide-react";
 import { TypeActe } from "@/lib/generated/prisma";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ErrorsMessage } from "@/enums/errors-message";
 
-const DemandeMariageForm = () => {
+const DemandeDecesForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
     const [isLoading, setIsLoading] = useState(false);
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
@@ -42,7 +39,7 @@ const DemandeMariageForm = () => {
     const form = useForm({
         resolver: zodResolver(createDemandeMariageSchema),
         defaultValues: {
-            TypeActe: TypeActe.Mariage,
+            TypeActe: TypeActe.Décès,
         },
     });
 
@@ -63,17 +60,17 @@ const DemandeMariageForm = () => {
             const newRequest = await createDemande(formData);
 
             if (!newRequest.success) {
-                setErr(ErrorsMessage.errors);
+                setErr(newRequest.error);
+                setIsLoading(false)
                 return
             }
 
-            router.push(`/confirmation/${newRequest.ID_Demande}`);
-            setIsLoading(false)
+            router.push(`/paiement/${newRequest.data}`);
         } catch (error) {
-            console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
-                description: "Veuillez réessayer plus tard.",
+                description: error as string,
             });
+            setIsLoading(false)
         }
 
     };
@@ -82,7 +79,7 @@ const DemandeMariageForm = () => {
         <div className="max-w-3xl mx-auto">
             <Card>
                 <CardHeader>
-                    <CardTitle>Demande d'acte de mariage</CardTitle>
+                    <CardTitle>Demande d'acte de décès</CardTitle>
                     <CardDescription>
                         Remplissez ce formulaire pour demander votre document
                         officiel.
@@ -94,28 +91,17 @@ const DemandeMariageForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-                            {err && (
-                                <Alert
-                                    variant="destructive"
-                                    className="flex items-center border-red-500"
-                                >
-                                    <Info className="h-4 w-4" color="red" />
-                                    <div>
-                                        <AlertTitle>Erreur</AlertTitle>
-                                        <AlertDescription>{err}</AlertDescription>
-                                    </div>
-                                </Alert>
-                            )}
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="NumeroActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Numéro de l'acte de mariage</FormLabel>
+                                            <FormLabel>Numéro de l'acte du décès</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Numéro de l'acte de mariage"
+                                                    placeholder="Numéro de l'acte du décès"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -129,7 +115,7 @@ const DemandeMariageForm = () => {
                                     name="DateActe"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Date du mariage</FormLabel>
+                                            <FormLabel>Date de décès</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     placeholder="Date du mariage"
@@ -149,10 +135,10 @@ const DemandeMariageForm = () => {
                                     name="Nom"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Nom de l'epoux</FormLabel>
+                                            <FormLabel>Nom du defunt</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Nom de l'epoux"
+                                                    placeholder="Nom du defunt"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -166,10 +152,10 @@ const DemandeMariageForm = () => {
                                     name="Prenom"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Prenom de l'epoux</FormLabel>
+                                            <FormLabel>Prenom du defunt</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Prénom de l'epoux"
+                                                    placeholder="Nom du defunt"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -178,6 +164,7 @@ const DemandeMariageForm = () => {
                                     )}
                                 />
                             </div>
+
 
                             <div className="border-t pt-4">
                                 <div className="bg-gray-50 p-4 rounded-lg mb-4">
@@ -193,41 +180,13 @@ const DemandeMariageForm = () => {
                                         votre demande soit traitée.
                                     </p>
                                 </div>
-                                {/* 
-                                <FormField
-                                    control={form.control}
-                                    name="paymentConfirmed"
-                                    render={({ field }) => (
-                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={field.value}
-                                                    onCheckedChange={
-                                                        field.onChange
-                                                    }
-                                                />
-                                            </FormControl>
-                                            <div className="space-y-1 leading-none">
-                                                <FormLabel>
-                                                    Je confirme avoir payé les
-                                                    frais de timbre de 1000 FCFA
-                                                </FormLabel>
-                                                <FormDescription>
-                                                    En cochant cette case, vous
-                                                    confirmez avoir effectué le
-                                                    paiement.
-                                                </FormDescription>
-                                                <FormMessage />
-                                            </div>
-                                        </FormItem>
-                                    )}
-                                /> */}
+
                             </div>
 
                             <div className="flex justify-end">
                                 <Button
                                     type="submit"
-                                    disabled={isLoading}
+                                    isLoading={isLoading}
                                 >
                                     Soumettre ma demande
                                 </Button>
@@ -240,4 +199,4 @@ const DemandeMariageForm = () => {
     );
 };
 
-export default DemandeMariageForm;
+export default DemandeDecesForm;

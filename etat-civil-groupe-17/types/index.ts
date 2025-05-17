@@ -59,3 +59,9 @@ export interface DemandeResquest {
     Citoyen: CitoyenResquest;
     Statut: StatutDemande
 }
+
+export interface ResultData {
+    success?: boolean;
+    error?: string;
+    data?: any;
+}

@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 function LoginForm() {
     const router = useRouter();
     const [isPending, setIsPending] = useState(false);
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -44,18 +44,18 @@ function LoginForm() {
         try {
             const res = await login(formData);
 
-            if (res?.errors) {
-                const errMessage = Object.values(res?.errors ?? {})[0]?.toString();
+            if (!res.success) {
+                const errMessage = res.error;
                 setErr(errMessage);
+                setIsPending(false);
             } else {
                 router.push("/admin/dashboard");
             }
-            setIsPending(false);
         } catch (error) {
             setErr(error as string);
+            setIsPending(false);
         }
 
-        setIsPending(false);
     };
 
     return (
@@ -118,8 +118,8 @@ function LoginForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isPending}>
-                    {isPending ? "..." : "Se connecter"}
+                <Button type="submit" className="w-full" isLoading={isPending}>
+                    Se connecter
                 </Button>
             </form>
         </Form>

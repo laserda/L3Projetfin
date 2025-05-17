@@ -44,7 +44,7 @@ const DemandeNaissanceForm = () => {
     const searchParams = useSearchParams();
 
     const [demandePourTier, setDemandePourTier] = useState<DemandePourTier>(DemandePourTier.Moi);
-    const [err, setErr] = useState("");
+    const [err, setErr] = useState<string | undefined>("");
     const [isLoading, setIsLoading] = useState(false);
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
@@ -73,17 +73,17 @@ const DemandeNaissanceForm = () => {
             const newRequest = await createDemande(formData);
 
             if (!newRequest.success) {
-                setErr(ErrorsMessage.errors);
+                setErr(newRequest.error);
+                setIsLoading(false);
                 return
             }
 
-            router.push(`/paiement/${newRequest.ID_Demande}`);
-            setIsLoading(false)
+            router.push(`/paiement/${newRequest.data}`);
         } catch (error) {
-            console.error("Erreur lors de la soumission:", error);
             toast.error("Erreur lors de l'envoi de la demande", {
-                description: "Veuillez réessayer plus tard.",
+                description: error as string,
             });
+            setIsLoading(false);
         }
     };
 
@@ -241,7 +241,7 @@ const DemandeNaissanceForm = () => {
                             <div className="flex justify-end">
                                 <Button
                                     type="submit"
-                                    disabled={isLoading}
+                                    isLoading={isLoading}
                                 >
                                     Soumettre ma demande
                                 </Button>

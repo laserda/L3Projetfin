@@ -11,27 +11,28 @@ import { redirect } from "next/navigation";
 
 import { loginSchema, registerSchema } from "@/validation/validation-citoyen";
 import { hashPassword, verifyPassword } from "@/lib/hashPassword";
-
+import { ErrorsMessage } from '@/enums/errors-message';
+import { ResultData } from '@/types';
 const citoyenRepo = new CitoyenRepository()
 
-export async function login(formData: FormData) {
+export async function login(formData: FormData): Promise<ResultData> {
+    console.log("login")
     const result = loginSchema.safeParse(Object.fromEntries(formData));
-
     if (!result.success) {
         return {
-            errors: result.error.flatten().fieldErrors,
-            succes: false,
+            error: ErrorsMessage.errors,
+            data: "error"
         };
     }
-    try {
-        const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
+    try {
+
+
+        const isCitoyen = await getCitoyenByEmail(result.data.Email);
 
         if (!isCitoyen) {
             return {
-                errors: {
-                    email: ["Informations incorrectes"],
-                },
+                error: "Email ou Mot de passe incorrect"
             };
         }
         const isPasswordCorrect = await verifyPassword(
@@ -40,44 +41,36 @@ export async function login(formData: FormData) {
         );
         if (!isPasswordCorrect) {
             return {
-                errors: {
-                    password: ["Mot de passe incorrect"],
-                    succes: false,
-                },
+                error: "Email ou Mot de passe incorrect",
             };
         }
 
         await createSession(isCitoyen.ID_Citoyen);
         return {
-            errors: null,
-            succes: true,
+            success: true,
         };
     } catch (error) {
-        console.log(error);
+        console.log(`login ${error}`)
         return {
-            errors: 'Une erreur est survenue',
-            succes: false,
+            error: ErrorsMessage.errors,
+            data: error
         };
     }
 }
 
-export async function register(formData: FormData) {
+export async function register(formData: FormData): Promise<ResultData> {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
         return {
-            errors: result.error.flatten().fieldErrors,
-            succes: false,
+            error: ErrorsMessage.errors
         };
     }
     try {
         const isCitoyen = await getCitoyenByEmail(result.data.Email);
         if (isCitoyen) {
             return {
-                errors: {
-                    email: ["Cet email est déjà utilisé"],
-                    succes: false,
-                },
+                error: "Cet email est déjà utilisé",
             };
         }
 
@@ -92,11 +85,13 @@ export async function register(formData: FormData) {
         })
         await createSession(newCitoyen.ID_Citoyen);
         return {
-            errors: null,
-            succes: true,
+            success: true,
         };
     } catch (e) {
-        console.log(e);
+        console.log(`register ${e}`)
+        return {
+            error: ErrorsMessage.errors
+        };
     }
 }
 
