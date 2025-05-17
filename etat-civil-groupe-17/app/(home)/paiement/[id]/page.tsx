@@ -25,6 +25,7 @@ import dynamic from "next/dynamic";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { useRouter } from "next/navigation";
 import { PaystackConsumer } from "react-paystack";
+import { getTarifByType, getTarifs } from "@/server/admin/tarif/tarif";
 
 
 
@@ -53,7 +54,7 @@ const PaiementPage: FC = () => {
     const [request, setRequest] = useState<DemandeResquest | null>(null);
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const montant = 1000;
+    const [montant, setMontant] = useState(0);
     const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm({
@@ -85,7 +86,7 @@ const PaiementPage: FC = () => {
         // Implementation for whatever you want to do with reference and after success call.
 
         const paiement = {
-            Montant: config.amount,
+            Montant: montant,
             ModePaiement: ModePaiement.Carte_Bancaire,
             Transaction_ID: config.reference,
         };
@@ -122,6 +123,13 @@ const PaiementPage: FC = () => {
                 const foundRequest = await getDemandeEnAttenteDePaiement(id);
                 if (foundRequest) {
                     setRequest(foundRequest);
+
+                    const tarif = await getTarifByType(foundRequest.TypeActe);
+                    if (tarif) {
+                        setMontant(tarif.PrixTimbre);
+                    } else {
+                        setErr("Le tarif n'est pas encore parametrer pour ce type d'acte");
+                    }
                 }
             } catch (error) {
                 console.error(
@@ -198,8 +206,7 @@ const PaiementPage: FC = () => {
                                 Frais de timbre
                             </h3>
                             <p className="text-gray-600 mb-2">
-                                Les frais de timbre s'élèvent à {montant}
-                                FCFA pour ce document.
+                                Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
                             </p>
                             <p className="text-sm text-gray-500">
                                 Vous devez régler ces frais pour que

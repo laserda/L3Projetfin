@@ -27,12 +27,16 @@ import { createDemande } from "@/server/demande/demande";
 import { createDemandeMariageSchema, CreateDemandeMariageFormData } from "@/validation/validation-demande";
 import { TypeActe } from "@/lib/generated/prisma";
 import { ErrorsMessage } from "@/enums/errors-message";
+import { getTarifByType } from "@/server/admin/tarif/tarif";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Info } from "lucide-react";
 
 const DemandeDecesForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [err, setErr] = useState<string | undefined>("");
     const [isLoading, setIsLoading] = useState(false);
+    const [montant, setMontant] = useState(0);
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
@@ -43,9 +47,19 @@ const DemandeDecesForm = () => {
         },
     });
 
+    const getTarif = async (typeActe: TypeActe) => {
+        const tarif = await getTarifByType(typeActe);
+        if (tarif) {
+            setMontant(tarif.PrixTimbre);
+        } else {
+            setErr("Le tarif n'est pas encore parametrer pour ce type d'acte");
+        }
+    }
+
     useEffect(() => {
         if (typeFromUrl) {
             form.setValue("TypeActe", typeFromUrl);
+            getTarif(typeFromUrl);
         }
     }, [typeFromUrl, form]);
 
@@ -91,7 +105,18 @@ const DemandeDecesForm = () => {
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
                         >
-
+                            {err && (
+                                <Alert
+                                    variant="destructive"
+                                    className="flex items-center border-red-500"
+                                >
+                                    <Info className="h-4 w-4" color="red" />
+                                    <div>
+                                        <AlertTitle>Erreur</AlertTitle>
+                                        <AlertDescription>{err}</AlertDescription>
+                                    </div>
+                                </Alert>
+                            )}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
@@ -172,8 +197,7 @@ const DemandeDecesForm = () => {
                                         Frais de timbre
                                     </h3>
                                     <p className="text-gray-600 mb-2">
-                                        Les frais de timbre s'élèvent à 1000
-                                        FCFA pour ce document.
+                                        Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
                                     </p>
                                     <p className="text-sm text-gray-500">
                                         Vous devez régler ces frais pour que
