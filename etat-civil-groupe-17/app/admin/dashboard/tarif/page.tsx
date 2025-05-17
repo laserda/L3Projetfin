@@ -82,7 +82,6 @@ function page() {
                                                 setTarifSelected({ ...res, ID_FraisTimbre: tarif.ID_FraisTimbre })
                                                 setIsOpen(true);
                                             }}
-                                        // href={`/admin/dashboard/tarif/${tarif.ID_FraisTimbre}`}
                                         >
                                             <Eye size={24} />
                                         </Button>
