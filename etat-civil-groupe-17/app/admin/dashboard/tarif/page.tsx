@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { getAllAgents } from "@/server/auth/agent";
 import RegisterForm from "./tarifForm";
 import {
@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import Link from "next/link";
 import { Loader } from "@/components/Loader";
-import { getTarifs } from "@/server/admin/tarif/tarif";
+import { getTarif, getTarifByType, getTarifs } from "@/server/admin/tarif/tarif";
+import { Eye } from "lucide-react";
+import { FraisTimbre } from "@/lib/generated/prisma";
 
 function page() {
     const [tarifs, setTarifs] = useState<any>([]);
+    const [tarifSelected, setTarifSelected] = useState<FraisTimbre | undefined>(undefined);
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -46,7 +49,7 @@ function page() {
                         <DialogHeader>
                             <DialogTitle>Ajouter un nouveau tarif</DialogTitle>
                         </DialogHeader>
-                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} refresh={refresh} />
+                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} tarif={tarifSelected} />
                     </DialogContent>
                 </Dialog>
             </div>
@@ -73,12 +76,15 @@ function page() {
                                     <td className="py-3 px-4">{tarif.FraisDossier} </td>
 
                                     <td className="py-3 px-4 text-right">
-                                        <Link
-                                            href={`/admin/dashboard/tarif/${tarif.ID_FraisTimbre}`}
-                                            className={buttonVariants({ variant: "link" })}
+                                        <Button
+                                            onClick={async () => {
+                                                const res = await getTarif(tarif.ID_FraisTimbre);
+                                                setTarifSelected({ ...res, ID_FraisTimbre: tarif.ID_FraisTimbre })
+                                                setIsOpen(true);
+                                            }}
                                         >
-                                            Voir
-                                        </Link>
+                                            <Eye size={24} />
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}

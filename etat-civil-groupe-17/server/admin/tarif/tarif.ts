@@ -64,6 +64,53 @@ export async function createTarif(formData: FormData): Promise<ResultData> {
     }
 }
 
+
+export async function updateTarif(formData: FormData, id: number): Promise<ResultData> {
+    const result = tarifSchema.safeParse(Object.fromEntries(formData));
+    console.log(result);
+
+    if (!result.success) {
+        return {
+            error: ErrorsMessage.errors,
+        };
+    }
+
+    try {
+        let session = await getSession();
+        console.log(session);
+        let user = await agentRepos.findById(session?.userId);
+        if (!user) {
+            return {
+                error: ErrorsMessage.errors,
+            };
+        }
+
+
+        console.log(result.data);
+
+        // DateAct
+        const newDemande = await tarifRepos.update({
+            where: { ID_FraisTimbre: id },
+            data: {
+                ...result.data,
+                PrixTimbre: parseInt(result.data.PrixTimbre),
+                FraisDossier: result.data.FraisDossier ? parseInt(result.data.FraisDossier) : result.data.FraisDossier
+            },
+        });
+
+        console.log(newDemande);
+
+        return {
+            success: true
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            error: ErrorsMessage.errors,
+        };
+    }
+}
+
 export async function getTarifs() {
     return await tarifRepos.findAll();
 }
