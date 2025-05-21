@@ -1,4 +1,26 @@
+import n2words from "n2words";
 import { DemandePourTier, StatutDemande, TypeActe } from "@/lib/generated/prisma";
+
+
+
+
+
+export function dateEnLettres(d: Date) {
+    const parts = new Intl.DateTimeFormat("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    }).formatToParts(d);
+
+    const jour = +parts.find(p => p.type === "day")!.value;
+    const mois = parts.find(p => p.type === "month")!.value; // déjà « mai », « juin », …
+    const annee = +parts.find(p => p.type === "year")!.value;
+
+    const jourEnLettres = jour === 1 ? "premier" : n2words(jour, { lang: "fr" });
+
+    return `${jourEnLettres} ${mois} ${n2words(annee, { lang: "fr" })}`;
+}
+
 // Formater les dates
 export const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);

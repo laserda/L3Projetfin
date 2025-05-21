@@ -18,7 +18,7 @@ export const createDemandeSchema = z.object({
         return demandePourTier === DemandePourTier.Moi ? '' : `${val}`;
     }),
 })
-  
+
 
 export const createDemandeMariageSchema = z.object({
     TypeActe: z.nativeEnum(TypeActe),
@@ -30,6 +30,6 @@ export const createDemandeMariageSchema = z.object({
     Nom: z.string(),
     DateActe: z.string(),
 })
-  
+
 export type CreateDemandeFormData = z.infer<typeof createDemandeSchema>;
 export type CreateDemandeMariageFormData = z.infer<typeof createDemandeMariageSchema>;

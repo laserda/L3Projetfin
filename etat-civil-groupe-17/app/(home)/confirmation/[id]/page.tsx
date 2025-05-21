@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
 import { DemandeResquest } from "@/types";
 import {
@@ -11,28 +11,38 @@ import {
     CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, FileText } from "lucide-react";
-import { useParams } from "next/navigation";
+import { CheckCircle, ArrowRight, FileText, Download } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { getDemandePayer } from "@/server/demande/demande";
 import { Loader } from "@/components/Loader";
+import { ActeNaissance } from "@/components/ActeNaissance";
+import { useReactToPrint } from "react-to-print";
+import { ActeMariage } from "@/components/ActeMariage";
+import { ActeDeces } from "@/components/ActeDeces";
+import { TypeActe } from "@/lib/generated/prisma";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [request, setRequest] = useState<DemandeResquest | null>(null);
     const [loading, setLoading] = useState(true);
 
+    const router = useRouter();
+
+    const componentRef = useRef<HTMLDivElement>(null);
+    const reactToPrintContent = () => {
+        return componentRef.current;
+    };
+    const handlePrint = useReactToPrint({
+        documentTitle: `${request?.Nom}-${request?.Prenom}-${request?.TypeActe}`,
+    });
+
     useEffect(() => {
         const fetchRequest = async () => {
             setLoading(true);
             try {
-                // const requests = JSON.parse(
-                //     localStorage.getItem("requests") || "[]"
-                // );
-                // const foundRequest = requests.find((r: Request) => r.id === id);
                 const foundRequest = await getDemandePayer(id);
-
                 if (foundRequest) {
                     setRequest(foundRequest);
                 }
@@ -72,6 +82,20 @@ const ConfirmationPage: FC = () => {
                 </CardFooter>
             </Card>
         );
+    }
+
+    const TypeActe = ({ typeActe, ref }: { typeActe: TypeActe, ref: any }) => {
+        switch (typeActe) {
+            case "Naissance":
+                return <ActeNaissance ref={ref} ID_Demande={request.ID_Demande} />;
+            case "Mariage":
+                return <ActeMariage ref={ref} ID_Demande={request.ID_Demande} />;
+            case "Décès":
+                return <ActeDeces ref={ref} ID_Demande={request.ID_Demande} />;
+            default:
+                return <></>;
+        }
+
     }
 
     return (
@@ -150,8 +174,7 @@ const ConfirmationPage: FC = () => {
                             </p>
                         </div>
                     </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    {request.Statut !== 'Livrée' && <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
                         <h3 className="font-medium text-blue-800 mb-2">
                             Que se passe-t-il maintenant ?
                         </h3>
@@ -179,19 +202,28 @@ const ConfirmationPage: FC = () => {
                                 </span>
                             </li>
                         </ul>
-                    </div>
+                    </div>}
+
                 </CardContent>
 
                 <CardFooter className="flex justify-between flex-wrap gap-3">
-                    <Link href="/">
-                        <Button variant="outline">Retour à l'accueil</Button>
-                    </Link>
-                    <Link href="/suivi-demande">
-                        <Button className="bg-ci-orange hover:bg-ci-orange/90">
-                            <FileText className="mr-2 h-4 w-4" />
-                            Suivre ma demande
-                        </Button>
-                    </Link>
+                    <Button onClick={() => router.back()} variant="outline">Retour</Button>
+                    {request.Statut == 'Livrée' ?
+                        <>
+                            <Button onClick={() => handlePrint(reactToPrintContent)}>
+                                <Download className="mr-2 h-4 w-4" />
+                                Télécharger le document
+                            </Button>
+                            <div style={{ position: 'absolute', left: '-9999px' }}>
+                                <TypeActe typeActe={request.TypeActe} ref={componentRef} />
+                            </div>
+                        </>
+                        : <Link href="/suivi-demande">
+                            <Button>
+                                <FileText className="mr-2 h-4 w-4" />
+                                Suivre ma demande
+                            </Button>
+                        </Link>}
                 </CardFooter>
             </Card>
         </div>
@@ -199,3 +231,6 @@ const ConfirmationPage: FC = () => {
 };
 
 export default ConfirmationPage;
+
+
+
