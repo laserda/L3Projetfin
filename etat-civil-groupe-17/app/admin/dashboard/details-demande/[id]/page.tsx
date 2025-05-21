@@ -11,13 +11,6 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import {
     ArrowLeft,
@@ -27,13 +20,15 @@ import {
     Check,
     X,
     ArrowUp,
+    PenBox,
+    CheckCheck
 } from "lucide-react";
-import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Demande, StatutDemande } from "@/lib/generated/prisma";
+import { Agent, Demande, StatutDemande, Citoyen } from "@/lib/generated/prisma";
 import { getDemande, updateDemandeStatus } from "@/server/admin/demande";
 import { Loader } from "@/components/Loader";
+import { createActe } from "@/server/actes/actes";
 
 const DemandeDetailPage = () => {
     const params = useParams();
@@ -42,11 +37,9 @@ const DemandeDetailPage = () => {
 
     const [request, setRequest] = useState<Demande>();
     const [loading, setLoading] = useState(true);
-    const [currentStatus, setCurrentStatus] =
-        useState<StatutDemande>("SoumisePayee");
     const [updatingStatus, setUpdatingStatus] = useState(false);
-    const [generatingPdf, setGeneratingPdf] = useState(false);
-    const [sendingEmail, setSendingEmail] = useState(false);
+    const [error, setError] = useState("");
+    const [signed, setSigned] = useState<"Signée" | "Non signée">("Non signée");
 
     useEffect(() => {
         const fetchRequest = async () => {
@@ -56,13 +49,16 @@ const DemandeDetailPage = () => {
 
                 if (foundRequest) {
                     setRequest(foundRequest);
-                    setCurrentStatus(foundRequest.Statut);
+                }
+                else {
+                    setError("Demande introuvable")
                 }
             } catch (error) {
                 console.error(
                     "Erreur lors du chargement de la demande:",
                     error
                 );
+                setError("Erreur lors du chargement de la demande")
             } finally {
                 setLoading(false);
             }
@@ -71,36 +67,26 @@ const DemandeDetailPage = () => {
         fetchRequest();
     }, [id]);
 
-    const updateStatus = async () => {
+    const updateStatus = async (status: StatutDemande) => {
         setUpdatingStatus(true);
-        const res = await updateDemandeStatus(id, 'EnTraitement')
+        const res = await updateDemandeStatus(id, status)
         setUpdatingStatus(false);
         setRequest(res);
     };
 
-    const generatePdf = async () => {
-        if (!request) return;
-
-        setGeneratingPdf(true);
+    const SignDemande = async () => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-
-            toast.success("Document PDF généré avec succès", {
-                description:
-                    "Le document a été généré et est prêt à être téléchargé.",
-            });
-
-            console.log(`PDF généré pour la demande ${request.ID_Demande}`);
+            const res = await createActe(id);
+            setSigned(res.data);
         } catch (error) {
-            console.error("Erreur lors de la génération du PDF:", error);
-            toast.error("Erreur lors de la génération du PDF");
+            console.error(
+                "Erreur lors de la signature de la demande:",
+                error
+            );
+            setError("Erreur lors de la signature de la demande")
         } finally {
-            setGeneratingPdf(false);
+            setUpdatingStatus(false);
         }
-    };
-
-    const sendEmail = async () => {
-
     };
 
 
@@ -143,6 +129,12 @@ const DemandeDetailPage = () => {
                     color: "text-blue-500",
                     bg: "bg-blue-100",
                 };
+            case "Livrée":
+                return {
+                    icon: <CheckCheck className="h-5 w-5" />,
+                    color: "text-green-500",
+                    bg: "bg-green-100",
+                };
             default:
                 return {
                     icon: null,
@@ -170,7 +162,7 @@ const DemandeDetailPage = () => {
                         </CardDescription>
                     </CardHeader>
                     <CardFooter>
-                        <Button onClick={() => { }}>Retour à la liste</Button>
+                        <Button onClick={() => router.back()}>Retour à la liste</Button>
                     </CardFooter>
                 </Card>
             </>
@@ -178,6 +170,80 @@ const DemandeDetailPage = () => {
     }
 
     const statusInfo = getStatusInfo(request.Statut);
+
+    const renderActionButtons = (statut: StatutDemande) => {
+        switch (statut) {
+            case "SoumisePayee":
+                return (
+                    <>
+                        <h3 className="text-sm font-medium mb-2">
+                            M'occuper de la demande
+                        </h3>
+                        <Button
+                            className="w-full mt-2"
+                            disabled={updatingStatus}
+                            onClick={() => updateStatus('EnTraitement')}
+                        >
+                            {updatingStatus ? "..." : "M'occuper de la demande"}
+                        </Button>
+                    </>
+                );
+            case "EnTraitement":
+                return (
+                    <>
+                        <h3 className="text-sm font-medium mb-2">
+                            Validée la demande
+                        </h3>
+                        <Button
+                            className="w-full mt-2 mb-4"
+                            disabled={updatingStatus}
+                            onClick={() => updateStatus('Validée')}
+                        >
+                            {updatingStatus ? "..." : "Valider la demande"}
+                        </Button>
+                        <Separator />
+                        <h3 className="text-sm font-medium my-3">
+                            Refusée la demande
+                        </h3>
+                        <Button
+                            className="w-full"
+                            disabled={updatingStatus}
+                            onClick={() => updateStatus('Refusée')}
+                            variant={"destructive"}
+                        >
+                            {updatingStatus ? "..." : "Refusée la demande"}
+                        </Button>
+                    </>
+                );
+            case "Validée":
+                return signed !== "Signée" ? (
+                    <Button
+                        className="w-full mt-2"
+                        disabled={updatingStatus}
+                        onClick={() => SignDemande()}
+                    >
+                        <PenBox className="mr-2 h-4 w-4" />
+                        {updatingStatus ? "..." : "Signée la demande"}
+                    </Button>
+                ) : (
+                    <Button
+                        className="w-full mt-2"
+                        disabled={updatingStatus}
+                        onClick={() => updateStatus('Livrée')}
+                    >
+                        {updatingStatus ? "..." : "Livrée la demande"}
+                    </Button>
+                );
+            case "Livrée":
+                return <p className="text-green-500 text-xl">La demande est déjà signée et livrée.</p>;
+            case "Refusée":
+                return <p className="text-red-500 text-xl">La demande est refusée.</p>;
+            default:
+                return null;
+        }
+    }
+
+
 
     return (
         <>
@@ -220,6 +286,8 @@ const DemandeDetailPage = () => {
                                             "Refusée"}
                                         {request.Statut === "EnTraitement" &&
                                             "En traitement"}
+                                        {request.Statut === "Livrée" &&
+                                            "Livrée"}
                                     </span>
                                 </div>
                             </div>
@@ -398,82 +466,14 @@ const DemandeDetailPage = () => {
                     <Card>
                         <CardHeader>
                             <CardTitle>Actions</CardTitle>
-                            <CardDescription>
-                                Gérer le traitement de cette demande
-                            </CardDescription>
+                            {error ? <CardDescription className="text-red-500 text-xl">{error}</CardDescription> :
+                                <CardDescription>
+                                    Gérer le traitement de cette demande
+                                </CardDescription>}
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div>
-                                <h3 className="text-sm font-medium mb-2">
-                                    M'occuper de la demande
-                                </h3>
-                                {/* Ajouter pour fixer un bug sur le Select */}
-                                {/* <Select></Select>
-                                <Select onValueChange={(value: StatutDemande) => setCurrentStatus(value)}>
-                                    <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Choisir un statut" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="SoumisePayee">
-                                            En attente
-                                        </SelectItem>
-                                        <SelectItem value="EnTraitement">
-                                            En traitement
-                                        </SelectItem>
-                                        <SelectItem value="Validée">
-                                            Validée
-                                        </SelectItem>
-                                        <SelectItem value="Refusée">
-                                            Refusée
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select> */}
-
-                                <Button
-                                    className="w-full mt-2"
-                                    disabled={
-                                        updatingStatus ||
-                                        request.Statut === "EnTraitement"
-                                    }
-                                    onClick={updateStatus}
-                                >
-                                    {updatingStatus
-                                        ? "..."
-                                        : "M'occuper de la demande"}
-                                </Button>
-                            </div>
-
-                            <Separator />
-
-                            <div>
-                                <h3 className="text-sm font-medium mb-2">
-                                    Actions sur le document
-                                </h3>
-                                <div className="grid grid-cols-1 gap-2">
-                                    <Button
-                                        className="w-full"
-                                        variant="outline"
-                                        onClick={generatePdf}
-                                        disabled={generatingPdf}
-                                    >
-                                        <FileText className="mr-2 h-4 w-4" />
-                                        {generatingPdf
-                                            ? "Génération..."
-                                            : "Générer un PDF"}
-                                    </Button>
-
-                                    <Button
-                                        className="w-full"
-                                        variant="outline"
-                                        onClick={sendEmail}
-                                        disabled={sendingEmail}
-                                    >
-                                        <Mail className="mr-2 h-4 w-4" />
-                                        {sendingEmail
-                                            ? "Envoi..."
-                                            : "Envoyer par email"}
-                                    </Button>
-                                </div>
+                                {renderActionButtons(request.Statut)}
                             </div>
                         </CardContent>
                     </Card>

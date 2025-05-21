@@ -21,12 +21,13 @@ import {
     Legend,
 } from "recharts";
 import { ArrowUp, FileText, Clock, Check, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { useEffect, useState } from "react";
 import { Demande } from "@/lib/generated/prisma";
 import { getDemandes } from "@/server/admin/demande";
 import { Loader } from "@/components/Loader";
+import Link from "next/link";
 
 const DashboardIndexPage = () => {
     const [demandes, setDemandes] = useState<Demande[]>([])
@@ -72,6 +73,12 @@ const DashboardIndexPage = () => {
             title: "Total demandes",
             value: demandes.length,
             Icon: FileText,
+            color: "bg-gray-100",
+        },
+        {
+            title: "En traitement",
+            value: enTraitement.length,
+            Icon: ArrowUp,
             color: "bg-blue-100",
         },
         {
@@ -97,7 +104,7 @@ const DashboardIndexPage = () => {
     // Obtenir l'icône et la couleur selon le statut
     const getStatusInfo = (status: string) => {
         switch (status) {
-            case "SoumiseEnAttenteDePaiment":
+            case "SoumisePayee":
                 return {
                     icon: <Clock className="h-4 w-4" />,
                     color: "text-yellow-500",
@@ -135,7 +142,7 @@ const DashboardIndexPage = () => {
             <div>
                 <h1 className="text-2xl font-bold mb-6">Tableau de bord</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
                 {generalStats.map((card, idx) => (
                     <Card key={idx}>
                         <CardContent className="p-6">
@@ -319,12 +326,12 @@ const DashboardIndexPage = () => {
                                                     </span>
                                                 </td>
                                                 <td className="py-3 px-4 text-right">
-                                                    <Button
-                                                        size="sm"
-                                                        variant="link"
+                                                    <Link
+                                                        href={`/admin/dashboard/details-demande/${request.ID_Demande}`}
+                                                        className={buttonVariants({ variant: "link" })}
                                                     >
                                                         Voir
-                                                    </Button>
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         );

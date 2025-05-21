@@ -34,7 +34,9 @@ import { getRequestTypeName } from "@/utils";
 import { FraisTimbre, TypeActe } from "@/lib/generated/prisma";
 import { createTarif, updateTarif } from "@/server/admin/tarif/tarif";
 
+
 function TarifForm({ setIsOpen, setRefresh, tarif = undefined }: { setIsOpen: any, setRefresh: any, tarif: FraisTimbre | undefined }) {
+
     const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState<string | undefined>("");
 
@@ -63,7 +65,7 @@ function TarifForm({ setIsOpen, setRefresh, tarif = undefined }: { setIsOpen: an
                 setErr(errMessage);
             } else {
                 setIsOpen(false);
-                setRefresh(true);
+                setRefresh(!refresh);
             }
         } catch (error) {
             setErr(error as string);

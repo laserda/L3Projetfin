@@ -120,7 +120,7 @@ md:translate-x-0 md:z-auto
                         </nav>
                     </div>
 
-                    <div className={` p-4 border-t w-full justify-start`}>
+                    <div className={`p-4 border-t w-full flex `}>
                         <LogOutButton />
                     </div>
                 </div>
