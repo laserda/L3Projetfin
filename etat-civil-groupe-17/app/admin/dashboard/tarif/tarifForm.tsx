@@ -31,18 +31,19 @@ import { register } from "@/server/auth/agent";
 import { useForm } from "react-hook-form";
 import { TarifFormData, tarifSchema } from "@/validation/validation-tarif";
 import { getRequestTypeName } from "@/utils";
-import { TypeActe } from "@/lib/generated/prisma";
-import { createTarif } from "@/server/admin/tarif/tarif";
+import { FraisTimbre, TypeActe } from "@/lib/generated/prisma";
+import { createTarif, updateTarif } from "@/server/admin/tarif/tarif";
 
-function TarifForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: any }) {
+function TarifForm({ setIsOpen, setRefresh, tarif = undefined }: { setIsOpen: any, setRefresh: any, tarif: FraisTimbre | undefined }) {
     const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState<string | undefined>("");
 
     const form = useForm<TarifFormData>({
         resolver: zodResolver(tarifSchema),
         defaultValues: {
-            PrixTimbre: "500",
-            FraisDossier: "0"
+            PrixTimbre: tarif ? tarif.PrixTimbre.toString() : "500",
+            FraisDossier: tarif && tarif.FraisDossier ? tarif.FraisDossier.toString() : "0",
+            TypeActe: tarif && tarif.TypeActe
         },
     });
 
@@ -55,7 +56,7 @@ function TarifForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: any 
             formData.append(key, value);
         });
         try {
-            const res = await createTarif(formData);
+            const res = tarif && tarif.ID_FraisTimbre ? await updateTarif(formData, tarif.ID_FraisTimbre) : await createTarif(formData);
 
             if (!res.success) {
                 const errMessage = res.error;
