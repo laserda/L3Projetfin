@@ -1,7 +1,19 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { useReactToPrint } from "react-to-print";
 
 import { DemandeResquest } from "@/types";
+import { TypeActe } from "@/lib/generated/prisma";
+import { getDemandePayer } from "@/server/demande/demande";
+import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+
+import { ActeNaissance } from "@/components/ActeNaissance";
+import { ActeMariage } from "@/components/ActeMariage";
+import { ActeDeces } from "@/components/ActeDeces";
+import { Loader } from "@/components/Loader";
+
 import {
     Card,
     CardContent,
@@ -12,30 +24,20 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, FileText, Download } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
-import { getDemandePayer } from "@/server/demande/demande";
-import { Loader } from "@/components/Loader";
-import { ActeNaissance } from "@/components/ActeNaissance";
-import { useReactToPrint } from "react-to-print";
-import { ActeMariage } from "@/components/ActeMariage";
-import { ActeDeces } from "@/components/ActeDeces";
-import { TypeActe } from "@/lib/generated/prisma";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [request, setRequest] = useState<DemandeResquest | null>(null);
     const [loading, setLoading] = useState(true);
-
     const router = useRouter();
 
     const componentRef = useRef<HTMLDivElement>(null);
-    const reactToPrintContent = () => {
-        return componentRef.current;
-    };
+
     const handlePrint = useReactToPrint({
-        documentTitle: `${request?.Nom}-${request?.Prenom}-${request?.TypeActe}`,
+        contentRef: componentRef,
+        documentTitle: request
+            ? `${request.Nom}-${request.Prenom}-${request.TypeActe}`
+            : "document",
     });
 
     useEffect(() => {
@@ -43,14 +45,10 @@ const ConfirmationPage: FC = () => {
             setLoading(true);
             try {
                 const foundRequest = await getDemandePayer(id);
-                if (foundRequest) {
-                    setRequest(foundRequest);
-                }
+                setRequest(foundRequest);
+                renderActeComponent();
             } catch (error) {
-                console.error(
-                    "Erreur lors de la récupération de la demande:",
-                    error
-                );
+                console.error("Erreur lors de la récupération de la demande:", error);
             } finally {
                 setLoading(false);
             }
@@ -59,20 +57,35 @@ const ConfirmationPage: FC = () => {
         fetchRequest();
     }, [id]);
 
-    if (loading) {
-        return <Loader />;
-    }
+    const renderActeComponent = () => {
+        if (!request) return null;
+
+        switch (request.TypeActe) {
+            case "Naissance":
+                return (
+                    <ActeNaissance ref={componentRef} ID_Demande={request.ID_Demande} />
+                );
+            case "Mariage":
+                return (
+                    <ActeMariage ref={componentRef} ID_Demande={request.ID_Demande} />
+                );
+            case "Décès":
+                return <ActeDeces ref={componentRef} ID_Demande={request.ID_Demande} />;
+            default:
+                return null;
+        }
+    };
+
+    if (loading) return <Loader />;
 
     if (!request) {
         return (
             <Card className="max-w-md mx-auto">
                 <CardHeader>
-                    <CardTitle className="text-red-500">
-                        Demande introuvable
-                    </CardTitle>
+                    <CardTitle className="text-red-500">Demande introuvable</CardTitle>
                     <CardDescription>
-                        Nous n'avons pas pu trouver votre demande. Veuillez
-                        vérifier l'URL ou essayer à nouveau.
+                        Nous n'avons pas pu trouver votre demande. Veuillez vérifier l'URL
+                        ou essayer à nouveau.
                     </CardDescription>
                 </CardHeader>
                 <CardFooter>
@@ -82,20 +95,6 @@ const ConfirmationPage: FC = () => {
                 </CardFooter>
             </Card>
         );
-    }
-
-    const TypeActe = ({ typeActe, ref }: { typeActe: TypeActe, ref: any }) => {
-        switch (typeActe) {
-            case "Naissance":
-                return <ActeNaissance ref={ref} ID_Demande={request.ID_Demande} />;
-            case "Mariage":
-                return <ActeMariage ref={ref} ID_Demande={request.ID_Demande} />;
-            case "Décès":
-                return <ActeDeces ref={ref} ID_Demande={request.ID_Demande} />;
-            default:
-                return <></>;
-        }
-
     }
 
     return (
@@ -118,119 +117,102 @@ const ConfirmationPage: FC = () => {
                         <h3 className="font-medium text-gray-800 mb-2">
                             Récapitulatif de votre demande
                         </h3>
-
                         <div className="space-y-3 text-sm">
                             <p>
                                 <span className="font-medium">Référence :</span>{" "}
                                 {request.ID_Demande}
                             </p>
                             <p>
-                                <span className="font-medium">
-                                    Type de document :
-                                </span>{" "}
+                                <span className="font-medium">Type de document :</span>{" "}
                                 {getRequestTypeName(request.TypeActe)}
                             </p>
                             <p>
-                                <span className="font-medium">Nom :</span>{" "}
-                                {request.Nom}
+                                <span className="font-medium">Nom :</span> {request.Nom}
                             </p>
                             <p>
-                                <span className="font-medium">Prénom :</span>{" "}
-                                {request.Prenom}
+                                <span className="font-medium">Prénom :</span> {request.Prenom}
                             </p>
-                            {/* {request.parents && (
-                                <p>
-                                    <span className="font-medium">
-                                        Parents :
-                                    </span>{" "}
-                                    {request.parents}
-                                </p>
-                            )} */}
                             <p>
                                 <span className="font-medium">Date :</span>{" "}
                                 {request.DateActe?.toDateString()}
                             </p>
-                            {/* <p>
-                                <span className="font-medium">Lieu :</span>{" "}
-                                {request.lieu}
-                            </p> */}
                             <p>
                                 <span className="font-medium">Email :</span>{" "}
                                 {request.Citoyen.Email}
                             </p>
                             <p>
-                                <span className="font-medium">
-                                    Date de soumission :
-                                </span>{" "}
+                                <span className="font-medium">Date de soumission :</span>{" "}
                                 {formatDate(request.DateDemande.toDateString())}
                             </p>
                             <p>
-                                <span className="font-medium">
-                                    Statut actuel :
-                                </span>{" "}
+                                <span className="font-medium">Statut actuel :</span>{" "}
                                 <span className="text-yellow-600 font-medium">
                                     {getStatusDemande(request.Statut)}
                                 </span>
                             </p>
                         </div>
                     </div>
-                    {request.Statut !== 'Livrée' && <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                        <h3 className="font-medium text-blue-800 mb-2">
-                            Que se passe-t-il maintenant ?
-                        </h3>
-                        <ul className="space-y-2 text-blue-700 text-sm">
-                            <li className="flex items-start">
-                                <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
-                                <span>
-                                    Notre équipe va traiter votre demande dans
-                                    un délai de 24 à 48 heures.
-                                </span>
-                            </li>
-                            <li className="flex items-start">
-                                <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
-                                <span>
-                                    Vous recevrez un email de confirmation à
-                                    l'adresse {request.Citoyen.Email}.
-                                </span>
-                            </li>
-                            <li className="flex items-start">
-                                <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
-                                <span>
-                                    Vous pourrez suivre l'état de votre demande
-                                    en utilisant la référence indiquée
-                                    ci-dessus.
-                                </span>
-                            </li>
-                        </ul>
-                    </div>}
 
+                    {request.Statut !== "Livrée" && (
+                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <h3 className="font-medium text-blue-800 mb-2">
+                                Que se passe-t-il maintenant ?
+                            </h3>
+                            <ul className="space-y-2 text-blue-700 text-sm">
+                                <li className="flex items-start">
+                                    <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                                    <span>
+                                        Notre équipe va traiter votre demande dans un délai de 24 à
+                                        48 heures.
+                                    </span>
+                                </li>
+                                <li className="flex items-start">
+                                    <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                                    <span>
+                                        Vous recevrez un email de confirmation à l'adresse{" "}
+                                        {request.Citoyen.Email}.
+                                    </span>
+                                </li>
+                                <li className="flex items-start">
+                                    <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                                    <span>
+                                        Vous pourrez suivre l'état de votre demande en utilisant la
+                                        référence indiquée ci-dessus.
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </CardContent>
 
                 <CardFooter className="flex justify-between flex-wrap gap-3">
-                    <Button onClick={() => router.back()} variant="outline">Retour</Button>
-                    {request.Statut == 'Livrée' ?
+                    <Button onClick={() => router.back()} variant="outline">
+                        Retour
+                    </Button>
+                    {request.Statut === "Livrée" ? (
                         <>
-                            <Button onClick={() => handlePrint(reactToPrintContent)}>
+                            <Button onClick={handlePrint}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Télécharger le document
                             </Button>
-                            <div style={{ position: 'absolute', left: '-9999px' }}>
-                                <TypeActe typeActe={request.TypeActe} ref={componentRef} />
+                            <div className="hidden">
+                                {renderActeComponent()}
                             </div>
                         </>
-                        : <Link href="/suivi-demande">
+                    ) : (
+                        <Link href="/suivi-demande">
                             <Button>
                                 <FileText className="mr-2 h-4 w-4" />
                                 Suivre ma demande
                             </Button>
-                        </Link>}
+                        </Link>
+                    )}
                 </CardFooter>
             </Card>
+
+
         </div>
     );
 };
 
 export default ConfirmationPage;
-
-
-

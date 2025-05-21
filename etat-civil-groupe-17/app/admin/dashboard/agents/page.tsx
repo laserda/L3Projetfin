@@ -45,7 +45,7 @@ function page() {
                         <DialogHeader>
                             <DialogTitle>Ajouter un nouvel agent</DialogTitle>
                         </DialogHeader>
-                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} />
+                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} refresh={refresh} />
                     </DialogContent>
                 </Dialog>
             </div>

@@ -30,7 +30,7 @@ import {
 import { register } from "@/server/auth/agent";
 import { useForm } from "react-hook-form";
 
-function RegisterForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: any }) {
+function RegisterForm({ setIsOpen, setRefresh, refresh }: { setIsOpen: any, setRefresh: any, refresh: boolean }) {
     const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState<string | undefined>("");
 
@@ -61,7 +61,7 @@ function RegisterForm({ setIsOpen, setRefresh }: { setIsOpen: any, setRefresh: a
                 setErr(errMessage);
             } else {
                 setIsOpen(false);
-                setRefresh(true);
+                setRefresh(!refresh);
             }
         } catch (error) {
             setErr(error as string);
