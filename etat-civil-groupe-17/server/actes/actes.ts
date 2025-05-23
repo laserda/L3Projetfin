@@ -31,7 +31,6 @@ export async function createActe(ID_Demande: string): Promise<ResultData> {
 
         const newDemande = await acteRepo.create({
             data: {
-                // ID_Agent: user.ID_Agent,
                 DateDelivrance: getDateTimeISOString(),
                 Fichier_PDF: "",
                 SignatureNumerique: "Signée",

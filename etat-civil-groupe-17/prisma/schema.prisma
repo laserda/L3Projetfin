@@ -100,7 +100,6 @@ model Document_Acte {
 
   Demande             Demande    @relation(fields: [ID_Demande], references: [ID_Demande])
   Agent               Agent      @relation(fields: [ID_Agent], references: [ID_Agent])
-  Historique          Historique_Modifications[]
 
   @@index([ID_Demande])
   @@index([ID_Agent])
@@ -130,19 +129,18 @@ model Agent {
 model Historique_Modifications {
   ID_Historique     String      @id @default(uuid())
   TypeEntite       TypeEntite
-  ID_Entite         String
+  ID_Demande         String?
   ID_Agent          String
   Action            String
-  DateModification DateTime
+  DateModification DateTime @default(now())
   Ancienne_Valeur   String
   Nouvelle_Valeur   String
 
   Agent             Agent       @relation(fields: [ID_Agent], references: [ID_Agent])
-  Demande     Demande? @relation(fields: [ID_Entite], references: [ID_Demande], map: "fk_demande")
-  Document    Document_Acte? @relation(fields: [ID_Entite], references: [ID_Document_Acte], map: "fk_acte")
+  Demande     Demande? @relation(fields: [ID_Demande], references: [ID_Demande])
 
   @@index([ID_Agent])
-  @@index([ID_Entite])
+  @@index([ID_Demande])
 }
 
 model FraisTimbre {
