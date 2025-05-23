@@ -67,22 +67,27 @@ model Citoyen {
 }
 
 model Demande {
-  ID_Demande      String          @id @default(uuid())
+  ID_Demande      String                     @id @default(uuid())
   ID_Citoyen      String
   TypeActe        TypeActe
-  NumeroActe      String          @default("")
-  Nom             String          @default("")
-  Prenom          String          @default("")
+  NumeroActe      String                     @default("")
+  Nom             String                     @default("")
+  Prenom          String                     @default("")
   Statut          StatutDemande
   DemandePourTier DemandePourTier
   DateDemande     DateTime
   DateActe        DateTime?
-  ID_Paiement     String?         @unique
-
-  Citoyen    Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
-  Paiement   Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
-  Document   Document_Acte?
-  Historique Historique_Modifications[]
+  ID_Paiement     String?                    @unique
+  NomMere         String?                    @default("")
+  PrenomMere      String?                    @default("")
+  DateNaisMere    DateTime?
+  NomPere         String?                    @default("")
+  PrenomPere      String?                    @default("")
+  DateNaisPere    DateTime?
+  Citoyen         Citoyen                    @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  Paiement        Paiement?                  @relation(fields: [ID_Paiement], references: [ID_Paiement])
+  Document        Document_Acte?
+  Historique      Historique_Modifications[]
 
   @@index([ID_Citoyen])
   @@index([ID_Paiement])

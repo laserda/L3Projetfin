@@ -386,8 +386,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -2776,6 +2776,12 @@ export namespace Prisma {
     DateDemande: Date | null
     DateActe: Date | null
     ID_Paiement: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    DateNaisPere: Date | null
   }
 
   export type DemandeMaxAggregateOutputType = {
@@ -2790,6 +2796,12 @@ export namespace Prisma {
     DateDemande: Date | null
     DateActe: Date | null
     ID_Paiement: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    DateNaisPere: Date | null
   }
 
   export type DemandeCountAggregateOutputType = {
@@ -2804,6 +2816,12 @@ export namespace Prisma {
     DateDemande: number
     DateActe: number
     ID_Paiement: number
+    NomMere: number
+    PrenomMere: number
+    DateNaisMere: number
+    NomPere: number
+    PrenomPere: number
+    DateNaisPere: number
     _all: number
   }
 
@@ -2820,6 +2838,12 @@ export namespace Prisma {
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
+    NomMere?: true
+    PrenomMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    DateNaisPere?: true
   }
 
   export type DemandeMaxAggregateInputType = {
@@ -2834,6 +2858,12 @@ export namespace Prisma {
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
+    NomMere?: true
+    PrenomMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    DateNaisPere?: true
   }
 
   export type DemandeCountAggregateInputType = {
@@ -2848,6 +2878,12 @@ export namespace Prisma {
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
+    NomMere?: true
+    PrenomMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    DateNaisPere?: true
     _all?: true
   }
 
@@ -2935,6 +2971,12 @@ export namespace Prisma {
     DateDemande: Date
     DateActe: Date | null
     ID_Paiement: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    DateNaisPere: Date | null
     _count: DemandeCountAggregateOutputType | null
     _min: DemandeMinAggregateOutputType | null
     _max: DemandeMaxAggregateOutputType | null
@@ -2966,6 +3008,12 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
     Document?: boolean | Demande$DocumentArgs<ExtArgs>
@@ -2985,6 +3033,12 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
@@ -3001,6 +3055,12 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
@@ -3017,9 +3077,15 @@ export namespace Prisma {
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    DateNaisPere?: boolean
   }
 
-  export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "NumeroActe" | "Nom" | "Prenom" | "Statut" | "DemandePourTier" | "DateDemande" | "DateActe" | "ID_Paiement", ExtArgs["result"]["demande"]>
+  export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "NumeroActe" | "Nom" | "Prenom" | "Statut" | "DemandePourTier" | "DateDemande" | "DateActe" | "ID_Paiement" | "NomMere" | "PrenomMere" | "DateNaisMere" | "NomPere" | "PrenomPere" | "DateNaisPere", ExtArgs["result"]["demande"]>
   export type DemandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
@@ -3056,6 +3122,12 @@ export namespace Prisma {
       DateDemande: Date
       DateActe: Date | null
       ID_Paiement: string | null
+      NomMere: string | null
+      PrenomMere: string | null
+      DateNaisMere: Date | null
+      NomPere: string | null
+      PrenomPere: string | null
+      DateNaisPere: Date | null
     }, ExtArgs["result"]["demande"]>
     composites: {}
   }
@@ -3494,6 +3566,12 @@ export namespace Prisma {
     readonly DateDemande: FieldRef<"Demande", 'DateTime'>
     readonly DateActe: FieldRef<"Demande", 'DateTime'>
     readonly ID_Paiement: FieldRef<"Demande", 'String'>
+    readonly NomMere: FieldRef<"Demande", 'String'>
+    readonly PrenomMere: FieldRef<"Demande", 'String'>
+    readonly DateNaisMere: FieldRef<"Demande", 'DateTime'>
+    readonly NomPere: FieldRef<"Demande", 'String'>
+    readonly PrenomPere: FieldRef<"Demande", 'String'>
+    readonly DateNaisPere: FieldRef<"Demande", 'DateTime'>
   }
     
 
@@ -9554,7 +9632,13 @@ export namespace Prisma {
     DemandePourTier: 'DemandePourTier',
     DateDemande: 'DateDemande',
     DateActe: 'DateActe',
-    ID_Paiement: 'ID_Paiement'
+    ID_Paiement: 'ID_Paiement',
+    NomMere: 'NomMere',
+    PrenomMere: 'PrenomMere',
+    DateNaisMere: 'DateNaisMere',
+    NomPere: 'NomPere',
+    PrenomPere: 'PrenomPere',
+    DateNaisPere: 'DateNaisPere'
   };
 
   export type DemandeScalarFieldEnum = (typeof DemandeScalarFieldEnum)[keyof typeof DemandeScalarFieldEnum]
@@ -9906,6 +9990,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableFilter<"Demande"> | string | null
+    NomMere?: StringNullableFilter<"Demande"> | string | null
+    PrenomMere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
+    NomPere?: StringNullableFilter<"Demande"> | string | null
+    PrenomPere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
     Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
@@ -9924,6 +10014,12 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrderInput | SortOrder
     ID_Paiement?: SortOrderInput | SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    DateNaisMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    DateNaisPere?: SortOrderInput | SortOrder
     Citoyen?: CitoyenOrderByWithRelationInput
     Paiement?: PaiementOrderByWithRelationInput
     Document?: Document_ActeOrderByWithRelationInput
@@ -9945,6 +10041,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
+    NomMere?: StringNullableFilter<"Demande"> | string | null
+    PrenomMere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
+    NomPere?: StringNullableFilter<"Demande"> | string | null
+    PrenomPere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
     Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
@@ -9963,6 +10065,12 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrderInput | SortOrder
     ID_Paiement?: SortOrderInput | SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    DateNaisMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    DateNaisPere?: SortOrderInput | SortOrder
     _count?: DemandeCountOrderByAggregateInput
     _max?: DemandeMaxOrderByAggregateInput
     _min?: DemandeMinOrderByAggregateInput
@@ -9983,6 +10091,12 @@ export namespace Prisma {
     DateDemande?: DateTimeWithAggregatesFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableWithAggregatesFilter<"Demande"> | string | null
+    NomMere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
+    PrenomMere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
+    DateNaisMere?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
+    NomPere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
+    PrenomPere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
+    DateNaisPere?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
   }
 
   export type Document_ActeWhereInput = {
@@ -10414,6 +10528,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
@@ -10432,6 +10552,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
@@ -10446,6 +10572,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
@@ -10464,6 +10596,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
@@ -10480,6 +10618,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
   }
 
   export type DemandeUpdateManyMutationInput = {
@@ -10492,6 +10636,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DemandeUncheckedUpdateManyInput = {
@@ -10506,6 +10656,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type Document_ActeCreateInput = {
@@ -11048,6 +11204,12 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    DateNaisPere?: SortOrder
   }
 
   export type DemandeMaxOrderByAggregateInput = {
@@ -11062,6 +11224,12 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    DateNaisPere?: SortOrder
   }
 
   export type DemandeMinOrderByAggregateInput = {
@@ -11076,6 +11244,12 @@ export namespace Prisma {
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    DateNaisPere?: SortOrder
   }
 
   export type EnumTypeActeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11605,6 +11779,10 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type CitoyenUpdateOneRequiredWithoutDemandesNestedInput = {
     create?: XOR<CitoyenCreateWithoutDemandesInput, CitoyenUncheckedCreateWithoutDemandesInput>
     connectOrCreate?: CitoyenCreateOrConnectWithoutDemandesInput
@@ -11645,10 +11823,6 @@ export namespace Prisma {
     update?: Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput | Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput[]
     updateMany?: Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput | Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput[]
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput = {
@@ -12311,6 +12485,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
@@ -12327,6 +12507,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
@@ -12372,6 +12558,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableFilter<"Demande"> | string | null
+    NomMere?: StringNullableFilter<"Demande"> | string | null
+    PrenomMere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
+    NomPere?: StringNullableFilter<"Demande"> | string | null
+    PrenomPere?: StringNullableFilter<"Demande"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
   }
 
   export type CitoyenCreateWithoutDemandesInput = {
@@ -12617,6 +12809,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
@@ -12634,6 +12832,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
 
@@ -12719,6 +12923,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
@@ -12736,6 +12946,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
@@ -12796,6 +13012,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
@@ -12812,6 +13034,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
   }
@@ -12842,6 +13070,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
@@ -12858,6 +13092,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
@@ -13006,6 +13246,12 @@ export namespace Prisma {
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
@@ -13023,6 +13269,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
   }
 
@@ -13110,6 +13362,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
@@ -13127,6 +13385,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
@@ -13174,6 +13438,12 @@ export namespace Prisma {
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+    NomMere?: string | null
+    PrenomMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    DateNaisPere?: Date | string | null
   }
 
   export type DemandeUpdateWithoutCitoyenInput = {
@@ -13186,6 +13456,12 @@ export namespace Prisma {
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
@@ -13202,6 +13478,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
   }
@@ -13217,6 +13499,12 @@ export namespace Prisma {
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type Historique_ModificationsCreateManyDemandeInput = {

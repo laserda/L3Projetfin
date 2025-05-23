@@ -78,7 +78,12 @@ model Demande {
   DateDemande   DateTime   
   DateActe  DateTime?  
   ID_Paiement   String?     @unique
-
+  NomMere            String?   @default("")
+  PrenomMere         String?   @default("")  
+  DateNaisMere  DateTime?  
+  NomPere            String?   @default("")
+  PrenomPere         String?   @default("")  
+  DateNaisPere  DateTime?  
   Citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
   Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
   Document      Document_Acte?
