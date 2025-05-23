@@ -97,10 +97,10 @@ CREATE TABLE "Agent" (
 CREATE TABLE "Historique_Modifications" (
     "ID_Historique" TEXT NOT NULL,
     "TypeEntite" "TypeEntite" NOT NULL,
-    "ID_Entite" TEXT NOT NULL,
+    "ID_Demande" TEXT,
     "ID_Agent" TEXT NOT NULL,
     "Action" TEXT NOT NULL,
-    "DateModification" TIMESTAMP(3) NOT NULL,
+    "DateModification" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "Ancienne_Valeur" TEXT NOT NULL,
     "Nouvelle_Valeur" TEXT NOT NULL,
 
@@ -150,7 +150,7 @@ CREATE UNIQUE INDEX "Agent_Email_key" ON "Agent"("Email");
 CREATE INDEX "Historique_Modifications_ID_Agent_idx" ON "Historique_Modifications"("ID_Agent");
 
 -- CreateIndex
-CREATE INDEX "Historique_Modifications_ID_Entite_idx" ON "Historique_Modifications"("ID_Entite");
+CREATE INDEX "Historique_Modifications_ID_Demande_idx" ON "Historique_Modifications"("ID_Demande");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "FraisTimbre_TypeActe_key" ON "FraisTimbre"("TypeActe");
@@ -171,7 +171,4 @@ ALTER TABLE "Document_Acte" ADD CONSTRAINT "Document_Acte_ID_Agent_fkey" FOREIGN
 ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "Historique_Modifications_ID_Agent_fkey" FOREIGN KEY ("ID_Agent") REFERENCES "Agent"("ID_Agent") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "fk_demande" FOREIGN KEY ("ID_Entite") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "fk_acte" FOREIGN KEY ("ID_Entite") REFERENCES "Document_Acte"("ID_Document_Acte") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "Historique_Modifications_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE SET NULL ON UPDATE CASCADE;

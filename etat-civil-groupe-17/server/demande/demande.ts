@@ -39,24 +39,26 @@ export async function createDemande(formData: FormData): Promise<ResultData> {
             result.data.Nom = user.Nom;
             result.data.Prenom = user.Prenom;
             result.data.DateActe = user.DateNaissance.toISOString();
-            // Réinitialiser les champs des parents pour une demande personnelle
-            result.data.NomMere = '';
-            result.data.PrenomMere = '';
-            result.data.DateNaisMere = '';
-            result.data.ProfessionMere = '';
-            result.data.NomPere = '';
-            result.data.PrenomPere = '';
-            result.data.DateNaisPere = '';
-            result.data.ProfessionPere = '';
+            // // Réinitialiser les champs des parents pour une demande personnelle
+            // result.data.NomMere = '';
+            // result.data.PrenomMere = '';
+            // result.data.DateNaisMere = '';
+            // result.data.ProfessionMere = '';
+            // result.data.NomPere = '';
+            // result.data.PrenomPere = '';
+            // result.data.DateNaisPere = '';
+            // result.data.ProfessionPere = '';
         } else {
             // Formater les dates pour les demandes tier
             result.data.DateActe = `${result.data.DateActe}T00:00:00.000Z`;
-            if (result.data.DateNaisMere) {
-                result.data.DateNaisMere = `${result.data.DateNaisMere}T00:00:00.000Z`;
-            }
-            if (result.data.DateNaisPere) {
-                result.data.DateNaisPere = `${result.data.DateNaisPere}T00:00:00.000Z`;
-            }
+        }
+
+
+        if (result.data.DateNaisMere) {
+            result.data.DateNaisMere = `${result.data.DateNaisMere}T00:00:00.000Z`;
+        }
+        if (result.data.DateNaisPere) {
+            result.data.DateNaisPere = `${result.data.DateNaisPere}T00:00:00.000Z`;
         }
 
         // DateAct
