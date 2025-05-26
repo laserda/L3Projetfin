@@ -27,6 +27,7 @@ import {
     ArrowUp,
     Filter,
     RefreshCw,
+    CheckCheck,
 } from "lucide-react";
 
 import { getDemandes } from "@/server/admin/demande";
@@ -111,7 +112,7 @@ const DemandesListPage: FC = () => {
     // Obtenir l'icône et la couleur selon le statut
     const getStatusInfo = (status: string) => {
         switch (status) {
-            case "SoumiseEnAttenteDePaiment":
+            case "SoumisePayee":
                 return {
                     icon: <Clock className="h-4 w-4" />,
                     color: "text-yellow-500",
@@ -122,6 +123,12 @@ const DemandesListPage: FC = () => {
                     icon: <Check className="h-4 w-4" />,
                     color: "text-green-500",
                     badge: "bg-green-50 text-green-700 border-green-200",
+                };
+            case "Livrée":
+                return {
+                    icon: <CheckCheck className="h-4 w-4" />,
+                    color: "text-green-600",
+                    badge: "bg-green-100 text-green-700 border-green-200",
                 };
             case "Refusée":
                 return {

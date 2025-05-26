@@ -24,7 +24,7 @@ export async function createTarif(formData: FormData): Promise<ResultData> {
 
     try {
         let session = await getSession();
-        console.log(session);
+        // console.log(session);
         let user = await agentRepos.findById(session?.userId);
         if (!user) {
             return {
@@ -33,7 +33,7 @@ export async function createTarif(formData: FormData): Promise<ResultData> {
         }
 
 
-        console.log(result.data);
+        // console.log(result.data);
 
         const tarifByType = await getTarifByType(result.data.TypeActe);
 
@@ -77,7 +77,7 @@ export async function updateTarif(formData: FormData, id: number): Promise<Resul
 
     try {
         let session = await getSession();
-        console.log(session);
+        // console.log(session);
         let user = await agentRepos.findById(session?.userId);
         if (!user) {
             return {
@@ -86,7 +86,7 @@ export async function updateTarif(formData: FormData, id: number): Promise<Resul
         }
 
 
-        console.log(result.data);
+        // console.log(result.data);
 
         // DateAct
         const newDemande = await tarifRepos.update({
@@ -98,7 +98,7 @@ export async function updateTarif(formData: FormData, id: number): Promise<Resul
             },
         });
 
-        console.log(newDemande);
+        // console.log(newDemande);
 
         return {
             success: true

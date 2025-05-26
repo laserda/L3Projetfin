@@ -29,9 +29,9 @@ const Page = () => {
                 </CardContent>
 
                 <CardFooter className="flex justify-center">
-                    {/* <Link href={"/admin/register"} className="text-gray-500">
-            Pas encore inscrit ? Inscription
-          </Link> */}
+                    <Link href={"/admin/register"} className="text-gray-500">
+                        Pas encore inscrit ? Inscription
+                    </Link>
                 </CardFooter>
             </Card>
         </div>

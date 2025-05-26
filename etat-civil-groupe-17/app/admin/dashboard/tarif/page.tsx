@@ -49,7 +49,7 @@ function page() {
                         <DialogHeader>
                             <DialogTitle>Ajouter un nouveau tarif</DialogTitle>
                         </DialogHeader>
-                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} tarif={tarifSelected} />
+                        <RegisterForm setIsOpen={setIsOpen} setRefresh={setRefresh} tarif={tarifSelected} refresh={refresh} />
                     </DialogContent>
                 </Dialog>
             </div>

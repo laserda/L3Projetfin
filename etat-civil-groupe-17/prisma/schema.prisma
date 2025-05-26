@@ -7,6 +7,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
+   binaryTargets = ["native", "windows", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -80,9 +81,11 @@ model Demande {
   ID_Paiement   String?     @unique
   NomMere            String?   @default("")
   PrenomMere         String?   @default("")  
+  ProfessionMere         String?   @default("")  
   DateNaisMere  DateTime?  
   NomPere            String?   @default("")
   PrenomPere         String?   @default("")  
+  ProfessionPere     String?   @default("")
   DateNaisPere  DateTime?  
   Citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
   Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])

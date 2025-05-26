@@ -44,6 +44,14 @@ CREATE TABLE "Demande" (
     "DateDemande" TIMESTAMP(3) NOT NULL,
     "DateActe" TIMESTAMP(3),
     "ID_Paiement" TEXT,
+    "NomMere" TEXT DEFAULT '',
+    "PrenomMere" TEXT DEFAULT '',
+    "ProfessionMere" TEXT DEFAULT '',
+    "DateNaisMere" TIMESTAMP(3),
+    "NomPere" TEXT DEFAULT '',
+    "PrenomPere" TEXT DEFAULT '',
+    "ProfessionPere" TEXT DEFAULT '',
+    "DateNaisPere" TIMESTAMP(3),
 
     CONSTRAINT "Demande_pkey" PRIMARY KEY ("ID_Demande")
 );

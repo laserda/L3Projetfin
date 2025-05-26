@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useReactToPrint } from "react-to-print";
 
 import { DemandeResquest } from "@/types";
-import { TypeActe } from "@/lib/generated/prisma";
 import { getDemandePayer } from "@/server/demande/demande";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 
@@ -38,6 +37,7 @@ const ConfirmationPage: FC = () => {
         documentTitle: request
             ? `${request.Nom}-${request.Prenom}-${request.TypeActe}`
             : "document",
+        suppressErrors: true,
     });
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const ConfirmationPage: FC = () => {
             try {
                 const foundRequest = await getDemandePayer(id);
                 setRequest(foundRequest);
-                renderActeComponent();
+                // renderActeComponent();
             } catch (error) {
                 console.error("Erreur lors de la récupération de la demande:", error);
             } finally {
@@ -89,7 +89,7 @@ const ConfirmationPage: FC = () => {
                     </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                    <Link href="/demande">
+                    <Link href="/#nos-services">
                         <Button>Faire une nouvelle demande</Button>
                     </Link>
                 </CardFooter>
@@ -186,12 +186,12 @@ const ConfirmationPage: FC = () => {
                 </CardContent>
 
                 <CardFooter className="flex justify-between flex-wrap gap-3">
-                    <Button onClick={() => router.back()} variant="outline">
+                    <Button variant={"outline"} onClick={() => router.push("/suivi-demande")}>
                         Retour
                     </Button>
                     {request.Statut === "Livrée" ? (
                         <>
-                            <Button onClick={handlePrint}>
+                            <Button onClick={() => { handlePrint() }}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Télécharger le document
                             </Button>

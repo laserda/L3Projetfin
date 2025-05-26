@@ -20,7 +20,7 @@ import {
     ResponsiveContainer,
     Legend,
 } from "recharts";
-import { ArrowUp, FileText, Clock, Check, X } from "lucide-react";
+import { ArrowUp, FileText, Clock, Check, X, CheckCheck } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { useEffect, useState } from "react";
@@ -46,6 +46,7 @@ const DashboardIndexPage = () => {
     const enTraitement = demandes.filter(demande => demande.Statut === "EnTraitement")
     const valide = demandes.filter(demande => demande.Statut === "Validée")
     const refuse = demandes.filter(demande => demande.Statut === "Refusée")
+    const livree = demandes.filter(demande => demande.Statut === "Livrée")
 
     // Les 5 dernières demandes reçues
     const recentDemandes = [...demandes].sort((a, b) => {
@@ -66,6 +67,7 @@ const DashboardIndexPage = () => {
         { name: "En traitement", value: enTraitement.length, color: "#3B82F6" },
         { name: "Approuvées", value: valide.length, color: "#10B981" },
         { name: "Rejetées", value: refuse.length, color: "#EF4444" },
+        { name: "Livrées", value: livree.length, color: "#4FD1C5" },
     ];
 
     const generalStats = [
@@ -94,6 +96,12 @@ const DashboardIndexPage = () => {
             color: "bg-green-100",
         },
         {
+            title: "Livrées",
+            value: livree.length,
+            Icon: CheckCheck,
+            color: "bg-green-300",
+        },
+        {
             title: "Refusées",
             value: refuse.length,
             Icon: X,
@@ -112,6 +120,11 @@ const DashboardIndexPage = () => {
             case "Validée":
                 return {
                     icon: <Check className="h-4 w-4" />,
+                    color: "text-green-500",
+                };
+            case "Livrée":
+                return {
+                    icon: <CheckCheck className="h-4 w-4" />,
                     color: "text-green-500",
                 };
             case "Refusée":
@@ -142,7 +155,7 @@ const DashboardIndexPage = () => {
             <div>
                 <h1 className="text-2xl font-bold mb-6">Tableau de bord</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
                 {generalStats.map((card, idx) => (
                     <Card key={idx}>
                         <CardContent className="p-6">
