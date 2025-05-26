@@ -35,6 +35,7 @@ import { Demande, StatutDemande, TypeActe } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 import { Loader } from "@/components/Loader";
+import { getStatusInfo } from "@/app/shared/common";
 
 const DemandesListPage: FC = () => {
     const [requests, setRequests] = useState<Demande[]>([]);
@@ -107,48 +108,6 @@ const DemandesListPage: FC = () => {
         setSearchTerm("");
         setStatusFilter("all");
         setTypeFilter("all");
-    };
-
-    // Obtenir l'icône et la couleur selon le statut
-    const getStatusInfo = (status: string) => {
-        switch (status) {
-            case "SoumisePayee":
-                return {
-                    icon: <Clock className="h-4 w-4" />,
-                    color: "text-yellow-500",
-                    badge: "bg-yellow-50 text-yellow-700 border-yellow-200",
-                };
-            case "Validée":
-                return {
-                    icon: <Check className="h-4 w-4" />,
-                    color: "text-green-500",
-                    badge: "bg-green-50 text-green-700 border-green-200",
-                };
-            case "Livrée":
-                return {
-                    icon: <CheckCheck className="h-4 w-4" />,
-                    color: "text-green-600",
-                    badge: "bg-green-100 text-green-700 border-green-200",
-                };
-            case "Refusée":
-                return {
-                    icon: <X className="h-4 w-4" />,
-                    color: "text-red-500",
-                    badge: "bg-red-50 text-red-700 border-red-200",
-                };
-            case "EnTraitement":
-                return {
-                    icon: <ArrowUp className="h-4 w-4" />,
-                    color: "text-blue-500",
-                    badge: "bg-blue-50 text-blue-700 border-blue-200",
-                };
-            default:
-                return {
-                    icon: <FileText className="h-4 w-4" />,
-                    color: "text-gray-500",
-                    badge: "bg-gray-50 text-gray-700 border-gray-200",
-                };
-        }
     };
 
 
