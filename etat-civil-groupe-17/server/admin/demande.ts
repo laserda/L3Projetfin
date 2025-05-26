@@ -88,7 +88,10 @@ export async function getDemandes() {
             Statut: {
                 not: 'SoumiseEnAttenteDePaiment'
             }
-        }
+        },
+        include: {
+            Citoyen: true,
+        },
     });
 }
 

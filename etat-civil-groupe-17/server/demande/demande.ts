@@ -1,17 +1,19 @@
 "use server";
 
 import { DemandeRepository } from './repositories/demandeRepository'
+import { NaissanceRepository } from './repositories/naissanceRepository';
 import { CitoyenRepository } from '../auth/repositories/citoyenRepository';
 import {
     getSession,
 } from "../sessions/citoyen_session";
 
 import { createDemandeSchema } from '@/validation/validation-demande';
-import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
+import { Demande, DemandePourTier, Naissance, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
 import { ResultData } from '@/types';
 
+const naissanceRepo = new NaissanceRepository()
 const demandeRepo = new DemandeRepository()
 const citoyenRepo = new CitoyenRepository()
 
@@ -61,20 +63,42 @@ export async function createDemande(formData: FormData): Promise<ResultData> {
             result.data.DateNaisPere = `${result.data.DateNaisPere}T00:00:00.000Z`;
         }
 
+        const demande = {
+            DemandePourTier: result.data.DemandePourTier,
+            Statut: StatutDemande.SoumiseEnAttenteDePaiment,
+            TypeActe: result.data.TypeActe,
+            NumeroActe: result.data.NumeroActe
+        }
+
         // DateAct
         const newDemande = await demandeRepo.create({
             data: {
-                ...result.data,
+                ...demande,
                 Citoyen: {
                     connect: { ID_Citoyen: user.ID_Citoyen }
                 },
-                Statut: StatutDemande.SoumiseEnAttenteDePaiment,
                 DateDemande: getDateTimeISOString(),
-                DateActe: `${result.data.DateActe}`,
-                DateNaisMere: result.data.DateNaisMere,
-                DateNaisPere: result.data.DateNaisPere,
-                ProfessionMere: result.data.ProfessionMere,
-                ProfessionPere: result.data.ProfessionPere
+                DateActe: `${result.data.DateActe}`
+            }
+        });
+
+        const demandeNaissance = {
+            Nom: result.data.Nom ?? '',
+            Prenom: result.data.Prenom ?? '',
+            NomMere: result.data.NomMere ?? '',
+            PrenomMere: result.data.PrenomMere ?? '',
+            ProfessionMere: result.data.ProfessionMere ?? '',
+            NomPere: result.data.NomPere ?? '',
+            PrenomPere: result.data.PrenomPere ?? '',
+            ProfessionPere: result.data.ProfessionPere ?? ''
+        }
+
+        const newDemandeNaissance = await naissanceRepo.create({
+            data: {
+                ...demandeNaissance,
+                ID_Demande: newDemande.ID_Demande,
+                DateNaisMere: `${result.data.DateNaisMere}`,
+                DateNaisPere: `${result.data.DateNaisPere}`
             }
         });
 

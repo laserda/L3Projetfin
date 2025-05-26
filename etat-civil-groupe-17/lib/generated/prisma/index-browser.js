@@ -137,13 +137,18 @@ exports.Prisma.DemandeScalarFieldEnum = {
   ID_Citoyen: 'ID_Citoyen',
   TypeActe: 'TypeActe',
   NumeroActe: 'NumeroActe',
-  Nom: 'Nom',
-  Prenom: 'Prenom',
   Statut: 'Statut',
   DemandePourTier: 'DemandePourTier',
   DateDemande: 'DateDemande',
   DateActe: 'DateActe',
-  ID_Paiement: 'ID_Paiement',
+  ID_Paiement: 'ID_Paiement'
+};
+
+exports.Prisma.NaissanceScalarFieldEnum = {
+  ID_Naissance: 'ID_Naissance',
+  ID_Demande: 'ID_Demande',
+  Nom: 'Nom',
+  Prenom: 'Prenom',
   NomMere: 'NomMere',
   PrenomMere: 'PrenomMere',
   ProfessionMere: 'ProfessionMere',
@@ -152,6 +157,30 @@ exports.Prisma.DemandeScalarFieldEnum = {
   PrenomPere: 'PrenomPere',
   ProfessionPere: 'ProfessionPere',
   DateNaisPere: 'DateNaisPere'
+};
+
+exports.Prisma.MariageScalarFieldEnum = {
+  ID_Mariage: 'ID_Mariage',
+  ID_Demande: 'ID_Demande',
+  NomEpoux: 'NomEpoux',
+  PrenomEpoux: 'PrenomEpoux',
+  DateNaissanceEpoux: 'DateNaissanceEpoux',
+  NomEpouse: 'NomEpouse',
+  PrenomEpouse: 'PrenomEpouse',
+  DateNaissanceEpouse: 'DateNaissanceEpouse'
+};
+
+exports.Prisma.DecesScalarFieldEnum = {
+  ID_Deces: 'ID_Deces',
+  ID_Demande: 'ID_Demande',
+  Nom: 'Nom',
+  Prenom: 'Prenom',
+  NomMere: 'NomMere',
+  PrenomMere: 'PrenomMere',
+  ProfessionMere: 'ProfessionMere',
+  NomPere: 'NomPere',
+  PrenomPere: 'PrenomPere',
+  ProfessionPere: 'ProfessionPere'
 };
 
 exports.Prisma.Document_ActeScalarFieldEnum = {
@@ -186,11 +215,11 @@ exports.Prisma.Historique_ModificationsScalarFieldEnum = {
   ID_Historique: 'ID_Historique',
   TypeEntite: 'TypeEntite',
   ID_Demande: 'ID_Demande',
-  ID_Agent: 'ID_Agent',
   Action: 'Action',
   DateModification: 'DateModification',
   Ancienne_Valeur: 'Ancienne_Valeur',
-  Nouvelle_Valeur: 'Nouvelle_Valeur'
+  Nouvelle_Valeur: 'Nouvelle_Valeur',
+  CreatedBy: 'CreatedBy'
 };
 
 exports.Prisma.FraisTimbreScalarFieldEnum = {
@@ -257,6 +286,9 @@ exports.TypeEntite = exports.$Enums.TypeEntite = {
 exports.Prisma.ModelName = {
   Citoyen: 'Citoyen',
   Demande: 'Demande',
+  Naissance: 'Naissance',
+  Mariage: 'Mariage',
+  Deces: 'Deces',
   Document_Acte: 'Document_Acte',
   Paiement: 'Paiement',
   Agent: 'Agent',

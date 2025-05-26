@@ -24,6 +24,21 @@ export type Citoyen = $Result.DefaultSelection<Prisma.$CitoyenPayload>
  */
 export type Demande = $Result.DefaultSelection<Prisma.$DemandePayload>
 /**
+ * Model Naissance
+ * 
+ */
+export type Naissance = $Result.DefaultSelection<Prisma.$NaissancePayload>
+/**
+ * Model Mariage
+ * 
+ */
+export type Mariage = $Result.DefaultSelection<Prisma.$MariagePayload>
+/**
+ * Model Deces
+ * 
+ */
+export type Deces = $Result.DefaultSelection<Prisma.$DecesPayload>
+/**
  * Model Document_Acte
  * 
  */
@@ -278,6 +293,36 @@ export class PrismaClient<
     * ```
     */
   get demande(): Prisma.DemandeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.naissance`: Exposes CRUD operations for the **Naissance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Naissances
+    * const naissances = await prisma.naissance.findMany()
+    * ```
+    */
+  get naissance(): Prisma.NaissanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mariage`: Exposes CRUD operations for the **Mariage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Mariages
+    * const mariages = await prisma.mariage.findMany()
+    * ```
+    */
+  get mariage(): Prisma.MariageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.deces`: Exposes CRUD operations for the **Deces** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Deces
+    * const deces = await prisma.deces.findMany()
+    * ```
+    */
+  get deces(): Prisma.DecesDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.document_Acte`: Exposes CRUD operations for the **Document_Acte** model.
@@ -770,6 +815,9 @@ export namespace Prisma {
   export const ModelName: {
     Citoyen: 'Citoyen',
     Demande: 'Demande',
+    Naissance: 'Naissance',
+    Mariage: 'Mariage',
+    Deces: 'Deces',
     Document_Acte: 'Document_Acte',
     Paiement: 'Paiement',
     Agent: 'Agent',
@@ -793,7 +841,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "citoyen" | "demande" | "document_Acte" | "paiement" | "agent" | "historique_Modifications" | "fraisTimbre"
+      modelProps: "citoyen" | "demande" | "naissance" | "mariage" | "deces" | "document_Acte" | "paiement" | "agent" | "historique_Modifications" | "fraisTimbre"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -942,6 +990,228 @@ export namespace Prisma {
           count: {
             args: Prisma.DemandeCountArgs<ExtArgs>
             result: $Utils.Optional<DemandeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Naissance: {
+        payload: Prisma.$NaissancePayload<ExtArgs>
+        fields: Prisma.NaissanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NaissanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NaissanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          findFirst: {
+            args: Prisma.NaissanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NaissanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          findMany: {
+            args: Prisma.NaissanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>[]
+          }
+          create: {
+            args: Prisma.NaissanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          createMany: {
+            args: Prisma.NaissanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NaissanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>[]
+          }
+          delete: {
+            args: Prisma.NaissanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          update: {
+            args: Prisma.NaissanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          deleteMany: {
+            args: Prisma.NaissanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NaissanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NaissanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>[]
+          }
+          upsert: {
+            args: Prisma.NaissanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NaissancePayload>
+          }
+          aggregate: {
+            args: Prisma.NaissanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNaissance>
+          }
+          groupBy: {
+            args: Prisma.NaissanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NaissanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NaissanceCountArgs<ExtArgs>
+            result: $Utils.Optional<NaissanceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Mariage: {
+        payload: Prisma.$MariagePayload<ExtArgs>
+        fields: Prisma.MariageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MariageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MariageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          findFirst: {
+            args: Prisma.MariageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MariageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          findMany: {
+            args: Prisma.MariageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>[]
+          }
+          create: {
+            args: Prisma.MariageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          createMany: {
+            args: Prisma.MariageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MariageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>[]
+          }
+          delete: {
+            args: Prisma.MariageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          update: {
+            args: Prisma.MariageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          deleteMany: {
+            args: Prisma.MariageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MariageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MariageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>[]
+          }
+          upsert: {
+            args: Prisma.MariageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MariagePayload>
+          }
+          aggregate: {
+            args: Prisma.MariageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMariage>
+          }
+          groupBy: {
+            args: Prisma.MariageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MariageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MariageCountArgs<ExtArgs>
+            result: $Utils.Optional<MariageCountAggregateOutputType> | number
+          }
+        }
+      }
+      Deces: {
+        payload: Prisma.$DecesPayload<ExtArgs>
+        fields: Prisma.DecesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DecesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DecesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          findFirst: {
+            args: Prisma.DecesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DecesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          findMany: {
+            args: Prisma.DecesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>[]
+          }
+          create: {
+            args: Prisma.DecesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          createMany: {
+            args: Prisma.DecesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DecesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>[]
+          }
+          delete: {
+            args: Prisma.DecesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          update: {
+            args: Prisma.DecesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          deleteMany: {
+            args: Prisma.DecesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DecesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DecesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>[]
+          }
+          upsert: {
+            args: Prisma.DecesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DecesPayload>
+          }
+          aggregate: {
+            args: Prisma.DecesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDeces>
+          }
+          groupBy: {
+            args: Prisma.DecesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DecesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DecesCountArgs<ExtArgs>
+            result: $Utils.Optional<DecesCountAggregateOutputType> | number
           }
         }
       }
@@ -1401,6 +1671,9 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     citoyen?: CitoyenOmit
     demande?: DemandeOmit
+    naissance?: NaissanceOmit
+    mariage?: MariageOmit
+    deces?: DecesOmit
     document_Acte?: Document_ActeOmit
     paiement?: PaiementOmit
     agent?: AgentOmit
@@ -1532,10 +1805,16 @@ export namespace Prisma {
 
   export type DemandeCountOutputType = {
     Historique: number
+    Naissances: number
+    Mariages: number
+    Deces: number
   }
 
   export type DemandeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Historique?: boolean | DemandeCountOutputTypeCountHistoriqueArgs
+    Naissances?: boolean | DemandeCountOutputTypeCountNaissancesArgs
+    Mariages?: boolean | DemandeCountOutputTypeCountMariagesArgs
+    Deces?: boolean | DemandeCountOutputTypeCountDecesArgs
   }
 
   // Custom InputTypes
@@ -1556,6 +1835,27 @@ export namespace Prisma {
     where?: Historique_ModificationsWhereInput
   }
 
+  /**
+   * DemandeCountOutputType without action
+   */
+  export type DemandeCountOutputTypeCountNaissancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NaissanceWhereInput
+  }
+
+  /**
+   * DemandeCountOutputType without action
+   */
+  export type DemandeCountOutputTypeCountMariagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MariageWhereInput
+  }
+
+  /**
+   * DemandeCountOutputType without action
+   */
+  export type DemandeCountOutputTypeCountDecesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DecesWhereInput
+  }
+
 
   /**
    * Count Type AgentCountOutputType
@@ -1563,12 +1863,10 @@ export namespace Prisma {
 
   export type AgentCountOutputType = {
     Documents: number
-    Historiques: number
   }
 
   export type AgentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Documents?: boolean | AgentCountOutputTypeCountDocumentsArgs
-    Historiques?: boolean | AgentCountOutputTypeCountHistoriquesArgs
   }
 
   // Custom InputTypes
@@ -1587,13 +1885,6 @@ export namespace Prisma {
    */
   export type AgentCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Document_ActeWhereInput
-  }
-
-  /**
-   * AgentCountOutputType without action
-   */
-  export type AgentCountOutputTypeCountHistoriquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Historique_ModificationsWhereInput
   }
 
 
@@ -2738,21 +3029,11 @@ export namespace Prisma {
     ID_Citoyen: string | null
     TypeActe: $Enums.TypeActe | null
     NumeroActe: string | null
-    Nom: string | null
-    Prenom: string | null
     Statut: $Enums.StatutDemande | null
     DemandePourTier: $Enums.DemandePourTier | null
     DateDemande: Date | null
     DateActe: Date | null
     ID_Paiement: string | null
-    NomMere: string | null
-    PrenomMere: string | null
-    ProfessionMere: string | null
-    DateNaisMere: Date | null
-    NomPere: string | null
-    PrenomPere: string | null
-    ProfessionPere: string | null
-    DateNaisPere: Date | null
   }
 
   export type DemandeMaxAggregateOutputType = {
@@ -2760,21 +3041,11 @@ export namespace Prisma {
     ID_Citoyen: string | null
     TypeActe: $Enums.TypeActe | null
     NumeroActe: string | null
-    Nom: string | null
-    Prenom: string | null
     Statut: $Enums.StatutDemande | null
     DemandePourTier: $Enums.DemandePourTier | null
     DateDemande: Date | null
     DateActe: Date | null
     ID_Paiement: string | null
-    NomMere: string | null
-    PrenomMere: string | null
-    ProfessionMere: string | null
-    DateNaisMere: Date | null
-    NomPere: string | null
-    PrenomPere: string | null
-    ProfessionPere: string | null
-    DateNaisPere: Date | null
   }
 
   export type DemandeCountAggregateOutputType = {
@@ -2782,21 +3053,11 @@ export namespace Prisma {
     ID_Citoyen: number
     TypeActe: number
     NumeroActe: number
-    Nom: number
-    Prenom: number
     Statut: number
     DemandePourTier: number
     DateDemande: number
     DateActe: number
     ID_Paiement: number
-    NomMere: number
-    PrenomMere: number
-    ProfessionMere: number
-    DateNaisMere: number
-    NomPere: number
-    PrenomPere: number
-    ProfessionPere: number
-    DateNaisPere: number
     _all: number
   }
 
@@ -2806,21 +3067,11 @@ export namespace Prisma {
     ID_Citoyen?: true
     TypeActe?: true
     NumeroActe?: true
-    Nom?: true
-    Prenom?: true
     Statut?: true
     DemandePourTier?: true
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
-    NomMere?: true
-    PrenomMere?: true
-    ProfessionMere?: true
-    DateNaisMere?: true
-    NomPere?: true
-    PrenomPere?: true
-    ProfessionPere?: true
-    DateNaisPere?: true
   }
 
   export type DemandeMaxAggregateInputType = {
@@ -2828,21 +3079,11 @@ export namespace Prisma {
     ID_Citoyen?: true
     TypeActe?: true
     NumeroActe?: true
-    Nom?: true
-    Prenom?: true
     Statut?: true
     DemandePourTier?: true
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
-    NomMere?: true
-    PrenomMere?: true
-    ProfessionMere?: true
-    DateNaisMere?: true
-    NomPere?: true
-    PrenomPere?: true
-    ProfessionPere?: true
-    DateNaisPere?: true
   }
 
   export type DemandeCountAggregateInputType = {
@@ -2850,21 +3091,11 @@ export namespace Prisma {
     ID_Citoyen?: true
     TypeActe?: true
     NumeroActe?: true
-    Nom?: true
-    Prenom?: true
     Statut?: true
     DemandePourTier?: true
     DateDemande?: true
     DateActe?: true
     ID_Paiement?: true
-    NomMere?: true
-    PrenomMere?: true
-    ProfessionMere?: true
-    DateNaisMere?: true
-    NomPere?: true
-    PrenomPere?: true
-    ProfessionPere?: true
-    DateNaisPere?: true
     _all?: true
   }
 
@@ -2945,21 +3176,11 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe: string
-    Nom: string
-    Prenom: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date
     DateActe: Date | null
     ID_Paiement: string | null
-    NomMere: string | null
-    PrenomMere: string | null
-    ProfessionMere: string | null
-    DateNaisMere: Date | null
-    NomPere: string | null
-    PrenomPere: string | null
-    ProfessionPere: string | null
-    DateNaisPere: Date | null
     _count: DemandeCountAggregateOutputType | null
     _min: DemandeMinAggregateOutputType | null
     _max: DemandeMaxAggregateOutputType | null
@@ -2984,25 +3205,18 @@ export namespace Prisma {
     ID_Citoyen?: boolean
     TypeActe?: boolean
     NumeroActe?: boolean
-    Nom?: boolean
-    Prenom?: boolean
     Statut?: boolean
     DemandePourTier?: boolean
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    NomMere?: boolean
-    PrenomMere?: boolean
-    ProfessionMere?: boolean
-    DateNaisMere?: boolean
-    NomPere?: boolean
-    PrenomPere?: boolean
-    ProfessionPere?: boolean
-    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
     Document?: boolean | Demande$DocumentArgs<ExtArgs>
     Historique?: boolean | Demande$HistoriqueArgs<ExtArgs>
+    Naissances?: boolean | Demande$NaissancesArgs<ExtArgs>
+    Mariages?: boolean | Demande$MariagesArgs<ExtArgs>
+    Deces?: boolean | Demande$DecesArgs<ExtArgs>
     _count?: boolean | DemandeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
 
@@ -3011,21 +3225,11 @@ export namespace Prisma {
     ID_Citoyen?: boolean
     TypeActe?: boolean
     NumeroActe?: boolean
-    Nom?: boolean
-    Prenom?: boolean
     Statut?: boolean
     DemandePourTier?: boolean
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    NomMere?: boolean
-    PrenomMere?: boolean
-    ProfessionMere?: boolean
-    DateNaisMere?: boolean
-    NomPere?: boolean
-    PrenomPere?: boolean
-    ProfessionPere?: boolean
-    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
@@ -3035,21 +3239,11 @@ export namespace Prisma {
     ID_Citoyen?: boolean
     TypeActe?: boolean
     NumeroActe?: boolean
-    Nom?: boolean
-    Prenom?: boolean
     Statut?: boolean
     DemandePourTier?: boolean
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    NomMere?: boolean
-    PrenomMere?: boolean
-    ProfessionMere?: boolean
-    DateNaisMere?: boolean
-    NomPere?: boolean
-    PrenomPere?: boolean
-    ProfessionPere?: boolean
-    DateNaisPere?: boolean
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
   }, ExtArgs["result"]["demande"]>
@@ -3059,29 +3253,22 @@ export namespace Prisma {
     ID_Citoyen?: boolean
     TypeActe?: boolean
     NumeroActe?: boolean
-    Nom?: boolean
-    Prenom?: boolean
     Statut?: boolean
     DemandePourTier?: boolean
     DateDemande?: boolean
     DateActe?: boolean
     ID_Paiement?: boolean
-    NomMere?: boolean
-    PrenomMere?: boolean
-    ProfessionMere?: boolean
-    DateNaisMere?: boolean
-    NomPere?: boolean
-    PrenomPere?: boolean
-    ProfessionPere?: boolean
-    DateNaisPere?: boolean
   }
 
-  export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "NumeroActe" | "Nom" | "Prenom" | "Statut" | "DemandePourTier" | "DateDemande" | "DateActe" | "ID_Paiement" | "NomMere" | "PrenomMere" | "ProfessionMere" | "DateNaisMere" | "NomPere" | "PrenomPere" | "ProfessionPere" | "DateNaisPere", ExtArgs["result"]["demande"]>
+  export type DemandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Demande" | "ID_Citoyen" | "TypeActe" | "NumeroActe" | "Statut" | "DemandePourTier" | "DateDemande" | "DateActe" | "ID_Paiement", ExtArgs["result"]["demande"]>
   export type DemandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Citoyen?: boolean | CitoyenDefaultArgs<ExtArgs>
     Paiement?: boolean | Demande$PaiementArgs<ExtArgs>
     Document?: boolean | Demande$DocumentArgs<ExtArgs>
     Historique?: boolean | Demande$HistoriqueArgs<ExtArgs>
+    Naissances?: boolean | Demande$NaissancesArgs<ExtArgs>
+    Mariages?: boolean | Demande$MariagesArgs<ExtArgs>
+    Deces?: boolean | Demande$DecesArgs<ExtArgs>
     _count?: boolean | DemandeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DemandeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3100,27 +3287,20 @@ export namespace Prisma {
       Paiement: Prisma.$PaiementPayload<ExtArgs> | null
       Document: Prisma.$Document_ActePayload<ExtArgs> | null
       Historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
+      Naissances: Prisma.$NaissancePayload<ExtArgs>[]
+      Mariages: Prisma.$MariagePayload<ExtArgs>[]
+      Deces: Prisma.$DecesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Demande: string
       ID_Citoyen: string
       TypeActe: $Enums.TypeActe
       NumeroActe: string
-      Nom: string
-      Prenom: string
       Statut: $Enums.StatutDemande
       DemandePourTier: $Enums.DemandePourTier
       DateDemande: Date
       DateActe: Date | null
       ID_Paiement: string | null
-      NomMere: string | null
-      PrenomMere: string | null
-      ProfessionMere: string | null
-      DateNaisMere: Date | null
-      NomPere: string | null
-      PrenomPere: string | null
-      ProfessionPere: string | null
-      DateNaisPere: Date | null
     }, ExtArgs["result"]["demande"]>
     composites: {}
   }
@@ -3519,6 +3699,9 @@ export namespace Prisma {
     Paiement<T extends Demande$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Demande$PaiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Document<T extends Demande$DocumentArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DocumentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Historique<T extends Demande$HistoriqueArgs<ExtArgs> = {}>(args?: Subset<T, Demande$HistoriqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Naissances<T extends Demande$NaissancesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$NaissancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Mariages<T extends Demande$MariagesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$MariagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Deces<T extends Demande$DecesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DecesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3552,21 +3735,11 @@ export namespace Prisma {
     readonly ID_Citoyen: FieldRef<"Demande", 'String'>
     readonly TypeActe: FieldRef<"Demande", 'TypeActe'>
     readonly NumeroActe: FieldRef<"Demande", 'String'>
-    readonly Nom: FieldRef<"Demande", 'String'>
-    readonly Prenom: FieldRef<"Demande", 'String'>
     readonly Statut: FieldRef<"Demande", 'StatutDemande'>
     readonly DemandePourTier: FieldRef<"Demande", 'DemandePourTier'>
     readonly DateDemande: FieldRef<"Demande", 'DateTime'>
     readonly DateActe: FieldRef<"Demande", 'DateTime'>
     readonly ID_Paiement: FieldRef<"Demande", 'String'>
-    readonly NomMere: FieldRef<"Demande", 'String'>
-    readonly PrenomMere: FieldRef<"Demande", 'String'>
-    readonly ProfessionMere: FieldRef<"Demande", 'String'>
-    readonly DateNaisMere: FieldRef<"Demande", 'DateTime'>
-    readonly NomPere: FieldRef<"Demande", 'String'>
-    readonly PrenomPere: FieldRef<"Demande", 'String'>
-    readonly ProfessionPere: FieldRef<"Demande", 'String'>
-    readonly DateNaisPere: FieldRef<"Demande", 'DateTime'>
   }
     
 
@@ -4025,6 +4198,78 @@ export namespace Prisma {
   }
 
   /**
+   * Demande.Naissances
+   */
+  export type Demande$NaissancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    where?: NaissanceWhereInput
+    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
+    cursor?: NaissanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NaissanceScalarFieldEnum | NaissanceScalarFieldEnum[]
+  }
+
+  /**
+   * Demande.Mariages
+   */
+  export type Demande$MariagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    where?: MariageWhereInput
+    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
+    cursor?: MariageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MariageScalarFieldEnum | MariageScalarFieldEnum[]
+  }
+
+  /**
+   * Demande.Deces
+   */
+  export type Demande$DecesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    where?: DecesWhereInput
+    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
+    cursor?: DecesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DecesScalarFieldEnum | DecesScalarFieldEnum[]
+  }
+
+  /**
    * Demande without action
    */
   export type DemandeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4040,6 +4285,3375 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: DemandeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Naissance
+   */
+
+  export type AggregateNaissance = {
+    _count: NaissanceCountAggregateOutputType | null
+    _min: NaissanceMinAggregateOutputType | null
+    _max: NaissanceMaxAggregateOutputType | null
+  }
+
+  export type NaissanceMinAggregateOutputType = {
+    ID_Naissance: string | null
+    ID_Demande: string | null
+    Nom: string | null
+    Prenom: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+    DateNaisPere: Date | null
+  }
+
+  export type NaissanceMaxAggregateOutputType = {
+    ID_Naissance: string | null
+    ID_Demande: string | null
+    Nom: string | null
+    Prenom: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+    DateNaisPere: Date | null
+  }
+
+  export type NaissanceCountAggregateOutputType = {
+    ID_Naissance: number
+    ID_Demande: number
+    Nom: number
+    Prenom: number
+    NomMere: number
+    PrenomMere: number
+    ProfessionMere: number
+    DateNaisMere: number
+    NomPere: number
+    PrenomPere: number
+    ProfessionPere: number
+    DateNaisPere: number
+    _all: number
+  }
+
+
+  export type NaissanceMinAggregateInputType = {
+    ID_Naissance?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+    DateNaisPere?: true
+  }
+
+  export type NaissanceMaxAggregateInputType = {
+    ID_Naissance?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+    DateNaisPere?: true
+  }
+
+  export type NaissanceCountAggregateInputType = {
+    ID_Naissance?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    DateNaisMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+    DateNaisPere?: true
+    _all?: true
+  }
+
+  export type NaissanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Naissance to aggregate.
+     */
+    where?: NaissanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Naissances to fetch.
+     */
+    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NaissanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Naissances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Naissances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Naissances
+    **/
+    _count?: true | NaissanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NaissanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NaissanceMaxAggregateInputType
+  }
+
+  export type GetNaissanceAggregateType<T extends NaissanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateNaissance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNaissance[P]>
+      : GetScalarType<T[P], AggregateNaissance[P]>
+  }
+
+
+
+
+  export type NaissanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NaissanceWhereInput
+    orderBy?: NaissanceOrderByWithAggregationInput | NaissanceOrderByWithAggregationInput[]
+    by: NaissanceScalarFieldEnum[] | NaissanceScalarFieldEnum
+    having?: NaissanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NaissanceCountAggregateInputType | true
+    _min?: NaissanceMinAggregateInputType
+    _max?: NaissanceMaxAggregateInputType
+  }
+
+  export type NaissanceGroupByOutputType = {
+    ID_Naissance: string
+    ID_Demande: string
+    Nom: string
+    Prenom: string
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    DateNaisMere: Date | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+    DateNaisPere: Date | null
+    _count: NaissanceCountAggregateOutputType | null
+    _min: NaissanceMinAggregateOutputType | null
+    _max: NaissanceMaxAggregateOutputType | null
+  }
+
+  type GetNaissanceGroupByPayload<T extends NaissanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NaissanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NaissanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NaissanceGroupByOutputType[P]>
+            : GetScalarType<T[P], NaissanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NaissanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Naissance?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    DateNaisPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["naissance"]>
+
+  export type NaissanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Naissance?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    DateNaisPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["naissance"]>
+
+  export type NaissanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Naissance?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    DateNaisPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["naissance"]>
+
+  export type NaissanceSelectScalar = {
+    ID_Naissance?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    DateNaisMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    DateNaisPere?: boolean
+  }
+
+  export type NaissanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Naissance" | "ID_Demande" | "Nom" | "Prenom" | "NomMere" | "PrenomMere" | "ProfessionMere" | "DateNaisMere" | "NomPere" | "PrenomPere" | "ProfessionPere" | "DateNaisPere", ExtArgs["result"]["naissance"]>
+  export type NaissanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type NaissanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type NaissanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+
+  export type $NaissancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Naissance"
+    objects: {
+      Demande: Prisma.$DemandePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      ID_Naissance: string
+      ID_Demande: string
+      Nom: string
+      Prenom: string
+      NomMere: string | null
+      PrenomMere: string | null
+      ProfessionMere: string | null
+      DateNaisMere: Date | null
+      NomPere: string | null
+      PrenomPere: string | null
+      ProfessionPere: string | null
+      DateNaisPere: Date | null
+    }, ExtArgs["result"]["naissance"]>
+    composites: {}
+  }
+
+  type NaissanceGetPayload<S extends boolean | null | undefined | NaissanceDefaultArgs> = $Result.GetResult<Prisma.$NaissancePayload, S>
+
+  type NaissanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NaissanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NaissanceCountAggregateInputType | true
+    }
+
+  export interface NaissanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Naissance'], meta: { name: 'Naissance' } }
+    /**
+     * Find zero or one Naissance that matches the filter.
+     * @param {NaissanceFindUniqueArgs} args - Arguments to find a Naissance
+     * @example
+     * // Get one Naissance
+     * const naissance = await prisma.naissance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NaissanceFindUniqueArgs>(args: SelectSubset<T, NaissanceFindUniqueArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Naissance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NaissanceFindUniqueOrThrowArgs} args - Arguments to find a Naissance
+     * @example
+     * // Get one Naissance
+     * const naissance = await prisma.naissance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NaissanceFindUniqueOrThrowArgs>(args: SelectSubset<T, NaissanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Naissance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceFindFirstArgs} args - Arguments to find a Naissance
+     * @example
+     * // Get one Naissance
+     * const naissance = await prisma.naissance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NaissanceFindFirstArgs>(args?: SelectSubset<T, NaissanceFindFirstArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Naissance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceFindFirstOrThrowArgs} args - Arguments to find a Naissance
+     * @example
+     * // Get one Naissance
+     * const naissance = await prisma.naissance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NaissanceFindFirstOrThrowArgs>(args?: SelectSubset<T, NaissanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Naissances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Naissances
+     * const naissances = await prisma.naissance.findMany()
+     * 
+     * // Get first 10 Naissances
+     * const naissances = await prisma.naissance.findMany({ take: 10 })
+     * 
+     * // Only select the `ID_Naissance`
+     * const naissanceWithID_NaissanceOnly = await prisma.naissance.findMany({ select: { ID_Naissance: true } })
+     * 
+     */
+    findMany<T extends NaissanceFindManyArgs>(args?: SelectSubset<T, NaissanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Naissance.
+     * @param {NaissanceCreateArgs} args - Arguments to create a Naissance.
+     * @example
+     * // Create one Naissance
+     * const Naissance = await prisma.naissance.create({
+     *   data: {
+     *     // ... data to create a Naissance
+     *   }
+     * })
+     * 
+     */
+    create<T extends NaissanceCreateArgs>(args: SelectSubset<T, NaissanceCreateArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Naissances.
+     * @param {NaissanceCreateManyArgs} args - Arguments to create many Naissances.
+     * @example
+     * // Create many Naissances
+     * const naissance = await prisma.naissance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NaissanceCreateManyArgs>(args?: SelectSubset<T, NaissanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Naissances and returns the data saved in the database.
+     * @param {NaissanceCreateManyAndReturnArgs} args - Arguments to create many Naissances.
+     * @example
+     * // Create many Naissances
+     * const naissance = await prisma.naissance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Naissances and only return the `ID_Naissance`
+     * const naissanceWithID_NaissanceOnly = await prisma.naissance.createManyAndReturn({
+     *   select: { ID_Naissance: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NaissanceCreateManyAndReturnArgs>(args?: SelectSubset<T, NaissanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Naissance.
+     * @param {NaissanceDeleteArgs} args - Arguments to delete one Naissance.
+     * @example
+     * // Delete one Naissance
+     * const Naissance = await prisma.naissance.delete({
+     *   where: {
+     *     // ... filter to delete one Naissance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NaissanceDeleteArgs>(args: SelectSubset<T, NaissanceDeleteArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Naissance.
+     * @param {NaissanceUpdateArgs} args - Arguments to update one Naissance.
+     * @example
+     * // Update one Naissance
+     * const naissance = await prisma.naissance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NaissanceUpdateArgs>(args: SelectSubset<T, NaissanceUpdateArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Naissances.
+     * @param {NaissanceDeleteManyArgs} args - Arguments to filter Naissances to delete.
+     * @example
+     * // Delete a few Naissances
+     * const { count } = await prisma.naissance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NaissanceDeleteManyArgs>(args?: SelectSubset<T, NaissanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Naissances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Naissances
+     * const naissance = await prisma.naissance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NaissanceUpdateManyArgs>(args: SelectSubset<T, NaissanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Naissances and returns the data updated in the database.
+     * @param {NaissanceUpdateManyAndReturnArgs} args - Arguments to update many Naissances.
+     * @example
+     * // Update many Naissances
+     * const naissance = await prisma.naissance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Naissances and only return the `ID_Naissance`
+     * const naissanceWithID_NaissanceOnly = await prisma.naissance.updateManyAndReturn({
+     *   select: { ID_Naissance: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NaissanceUpdateManyAndReturnArgs>(args: SelectSubset<T, NaissanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Naissance.
+     * @param {NaissanceUpsertArgs} args - Arguments to update or create a Naissance.
+     * @example
+     * // Update or create a Naissance
+     * const naissance = await prisma.naissance.upsert({
+     *   create: {
+     *     // ... data to create a Naissance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Naissance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NaissanceUpsertArgs>(args: SelectSubset<T, NaissanceUpsertArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Naissances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceCountArgs} args - Arguments to filter Naissances to count.
+     * @example
+     * // Count the number of Naissances
+     * const count = await prisma.naissance.count({
+     *   where: {
+     *     // ... the filter for the Naissances we want to count
+     *   }
+     * })
+    **/
+    count<T extends NaissanceCountArgs>(
+      args?: Subset<T, NaissanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NaissanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Naissance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NaissanceAggregateArgs>(args: Subset<T, NaissanceAggregateArgs>): Prisma.PrismaPromise<GetNaissanceAggregateType<T>>
+
+    /**
+     * Group by Naissance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NaissanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NaissanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NaissanceGroupByArgs['orderBy'] }
+        : { orderBy?: NaissanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NaissanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNaissanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Naissance model
+   */
+  readonly fields: NaissanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Naissance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NaissanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Demande<T extends DemandeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DemandeDefaultArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Naissance model
+   */
+  interface NaissanceFieldRefs {
+    readonly ID_Naissance: FieldRef<"Naissance", 'String'>
+    readonly ID_Demande: FieldRef<"Naissance", 'String'>
+    readonly Nom: FieldRef<"Naissance", 'String'>
+    readonly Prenom: FieldRef<"Naissance", 'String'>
+    readonly NomMere: FieldRef<"Naissance", 'String'>
+    readonly PrenomMere: FieldRef<"Naissance", 'String'>
+    readonly ProfessionMere: FieldRef<"Naissance", 'String'>
+    readonly DateNaisMere: FieldRef<"Naissance", 'DateTime'>
+    readonly NomPere: FieldRef<"Naissance", 'String'>
+    readonly PrenomPere: FieldRef<"Naissance", 'String'>
+    readonly ProfessionPere: FieldRef<"Naissance", 'String'>
+    readonly DateNaisPere: FieldRef<"Naissance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Naissance findUnique
+   */
+  export type NaissanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Naissance to fetch.
+     */
+    where: NaissanceWhereUniqueInput
+  }
+
+  /**
+   * Naissance findUniqueOrThrow
+   */
+  export type NaissanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Naissance to fetch.
+     */
+    where: NaissanceWhereUniqueInput
+  }
+
+  /**
+   * Naissance findFirst
+   */
+  export type NaissanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Naissance to fetch.
+     */
+    where?: NaissanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Naissances to fetch.
+     */
+    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Naissances.
+     */
+    cursor?: NaissanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Naissances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Naissances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Naissances.
+     */
+    distinct?: NaissanceScalarFieldEnum | NaissanceScalarFieldEnum[]
+  }
+
+  /**
+   * Naissance findFirstOrThrow
+   */
+  export type NaissanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Naissance to fetch.
+     */
+    where?: NaissanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Naissances to fetch.
+     */
+    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Naissances.
+     */
+    cursor?: NaissanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Naissances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Naissances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Naissances.
+     */
+    distinct?: NaissanceScalarFieldEnum | NaissanceScalarFieldEnum[]
+  }
+
+  /**
+   * Naissance findMany
+   */
+  export type NaissanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Naissances to fetch.
+     */
+    where?: NaissanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Naissances to fetch.
+     */
+    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Naissances.
+     */
+    cursor?: NaissanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Naissances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Naissances.
+     */
+    skip?: number
+    distinct?: NaissanceScalarFieldEnum | NaissanceScalarFieldEnum[]
+  }
+
+  /**
+   * Naissance create
+   */
+  export type NaissanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Naissance.
+     */
+    data: XOR<NaissanceCreateInput, NaissanceUncheckedCreateInput>
+  }
+
+  /**
+   * Naissance createMany
+   */
+  export type NaissanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Naissances.
+     */
+    data: NaissanceCreateManyInput | NaissanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Naissance createManyAndReturn
+   */
+  export type NaissanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Naissances.
+     */
+    data: NaissanceCreateManyInput | NaissanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Naissance update
+   */
+  export type NaissanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Naissance.
+     */
+    data: XOR<NaissanceUpdateInput, NaissanceUncheckedUpdateInput>
+    /**
+     * Choose, which Naissance to update.
+     */
+    where: NaissanceWhereUniqueInput
+  }
+
+  /**
+   * Naissance updateMany
+   */
+  export type NaissanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Naissances.
+     */
+    data: XOR<NaissanceUpdateManyMutationInput, NaissanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Naissances to update
+     */
+    where?: NaissanceWhereInput
+    /**
+     * Limit how many Naissances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Naissance updateManyAndReturn
+   */
+  export type NaissanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * The data used to update Naissances.
+     */
+    data: XOR<NaissanceUpdateManyMutationInput, NaissanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Naissances to update
+     */
+    where?: NaissanceWhereInput
+    /**
+     * Limit how many Naissances to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Naissance upsert
+   */
+  export type NaissanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Naissance to update in case it exists.
+     */
+    where: NaissanceWhereUniqueInput
+    /**
+     * In case the Naissance found by the `where` argument doesn't exist, create a new Naissance with this data.
+     */
+    create: XOR<NaissanceCreateInput, NaissanceUncheckedCreateInput>
+    /**
+     * In case the Naissance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NaissanceUpdateInput, NaissanceUncheckedUpdateInput>
+  }
+
+  /**
+   * Naissance delete
+   */
+  export type NaissanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+    /**
+     * Filter which Naissance to delete.
+     */
+    where: NaissanceWhereUniqueInput
+  }
+
+  /**
+   * Naissance deleteMany
+   */
+  export type NaissanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Naissances to delete
+     */
+    where?: NaissanceWhereInput
+    /**
+     * Limit how many Naissances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Naissance without action
+   */
+  export type NaissanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Naissance
+     */
+    select?: NaissanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Naissance
+     */
+    omit?: NaissanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NaissanceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Mariage
+   */
+
+  export type AggregateMariage = {
+    _count: MariageCountAggregateOutputType | null
+    _min: MariageMinAggregateOutputType | null
+    _max: MariageMaxAggregateOutputType | null
+  }
+
+  export type MariageMinAggregateOutputType = {
+    ID_Mariage: string | null
+    ID_Demande: string | null
+    NomEpoux: string | null
+    PrenomEpoux: string | null
+    DateNaissanceEpoux: Date | null
+    NomEpouse: string | null
+    PrenomEpouse: string | null
+    DateNaissanceEpouse: Date | null
+  }
+
+  export type MariageMaxAggregateOutputType = {
+    ID_Mariage: string | null
+    ID_Demande: string | null
+    NomEpoux: string | null
+    PrenomEpoux: string | null
+    DateNaissanceEpoux: Date | null
+    NomEpouse: string | null
+    PrenomEpouse: string | null
+    DateNaissanceEpouse: Date | null
+  }
+
+  export type MariageCountAggregateOutputType = {
+    ID_Mariage: number
+    ID_Demande: number
+    NomEpoux: number
+    PrenomEpoux: number
+    DateNaissanceEpoux: number
+    NomEpouse: number
+    PrenomEpouse: number
+    DateNaissanceEpouse: number
+    _all: number
+  }
+
+
+  export type MariageMinAggregateInputType = {
+    ID_Mariage?: true
+    ID_Demande?: true
+    NomEpoux?: true
+    PrenomEpoux?: true
+    DateNaissanceEpoux?: true
+    NomEpouse?: true
+    PrenomEpouse?: true
+    DateNaissanceEpouse?: true
+  }
+
+  export type MariageMaxAggregateInputType = {
+    ID_Mariage?: true
+    ID_Demande?: true
+    NomEpoux?: true
+    PrenomEpoux?: true
+    DateNaissanceEpoux?: true
+    NomEpouse?: true
+    PrenomEpouse?: true
+    DateNaissanceEpouse?: true
+  }
+
+  export type MariageCountAggregateInputType = {
+    ID_Mariage?: true
+    ID_Demande?: true
+    NomEpoux?: true
+    PrenomEpoux?: true
+    DateNaissanceEpoux?: true
+    NomEpouse?: true
+    PrenomEpouse?: true
+    DateNaissanceEpouse?: true
+    _all?: true
+  }
+
+  export type MariageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Mariage to aggregate.
+     */
+    where?: MariageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mariages to fetch.
+     */
+    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MariageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mariages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mariages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Mariages
+    **/
+    _count?: true | MariageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MariageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MariageMaxAggregateInputType
+  }
+
+  export type GetMariageAggregateType<T extends MariageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMariage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMariage[P]>
+      : GetScalarType<T[P], AggregateMariage[P]>
+  }
+
+
+
+
+  export type MariageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MariageWhereInput
+    orderBy?: MariageOrderByWithAggregationInput | MariageOrderByWithAggregationInput[]
+    by: MariageScalarFieldEnum[] | MariageScalarFieldEnum
+    having?: MariageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MariageCountAggregateInputType | true
+    _min?: MariageMinAggregateInputType
+    _max?: MariageMaxAggregateInputType
+  }
+
+  export type MariageGroupByOutputType = {
+    ID_Mariage: string
+    ID_Demande: string
+    NomEpoux: string
+    PrenomEpoux: string
+    DateNaissanceEpoux: Date
+    NomEpouse: string | null
+    PrenomEpouse: string | null
+    DateNaissanceEpouse: Date
+    _count: MariageCountAggregateOutputType | null
+    _min: MariageMinAggregateOutputType | null
+    _max: MariageMaxAggregateOutputType | null
+  }
+
+  type GetMariageGroupByPayload<T extends MariageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MariageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MariageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MariageGroupByOutputType[P]>
+            : GetScalarType<T[P], MariageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MariageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Mariage?: boolean
+    ID_Demande?: boolean
+    NomEpoux?: boolean
+    PrenomEpoux?: boolean
+    DateNaissanceEpoux?: boolean
+    NomEpouse?: boolean
+    PrenomEpouse?: boolean
+    DateNaissanceEpouse?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mariage"]>
+
+  export type MariageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Mariage?: boolean
+    ID_Demande?: boolean
+    NomEpoux?: boolean
+    PrenomEpoux?: boolean
+    DateNaissanceEpoux?: boolean
+    NomEpouse?: boolean
+    PrenomEpouse?: boolean
+    DateNaissanceEpouse?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mariage"]>
+
+  export type MariageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Mariage?: boolean
+    ID_Demande?: boolean
+    NomEpoux?: boolean
+    PrenomEpoux?: boolean
+    DateNaissanceEpoux?: boolean
+    NomEpouse?: boolean
+    PrenomEpouse?: boolean
+    DateNaissanceEpouse?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mariage"]>
+
+  export type MariageSelectScalar = {
+    ID_Mariage?: boolean
+    ID_Demande?: boolean
+    NomEpoux?: boolean
+    PrenomEpoux?: boolean
+    DateNaissanceEpoux?: boolean
+    NomEpouse?: boolean
+    PrenomEpouse?: boolean
+    DateNaissanceEpouse?: boolean
+  }
+
+  export type MariageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Mariage" | "ID_Demande" | "NomEpoux" | "PrenomEpoux" | "DateNaissanceEpoux" | "NomEpouse" | "PrenomEpouse" | "DateNaissanceEpouse", ExtArgs["result"]["mariage"]>
+  export type MariageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type MariageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type MariageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+
+  export type $MariagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Mariage"
+    objects: {
+      Demande: Prisma.$DemandePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      ID_Mariage: string
+      ID_Demande: string
+      NomEpoux: string
+      PrenomEpoux: string
+      DateNaissanceEpoux: Date
+      NomEpouse: string | null
+      PrenomEpouse: string | null
+      DateNaissanceEpouse: Date
+    }, ExtArgs["result"]["mariage"]>
+    composites: {}
+  }
+
+  type MariageGetPayload<S extends boolean | null | undefined | MariageDefaultArgs> = $Result.GetResult<Prisma.$MariagePayload, S>
+
+  type MariageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MariageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MariageCountAggregateInputType | true
+    }
+
+  export interface MariageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Mariage'], meta: { name: 'Mariage' } }
+    /**
+     * Find zero or one Mariage that matches the filter.
+     * @param {MariageFindUniqueArgs} args - Arguments to find a Mariage
+     * @example
+     * // Get one Mariage
+     * const mariage = await prisma.mariage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MariageFindUniqueArgs>(args: SelectSubset<T, MariageFindUniqueArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Mariage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MariageFindUniqueOrThrowArgs} args - Arguments to find a Mariage
+     * @example
+     * // Get one Mariage
+     * const mariage = await prisma.mariage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MariageFindUniqueOrThrowArgs>(args: SelectSubset<T, MariageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mariage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageFindFirstArgs} args - Arguments to find a Mariage
+     * @example
+     * // Get one Mariage
+     * const mariage = await prisma.mariage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MariageFindFirstArgs>(args?: SelectSubset<T, MariageFindFirstArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mariage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageFindFirstOrThrowArgs} args - Arguments to find a Mariage
+     * @example
+     * // Get one Mariage
+     * const mariage = await prisma.mariage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MariageFindFirstOrThrowArgs>(args?: SelectSubset<T, MariageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Mariages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Mariages
+     * const mariages = await prisma.mariage.findMany()
+     * 
+     * // Get first 10 Mariages
+     * const mariages = await prisma.mariage.findMany({ take: 10 })
+     * 
+     * // Only select the `ID_Mariage`
+     * const mariageWithID_MariageOnly = await prisma.mariage.findMany({ select: { ID_Mariage: true } })
+     * 
+     */
+    findMany<T extends MariageFindManyArgs>(args?: SelectSubset<T, MariageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Mariage.
+     * @param {MariageCreateArgs} args - Arguments to create a Mariage.
+     * @example
+     * // Create one Mariage
+     * const Mariage = await prisma.mariage.create({
+     *   data: {
+     *     // ... data to create a Mariage
+     *   }
+     * })
+     * 
+     */
+    create<T extends MariageCreateArgs>(args: SelectSubset<T, MariageCreateArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Mariages.
+     * @param {MariageCreateManyArgs} args - Arguments to create many Mariages.
+     * @example
+     * // Create many Mariages
+     * const mariage = await prisma.mariage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MariageCreateManyArgs>(args?: SelectSubset<T, MariageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Mariages and returns the data saved in the database.
+     * @param {MariageCreateManyAndReturnArgs} args - Arguments to create many Mariages.
+     * @example
+     * // Create many Mariages
+     * const mariage = await prisma.mariage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Mariages and only return the `ID_Mariage`
+     * const mariageWithID_MariageOnly = await prisma.mariage.createManyAndReturn({
+     *   select: { ID_Mariage: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MariageCreateManyAndReturnArgs>(args?: SelectSubset<T, MariageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Mariage.
+     * @param {MariageDeleteArgs} args - Arguments to delete one Mariage.
+     * @example
+     * // Delete one Mariage
+     * const Mariage = await prisma.mariage.delete({
+     *   where: {
+     *     // ... filter to delete one Mariage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MariageDeleteArgs>(args: SelectSubset<T, MariageDeleteArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Mariage.
+     * @param {MariageUpdateArgs} args - Arguments to update one Mariage.
+     * @example
+     * // Update one Mariage
+     * const mariage = await prisma.mariage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MariageUpdateArgs>(args: SelectSubset<T, MariageUpdateArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Mariages.
+     * @param {MariageDeleteManyArgs} args - Arguments to filter Mariages to delete.
+     * @example
+     * // Delete a few Mariages
+     * const { count } = await prisma.mariage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MariageDeleteManyArgs>(args?: SelectSubset<T, MariageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mariages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Mariages
+     * const mariage = await prisma.mariage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MariageUpdateManyArgs>(args: SelectSubset<T, MariageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Mariages and returns the data updated in the database.
+     * @param {MariageUpdateManyAndReturnArgs} args - Arguments to update many Mariages.
+     * @example
+     * // Update many Mariages
+     * const mariage = await prisma.mariage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Mariages and only return the `ID_Mariage`
+     * const mariageWithID_MariageOnly = await prisma.mariage.updateManyAndReturn({
+     *   select: { ID_Mariage: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MariageUpdateManyAndReturnArgs>(args: SelectSubset<T, MariageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Mariage.
+     * @param {MariageUpsertArgs} args - Arguments to update or create a Mariage.
+     * @example
+     * // Update or create a Mariage
+     * const mariage = await prisma.mariage.upsert({
+     *   create: {
+     *     // ... data to create a Mariage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mariage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MariageUpsertArgs>(args: SelectSubset<T, MariageUpsertArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Mariages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageCountArgs} args - Arguments to filter Mariages to count.
+     * @example
+     * // Count the number of Mariages
+     * const count = await prisma.mariage.count({
+     *   where: {
+     *     // ... the filter for the Mariages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MariageCountArgs>(
+      args?: Subset<T, MariageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MariageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mariage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MariageAggregateArgs>(args: Subset<T, MariageAggregateArgs>): Prisma.PrismaPromise<GetMariageAggregateType<T>>
+
+    /**
+     * Group by Mariage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MariageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MariageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MariageGroupByArgs['orderBy'] }
+        : { orderBy?: MariageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MariageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMariageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Mariage model
+   */
+  readonly fields: MariageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Mariage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MariageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Demande<T extends DemandeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DemandeDefaultArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Mariage model
+   */
+  interface MariageFieldRefs {
+    readonly ID_Mariage: FieldRef<"Mariage", 'String'>
+    readonly ID_Demande: FieldRef<"Mariage", 'String'>
+    readonly NomEpoux: FieldRef<"Mariage", 'String'>
+    readonly PrenomEpoux: FieldRef<"Mariage", 'String'>
+    readonly DateNaissanceEpoux: FieldRef<"Mariage", 'DateTime'>
+    readonly NomEpouse: FieldRef<"Mariage", 'String'>
+    readonly PrenomEpouse: FieldRef<"Mariage", 'String'>
+    readonly DateNaissanceEpouse: FieldRef<"Mariage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Mariage findUnique
+   */
+  export type MariageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter, which Mariage to fetch.
+     */
+    where: MariageWhereUniqueInput
+  }
+
+  /**
+   * Mariage findUniqueOrThrow
+   */
+  export type MariageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter, which Mariage to fetch.
+     */
+    where: MariageWhereUniqueInput
+  }
+
+  /**
+   * Mariage findFirst
+   */
+  export type MariageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter, which Mariage to fetch.
+     */
+    where?: MariageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mariages to fetch.
+     */
+    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Mariages.
+     */
+    cursor?: MariageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mariages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mariages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Mariages.
+     */
+    distinct?: MariageScalarFieldEnum | MariageScalarFieldEnum[]
+  }
+
+  /**
+   * Mariage findFirstOrThrow
+   */
+  export type MariageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter, which Mariage to fetch.
+     */
+    where?: MariageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mariages to fetch.
+     */
+    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Mariages.
+     */
+    cursor?: MariageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mariages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mariages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Mariages.
+     */
+    distinct?: MariageScalarFieldEnum | MariageScalarFieldEnum[]
+  }
+
+  /**
+   * Mariage findMany
+   */
+  export type MariageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter, which Mariages to fetch.
+     */
+    where?: MariageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Mariages to fetch.
+     */
+    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Mariages.
+     */
+    cursor?: MariageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Mariages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Mariages.
+     */
+    skip?: number
+    distinct?: MariageScalarFieldEnum | MariageScalarFieldEnum[]
+  }
+
+  /**
+   * Mariage create
+   */
+  export type MariageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Mariage.
+     */
+    data: XOR<MariageCreateInput, MariageUncheckedCreateInput>
+  }
+
+  /**
+   * Mariage createMany
+   */
+  export type MariageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Mariages.
+     */
+    data: MariageCreateManyInput | MariageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Mariage createManyAndReturn
+   */
+  export type MariageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Mariages.
+     */
+    data: MariageCreateManyInput | MariageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Mariage update
+   */
+  export type MariageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Mariage.
+     */
+    data: XOR<MariageUpdateInput, MariageUncheckedUpdateInput>
+    /**
+     * Choose, which Mariage to update.
+     */
+    where: MariageWhereUniqueInput
+  }
+
+  /**
+   * Mariage updateMany
+   */
+  export type MariageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Mariages.
+     */
+    data: XOR<MariageUpdateManyMutationInput, MariageUncheckedUpdateManyInput>
+    /**
+     * Filter which Mariages to update
+     */
+    where?: MariageWhereInput
+    /**
+     * Limit how many Mariages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mariage updateManyAndReturn
+   */
+  export type MariageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * The data used to update Mariages.
+     */
+    data: XOR<MariageUpdateManyMutationInput, MariageUncheckedUpdateManyInput>
+    /**
+     * Filter which Mariages to update
+     */
+    where?: MariageWhereInput
+    /**
+     * Limit how many Mariages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Mariage upsert
+   */
+  export type MariageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Mariage to update in case it exists.
+     */
+    where: MariageWhereUniqueInput
+    /**
+     * In case the Mariage found by the `where` argument doesn't exist, create a new Mariage with this data.
+     */
+    create: XOR<MariageCreateInput, MariageUncheckedCreateInput>
+    /**
+     * In case the Mariage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MariageUpdateInput, MariageUncheckedUpdateInput>
+  }
+
+  /**
+   * Mariage delete
+   */
+  export type MariageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+    /**
+     * Filter which Mariage to delete.
+     */
+    where: MariageWhereUniqueInput
+  }
+
+  /**
+   * Mariage deleteMany
+   */
+  export type MariageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Mariages to delete
+     */
+    where?: MariageWhereInput
+    /**
+     * Limit how many Mariages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mariage without action
+   */
+  export type MariageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mariage
+     */
+    select?: MariageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mariage
+     */
+    omit?: MariageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MariageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Deces
+   */
+
+  export type AggregateDeces = {
+    _count: DecesCountAggregateOutputType | null
+    _min: DecesMinAggregateOutputType | null
+    _max: DecesMaxAggregateOutputType | null
+  }
+
+  export type DecesMinAggregateOutputType = {
+    ID_Deces: string | null
+    ID_Demande: string | null
+    Nom: string | null
+    Prenom: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+  }
+
+  export type DecesMaxAggregateOutputType = {
+    ID_Deces: string | null
+    ID_Demande: string | null
+    Nom: string | null
+    Prenom: string | null
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+  }
+
+  export type DecesCountAggregateOutputType = {
+    ID_Deces: number
+    ID_Demande: number
+    Nom: number
+    Prenom: number
+    NomMere: number
+    PrenomMere: number
+    ProfessionMere: number
+    NomPere: number
+    PrenomPere: number
+    ProfessionPere: number
+    _all: number
+  }
+
+
+  export type DecesMinAggregateInputType = {
+    ID_Deces?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+  }
+
+  export type DecesMaxAggregateInputType = {
+    ID_Deces?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+  }
+
+  export type DecesCountAggregateInputType = {
+    ID_Deces?: true
+    ID_Demande?: true
+    Nom?: true
+    Prenom?: true
+    NomMere?: true
+    PrenomMere?: true
+    ProfessionMere?: true
+    NomPere?: true
+    PrenomPere?: true
+    ProfessionPere?: true
+    _all?: true
+  }
+
+  export type DecesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Deces to aggregate.
+     */
+    where?: DecesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Deces to fetch.
+     */
+    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DecesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Deces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Deces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Deces
+    **/
+    _count?: true | DecesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DecesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DecesMaxAggregateInputType
+  }
+
+  export type GetDecesAggregateType<T extends DecesAggregateArgs> = {
+        [P in keyof T & keyof AggregateDeces]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDeces[P]>
+      : GetScalarType<T[P], AggregateDeces[P]>
+  }
+
+
+
+
+  export type DecesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DecesWhereInput
+    orderBy?: DecesOrderByWithAggregationInput | DecesOrderByWithAggregationInput[]
+    by: DecesScalarFieldEnum[] | DecesScalarFieldEnum
+    having?: DecesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DecesCountAggregateInputType | true
+    _min?: DecesMinAggregateInputType
+    _max?: DecesMaxAggregateInputType
+  }
+
+  export type DecesGroupByOutputType = {
+    ID_Deces: string
+    ID_Demande: string
+    Nom: string
+    Prenom: string
+    NomMere: string | null
+    PrenomMere: string | null
+    ProfessionMere: string | null
+    NomPere: string | null
+    PrenomPere: string | null
+    ProfessionPere: string | null
+    _count: DecesCountAggregateOutputType | null
+    _min: DecesMinAggregateOutputType | null
+    _max: DecesMaxAggregateOutputType | null
+  }
+
+  type GetDecesGroupByPayload<T extends DecesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DecesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DecesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DecesGroupByOutputType[P]>
+            : GetScalarType<T[P], DecesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DecesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Deces?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["deces"]>
+
+  export type DecesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Deces?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["deces"]>
+
+  export type DecesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID_Deces?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["deces"]>
+
+  export type DecesSelectScalar = {
+    ID_Deces?: boolean
+    ID_Demande?: boolean
+    Nom?: boolean
+    Prenom?: boolean
+    NomMere?: boolean
+    PrenomMere?: boolean
+    ProfessionMere?: boolean
+    NomPere?: boolean
+    PrenomPere?: boolean
+    ProfessionPere?: boolean
+  }
+
+  export type DecesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Deces" | "ID_Demande" | "Nom" | "Prenom" | "NomMere" | "PrenomMere" | "ProfessionMere" | "NomPere" | "PrenomPere" | "ProfessionPere", ExtArgs["result"]["deces"]>
+  export type DecesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type DecesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+  export type DecesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Demande?: boolean | DemandeDefaultArgs<ExtArgs>
+  }
+
+  export type $DecesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Deces"
+    objects: {
+      Demande: Prisma.$DemandePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      ID_Deces: string
+      ID_Demande: string
+      Nom: string
+      Prenom: string
+      NomMere: string | null
+      PrenomMere: string | null
+      ProfessionMere: string | null
+      NomPere: string | null
+      PrenomPere: string | null
+      ProfessionPere: string | null
+    }, ExtArgs["result"]["deces"]>
+    composites: {}
+  }
+
+  type DecesGetPayload<S extends boolean | null | undefined | DecesDefaultArgs> = $Result.GetResult<Prisma.$DecesPayload, S>
+
+  type DecesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DecesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DecesCountAggregateInputType | true
+    }
+
+  export interface DecesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Deces'], meta: { name: 'Deces' } }
+    /**
+     * Find zero or one Deces that matches the filter.
+     * @param {DecesFindUniqueArgs} args - Arguments to find a Deces
+     * @example
+     * // Get one Deces
+     * const deces = await prisma.deces.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DecesFindUniqueArgs>(args: SelectSubset<T, DecesFindUniqueArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Deces that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DecesFindUniqueOrThrowArgs} args - Arguments to find a Deces
+     * @example
+     * // Get one Deces
+     * const deces = await prisma.deces.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DecesFindUniqueOrThrowArgs>(args: SelectSubset<T, DecesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Deces that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesFindFirstArgs} args - Arguments to find a Deces
+     * @example
+     * // Get one Deces
+     * const deces = await prisma.deces.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DecesFindFirstArgs>(args?: SelectSubset<T, DecesFindFirstArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Deces that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesFindFirstOrThrowArgs} args - Arguments to find a Deces
+     * @example
+     * // Get one Deces
+     * const deces = await prisma.deces.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DecesFindFirstOrThrowArgs>(args?: SelectSubset<T, DecesFindFirstOrThrowArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Deces that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Deces
+     * const deces = await prisma.deces.findMany()
+     * 
+     * // Get first 10 Deces
+     * const deces = await prisma.deces.findMany({ take: 10 })
+     * 
+     * // Only select the `ID_Deces`
+     * const decesWithID_DecesOnly = await prisma.deces.findMany({ select: { ID_Deces: true } })
+     * 
+     */
+    findMany<T extends DecesFindManyArgs>(args?: SelectSubset<T, DecesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Deces.
+     * @param {DecesCreateArgs} args - Arguments to create a Deces.
+     * @example
+     * // Create one Deces
+     * const Deces = await prisma.deces.create({
+     *   data: {
+     *     // ... data to create a Deces
+     *   }
+     * })
+     * 
+     */
+    create<T extends DecesCreateArgs>(args: SelectSubset<T, DecesCreateArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Deces.
+     * @param {DecesCreateManyArgs} args - Arguments to create many Deces.
+     * @example
+     * // Create many Deces
+     * const deces = await prisma.deces.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DecesCreateManyArgs>(args?: SelectSubset<T, DecesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Deces and returns the data saved in the database.
+     * @param {DecesCreateManyAndReturnArgs} args - Arguments to create many Deces.
+     * @example
+     * // Create many Deces
+     * const deces = await prisma.deces.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Deces and only return the `ID_Deces`
+     * const decesWithID_DecesOnly = await prisma.deces.createManyAndReturn({
+     *   select: { ID_Deces: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DecesCreateManyAndReturnArgs>(args?: SelectSubset<T, DecesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Deces.
+     * @param {DecesDeleteArgs} args - Arguments to delete one Deces.
+     * @example
+     * // Delete one Deces
+     * const Deces = await prisma.deces.delete({
+     *   where: {
+     *     // ... filter to delete one Deces
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DecesDeleteArgs>(args: SelectSubset<T, DecesDeleteArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Deces.
+     * @param {DecesUpdateArgs} args - Arguments to update one Deces.
+     * @example
+     * // Update one Deces
+     * const deces = await prisma.deces.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DecesUpdateArgs>(args: SelectSubset<T, DecesUpdateArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Deces.
+     * @param {DecesDeleteManyArgs} args - Arguments to filter Deces to delete.
+     * @example
+     * // Delete a few Deces
+     * const { count } = await prisma.deces.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DecesDeleteManyArgs>(args?: SelectSubset<T, DecesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Deces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Deces
+     * const deces = await prisma.deces.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DecesUpdateManyArgs>(args: SelectSubset<T, DecesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Deces and returns the data updated in the database.
+     * @param {DecesUpdateManyAndReturnArgs} args - Arguments to update many Deces.
+     * @example
+     * // Update many Deces
+     * const deces = await prisma.deces.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Deces and only return the `ID_Deces`
+     * const decesWithID_DecesOnly = await prisma.deces.updateManyAndReturn({
+     *   select: { ID_Deces: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DecesUpdateManyAndReturnArgs>(args: SelectSubset<T, DecesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Deces.
+     * @param {DecesUpsertArgs} args - Arguments to update or create a Deces.
+     * @example
+     * // Update or create a Deces
+     * const deces = await prisma.deces.upsert({
+     *   create: {
+     *     // ... data to create a Deces
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Deces we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DecesUpsertArgs>(args: SelectSubset<T, DecesUpsertArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Deces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesCountArgs} args - Arguments to filter Deces to count.
+     * @example
+     * // Count the number of Deces
+     * const count = await prisma.deces.count({
+     *   where: {
+     *     // ... the filter for the Deces we want to count
+     *   }
+     * })
+    **/
+    count<T extends DecesCountArgs>(
+      args?: Subset<T, DecesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DecesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Deces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DecesAggregateArgs>(args: Subset<T, DecesAggregateArgs>): Prisma.PrismaPromise<GetDecesAggregateType<T>>
+
+    /**
+     * Group by Deces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DecesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DecesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DecesGroupByArgs['orderBy'] }
+        : { orderBy?: DecesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DecesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDecesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Deces model
+   */
+  readonly fields: DecesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Deces.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DecesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Demande<T extends DemandeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DemandeDefaultArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Deces model
+   */
+  interface DecesFieldRefs {
+    readonly ID_Deces: FieldRef<"Deces", 'String'>
+    readonly ID_Demande: FieldRef<"Deces", 'String'>
+    readonly Nom: FieldRef<"Deces", 'String'>
+    readonly Prenom: FieldRef<"Deces", 'String'>
+    readonly NomMere: FieldRef<"Deces", 'String'>
+    readonly PrenomMere: FieldRef<"Deces", 'String'>
+    readonly ProfessionMere: FieldRef<"Deces", 'String'>
+    readonly NomPere: FieldRef<"Deces", 'String'>
+    readonly PrenomPere: FieldRef<"Deces", 'String'>
+    readonly ProfessionPere: FieldRef<"Deces", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Deces findUnique
+   */
+  export type DecesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter, which Deces to fetch.
+     */
+    where: DecesWhereUniqueInput
+  }
+
+  /**
+   * Deces findUniqueOrThrow
+   */
+  export type DecesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter, which Deces to fetch.
+     */
+    where: DecesWhereUniqueInput
+  }
+
+  /**
+   * Deces findFirst
+   */
+  export type DecesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter, which Deces to fetch.
+     */
+    where?: DecesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Deces to fetch.
+     */
+    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Deces.
+     */
+    cursor?: DecesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Deces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Deces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Deces.
+     */
+    distinct?: DecesScalarFieldEnum | DecesScalarFieldEnum[]
+  }
+
+  /**
+   * Deces findFirstOrThrow
+   */
+  export type DecesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter, which Deces to fetch.
+     */
+    where?: DecesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Deces to fetch.
+     */
+    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Deces.
+     */
+    cursor?: DecesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Deces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Deces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Deces.
+     */
+    distinct?: DecesScalarFieldEnum | DecesScalarFieldEnum[]
+  }
+
+  /**
+   * Deces findMany
+   */
+  export type DecesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter, which Deces to fetch.
+     */
+    where?: DecesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Deces to fetch.
+     */
+    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Deces.
+     */
+    cursor?: DecesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Deces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Deces.
+     */
+    skip?: number
+    distinct?: DecesScalarFieldEnum | DecesScalarFieldEnum[]
+  }
+
+  /**
+   * Deces create
+   */
+  export type DecesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Deces.
+     */
+    data: XOR<DecesCreateInput, DecesUncheckedCreateInput>
+  }
+
+  /**
+   * Deces createMany
+   */
+  export type DecesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Deces.
+     */
+    data: DecesCreateManyInput | DecesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Deces createManyAndReturn
+   */
+  export type DecesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * The data used to create many Deces.
+     */
+    data: DecesCreateManyInput | DecesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Deces update
+   */
+  export type DecesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Deces.
+     */
+    data: XOR<DecesUpdateInput, DecesUncheckedUpdateInput>
+    /**
+     * Choose, which Deces to update.
+     */
+    where: DecesWhereUniqueInput
+  }
+
+  /**
+   * Deces updateMany
+   */
+  export type DecesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Deces.
+     */
+    data: XOR<DecesUpdateManyMutationInput, DecesUncheckedUpdateManyInput>
+    /**
+     * Filter which Deces to update
+     */
+    where?: DecesWhereInput
+    /**
+     * Limit how many Deces to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Deces updateManyAndReturn
+   */
+  export type DecesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * The data used to update Deces.
+     */
+    data: XOR<DecesUpdateManyMutationInput, DecesUncheckedUpdateManyInput>
+    /**
+     * Filter which Deces to update
+     */
+    where?: DecesWhereInput
+    /**
+     * Limit how many Deces to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Deces upsert
+   */
+  export type DecesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Deces to update in case it exists.
+     */
+    where: DecesWhereUniqueInput
+    /**
+     * In case the Deces found by the `where` argument doesn't exist, create a new Deces with this data.
+     */
+    create: XOR<DecesCreateInput, DecesUncheckedCreateInput>
+    /**
+     * In case the Deces was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DecesUpdateInput, DecesUncheckedUpdateInput>
+  }
+
+  /**
+   * Deces delete
+   */
+  export type DecesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
+    /**
+     * Filter which Deces to delete.
+     */
+    where: DecesWhereUniqueInput
+  }
+
+  /**
+   * Deces deleteMany
+   */
+  export type DecesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Deces to delete
+     */
+    where?: DecesWhereInput
+    /**
+     * Limit how many Deces to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Deces without action
+   */
+  export type DecesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Deces
+     */
+    select?: DecesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Deces
+     */
+    omit?: DecesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DecesInclude<ExtArgs> | null
   }
 
 
@@ -6418,7 +10032,6 @@ export namespace Prisma {
     Role?: boolean
     Password?: boolean
     Documents?: boolean | Agent$DocumentsArgs<ExtArgs>
-    Historiques?: boolean | Agent$HistoriquesArgs<ExtArgs>
     _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agent"]>
 
@@ -6452,7 +10065,6 @@ export namespace Prisma {
   export type AgentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Agent" | "Nom" | "Prenom" | "Email" | "Role" | "Password", ExtArgs["result"]["agent"]>
   export type AgentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Documents?: boolean | Agent$DocumentsArgs<ExtArgs>
-    Historiques?: boolean | Agent$HistoriquesArgs<ExtArgs>
     _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AgentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6462,7 +10074,6 @@ export namespace Prisma {
     name: "Agent"
     objects: {
       Documents: Prisma.$Document_ActePayload<ExtArgs>[]
-      Historiques: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Agent: string
@@ -6866,7 +10477,6 @@ export namespace Prisma {
   export interface Prisma__AgentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Documents<T extends Agent$DocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Agent$DocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Historiques<T extends Agent$HistoriquesArgs<ExtArgs> = {}>(args?: Subset<T, Agent$HistoriquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7314,30 +10924,6 @@ export namespace Prisma {
   }
 
   /**
-   * Agent.Historiques
-   */
-  export type Agent$HistoriquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Historique_Modifications
-     */
-    select?: Historique_ModificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Historique_Modifications
-     */
-    omit?: Historique_ModificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: Historique_ModificationsInclude<ExtArgs> | null
-    where?: Historique_ModificationsWhereInput
-    orderBy?: Historique_ModificationsOrderByWithRelationInput | Historique_ModificationsOrderByWithRelationInput[]
-    cursor?: Historique_ModificationsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Historique_ModificationsScalarFieldEnum | Historique_ModificationsScalarFieldEnum[]
-  }
-
-  /**
    * Agent without action
    */
   export type AgentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7370,33 +10956,33 @@ export namespace Prisma {
     ID_Historique: string | null
     TypeEntite: $Enums.TypeEntite | null
     ID_Demande: string | null
-    ID_Agent: string | null
     Action: string | null
     DateModification: Date | null
     Ancienne_Valeur: string | null
     Nouvelle_Valeur: string | null
+    CreatedBy: string | null
   }
 
   export type Historique_ModificationsMaxAggregateOutputType = {
     ID_Historique: string | null
     TypeEntite: $Enums.TypeEntite | null
     ID_Demande: string | null
-    ID_Agent: string | null
     Action: string | null
     DateModification: Date | null
     Ancienne_Valeur: string | null
     Nouvelle_Valeur: string | null
+    CreatedBy: string | null
   }
 
   export type Historique_ModificationsCountAggregateOutputType = {
     ID_Historique: number
     TypeEntite: number
     ID_Demande: number
-    ID_Agent: number
     Action: number
     DateModification: number
     Ancienne_Valeur: number
     Nouvelle_Valeur: number
+    CreatedBy: number
     _all: number
   }
 
@@ -7405,33 +10991,33 @@ export namespace Prisma {
     ID_Historique?: true
     TypeEntite?: true
     ID_Demande?: true
-    ID_Agent?: true
     Action?: true
     DateModification?: true
     Ancienne_Valeur?: true
     Nouvelle_Valeur?: true
+    CreatedBy?: true
   }
 
   export type Historique_ModificationsMaxAggregateInputType = {
     ID_Historique?: true
     TypeEntite?: true
     ID_Demande?: true
-    ID_Agent?: true
     Action?: true
     DateModification?: true
     Ancienne_Valeur?: true
     Nouvelle_Valeur?: true
+    CreatedBy?: true
   }
 
   export type Historique_ModificationsCountAggregateInputType = {
     ID_Historique?: true
     TypeEntite?: true
     ID_Demande?: true
-    ID_Agent?: true
     Action?: true
     DateModification?: true
     Ancienne_Valeur?: true
     Nouvelle_Valeur?: true
+    CreatedBy?: true
     _all?: true
   }
 
@@ -7511,11 +11097,11 @@ export namespace Prisma {
     ID_Historique: string
     TypeEntite: $Enums.TypeEntite
     ID_Demande: string | null
-    ID_Agent: string
     Action: string
     DateModification: Date
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
+    CreatedBy: string
     _count: Historique_ModificationsCountAggregateOutputType | null
     _min: Historique_ModificationsMinAggregateOutputType | null
     _max: Historique_ModificationsMaxAggregateOutputType | null
@@ -7539,12 +11125,11 @@ export namespace Prisma {
     ID_Historique?: boolean
     TypeEntite?: boolean
     ID_Demande?: boolean
-    ID_Agent?: boolean
     Action?: boolean
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    CreatedBy?: boolean
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
@@ -7552,12 +11137,11 @@ export namespace Prisma {
     ID_Historique?: boolean
     TypeEntite?: boolean
     ID_Demande?: boolean
-    ID_Agent?: boolean
     Action?: boolean
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    CreatedBy?: boolean
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
@@ -7565,12 +11149,11 @@ export namespace Prisma {
     ID_Historique?: boolean
     TypeEntite?: boolean
     ID_Demande?: boolean
-    ID_Agent?: boolean
     Action?: boolean
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
+    CreatedBy?: boolean
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }, ExtArgs["result"]["historique_Modifications"]>
 
@@ -7578,42 +11161,38 @@ export namespace Prisma {
     ID_Historique?: boolean
     TypeEntite?: boolean
     ID_Demande?: boolean
-    ID_Agent?: boolean
     Action?: boolean
     DateModification?: boolean
     Ancienne_Valeur?: boolean
     Nouvelle_Valeur?: boolean
+    CreatedBy?: boolean
   }
 
-  export type Historique_ModificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Historique" | "TypeEntite" | "ID_Demande" | "ID_Agent" | "Action" | "DateModification" | "Ancienne_Valeur" | "Nouvelle_Valeur", ExtArgs["result"]["historique_Modifications"]>
+  export type Historique_ModificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ID_Historique" | "TypeEntite" | "ID_Demande" | "Action" | "DateModification" | "Ancienne_Valeur" | "Nouvelle_Valeur" | "CreatedBy", ExtArgs["result"]["historique_Modifications"]>
   export type Historique_ModificationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }
   export type Historique_ModificationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }
   export type Historique_ModificationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Agent?: boolean | AgentDefaultArgs<ExtArgs>
     Demande?: boolean | Historique_Modifications$DemandeArgs<ExtArgs>
   }
 
   export type $Historique_ModificationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Historique_Modifications"
     objects: {
-      Agent: Prisma.$AgentPayload<ExtArgs>
       Demande: Prisma.$DemandePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Historique: string
       TypeEntite: $Enums.TypeEntite
       ID_Demande: string | null
-      ID_Agent: string
       Action: string
       DateModification: Date
       Ancienne_Valeur: string
       Nouvelle_Valeur: string
+      CreatedBy: string
     }, ExtArgs["result"]["historique_Modifications"]>
     composites: {}
   }
@@ -8008,7 +11587,6 @@ export namespace Prisma {
    */
   export interface Prisma__Historique_ModificationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Demande<T extends Historique_Modifications$DemandeArgs<ExtArgs> = {}>(args?: Subset<T, Historique_Modifications$DemandeArgs<ExtArgs>>): Prisma__DemandeClient<$Result.GetResult<Prisma.$DemandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8042,11 +11620,11 @@ export namespace Prisma {
     readonly ID_Historique: FieldRef<"Historique_Modifications", 'String'>
     readonly TypeEntite: FieldRef<"Historique_Modifications", 'TypeEntite'>
     readonly ID_Demande: FieldRef<"Historique_Modifications", 'String'>
-    readonly ID_Agent: FieldRef<"Historique_Modifications", 'String'>
     readonly Action: FieldRef<"Historique_Modifications", 'String'>
     readonly DateModification: FieldRef<"Historique_Modifications", 'DateTime'>
     readonly Ancienne_Valeur: FieldRef<"Historique_Modifications", 'String'>
     readonly Nouvelle_Valeur: FieldRef<"Historique_Modifications", 'String'>
+    readonly CreatedBy: FieldRef<"Historique_Modifications", 'String'>
   }
     
 
@@ -9564,13 +13142,21 @@ export namespace Prisma {
     ID_Citoyen: 'ID_Citoyen',
     TypeActe: 'TypeActe',
     NumeroActe: 'NumeroActe',
-    Nom: 'Nom',
-    Prenom: 'Prenom',
     Statut: 'Statut',
     DemandePourTier: 'DemandePourTier',
     DateDemande: 'DateDemande',
     DateActe: 'DateActe',
-    ID_Paiement: 'ID_Paiement',
+    ID_Paiement: 'ID_Paiement'
+  };
+
+  export type DemandeScalarFieldEnum = (typeof DemandeScalarFieldEnum)[keyof typeof DemandeScalarFieldEnum]
+
+
+  export const NaissanceScalarFieldEnum: {
+    ID_Naissance: 'ID_Naissance',
+    ID_Demande: 'ID_Demande',
+    Nom: 'Nom',
+    Prenom: 'Prenom',
     NomMere: 'NomMere',
     PrenomMere: 'PrenomMere',
     ProfessionMere: 'ProfessionMere',
@@ -9581,7 +13167,37 @@ export namespace Prisma {
     DateNaisPere: 'DateNaisPere'
   };
 
-  export type DemandeScalarFieldEnum = (typeof DemandeScalarFieldEnum)[keyof typeof DemandeScalarFieldEnum]
+  export type NaissanceScalarFieldEnum = (typeof NaissanceScalarFieldEnum)[keyof typeof NaissanceScalarFieldEnum]
+
+
+  export const MariageScalarFieldEnum: {
+    ID_Mariage: 'ID_Mariage',
+    ID_Demande: 'ID_Demande',
+    NomEpoux: 'NomEpoux',
+    PrenomEpoux: 'PrenomEpoux',
+    DateNaissanceEpoux: 'DateNaissanceEpoux',
+    NomEpouse: 'NomEpouse',
+    PrenomEpouse: 'PrenomEpouse',
+    DateNaissanceEpouse: 'DateNaissanceEpouse'
+  };
+
+  export type MariageScalarFieldEnum = (typeof MariageScalarFieldEnum)[keyof typeof MariageScalarFieldEnum]
+
+
+  export const DecesScalarFieldEnum: {
+    ID_Deces: 'ID_Deces',
+    ID_Demande: 'ID_Demande',
+    Nom: 'Nom',
+    Prenom: 'Prenom',
+    NomMere: 'NomMere',
+    PrenomMere: 'PrenomMere',
+    ProfessionMere: 'ProfessionMere',
+    NomPere: 'NomPere',
+    PrenomPere: 'PrenomPere',
+    ProfessionPere: 'ProfessionPere'
+  };
+
+  export type DecesScalarFieldEnum = (typeof DecesScalarFieldEnum)[keyof typeof DecesScalarFieldEnum]
 
 
   export const Document_ActeScalarFieldEnum: {
@@ -9625,11 +13241,11 @@ export namespace Prisma {
     ID_Historique: 'ID_Historique',
     TypeEntite: 'TypeEntite',
     ID_Demande: 'ID_Demande',
-    ID_Agent: 'ID_Agent',
     Action: 'Action',
     DateModification: 'DateModification',
     Ancienne_Valeur: 'Ancienne_Valeur',
-    Nouvelle_Valeur: 'Nouvelle_Valeur'
+    Nouvelle_Valeur: 'Nouvelle_Valeur',
+    CreatedBy: 'CreatedBy'
   };
 
   export type Historique_ModificationsScalarFieldEnum = (typeof Historique_ModificationsScalarFieldEnum)[keyof typeof Historique_ModificationsScalarFieldEnum]
@@ -9923,25 +13539,18 @@ export namespace Prisma {
     ID_Citoyen?: StringFilter<"Demande"> | string
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     NumeroActe?: StringFilter<"Demande"> | string
-    Nom?: StringFilter<"Demande"> | string
-    Prenom?: StringFilter<"Demande"> | string
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableFilter<"Demande"> | string | null
-    NomMere?: StringNullableFilter<"Demande"> | string | null
-    PrenomMere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionMere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
-    NomPere?: StringNullableFilter<"Demande"> | string | null
-    PrenomPere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionPere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
     Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     Historique?: Historique_ModificationsListRelationFilter
+    Naissances?: NaissanceListRelationFilter
+    Mariages?: MariageListRelationFilter
+    Deces?: DecesListRelationFilter
   }
 
   export type DemandeOrderByWithRelationInput = {
@@ -9949,25 +13558,18 @@ export namespace Prisma {
     ID_Citoyen?: SortOrder
     TypeActe?: SortOrder
     NumeroActe?: SortOrder
-    Nom?: SortOrder
-    Prenom?: SortOrder
     Statut?: SortOrder
     DemandePourTier?: SortOrder
     DateDemande?: SortOrder
     DateActe?: SortOrderInput | SortOrder
     ID_Paiement?: SortOrderInput | SortOrder
-    NomMere?: SortOrderInput | SortOrder
-    PrenomMere?: SortOrderInput | SortOrder
-    ProfessionMere?: SortOrderInput | SortOrder
-    DateNaisMere?: SortOrderInput | SortOrder
-    NomPere?: SortOrderInput | SortOrder
-    PrenomPere?: SortOrderInput | SortOrder
-    ProfessionPere?: SortOrderInput | SortOrder
-    DateNaisPere?: SortOrderInput | SortOrder
     Citoyen?: CitoyenOrderByWithRelationInput
     Paiement?: PaiementOrderByWithRelationInput
     Document?: Document_ActeOrderByWithRelationInput
     Historique?: Historique_ModificationsOrderByRelationAggregateInput
+    Naissances?: NaissanceOrderByRelationAggregateInput
+    Mariages?: MariageOrderByRelationAggregateInput
+    Deces?: DecesOrderByRelationAggregateInput
   }
 
   export type DemandeWhereUniqueInput = Prisma.AtLeast<{
@@ -9979,24 +13581,17 @@ export namespace Prisma {
     ID_Citoyen?: StringFilter<"Demande"> | string
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     NumeroActe?: StringFilter<"Demande"> | string
-    Nom?: StringFilter<"Demande"> | string
-    Prenom?: StringFilter<"Demande"> | string
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
-    NomMere?: StringNullableFilter<"Demande"> | string | null
-    PrenomMere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionMere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
-    NomPere?: StringNullableFilter<"Demande"> | string | null
-    PrenomPere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionPere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
     Citoyen?: XOR<CitoyenScalarRelationFilter, CitoyenWhereInput>
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     Historique?: Historique_ModificationsListRelationFilter
+    Naissances?: NaissanceListRelationFilter
+    Mariages?: MariageListRelationFilter
+    Deces?: DecesListRelationFilter
   }, "ID_Demande" | "ID_Paiement">
 
   export type DemandeOrderByWithAggregationInput = {
@@ -10004,21 +13599,11 @@ export namespace Prisma {
     ID_Citoyen?: SortOrder
     TypeActe?: SortOrder
     NumeroActe?: SortOrder
-    Nom?: SortOrder
-    Prenom?: SortOrder
     Statut?: SortOrder
     DemandePourTier?: SortOrder
     DateDemande?: SortOrder
     DateActe?: SortOrderInput | SortOrder
     ID_Paiement?: SortOrderInput | SortOrder
-    NomMere?: SortOrderInput | SortOrder
-    PrenomMere?: SortOrderInput | SortOrder
-    ProfessionMere?: SortOrderInput | SortOrder
-    DateNaisMere?: SortOrderInput | SortOrder
-    NomPere?: SortOrderInput | SortOrder
-    PrenomPere?: SortOrderInput | SortOrder
-    ProfessionPere?: SortOrderInput | SortOrder
-    DateNaisPere?: SortOrderInput | SortOrder
     _count?: DemandeCountOrderByAggregateInput
     _max?: DemandeMaxOrderByAggregateInput
     _min?: DemandeMinOrderByAggregateInput
@@ -10032,21 +13617,251 @@ export namespace Prisma {
     ID_Citoyen?: StringWithAggregatesFilter<"Demande"> | string
     TypeActe?: EnumTypeActeWithAggregatesFilter<"Demande"> | $Enums.TypeActe
     NumeroActe?: StringWithAggregatesFilter<"Demande"> | string
-    Nom?: StringWithAggregatesFilter<"Demande"> | string
-    Prenom?: StringWithAggregatesFilter<"Demande"> | string
     Statut?: EnumStatutDemandeWithAggregatesFilter<"Demande"> | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierWithAggregatesFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeWithAggregatesFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    NomMere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    PrenomMere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    ProfessionMere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    DateNaisMere?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
-    NomPere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    PrenomPere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    ProfessionPere?: StringNullableWithAggregatesFilter<"Demande"> | string | null
-    DateNaisPere?: DateTimeNullableWithAggregatesFilter<"Demande"> | Date | string | null
+  }
+
+  export type NaissanceWhereInput = {
+    AND?: NaissanceWhereInput | NaissanceWhereInput[]
+    OR?: NaissanceWhereInput[]
+    NOT?: NaissanceWhereInput | NaissanceWhereInput[]
+    ID_Naissance?: StringFilter<"Naissance"> | string
+    ID_Demande?: StringFilter<"Naissance"> | string
+    Nom?: StringFilter<"Naissance"> | string
+    Prenom?: StringFilter<"Naissance"> | string
+    NomMere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomMere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionMere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+    NomPere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomPere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionPere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }
+
+  export type NaissanceOrderByWithRelationInput = {
+    ID_Naissance?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    ProfessionMere?: SortOrderInput | SortOrder
+    DateNaisMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    ProfessionPere?: SortOrderInput | SortOrder
+    DateNaisPere?: SortOrderInput | SortOrder
+    Demande?: DemandeOrderByWithRelationInput
+  }
+
+  export type NaissanceWhereUniqueInput = Prisma.AtLeast<{
+    ID_Naissance?: string
+    AND?: NaissanceWhereInput | NaissanceWhereInput[]
+    OR?: NaissanceWhereInput[]
+    NOT?: NaissanceWhereInput | NaissanceWhereInput[]
+    ID_Demande?: StringFilter<"Naissance"> | string
+    Nom?: StringFilter<"Naissance"> | string
+    Prenom?: StringFilter<"Naissance"> | string
+    NomMere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomMere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionMere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+    NomPere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomPere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionPere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }, "ID_Naissance">
+
+  export type NaissanceOrderByWithAggregationInput = {
+    ID_Naissance?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    ProfessionMere?: SortOrderInput | SortOrder
+    DateNaisMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    ProfessionPere?: SortOrderInput | SortOrder
+    DateNaisPere?: SortOrderInput | SortOrder
+    _count?: NaissanceCountOrderByAggregateInput
+    _max?: NaissanceMaxOrderByAggregateInput
+    _min?: NaissanceMinOrderByAggregateInput
+  }
+
+  export type NaissanceScalarWhereWithAggregatesInput = {
+    AND?: NaissanceScalarWhereWithAggregatesInput | NaissanceScalarWhereWithAggregatesInput[]
+    OR?: NaissanceScalarWhereWithAggregatesInput[]
+    NOT?: NaissanceScalarWhereWithAggregatesInput | NaissanceScalarWhereWithAggregatesInput[]
+    ID_Naissance?: StringWithAggregatesFilter<"Naissance"> | string
+    ID_Demande?: StringWithAggregatesFilter<"Naissance"> | string
+    Nom?: StringWithAggregatesFilter<"Naissance"> | string
+    Prenom?: StringWithAggregatesFilter<"Naissance"> | string
+    NomMere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    PrenomMere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    ProfessionMere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    DateNaisMere?: DateTimeNullableWithAggregatesFilter<"Naissance"> | Date | string | null
+    NomPere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    PrenomPere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    ProfessionPere?: StringNullableWithAggregatesFilter<"Naissance"> | string | null
+    DateNaisPere?: DateTimeNullableWithAggregatesFilter<"Naissance"> | Date | string | null
+  }
+
+  export type MariageWhereInput = {
+    AND?: MariageWhereInput | MariageWhereInput[]
+    OR?: MariageWhereInput[]
+    NOT?: MariageWhereInput | MariageWhereInput[]
+    ID_Mariage?: StringFilter<"Mariage"> | string
+    ID_Demande?: StringFilter<"Mariage"> | string
+    NomEpoux?: StringFilter<"Mariage"> | string
+    PrenomEpoux?: StringFilter<"Mariage"> | string
+    DateNaissanceEpoux?: DateTimeFilter<"Mariage"> | Date | string
+    NomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    PrenomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    DateNaissanceEpouse?: DateTimeFilter<"Mariage"> | Date | string
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }
+
+  export type MariageOrderByWithRelationInput = {
+    ID_Mariage?: SortOrder
+    ID_Demande?: SortOrder
+    NomEpoux?: SortOrder
+    PrenomEpoux?: SortOrder
+    DateNaissanceEpoux?: SortOrder
+    NomEpouse?: SortOrderInput | SortOrder
+    PrenomEpouse?: SortOrderInput | SortOrder
+    DateNaissanceEpouse?: SortOrder
+    Demande?: DemandeOrderByWithRelationInput
+  }
+
+  export type MariageWhereUniqueInput = Prisma.AtLeast<{
+    ID_Mariage?: string
+    AND?: MariageWhereInput | MariageWhereInput[]
+    OR?: MariageWhereInput[]
+    NOT?: MariageWhereInput | MariageWhereInput[]
+    ID_Demande?: StringFilter<"Mariage"> | string
+    NomEpoux?: StringFilter<"Mariage"> | string
+    PrenomEpoux?: StringFilter<"Mariage"> | string
+    DateNaissanceEpoux?: DateTimeFilter<"Mariage"> | Date | string
+    NomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    PrenomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    DateNaissanceEpouse?: DateTimeFilter<"Mariage"> | Date | string
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }, "ID_Mariage">
+
+  export type MariageOrderByWithAggregationInput = {
+    ID_Mariage?: SortOrder
+    ID_Demande?: SortOrder
+    NomEpoux?: SortOrder
+    PrenomEpoux?: SortOrder
+    DateNaissanceEpoux?: SortOrder
+    NomEpouse?: SortOrderInput | SortOrder
+    PrenomEpouse?: SortOrderInput | SortOrder
+    DateNaissanceEpouse?: SortOrder
+    _count?: MariageCountOrderByAggregateInput
+    _max?: MariageMaxOrderByAggregateInput
+    _min?: MariageMinOrderByAggregateInput
+  }
+
+  export type MariageScalarWhereWithAggregatesInput = {
+    AND?: MariageScalarWhereWithAggregatesInput | MariageScalarWhereWithAggregatesInput[]
+    OR?: MariageScalarWhereWithAggregatesInput[]
+    NOT?: MariageScalarWhereWithAggregatesInput | MariageScalarWhereWithAggregatesInput[]
+    ID_Mariage?: StringWithAggregatesFilter<"Mariage"> | string
+    ID_Demande?: StringWithAggregatesFilter<"Mariage"> | string
+    NomEpoux?: StringWithAggregatesFilter<"Mariage"> | string
+    PrenomEpoux?: StringWithAggregatesFilter<"Mariage"> | string
+    DateNaissanceEpoux?: DateTimeWithAggregatesFilter<"Mariage"> | Date | string
+    NomEpouse?: StringNullableWithAggregatesFilter<"Mariage"> | string | null
+    PrenomEpouse?: StringNullableWithAggregatesFilter<"Mariage"> | string | null
+    DateNaissanceEpouse?: DateTimeWithAggregatesFilter<"Mariage"> | Date | string
+  }
+
+  export type DecesWhereInput = {
+    AND?: DecesWhereInput | DecesWhereInput[]
+    OR?: DecesWhereInput[]
+    NOT?: DecesWhereInput | DecesWhereInput[]
+    ID_Deces?: StringFilter<"Deces"> | string
+    ID_Demande?: StringFilter<"Deces"> | string
+    Nom?: StringFilter<"Deces"> | string
+    Prenom?: StringFilter<"Deces"> | string
+    NomMere?: StringNullableFilter<"Deces"> | string | null
+    PrenomMere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionMere?: StringNullableFilter<"Deces"> | string | null
+    NomPere?: StringNullableFilter<"Deces"> | string | null
+    PrenomPere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionPere?: StringNullableFilter<"Deces"> | string | null
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }
+
+  export type DecesOrderByWithRelationInput = {
+    ID_Deces?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    ProfessionMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    ProfessionPere?: SortOrderInput | SortOrder
+    Demande?: DemandeOrderByWithRelationInput
+  }
+
+  export type DecesWhereUniqueInput = Prisma.AtLeast<{
+    ID_Deces?: string
+    AND?: DecesWhereInput | DecesWhereInput[]
+    OR?: DecesWhereInput[]
+    NOT?: DecesWhereInput | DecesWhereInput[]
+    ID_Demande?: StringFilter<"Deces"> | string
+    Nom?: StringFilter<"Deces"> | string
+    Prenom?: StringFilter<"Deces"> | string
+    NomMere?: StringNullableFilter<"Deces"> | string | null
+    PrenomMere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionMere?: StringNullableFilter<"Deces"> | string | null
+    NomPere?: StringNullableFilter<"Deces"> | string | null
+    PrenomPere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionPere?: StringNullableFilter<"Deces"> | string | null
+    Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
+  }, "ID_Deces">
+
+  export type DecesOrderByWithAggregationInput = {
+    ID_Deces?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrderInput | SortOrder
+    PrenomMere?: SortOrderInput | SortOrder
+    ProfessionMere?: SortOrderInput | SortOrder
+    NomPere?: SortOrderInput | SortOrder
+    PrenomPere?: SortOrderInput | SortOrder
+    ProfessionPere?: SortOrderInput | SortOrder
+    _count?: DecesCountOrderByAggregateInput
+    _max?: DecesMaxOrderByAggregateInput
+    _min?: DecesMinOrderByAggregateInput
+  }
+
+  export type DecesScalarWhereWithAggregatesInput = {
+    AND?: DecesScalarWhereWithAggregatesInput | DecesScalarWhereWithAggregatesInput[]
+    OR?: DecesScalarWhereWithAggregatesInput[]
+    NOT?: DecesScalarWhereWithAggregatesInput | DecesScalarWhereWithAggregatesInput[]
+    ID_Deces?: StringWithAggregatesFilter<"Deces"> | string
+    ID_Demande?: StringWithAggregatesFilter<"Deces"> | string
+    Nom?: StringWithAggregatesFilter<"Deces"> | string
+    Prenom?: StringWithAggregatesFilter<"Deces"> | string
+    NomMere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
+    PrenomMere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
+    ProfessionMere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
+    NomPere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
+    PrenomPere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
+    ProfessionPere?: StringNullableWithAggregatesFilter<"Deces"> | string | null
   }
 
   export type Document_ActeWhereInput = {
@@ -10190,7 +14005,6 @@ export namespace Prisma {
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
     Password?: StringFilter<"Agent"> | string
     Documents?: Document_ActeListRelationFilter
-    Historiques?: Historique_ModificationsListRelationFilter
   }
 
   export type AgentOrderByWithRelationInput = {
@@ -10201,7 +14015,6 @@ export namespace Prisma {
     Role?: SortOrder
     Password?: SortOrder
     Documents?: Document_ActeOrderByRelationAggregateInput
-    Historiques?: Historique_ModificationsOrderByRelationAggregateInput
   }
 
   export type AgentWhereUniqueInput = Prisma.AtLeast<{
@@ -10215,7 +14028,6 @@ export namespace Prisma {
     Role?: EnumRoleAgentFilter<"Agent"> | $Enums.RoleAgent
     Password?: StringFilter<"Agent"> | string
     Documents?: Document_ActeListRelationFilter
-    Historiques?: Historique_ModificationsListRelationFilter
   }, "ID_Agent" | "Email">
 
   export type AgentOrderByWithAggregationInput = {
@@ -10249,12 +14061,11 @@ export namespace Prisma {
     ID_Historique?: StringFilter<"Historique_Modifications"> | string
     TypeEntite?: EnumTypeEntiteFilter<"Historique_Modifications"> | $Enums.TypeEntite
     ID_Demande?: StringNullableFilter<"Historique_Modifications"> | string | null
-    ID_Agent?: StringFilter<"Historique_Modifications"> | string
     Action?: StringFilter<"Historique_Modifications"> | string
     DateModification?: DateTimeFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringFilter<"Historique_Modifications"> | string
-    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    CreatedBy?: StringFilter<"Historique_Modifications"> | string
     Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
   }
 
@@ -10262,12 +14073,11 @@ export namespace Prisma {
     ID_Historique?: SortOrder
     TypeEntite?: SortOrder
     ID_Demande?: SortOrderInput | SortOrder
-    ID_Agent?: SortOrder
     Action?: SortOrder
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
-    Agent?: AgentOrderByWithRelationInput
+    CreatedBy?: SortOrder
     Demande?: DemandeOrderByWithRelationInput
   }
 
@@ -10278,12 +14088,11 @@ export namespace Prisma {
     NOT?: Historique_ModificationsWhereInput | Historique_ModificationsWhereInput[]
     TypeEntite?: EnumTypeEntiteFilter<"Historique_Modifications"> | $Enums.TypeEntite
     ID_Demande?: StringNullableFilter<"Historique_Modifications"> | string | null
-    ID_Agent?: StringFilter<"Historique_Modifications"> | string
     Action?: StringFilter<"Historique_Modifications"> | string
     DateModification?: DateTimeFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringFilter<"Historique_Modifications"> | string
-    Agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
+    CreatedBy?: StringFilter<"Historique_Modifications"> | string
     Demande?: XOR<DemandeNullableScalarRelationFilter, DemandeWhereInput> | null
   }, "ID_Historique">
 
@@ -10291,11 +14100,11 @@ export namespace Prisma {
     ID_Historique?: SortOrder
     TypeEntite?: SortOrder
     ID_Demande?: SortOrderInput | SortOrder
-    ID_Agent?: SortOrder
     Action?: SortOrder
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
+    CreatedBy?: SortOrder
     _count?: Historique_ModificationsCountOrderByAggregateInput
     _max?: Historique_ModificationsMaxOrderByAggregateInput
     _min?: Historique_ModificationsMinOrderByAggregateInput
@@ -10308,11 +14117,11 @@ export namespace Prisma {
     ID_Historique?: StringWithAggregatesFilter<"Historique_Modifications"> | string
     TypeEntite?: EnumTypeEntiteWithAggregatesFilter<"Historique_Modifications"> | $Enums.TypeEntite
     ID_Demande?: StringNullableWithAggregatesFilter<"Historique_Modifications"> | string | null
-    ID_Agent?: StringWithAggregatesFilter<"Historique_Modifications"> | string
     Action?: StringWithAggregatesFilter<"Historique_Modifications"> | string
     DateModification?: DateTimeWithAggregatesFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringWithAggregatesFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringWithAggregatesFilter<"Historique_Modifications"> | string
+    CreatedBy?: StringWithAggregatesFilter<"Historique_Modifications"> | string
   }
 
   export type FraisTimbreWhereInput = {
@@ -10466,24 +14275,17 @@ export namespace Prisma {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateInput = {
@@ -10491,47 +14293,33 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUpdateInput = {
     ID_Demande?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateInput = {
@@ -10539,23 +14327,16 @@ export namespace Prisma {
     ID_Citoyen?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeCreateManyInput = {
@@ -10563,13 +14344,55 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+  }
+
+  export type DemandeUpdateManyMutationInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DemandeUncheckedUpdateManyInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    ID_Citoyen?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NaissanceCreateInput = {
+    ID_Naissance?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+    DateNaisPere?: Date | string | null
+    Demande: DemandeCreateNestedOneWithoutNaissancesInput
+  }
+
+  export type NaissanceUncheckedCreateInput = {
+    ID_Naissance?: string
+    ID_Demande: string
+    Nom?: string
+    Prenom?: string
     NomMere?: string | null
     PrenomMere?: string | null
     ProfessionMere?: string | null
@@ -10580,16 +14403,26 @@ export namespace Prisma {
     DateNaisPere?: Date | string | null
   }
 
-  export type DemandeUpdateManyMutationInput = {
-    ID_Demande?: StringFieldUpdateOperationsInput | string
-    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
-    NumeroActe?: StringFieldUpdateOperationsInput | string
+  export type NaissanceUpdateInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
     Nom?: StringFieldUpdateOperationsInput | string
     Prenom?: StringFieldUpdateOperationsInput | string
-    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
-    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
-    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Demande?: DemandeUpdateOneRequiredWithoutNaissancesNestedInput
+  }
+
+  export type NaissanceUncheckedUpdateInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
     NomMere?: NullableStringFieldUpdateOperationsInput | string | null
     PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
     ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10600,18 +14433,25 @@ export namespace Prisma {
     DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type DemandeUncheckedUpdateManyInput = {
-    ID_Demande?: StringFieldUpdateOperationsInput | string
-    ID_Citoyen?: StringFieldUpdateOperationsInput | string
-    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
-    NumeroActe?: StringFieldUpdateOperationsInput | string
+  export type NaissanceCreateManyInput = {
+    ID_Naissance?: string
+    ID_Demande: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+    DateNaisPere?: Date | string | null
+  }
+
+  export type NaissanceUpdateManyMutationInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
     Nom?: StringFieldUpdateOperationsInput | string
     Prenom?: StringFieldUpdateOperationsInput | string
-    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
-    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
-    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     NomMere?: NullableStringFieldUpdateOperationsInput | string | null
     PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
     ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10620,6 +14460,187 @@ export namespace Prisma {
     PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
     ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
     DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NaissanceUncheckedUpdateManyInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MariageCreateInput = {
+    ID_Mariage?: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
+    Demande: DemandeCreateNestedOneWithoutMariagesInput
+  }
+
+  export type MariageUncheckedCreateInput = {
+    ID_Mariage?: string
+    ID_Demande: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
+  }
+
+  export type MariageUpdateInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+    Demande?: DemandeUpdateOneRequiredWithoutMariagesNestedInput
+  }
+
+  export type MariageUncheckedUpdateInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MariageCreateManyInput = {
+    ID_Mariage?: string
+    ID_Demande: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
+  }
+
+  export type MariageUpdateManyMutationInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MariageUncheckedUpdateManyInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DecesCreateInput = {
+    ID_Deces?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+    Demande: DemandeCreateNestedOneWithoutDecesInput
+  }
+
+  export type DecesUncheckedCreateInput = {
+    ID_Deces?: string
+    ID_Demande: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+  }
+
+  export type DecesUpdateInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    Demande?: DemandeUpdateOneRequiredWithoutDecesNestedInput
+  }
+
+  export type DecesUncheckedUpdateInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DecesCreateManyInput = {
+    ID_Deces?: string
+    ID_Demande: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+  }
+
+  export type DecesUpdateManyMutationInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DecesUncheckedUpdateManyInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Document_ActeCreateInput = {
@@ -10765,7 +14786,6 @@ export namespace Prisma {
     Role: $Enums.RoleAgent
     Password: string
     Documents?: Document_ActeCreateNestedManyWithoutAgentInput
-    Historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateInput = {
@@ -10776,7 +14796,6 @@ export namespace Prisma {
     Role: $Enums.RoleAgent
     Password: string
     Documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
-    Historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUpdateInput = {
@@ -10787,7 +14806,6 @@ export namespace Prisma {
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
     Documents?: Document_ActeUpdateManyWithoutAgentNestedInput
-    Historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateInput = {
@@ -10798,7 +14816,6 @@ export namespace Prisma {
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
     Documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
-    Historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentCreateManyInput = {
@@ -10835,7 +14852,7 @@ export namespace Prisma {
     DateModification?: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    Agent: AgentCreateNestedOneWithoutHistoriquesInput
+    CreatedBy: string
     Demande?: DemandeCreateNestedOneWithoutHistoriqueInput
   }
 
@@ -10843,11 +14860,11 @@ export namespace Prisma {
     ID_Historique?: string
     TypeEntite: $Enums.TypeEntite
     ID_Demande?: string | null
-    ID_Agent: string
     Action: string
     DateModification?: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
+    CreatedBy: string
   }
 
   export type Historique_ModificationsUpdateInput = {
@@ -10857,7 +14874,7 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    Agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
+    CreatedBy?: StringFieldUpdateOperationsInput | string
     Demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
   }
 
@@ -10865,22 +14882,22 @@ export namespace Prisma {
     ID_Historique?: StringFieldUpdateOperationsInput | string
     TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
     ID_Demande?: NullableStringFieldUpdateOperationsInput | string | null
-    ID_Agent?: StringFieldUpdateOperationsInput | string
     Action?: StringFieldUpdateOperationsInput | string
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+    CreatedBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type Historique_ModificationsCreateManyInput = {
     ID_Historique?: string
     TypeEntite: $Enums.TypeEntite
     ID_Demande?: string | null
-    ID_Agent: string
     Action: string
     DateModification?: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
+    CreatedBy: string
   }
 
   export type Historique_ModificationsUpdateManyMutationInput = {
@@ -10890,17 +14907,18 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+    CreatedBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type Historique_ModificationsUncheckedUpdateManyInput = {
     ID_Historique?: StringFieldUpdateOperationsInput | string
     TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
     ID_Demande?: NullableStringFieldUpdateOperationsInput | string | null
-    ID_Agent?: StringFieldUpdateOperationsInput | string
     Action?: StringFieldUpdateOperationsInput | string
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+    CreatedBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type FraisTimbreCreateInput = {
@@ -11135,6 +15153,24 @@ export namespace Prisma {
     none?: Historique_ModificationsWhereInput
   }
 
+  export type NaissanceListRelationFilter = {
+    every?: NaissanceWhereInput
+    some?: NaissanceWhereInput
+    none?: NaissanceWhereInput
+  }
+
+  export type MariageListRelationFilter = {
+    every?: MariageWhereInput
+    some?: MariageWhereInput
+    none?: MariageWhereInput
+  }
+
+  export type DecesListRelationFilter = {
+    every?: DecesWhereInput
+    some?: DecesWhereInput
+    none?: DecesWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11144,26 +15180,28 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type NaissanceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MariageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DecesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type DemandeCountOrderByAggregateInput = {
     ID_Demande?: SortOrder
     ID_Citoyen?: SortOrder
     TypeActe?: SortOrder
     NumeroActe?: SortOrder
-    Nom?: SortOrder
-    Prenom?: SortOrder
     Statut?: SortOrder
     DemandePourTier?: SortOrder
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
-    NomMere?: SortOrder
-    PrenomMere?: SortOrder
-    ProfessionMere?: SortOrder
-    DateNaisMere?: SortOrder
-    NomPere?: SortOrder
-    PrenomPere?: SortOrder
-    ProfessionPere?: SortOrder
-    DateNaisPere?: SortOrder
   }
 
   export type DemandeMaxOrderByAggregateInput = {
@@ -11171,21 +15209,11 @@ export namespace Prisma {
     ID_Citoyen?: SortOrder
     TypeActe?: SortOrder
     NumeroActe?: SortOrder
-    Nom?: SortOrder
-    Prenom?: SortOrder
     Statut?: SortOrder
     DemandePourTier?: SortOrder
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
-    NomMere?: SortOrder
-    PrenomMere?: SortOrder
-    ProfessionMere?: SortOrder
-    DateNaisMere?: SortOrder
-    NomPere?: SortOrder
-    PrenomPere?: SortOrder
-    ProfessionPere?: SortOrder
-    DateNaisPere?: SortOrder
   }
 
   export type DemandeMinOrderByAggregateInput = {
@@ -11193,21 +15221,11 @@ export namespace Prisma {
     ID_Citoyen?: SortOrder
     TypeActe?: SortOrder
     NumeroActe?: SortOrder
-    Nom?: SortOrder
-    Prenom?: SortOrder
     Statut?: SortOrder
     DemandePourTier?: SortOrder
     DateDemande?: SortOrder
     DateActe?: SortOrder
     ID_Paiement?: SortOrder
-    NomMere?: SortOrder
-    PrenomMere?: SortOrder
-    ProfessionMere?: SortOrder
-    DateNaisMere?: SortOrder
-    NomPere?: SortOrder
-    PrenomPere?: SortOrder
-    ProfessionPere?: SortOrder
-    DateNaisPere?: SortOrder
   }
 
   export type EnumTypeActeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11272,14 +15290,131 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type DemandeScalarRelationFilter = {
     is?: DemandeWhereInput
     isNot?: DemandeWhereInput
+  }
+
+  export type NaissanceCountOrderByAggregateInput = {
+    ID_Naissance?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+    DateNaisPere?: SortOrder
+  }
+
+  export type NaissanceMaxOrderByAggregateInput = {
+    ID_Naissance?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+    DateNaisPere?: SortOrder
+  }
+
+  export type NaissanceMinOrderByAggregateInput = {
+    ID_Naissance?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    DateNaisMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+    DateNaisPere?: SortOrder
+  }
+
+  export type MariageCountOrderByAggregateInput = {
+    ID_Mariage?: SortOrder
+    ID_Demande?: SortOrder
+    NomEpoux?: SortOrder
+    PrenomEpoux?: SortOrder
+    DateNaissanceEpoux?: SortOrder
+    NomEpouse?: SortOrder
+    PrenomEpouse?: SortOrder
+    DateNaissanceEpouse?: SortOrder
+  }
+
+  export type MariageMaxOrderByAggregateInput = {
+    ID_Mariage?: SortOrder
+    ID_Demande?: SortOrder
+    NomEpoux?: SortOrder
+    PrenomEpoux?: SortOrder
+    DateNaissanceEpoux?: SortOrder
+    NomEpouse?: SortOrder
+    PrenomEpouse?: SortOrder
+    DateNaissanceEpouse?: SortOrder
+  }
+
+  export type MariageMinOrderByAggregateInput = {
+    ID_Mariage?: SortOrder
+    ID_Demande?: SortOrder
+    NomEpoux?: SortOrder
+    PrenomEpoux?: SortOrder
+    DateNaissanceEpoux?: SortOrder
+    NomEpouse?: SortOrder
+    PrenomEpouse?: SortOrder
+    DateNaissanceEpouse?: SortOrder
+  }
+
+  export type DecesCountOrderByAggregateInput = {
+    ID_Deces?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+  }
+
+  export type DecesMaxOrderByAggregateInput = {
+    ID_Deces?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+  }
+
+  export type DecesMinOrderByAggregateInput = {
+    ID_Deces?: SortOrder
+    ID_Demande?: SortOrder
+    Nom?: SortOrder
+    Prenom?: SortOrder
+    NomMere?: SortOrder
+    PrenomMere?: SortOrder
+    ProfessionMere?: SortOrder
+    NomPere?: SortOrder
+    PrenomPere?: SortOrder
+    ProfessionPere?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type AgentScalarRelationFilter = {
@@ -11474,33 +15609,33 @@ export namespace Prisma {
     ID_Historique?: SortOrder
     TypeEntite?: SortOrder
     ID_Demande?: SortOrder
-    ID_Agent?: SortOrder
     Action?: SortOrder
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
+    CreatedBy?: SortOrder
   }
 
   export type Historique_ModificationsMaxOrderByAggregateInput = {
     ID_Historique?: SortOrder
     TypeEntite?: SortOrder
     ID_Demande?: SortOrder
-    ID_Agent?: SortOrder
     Action?: SortOrder
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
+    CreatedBy?: SortOrder
   }
 
   export type Historique_ModificationsMinOrderByAggregateInput = {
     ID_Historique?: SortOrder
     TypeEntite?: SortOrder
     ID_Demande?: SortOrder
-    ID_Agent?: SortOrder
     Action?: SortOrder
     DateModification?: SortOrder
     Ancienne_Valeur?: SortOrder
     Nouvelle_Valeur?: SortOrder
+    CreatedBy?: SortOrder
   }
 
   export type EnumTypeEntiteWithAggregatesFilter<$PrismaModel = never> = {
@@ -11708,6 +15843,27 @@ export namespace Prisma {
     connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
   }
 
+  export type NaissanceCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
+    createMany?: NaissanceCreateManyDemandeInputEnvelope
+    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+  }
+
+  export type MariageCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
+    createMany?: MariageCreateManyDemandeInputEnvelope
+    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+  }
+
+  export type DecesCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
+    createMany?: DecesCreateManyDemandeInputEnvelope
+    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+  }
+
   export type Document_ActeUncheckedCreateNestedOneWithoutDemandeInput = {
     create?: XOR<Document_ActeCreateWithoutDemandeInput, Document_ActeUncheckedCreateWithoutDemandeInput>
     connectOrCreate?: Document_ActeCreateOrConnectWithoutDemandeInput
@@ -11719,6 +15875,27 @@ export namespace Prisma {
     connectOrCreate?: Historique_ModificationsCreateOrConnectWithoutDemandeInput | Historique_ModificationsCreateOrConnectWithoutDemandeInput[]
     createMany?: Historique_ModificationsCreateManyDemandeInputEnvelope
     connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
+  }
+
+  export type NaissanceUncheckedCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
+    createMany?: NaissanceCreateManyDemandeInputEnvelope
+    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+  }
+
+  export type MariageUncheckedCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
+    createMany?: MariageCreateManyDemandeInputEnvelope
+    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+  }
+
+  export type DecesUncheckedCreateNestedManyWithoutDemandeInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
+    createMany?: DecesCreateManyDemandeInputEnvelope
+    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
   }
 
   export type EnumTypeActeFieldUpdateOperationsInput = {
@@ -11735,10 +15912,6 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type CitoyenUpdateOneRequiredWithoutDemandesNestedInput = {
@@ -11783,6 +15956,52 @@ export namespace Prisma {
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
   }
 
+  export type NaissanceUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
+    upsert?: NaissanceUpsertWithWhereUniqueWithoutDemandeInput | NaissanceUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: NaissanceCreateManyDemandeInputEnvelope
+    set?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    disconnect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    delete?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    update?: NaissanceUpdateWithWhereUniqueWithoutDemandeInput | NaissanceUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: NaissanceUpdateManyWithWhereWithoutDemandeInput | NaissanceUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+  }
+
+  export type MariageUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
+    upsert?: MariageUpsertWithWhereUniqueWithoutDemandeInput | MariageUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: MariageCreateManyDemandeInputEnvelope
+    set?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    disconnect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    delete?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    update?: MariageUpdateWithWhereUniqueWithoutDemandeInput | MariageUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: MariageUpdateManyWithWhereWithoutDemandeInput | MariageUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: MariageScalarWhereInput | MariageScalarWhereInput[]
+  }
+
+  export type DecesUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
+    upsert?: DecesUpsertWithWhereUniqueWithoutDemandeInput | DecesUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: DecesCreateManyDemandeInputEnvelope
+    set?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    disconnect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    delete?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    update?: DecesUpdateWithWhereUniqueWithoutDemandeInput | DecesUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: DecesUpdateManyWithWhereWithoutDemandeInput | DecesUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: DecesScalarWhereInput | DecesScalarWhereInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput = {
     create?: XOR<Document_ActeCreateWithoutDemandeInput, Document_ActeUncheckedCreateWithoutDemandeInput>
     connectOrCreate?: Document_ActeCreateOrConnectWithoutDemandeInput
@@ -11805,6 +16024,90 @@ export namespace Prisma {
     update?: Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput | Historique_ModificationsUpdateWithWhereUniqueWithoutDemandeInput[]
     updateMany?: Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput | Historique_ModificationsUpdateManyWithWhereWithoutDemandeInput[]
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
+  }
+
+  export type NaissanceUncheckedUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
+    upsert?: NaissanceUpsertWithWhereUniqueWithoutDemandeInput | NaissanceUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: NaissanceCreateManyDemandeInputEnvelope
+    set?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    disconnect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    delete?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+    update?: NaissanceUpdateWithWhereUniqueWithoutDemandeInput | NaissanceUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: NaissanceUpdateManyWithWhereWithoutDemandeInput | NaissanceUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+  }
+
+  export type MariageUncheckedUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
+    upsert?: MariageUpsertWithWhereUniqueWithoutDemandeInput | MariageUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: MariageCreateManyDemandeInputEnvelope
+    set?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    disconnect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    delete?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+    update?: MariageUpdateWithWhereUniqueWithoutDemandeInput | MariageUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: MariageUpdateManyWithWhereWithoutDemandeInput | MariageUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: MariageScalarWhereInput | MariageScalarWhereInput[]
+  }
+
+  export type DecesUncheckedUpdateManyWithoutDemandeNestedInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
+    upsert?: DecesUpsertWithWhereUniqueWithoutDemandeInput | DecesUpsertWithWhereUniqueWithoutDemandeInput[]
+    createMany?: DecesCreateManyDemandeInputEnvelope
+    set?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    disconnect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    delete?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+    update?: DecesUpdateWithWhereUniqueWithoutDemandeInput | DecesUpdateWithWhereUniqueWithoutDemandeInput[]
+    updateMany?: DecesUpdateManyWithWhereWithoutDemandeInput | DecesUpdateManyWithWhereWithoutDemandeInput[]
+    deleteMany?: DecesScalarWhereInput | DecesScalarWhereInput[]
+  }
+
+  export type DemandeCreateNestedOneWithoutNaissancesInput = {
+    create?: XOR<DemandeCreateWithoutNaissancesInput, DemandeUncheckedCreateWithoutNaissancesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutNaissancesInput
+    connect?: DemandeWhereUniqueInput
+  }
+
+  export type DemandeUpdateOneRequiredWithoutNaissancesNestedInput = {
+    create?: XOR<DemandeCreateWithoutNaissancesInput, DemandeUncheckedCreateWithoutNaissancesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutNaissancesInput
+    upsert?: DemandeUpsertWithoutNaissancesInput
+    connect?: DemandeWhereUniqueInput
+    update?: XOR<XOR<DemandeUpdateToOneWithWhereWithoutNaissancesInput, DemandeUpdateWithoutNaissancesInput>, DemandeUncheckedUpdateWithoutNaissancesInput>
+  }
+
+  export type DemandeCreateNestedOneWithoutMariagesInput = {
+    create?: XOR<DemandeCreateWithoutMariagesInput, DemandeUncheckedCreateWithoutMariagesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutMariagesInput
+    connect?: DemandeWhereUniqueInput
+  }
+
+  export type DemandeUpdateOneRequiredWithoutMariagesNestedInput = {
+    create?: XOR<DemandeCreateWithoutMariagesInput, DemandeUncheckedCreateWithoutMariagesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutMariagesInput
+    upsert?: DemandeUpsertWithoutMariagesInput
+    connect?: DemandeWhereUniqueInput
+    update?: XOR<XOR<DemandeUpdateToOneWithWhereWithoutMariagesInput, DemandeUpdateWithoutMariagesInput>, DemandeUncheckedUpdateWithoutMariagesInput>
+  }
+
+  export type DemandeCreateNestedOneWithoutDecesInput = {
+    create?: XOR<DemandeCreateWithoutDecesInput, DemandeUncheckedCreateWithoutDecesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutDecesInput
+    connect?: DemandeWhereUniqueInput
+  }
+
+  export type DemandeUpdateOneRequiredWithoutDecesNestedInput = {
+    create?: XOR<DemandeCreateWithoutDecesInput, DemandeUncheckedCreateWithoutDecesInput>
+    connectOrCreate?: DemandeCreateOrConnectWithoutDecesInput
+    upsert?: DemandeUpsertWithoutDecesInput
+    connect?: DemandeWhereUniqueInput
+    update?: XOR<XOR<DemandeUpdateToOneWithWhereWithoutDecesInput, DemandeUpdateWithoutDecesInput>, DemandeUncheckedUpdateWithoutDecesInput>
   }
 
   export type DemandeCreateNestedOneWithoutDocumentInput = {
@@ -11890,25 +16193,11 @@ export namespace Prisma {
     connect?: Document_ActeWhereUniqueInput | Document_ActeWhereUniqueInput[]
   }
 
-  export type Historique_ModificationsCreateNestedManyWithoutAgentInput = {
-    create?: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput> | Historique_ModificationsCreateWithoutAgentInput[] | Historique_ModificationsUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: Historique_ModificationsCreateOrConnectWithoutAgentInput | Historique_ModificationsCreateOrConnectWithoutAgentInput[]
-    createMany?: Historique_ModificationsCreateManyAgentInputEnvelope
-    connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-  }
-
   export type Document_ActeUncheckedCreateNestedManyWithoutAgentInput = {
     create?: XOR<Document_ActeCreateWithoutAgentInput, Document_ActeUncheckedCreateWithoutAgentInput> | Document_ActeCreateWithoutAgentInput[] | Document_ActeUncheckedCreateWithoutAgentInput[]
     connectOrCreate?: Document_ActeCreateOrConnectWithoutAgentInput | Document_ActeCreateOrConnectWithoutAgentInput[]
     createMany?: Document_ActeCreateManyAgentInputEnvelope
     connect?: Document_ActeWhereUniqueInput | Document_ActeWhereUniqueInput[]
-  }
-
-  export type Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput = {
-    create?: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput> | Historique_ModificationsCreateWithoutAgentInput[] | Historique_ModificationsUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: Historique_ModificationsCreateOrConnectWithoutAgentInput | Historique_ModificationsCreateOrConnectWithoutAgentInput[]
-    createMany?: Historique_ModificationsCreateManyAgentInputEnvelope
-    connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
   }
 
   export type EnumRoleAgentFieldUpdateOperationsInput = {
@@ -11929,20 +16218,6 @@ export namespace Prisma {
     deleteMany?: Document_ActeScalarWhereInput | Document_ActeScalarWhereInput[]
   }
 
-  export type Historique_ModificationsUpdateManyWithoutAgentNestedInput = {
-    create?: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput> | Historique_ModificationsCreateWithoutAgentInput[] | Historique_ModificationsUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: Historique_ModificationsCreateOrConnectWithoutAgentInput | Historique_ModificationsCreateOrConnectWithoutAgentInput[]
-    upsert?: Historique_ModificationsUpsertWithWhereUniqueWithoutAgentInput | Historique_ModificationsUpsertWithWhereUniqueWithoutAgentInput[]
-    createMany?: Historique_ModificationsCreateManyAgentInputEnvelope
-    set?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    disconnect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    delete?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    update?: Historique_ModificationsUpdateWithWhereUniqueWithoutAgentInput | Historique_ModificationsUpdateWithWhereUniqueWithoutAgentInput[]
-    updateMany?: Historique_ModificationsUpdateManyWithWhereWithoutAgentInput | Historique_ModificationsUpdateManyWithWhereWithoutAgentInput[]
-    deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
-  }
-
   export type Document_ActeUncheckedUpdateManyWithoutAgentNestedInput = {
     create?: XOR<Document_ActeCreateWithoutAgentInput, Document_ActeUncheckedCreateWithoutAgentInput> | Document_ActeCreateWithoutAgentInput[] | Document_ActeUncheckedCreateWithoutAgentInput[]
     connectOrCreate?: Document_ActeCreateOrConnectWithoutAgentInput | Document_ActeCreateOrConnectWithoutAgentInput[]
@@ -11957,26 +16232,6 @@ export namespace Prisma {
     deleteMany?: Document_ActeScalarWhereInput | Document_ActeScalarWhereInput[]
   }
 
-  export type Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput = {
-    create?: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput> | Historique_ModificationsCreateWithoutAgentInput[] | Historique_ModificationsUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: Historique_ModificationsCreateOrConnectWithoutAgentInput | Historique_ModificationsCreateOrConnectWithoutAgentInput[]
-    upsert?: Historique_ModificationsUpsertWithWhereUniqueWithoutAgentInput | Historique_ModificationsUpsertWithWhereUniqueWithoutAgentInput[]
-    createMany?: Historique_ModificationsCreateManyAgentInputEnvelope
-    set?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    disconnect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    delete?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
-    update?: Historique_ModificationsUpdateWithWhereUniqueWithoutAgentInput | Historique_ModificationsUpdateWithWhereUniqueWithoutAgentInput[]
-    updateMany?: Historique_ModificationsUpdateManyWithWhereWithoutAgentInput | Historique_ModificationsUpdateManyWithWhereWithoutAgentInput[]
-    deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
-  }
-
-  export type AgentCreateNestedOneWithoutHistoriquesInput = {
-    create?: XOR<AgentCreateWithoutHistoriquesInput, AgentUncheckedCreateWithoutHistoriquesInput>
-    connectOrCreate?: AgentCreateOrConnectWithoutHistoriquesInput
-    connect?: AgentWhereUniqueInput
-  }
-
   export type DemandeCreateNestedOneWithoutHistoriqueInput = {
     create?: XOR<DemandeCreateWithoutHistoriqueInput, DemandeUncheckedCreateWithoutHistoriqueInput>
     connectOrCreate?: DemandeCreateOrConnectWithoutHistoriqueInput
@@ -11985,14 +16240,6 @@ export namespace Prisma {
 
   export type EnumTypeEntiteFieldUpdateOperationsInput = {
     set?: $Enums.TypeEntite
-  }
-
-  export type AgentUpdateOneRequiredWithoutHistoriquesNestedInput = {
-    create?: XOR<AgentCreateWithoutHistoriquesInput, AgentUncheckedCreateWithoutHistoriquesInput>
-    connectOrCreate?: AgentCreateOrConnectWithoutHistoriquesInput
-    upsert?: AgentUpsertWithoutHistoriquesInput
-    connect?: AgentWhereUniqueInput
-    update?: XOR<XOR<AgentUpdateToOneWithWhereWithoutHistoriquesInput, AgentUpdateWithoutHistoriquesInput>, AgentUncheckedUpdateWithoutHistoriquesInput>
   }
 
   export type DemandeUpdateOneWithoutHistoriqueNestedInput = {
@@ -12379,46 +16626,32 @@ export namespace Prisma {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutCitoyenInput = {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutCitoyenInput = {
@@ -12455,21 +16688,11 @@ export namespace Prisma {
     ID_Citoyen?: StringFilter<"Demande"> | string
     TypeActe?: EnumTypeActeFilter<"Demande"> | $Enums.TypeActe
     NumeroActe?: StringFilter<"Demande"> | string
-    Nom?: StringFilter<"Demande"> | string
-    Prenom?: StringFilter<"Demande"> | string
     Statut?: EnumStatutDemandeFilter<"Demande"> | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFilter<"Demande"> | $Enums.DemandePourTier
     DateDemande?: DateTimeFilter<"Demande"> | Date | string
     DateActe?: DateTimeNullableFilter<"Demande"> | Date | string | null
     ID_Paiement?: StringNullableFilter<"Demande"> | string | null
-    NomMere?: StringNullableFilter<"Demande"> | string | null
-    PrenomMere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionMere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisMere?: DateTimeNullableFilter<"Demande"> | Date | string | null
-    NomPere?: StringNullableFilter<"Demande"> | string | null
-    PrenomPere?: StringNullableFilter<"Demande"> | string | null
-    ProfessionPere?: StringNullableFilter<"Demande"> | string | null
-    DateNaisPere?: DateTimeNullableFilter<"Demande"> | Date | string | null
   }
 
   export type CitoyenCreateWithoutDemandesInput = {
@@ -12554,17 +16777,17 @@ export namespace Prisma {
     DateModification?: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
-    Agent: AgentCreateNestedOneWithoutHistoriquesInput
+    CreatedBy: string
   }
 
   export type Historique_ModificationsUncheckedCreateWithoutDemandeInput = {
     ID_Historique?: string
     TypeEntite: $Enums.TypeEntite
-    ID_Agent: string
     Action: string
     DateModification?: Date | string
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
+    CreatedBy: string
   }
 
   export type Historique_ModificationsCreateOrConnectWithoutDemandeInput = {
@@ -12574,6 +16797,108 @@ export namespace Prisma {
 
   export type Historique_ModificationsCreateManyDemandeInputEnvelope = {
     data: Historique_ModificationsCreateManyDemandeInput | Historique_ModificationsCreateManyDemandeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NaissanceCreateWithoutDemandeInput = {
+    ID_Naissance?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+    DateNaisPere?: Date | string | null
+  }
+
+  export type NaissanceUncheckedCreateWithoutDemandeInput = {
+    ID_Naissance?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    DateNaisMere?: Date | string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+    DateNaisPere?: Date | string | null
+  }
+
+  export type NaissanceCreateOrConnectWithoutDemandeInput = {
+    where: NaissanceWhereUniqueInput
+    create: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type NaissanceCreateManyDemandeInputEnvelope = {
+    data: NaissanceCreateManyDemandeInput | NaissanceCreateManyDemandeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MariageCreateWithoutDemandeInput = {
+    ID_Mariage?: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
+  }
+
+  export type MariageUncheckedCreateWithoutDemandeInput = {
+    ID_Mariage?: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
+  }
+
+  export type MariageCreateOrConnectWithoutDemandeInput = {
+    where: MariageWhereUniqueInput
+    create: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type MariageCreateManyDemandeInputEnvelope = {
+    data: MariageCreateManyDemandeInput | MariageCreateManyDemandeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DecesCreateWithoutDemandeInput = {
+    ID_Deces?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+  }
+
+  export type DecesUncheckedCreateWithoutDemandeInput = {
+    ID_Deces?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
+  }
+
+  export type DecesCreateOrConnectWithoutDemandeInput = {
+    where: DecesWhereUniqueInput
+    create: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type DecesCreateManyDemandeInputEnvelope = {
+    data: DecesCreateManyDemandeInput | DecesCreateManyDemandeInput[]
     skipDuplicates?: boolean
   }
 
@@ -12693,34 +17018,363 @@ export namespace Prisma {
     ID_Historique?: StringFilter<"Historique_Modifications"> | string
     TypeEntite?: EnumTypeEntiteFilter<"Historique_Modifications"> | $Enums.TypeEntite
     ID_Demande?: StringNullableFilter<"Historique_Modifications"> | string | null
-    ID_Agent?: StringFilter<"Historique_Modifications"> | string
     Action?: StringFilter<"Historique_Modifications"> | string
     DateModification?: DateTimeFilter<"Historique_Modifications"> | Date | string
     Ancienne_Valeur?: StringFilter<"Historique_Modifications"> | string
     Nouvelle_Valeur?: StringFilter<"Historique_Modifications"> | string
+    CreatedBy?: StringFilter<"Historique_Modifications"> | string
+  }
+
+  export type NaissanceUpsertWithWhereUniqueWithoutDemandeInput = {
+    where: NaissanceWhereUniqueInput
+    update: XOR<NaissanceUpdateWithoutDemandeInput, NaissanceUncheckedUpdateWithoutDemandeInput>
+    create: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type NaissanceUpdateWithWhereUniqueWithoutDemandeInput = {
+    where: NaissanceWhereUniqueInput
+    data: XOR<NaissanceUpdateWithoutDemandeInput, NaissanceUncheckedUpdateWithoutDemandeInput>
+  }
+
+  export type NaissanceUpdateManyWithWhereWithoutDemandeInput = {
+    where: NaissanceScalarWhereInput
+    data: XOR<NaissanceUpdateManyMutationInput, NaissanceUncheckedUpdateManyWithoutDemandeInput>
+  }
+
+  export type NaissanceScalarWhereInput = {
+    AND?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+    OR?: NaissanceScalarWhereInput[]
+    NOT?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+    ID_Naissance?: StringFilter<"Naissance"> | string
+    ID_Demande?: StringFilter<"Naissance"> | string
+    Nom?: StringFilter<"Naissance"> | string
+    Prenom?: StringFilter<"Naissance"> | string
+    NomMere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomMere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionMere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisMere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+    NomPere?: StringNullableFilter<"Naissance"> | string | null
+    PrenomPere?: StringNullableFilter<"Naissance"> | string | null
+    ProfessionPere?: StringNullableFilter<"Naissance"> | string | null
+    DateNaisPere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+  }
+
+  export type MariageUpsertWithWhereUniqueWithoutDemandeInput = {
+    where: MariageWhereUniqueInput
+    update: XOR<MariageUpdateWithoutDemandeInput, MariageUncheckedUpdateWithoutDemandeInput>
+    create: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type MariageUpdateWithWhereUniqueWithoutDemandeInput = {
+    where: MariageWhereUniqueInput
+    data: XOR<MariageUpdateWithoutDemandeInput, MariageUncheckedUpdateWithoutDemandeInput>
+  }
+
+  export type MariageUpdateManyWithWhereWithoutDemandeInput = {
+    where: MariageScalarWhereInput
+    data: XOR<MariageUpdateManyMutationInput, MariageUncheckedUpdateManyWithoutDemandeInput>
+  }
+
+  export type MariageScalarWhereInput = {
+    AND?: MariageScalarWhereInput | MariageScalarWhereInput[]
+    OR?: MariageScalarWhereInput[]
+    NOT?: MariageScalarWhereInput | MariageScalarWhereInput[]
+    ID_Mariage?: StringFilter<"Mariage"> | string
+    ID_Demande?: StringFilter<"Mariage"> | string
+    NomEpoux?: StringFilter<"Mariage"> | string
+    PrenomEpoux?: StringFilter<"Mariage"> | string
+    DateNaissanceEpoux?: DateTimeFilter<"Mariage"> | Date | string
+    NomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    PrenomEpouse?: StringNullableFilter<"Mariage"> | string | null
+    DateNaissanceEpouse?: DateTimeFilter<"Mariage"> | Date | string
+  }
+
+  export type DecesUpsertWithWhereUniqueWithoutDemandeInput = {
+    where: DecesWhereUniqueInput
+    update: XOR<DecesUpdateWithoutDemandeInput, DecesUncheckedUpdateWithoutDemandeInput>
+    create: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+  }
+
+  export type DecesUpdateWithWhereUniqueWithoutDemandeInput = {
+    where: DecesWhereUniqueInput
+    data: XOR<DecesUpdateWithoutDemandeInput, DecesUncheckedUpdateWithoutDemandeInput>
+  }
+
+  export type DecesUpdateManyWithWhereWithoutDemandeInput = {
+    where: DecesScalarWhereInput
+    data: XOR<DecesUpdateManyMutationInput, DecesUncheckedUpdateManyWithoutDemandeInput>
+  }
+
+  export type DecesScalarWhereInput = {
+    AND?: DecesScalarWhereInput | DecesScalarWhereInput[]
+    OR?: DecesScalarWhereInput[]
+    NOT?: DecesScalarWhereInput | DecesScalarWhereInput[]
+    ID_Deces?: StringFilter<"Deces"> | string
+    ID_Demande?: StringFilter<"Deces"> | string
+    Nom?: StringFilter<"Deces"> | string
+    Prenom?: StringFilter<"Deces"> | string
+    NomMere?: StringNullableFilter<"Deces"> | string | null
+    PrenomMere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionMere?: StringNullableFilter<"Deces"> | string | null
+    NomPere?: StringNullableFilter<"Deces"> | string | null
+    PrenomPere?: StringNullableFilter<"Deces"> | string | null
+    ProfessionPere?: StringNullableFilter<"Deces"> | string | null
+  }
+
+  export type DemandeCreateWithoutNaissancesInput = {
+    ID_Demande?: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeUncheckedCreateWithoutNaissancesInput = {
+    ID_Demande?: string
+    ID_Citoyen: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    ID_Paiement?: string | null
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeCreateOrConnectWithoutNaissancesInput = {
+    where: DemandeWhereUniqueInput
+    create: XOR<DemandeCreateWithoutNaissancesInput, DemandeUncheckedCreateWithoutNaissancesInput>
+  }
+
+  export type DemandeUpsertWithoutNaissancesInput = {
+    update: XOR<DemandeUpdateWithoutNaissancesInput, DemandeUncheckedUpdateWithoutNaissancesInput>
+    create: XOR<DemandeCreateWithoutNaissancesInput, DemandeUncheckedCreateWithoutNaissancesInput>
+    where?: DemandeWhereInput
+  }
+
+  export type DemandeUpdateToOneWithWhereWithoutNaissancesInput = {
+    where?: DemandeWhereInput
+    data: XOR<DemandeUpdateWithoutNaissancesInput, DemandeUncheckedUpdateWithoutNaissancesInput>
+  }
+
+  export type DemandeUpdateWithoutNaissancesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeUncheckedUpdateWithoutNaissancesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    ID_Citoyen?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeCreateWithoutMariagesInput = {
+    ID_Demande?: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeUncheckedCreateWithoutMariagesInput = {
+    ID_Demande?: string
+    ID_Citoyen: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    ID_Paiement?: string | null
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeCreateOrConnectWithoutMariagesInput = {
+    where: DemandeWhereUniqueInput
+    create: XOR<DemandeCreateWithoutMariagesInput, DemandeUncheckedCreateWithoutMariagesInput>
+  }
+
+  export type DemandeUpsertWithoutMariagesInput = {
+    update: XOR<DemandeUpdateWithoutMariagesInput, DemandeUncheckedUpdateWithoutMariagesInput>
+    create: XOR<DemandeCreateWithoutMariagesInput, DemandeUncheckedCreateWithoutMariagesInput>
+    where?: DemandeWhereInput
+  }
+
+  export type DemandeUpdateToOneWithWhereWithoutMariagesInput = {
+    where?: DemandeWhereInput
+    data: XOR<DemandeUpdateWithoutMariagesInput, DemandeUncheckedUpdateWithoutMariagesInput>
+  }
+
+  export type DemandeUpdateWithoutMariagesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeUncheckedUpdateWithoutMariagesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    ID_Citoyen?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeCreateWithoutDecesInput = {
+    ID_Demande?: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
+    Paiement?: PaiementCreateNestedOneWithoutDemandeInput
+    Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeUncheckedCreateWithoutDecesInput = {
+    ID_Demande?: string
+    ID_Citoyen: string
+    TypeActe: $Enums.TypeActe
+    NumeroActe?: string
+    Statut: $Enums.StatutDemande
+    DemandePourTier: $Enums.DemandePourTier
+    DateDemande: Date | string
+    DateActe?: Date | string | null
+    ID_Paiement?: string | null
+    Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+  }
+
+  export type DemandeCreateOrConnectWithoutDecesInput = {
+    where: DemandeWhereUniqueInput
+    create: XOR<DemandeCreateWithoutDecesInput, DemandeUncheckedCreateWithoutDecesInput>
+  }
+
+  export type DemandeUpsertWithoutDecesInput = {
+    update: XOR<DemandeUpdateWithoutDecesInput, DemandeUncheckedUpdateWithoutDecesInput>
+    create: XOR<DemandeCreateWithoutDecesInput, DemandeUncheckedCreateWithoutDecesInput>
+    where?: DemandeWhereInput
+  }
+
+  export type DemandeUpdateToOneWithWhereWithoutDecesInput = {
+    where?: DemandeWhereInput
+    data: XOR<DemandeUpdateWithoutDecesInput, DemandeUncheckedUpdateWithoutDecesInput>
+  }
+
+  export type DemandeUpdateWithoutDecesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeUncheckedUpdateWithoutDecesInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    ID_Citoyen?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeCreateWithoutDocumentInput = {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutDocumentInput = {
@@ -12728,22 +17382,15 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutDocumentInput = {
@@ -12758,7 +17405,6 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    Historiques?: Historique_ModificationsCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateWithoutDocumentsInput = {
@@ -12768,7 +17414,6 @@ export namespace Prisma {
     Email: string
     Role: $Enums.RoleAgent
     Password: string
-    Historiques?: Historique_ModificationsUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentCreateOrConnectWithoutDocumentsInput = {
@@ -12791,23 +17436,16 @@ export namespace Prisma {
     ID_Demande?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutDocumentInput = {
@@ -12815,22 +17453,15 @@ export namespace Prisma {
     ID_Citoyen?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type AgentUpsertWithoutDocumentsInput = {
@@ -12851,7 +17482,6 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    Historiques?: Historique_ModificationsUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateWithoutDocumentsInput = {
@@ -12861,30 +17491,22 @@ export namespace Prisma {
     Email?: StringFieldUpdateOperationsInput | string
     Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
     Password?: StringFieldUpdateOperationsInput | string
-    Historiques?: Historique_ModificationsUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type DemandeCreateWithoutPaiementInput = {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutPaiementInput = {
@@ -12892,22 +17514,15 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutPaiementInput = {
@@ -12930,23 +17545,16 @@ export namespace Prisma {
     ID_Demande?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutPaiementInput = {
@@ -12954,22 +17562,15 @@ export namespace Prisma {
     ID_Citoyen?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type Document_ActeCreateWithoutAgentInput = {
@@ -12999,36 +17600,6 @@ export namespace Prisma {
 
   export type Document_ActeCreateManyAgentInputEnvelope = {
     data: Document_ActeCreateManyAgentInput | Document_ActeCreateManyAgentInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type Historique_ModificationsCreateWithoutAgentInput = {
-    ID_Historique?: string
-    TypeEntite: $Enums.TypeEntite
-    Action: string
-    DateModification?: Date | string
-    Ancienne_Valeur: string
-    Nouvelle_Valeur: string
-    Demande?: DemandeCreateNestedOneWithoutHistoriqueInput
-  }
-
-  export type Historique_ModificationsUncheckedCreateWithoutAgentInput = {
-    ID_Historique?: string
-    TypeEntite: $Enums.TypeEntite
-    ID_Demande?: string | null
-    Action: string
-    DateModification?: Date | string
-    Ancienne_Valeur: string
-    Nouvelle_Valeur: string
-  }
-
-  export type Historique_ModificationsCreateOrConnectWithoutAgentInput = {
-    where: Historique_ModificationsWhereUniqueInput
-    create: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput>
-  }
-
-  export type Historique_ModificationsCreateManyAgentInputEnvelope = {
-    data: Historique_ModificationsCreateManyAgentInput | Historique_ModificationsCreateManyAgentInput[]
     skipDuplicates?: boolean
   }
 
@@ -13062,68 +17633,20 @@ export namespace Prisma {
     DateArchivage?: DateTimeFilter<"Document_Acte"> | Date | string
   }
 
-  export type Historique_ModificationsUpsertWithWhereUniqueWithoutAgentInput = {
-    where: Historique_ModificationsWhereUniqueInput
-    update: XOR<Historique_ModificationsUpdateWithoutAgentInput, Historique_ModificationsUncheckedUpdateWithoutAgentInput>
-    create: XOR<Historique_ModificationsCreateWithoutAgentInput, Historique_ModificationsUncheckedCreateWithoutAgentInput>
-  }
-
-  export type Historique_ModificationsUpdateWithWhereUniqueWithoutAgentInput = {
-    where: Historique_ModificationsWhereUniqueInput
-    data: XOR<Historique_ModificationsUpdateWithoutAgentInput, Historique_ModificationsUncheckedUpdateWithoutAgentInput>
-  }
-
-  export type Historique_ModificationsUpdateManyWithWhereWithoutAgentInput = {
-    where: Historique_ModificationsScalarWhereInput
-    data: XOR<Historique_ModificationsUpdateManyMutationInput, Historique_ModificationsUncheckedUpdateManyWithoutAgentInput>
-  }
-
-  export type AgentCreateWithoutHistoriquesInput = {
-    ID_Agent?: string
-    Nom: string
-    Prenom: string
-    Email: string
-    Role: $Enums.RoleAgent
-    Password: string
-    Documents?: Document_ActeCreateNestedManyWithoutAgentInput
-  }
-
-  export type AgentUncheckedCreateWithoutHistoriquesInput = {
-    ID_Agent?: string
-    Nom: string
-    Prenom: string
-    Email: string
-    Role: $Enums.RoleAgent
-    Password: string
-    Documents?: Document_ActeUncheckedCreateNestedManyWithoutAgentInput
-  }
-
-  export type AgentCreateOrConnectWithoutHistoriquesInput = {
-    where: AgentWhereUniqueInput
-    create: XOR<AgentCreateWithoutHistoriquesInput, AgentUncheckedCreateWithoutHistoriquesInput>
-  }
-
   export type DemandeCreateWithoutHistoriqueInput = {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Deces?: DecesCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutHistoriqueInput = {
@@ -13131,58 +17654,20 @@ export namespace Prisma {
     ID_Citoyen: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutHistoriqueInput = {
     where: DemandeWhereUniqueInput
     create: XOR<DemandeCreateWithoutHistoriqueInput, DemandeUncheckedCreateWithoutHistoriqueInput>
-  }
-
-  export type AgentUpsertWithoutHistoriquesInput = {
-    update: XOR<AgentUpdateWithoutHistoriquesInput, AgentUncheckedUpdateWithoutHistoriquesInput>
-    create: XOR<AgentCreateWithoutHistoriquesInput, AgentUncheckedCreateWithoutHistoriquesInput>
-    where?: AgentWhereInput
-  }
-
-  export type AgentUpdateToOneWithWhereWithoutHistoriquesInput = {
-    where?: AgentWhereInput
-    data: XOR<AgentUpdateWithoutHistoriquesInput, AgentUncheckedUpdateWithoutHistoriquesInput>
-  }
-
-  export type AgentUpdateWithoutHistoriquesInput = {
-    ID_Agent?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
-    Password?: StringFieldUpdateOperationsInput | string
-    Documents?: Document_ActeUpdateManyWithoutAgentNestedInput
-  }
-
-  export type AgentUncheckedUpdateWithoutHistoriquesInput = {
-    ID_Agent?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Role?: EnumRoleAgentFieldUpdateOperationsInput | $Enums.RoleAgent
-    Password?: StringFieldUpdateOperationsInput | string
-    Documents?: Document_ActeUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type DemandeUpsertWithoutHistoriqueInput = {
@@ -13200,23 +17685,16 @@ export namespace Prisma {
     ID_Demande?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutHistoriqueInput = {
@@ -13224,35 +17702,85 @@ export namespace Prisma {
     ID_Citoyen?: StringFieldUpdateOperationsInput | string
     TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
     NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
     Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
     DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
     DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
   }
 
   export type DemandeCreateManyCitoyenInput = {
     ID_Demande?: string
     TypeActe: $Enums.TypeActe
     NumeroActe?: string
-    Nom?: string
-    Prenom?: string
     Statut: $Enums.StatutDemande
     DemandePourTier: $Enums.DemandePourTier
     DateDemande: Date | string
     DateActe?: Date | string | null
     ID_Paiement?: string | null
+  }
+
+  export type DemandeUpdateWithoutCitoyenInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
+    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeUncheckedUpdateWithoutCitoyenInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
+    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+  }
+
+  export type DemandeUncheckedUpdateManyWithoutCitoyenInput = {
+    ID_Demande?: StringFieldUpdateOperationsInput | string
+    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
+    NumeroActe?: StringFieldUpdateOperationsInput | string
+    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
+    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
+    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
+    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Historique_ModificationsCreateManyDemandeInput = {
+    ID_Historique?: string
+    TypeEntite: $Enums.TypeEntite
+    Action: string
+    DateModification?: Date | string
+    Ancienne_Valeur: string
+    Nouvelle_Valeur: string
+    CreatedBy: string
+  }
+
+  export type NaissanceCreateManyDemandeInput = {
+    ID_Naissance?: string
+    Nom?: string
+    Prenom?: string
     NomMere?: string | null
     PrenomMere?: string | null
     ProfessionMere?: string | null
@@ -13263,81 +17791,26 @@ export namespace Prisma {
     DateNaisPere?: Date | string | null
   }
 
-  export type DemandeUpdateWithoutCitoyenInput = {
-    ID_Demande?: StringFieldUpdateOperationsInput | string
-    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
-    NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
-    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
-    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
-    Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
-    Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
+  export type MariageCreateManyDemandeInput = {
+    ID_Mariage?: string
+    NomEpoux?: string
+    PrenomEpoux?: string
+    DateNaissanceEpoux: Date | string
+    NomEpouse?: string | null
+    PrenomEpouse?: string | null
+    DateNaissanceEpouse: Date | string
   }
 
-  export type DemandeUncheckedUpdateWithoutCitoyenInput = {
-    ID_Demande?: StringFieldUpdateOperationsInput | string
-    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
-    NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
-    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
-    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
-    Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-  }
-
-  export type DemandeUncheckedUpdateManyWithoutCitoyenInput = {
-    ID_Demande?: StringFieldUpdateOperationsInput | string
-    TypeActe?: EnumTypeActeFieldUpdateOperationsInput | $Enums.TypeActe
-    NumeroActe?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    Statut?: EnumStatutDemandeFieldUpdateOperationsInput | $Enums.StatutDemande
-    DemandePourTier?: EnumDemandePourTierFieldUpdateOperationsInput | $Enums.DemandePourTier
-    DateDemande?: DateTimeFieldUpdateOperationsInput | Date | string
-    DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type Historique_ModificationsCreateManyDemandeInput = {
-    ID_Historique?: string
-    TypeEntite: $Enums.TypeEntite
-    ID_Agent: string
-    Action: string
-    DateModification?: Date | string
-    Ancienne_Valeur: string
-    Nouvelle_Valeur: string
+  export type DecesCreateManyDemandeInput = {
+    ID_Deces?: string
+    Nom?: string
+    Prenom?: string
+    NomMere?: string | null
+    PrenomMere?: string | null
+    ProfessionMere?: string | null
+    NomPere?: string | null
+    PrenomPere?: string | null
+    ProfessionPere?: string | null
   }
 
   export type Historique_ModificationsUpdateWithoutDemandeInput = {
@@ -13347,27 +17820,135 @@ export namespace Prisma {
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    Agent?: AgentUpdateOneRequiredWithoutHistoriquesNestedInput
+    CreatedBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type Historique_ModificationsUncheckedUpdateWithoutDemandeInput = {
     ID_Historique?: StringFieldUpdateOperationsInput | string
     TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
-    ID_Agent?: StringFieldUpdateOperationsInput | string
     Action?: StringFieldUpdateOperationsInput | string
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+    CreatedBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type Historique_ModificationsUncheckedUpdateManyWithoutDemandeInput = {
     ID_Historique?: StringFieldUpdateOperationsInput | string
     TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
-    ID_Agent?: StringFieldUpdateOperationsInput | string
     Action?: StringFieldUpdateOperationsInput | string
     DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
+    CreatedBy?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NaissanceUpdateWithoutDemandeInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NaissanceUncheckedUpdateWithoutDemandeInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NaissanceUncheckedUpdateManyWithoutDemandeInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MariageUpdateWithoutDemandeInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MariageUncheckedUpdateWithoutDemandeInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MariageUncheckedUpdateManyWithoutDemandeInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DecesUpdateWithoutDemandeInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DecesUncheckedUpdateWithoutDemandeInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DecesUncheckedUpdateManyWithoutDemandeInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Document_ActeCreateManyAgentInput = {
@@ -13378,16 +17959,6 @@ export namespace Prisma {
     SignatureNumerique: string
     EstArchive: boolean
     DateArchivage: Date | string
-  }
-
-  export type Historique_ModificationsCreateManyAgentInput = {
-    ID_Historique?: string
-    TypeEntite: $Enums.TypeEntite
-    ID_Demande?: string | null
-    Action: string
-    DateModification?: Date | string
-    Ancienne_Valeur: string
-    Nouvelle_Valeur: string
   }
 
   export type Document_ActeUpdateWithoutAgentInput = {
@@ -13418,36 +17989,6 @@ export namespace Prisma {
     SignatureNumerique?: StringFieldUpdateOperationsInput | string
     EstArchive?: BoolFieldUpdateOperationsInput | boolean
     DateArchivage?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type Historique_ModificationsUpdateWithoutAgentInput = {
-    ID_Historique?: StringFieldUpdateOperationsInput | string
-    TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
-    Action?: StringFieldUpdateOperationsInput | string
-    DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
-    Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-    Demande?: DemandeUpdateOneWithoutHistoriqueNestedInput
-  }
-
-  export type Historique_ModificationsUncheckedUpdateWithoutAgentInput = {
-    ID_Historique?: StringFieldUpdateOperationsInput | string
-    TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
-    ID_Demande?: NullableStringFieldUpdateOperationsInput | string | null
-    Action?: StringFieldUpdateOperationsInput | string
-    DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
-    Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type Historique_ModificationsUncheckedUpdateManyWithoutAgentInput = {
-    ID_Historique?: StringFieldUpdateOperationsInput | string
-    TypeEntite?: EnumTypeEntiteFieldUpdateOperationsInput | $Enums.TypeEntite
-    ID_Demande?: NullableStringFieldUpdateOperationsInput | string | null
-    Action?: StringFieldUpdateOperationsInput | string
-    DateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
-    Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
   }
 
 
