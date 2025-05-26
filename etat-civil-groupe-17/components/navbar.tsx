@@ -29,7 +29,7 @@ export const Navbar = async () => {
     const navLinks = [
         { href: "/", label: "Accueil" },
         { href: `../#nos-service`, label: "Nouvelle Demande" },
-        ...(user ? [{ href: "/suivi-demande", label: "Suivi mes demandes" }] : []),
+        ...(user ? [{ href: "/suivi-demande", label: "Suivre mes demandes" }] : []),
 
     ];
 

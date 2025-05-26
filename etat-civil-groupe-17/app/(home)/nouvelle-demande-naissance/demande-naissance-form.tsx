@@ -178,7 +178,7 @@ const DemandeNaissanceForm = () => {
                                     )}
                                 />
 
-                                {demandePourTier != DemandePourTier.Moi && <FormField
+                                {demandePourTier !== DemandePourTier.Moi && <FormField
                                     control={form.control}
                                     name="DateActe"
                                     render={({ field }) => (
@@ -198,7 +198,7 @@ const DemandeNaissanceForm = () => {
                             </div>
 
 
-                            {demandePourTier != DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {demandePourTier !== DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="Nom"
@@ -233,6 +233,152 @@ const DemandeNaissanceForm = () => {
                                     )}
                                 />
                             </div>}
+
+                            {demandePourTier !== DemandePourTier.Moi && (
+                                <>
+                                    <h3 className="text-base font-medium">Mère</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <FormField
+                                            control={form.control}
+                                            name="NomMere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Nom de la mère</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Nom de la mère"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="PrenomMere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Prénom de la mère</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Prénom de la mère"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+
+
+                                        <FormField
+                                            control={form.control}
+                                            name="DateNaisMere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Date de naissance de la mère</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Date de naissance de la mère"
+                                                            {...field}
+                                                            type="date"
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                        <FormField
+                                            control={form.control}
+                                            name="ProfessionMere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Profession de la mère</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Profession de la mère"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                    <h3 className="text-base font-medium">Père</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <FormField
+                                            control={form.control}
+                                            name="NomPere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Nom du père</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Nom du père"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="PrenomPere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Prénom du père</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Prénom du père"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                        <FormField
+                                            control={form.control}
+                                            name="DateNaisPere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Date de naissance du père</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Date de naissance du père"
+                                                            {...field}
+                                                            type="date"
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                        <FormField
+                                            control={form.control}
+                                            name="ProfessionPere"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Profession du père</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Profession du père"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                </>
+                            )}
 
                             <div className="border-t pt-4">
                                 <div className="bg-gray-50 p-4 rounded-lg mb-4">

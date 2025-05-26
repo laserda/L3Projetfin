@@ -35,7 +35,7 @@ import { FraisTimbre, TypeActe } from "@/lib/generated/prisma";
 import { createTarif, updateTarif } from "@/server/admin/tarif/tarif";
 
 
-function TarifForm({ setIsOpen, setRefresh, tarif = undefined }: { setIsOpen: any, setRefresh: any, tarif: FraisTimbre | undefined }) {
+function TarifForm({ setIsOpen, setRefresh, tarif = undefined, refresh }: { setIsOpen: any, setRefresh: any, tarif: FraisTimbre | undefined, refresh: boolean }) {
 
     const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState<string | undefined>("");
@@ -52,7 +52,7 @@ function TarifForm({ setIsOpen, setRefresh, tarif = undefined }: { setIsOpen: an
     const onSubmit = async (data: TarifFormData) => {
         setErr("");
         setIsPending(true);
-        console.log("test")
+        // console.log("test")
         const formData = new FormData();
         Object.entries(data).forEach(([key, value]) => {
             formData.append(key, value);

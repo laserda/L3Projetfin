@@ -278,8 +278,8 @@ const DemandeDetailPage = () => {
                                 >
                                     {statusInfo.icon}
                                     <span className="font-medium">
-                                        {request.Statut === "SoumiseEnAttenteDePaiment" &&
-                                            "En attente de paiement"}
+                                        {request.Statut === "SoumisePayee" &&
+                                            "En attente de traitement"}
                                         {request.Statut === "Validée" &&
                                             "Validée"}
                                         {request.Statut === "Refusée" &&
