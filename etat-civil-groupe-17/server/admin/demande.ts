@@ -2,12 +2,12 @@
 
 import { DemandeRepository } from "./repositories/demandeRepository";
 import { HistoriqueRepository } from "./repositories/historiqueRepository";
-import { CitoyenRepository } from "../auth/repositories/citoyenRepository";
+// import { CitoyenRepository } from "../auth/repositories/citoyenRepository";
 import { getSession } from "../sessions/citoyen_session";
 
-import { createDemandeSchema } from "@/validation/validation-demande";
-import { DemandePourTier, StatutDemande } from "@/lib/generated/prisma";
-import { getDateTimeISOString } from "@/utils";
+// import { createDemandeSchema } from "@/validation/validation-demande";
+import { StatutDemande } from "@/lib/generated/prisma";
+// import { getDateTimeISOString } from "@/utils";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { AgentRepository } from "../auth/repositories/agentRepository";
 
@@ -79,6 +79,7 @@ export async function getDemande(ID_Demande: string) {
         where: { ID_Demande: ID_Demande },
         include: {
             Citoyen: true,
+
         },
     });
 }
@@ -145,12 +146,13 @@ export async function updateDemandeStatus(ID_Demande: string, status: StatutDema
             Action: `Mise à jour du statut : ${status}`,
             Ancienne_Valeur: updated.Statut, // tu peux stocker l'ancien si tu le récupères avant
             Nouvelle_Valeur: status,
-            Agent: {
-                connect: { ID_Agent: session?.userId },
-            },
+            // Agent: {
+            //     connect: { ID_Agent: session?.userId },
+            // },
             Demande: {
                 connect: { ID_Demande },
             },
+            CreatedBy: session?.userId,
         }
     });
 

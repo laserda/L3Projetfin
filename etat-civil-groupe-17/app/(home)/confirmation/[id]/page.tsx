@@ -4,7 +4,6 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useReactToPrint } from "react-to-print";
 
-import { DemandeResquest } from "@/types";
 import { getDemandePayer } from "@/server/demande/demande";
 import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
 
@@ -23,11 +22,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, FileText, Download } from "lucide-react";
+import { Citoyen, Deces, Demande, Mariage, Naissance } from "@/lib/generated/prisma";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
-    const [request, setRequest] = useState<DemandeResquest | null>(null);
+    const [request, setRequest] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [type, setType] = useState<string>("");
     const router = useRouter();
 
     const componentRef = useRef<HTMLDivElement>(null);
@@ -44,9 +45,11 @@ const ConfirmationPage: FC = () => {
         const fetchRequest = async () => {
             setLoading(true);
             try {
+                // const foundRequest = await getDemandePayerNaissance(id);
                 const foundRequest = await getDemandePayer(id);
-                setRequest(foundRequest);
-                // renderActeComponent();
+                setRequest(foundRequest?.Demande);
+                console.log(foundRequest);
+
             } catch (error) {
                 console.error("Erreur lors de la récupération de la demande:", error);
             } finally {
@@ -136,10 +139,10 @@ const ConfirmationPage: FC = () => {
                                 <span className="font-medium">Date :</span>{" "}
                                 {request.DateActe?.toDateString()}
                             </p>
-                            <p>
+                            {/* <p>
                                 <span className="font-medium">Email :</span>{" "}
-                                {request.Citoyen.Email}
-                            </p>
+                                {request.Email}
+                            </p> */}
                             <p>
                                 <span className="font-medium">Date de soumission :</span>{" "}
                                 {formatDate(request.DateDemande.toDateString())}
@@ -170,7 +173,7 @@ const ConfirmationPage: FC = () => {
                                     <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                                     <span>
                                         Vous recevrez un email de confirmation à l'adresse{" "}
-                                        {request.Citoyen.Email}.
+                                        {request.Email}.
                                     </span>
                                 </li>
                                 <li className="flex items-start">

@@ -33,8 +33,6 @@ export const Navbar = async () => {
 
     ];
 
-    console.log(user?.id);
-
     const renderNavLinks = () => (
         <>
             {navLinks.map((link) => (

@@ -47,6 +47,8 @@ export interface RequestStats {
 export interface CitoyenResquest {
     ID_Citoyen: string;
     Email: string;
+    Nom: string;
+    Prenom: string;
 }
 
 export interface DemandeResquest {

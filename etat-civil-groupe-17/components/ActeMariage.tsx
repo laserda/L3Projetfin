@@ -8,7 +8,7 @@ import { forwardRef, useEffect, useState } from "react";
 
 const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
     function ActeMariage({ ID_Demande }, ref) {
-        const [acteInfos, setActeInfos] = useState<(Demande & { Citoyen: Citoyen }) | null>(null);
+        const [acteInfos, setActeInfos] = useState<any>(null);
         const [agent, setAgent] = useState<Agent | null>(null);
         const [isLoading, setIsLoading] = useState(true);
 

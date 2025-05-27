@@ -31,28 +31,30 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-import { getRequestDemandePourTier, getRequestTypeName } from "@/utils";
+import { getRequestDemandePourTier, DemandePourTier } from "@/utils";
 import { createDemande } from "@/server/demande/demande";
-import { createDemandeSchema, CreateDemandeFormData } from "@/validation/validation-demande";
+import { naissanceSchema, DemandeNaissanceFormData } from "@/validation/validation-demande";
 import { Info } from "lucide-react";
-import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
+import { TypeActe } from "@/lib/generated/prisma";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { getTarifByType } from "@/server/admin/tarif/tarif";
+
 
 const DemandeNaissanceForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [demandePourTier, setDemandePourTier] = useState<DemandePourTier>(DemandePourTier.Moi);
+    const [demandePourTier, setDemandePourTier] = useState(DemandePourTier.Moi);
     const [err, setErr] = useState<string | undefined>("");
     const [isLoading, setIsLoading] = useState(false);
     const [montant, setMontant] = useState(0);
 
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
+
     const form = useForm({
-        resolver: zodResolver(createDemandeSchema),
+        resolver: zodResolver(naissanceSchema),
         defaultValues: {
             TypeActe: TypeActe.Naissance,
         },
@@ -71,10 +73,13 @@ const DemandeNaissanceForm = () => {
         if (typeFromUrl) {
             form.setValue("TypeActe", typeFromUrl);
             getTarif(typeFromUrl);
+
         }
     }, [typeFromUrl, form]);
 
-    const onSubmit = async (data: CreateDemandeFormData) => {
+    const onSubmit = async (data: DemandeNaissanceFormData) => {
+        // console.log(data);
+
         try {
             setIsLoading(true)
             const formData = new FormData();
@@ -136,7 +141,7 @@ const DemandeNaissanceForm = () => {
                                         <FormControl>
                                             <Select
                                                 onValueChange={(e) => {
-                                                    setDemandePourTier(e as DemandePourTier)
+                                                    setDemandePourTier(e as any)
                                                     field.onChange(e)
                                                 }}
                                                 {...field}

@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Agent, Demande, StatutDemande, Citoyen } from "@/lib/generated/prisma";
+import { Agent, Demande, StatutDemande, Citoyen, Naissance, Mariage, Deces } from "@/lib/generated/prisma";
 import { getDemande, updateDemandeStatus } from "@/server/admin/demande";
 import { Loader } from "@/components/Loader";
 import { createActe } from "@/server/actes/actes";
@@ -35,7 +35,12 @@ const DemandeDetailPage = () => {
     const id = params?.id as string;
     const router = useRouter();
 
-    const [request, setRequest] = useState<Demande>();
+    const [request, setRequest] = useState<Demande & {
+        Citoyen: Citoyen;
+        Naissances?: Naissance[];
+        Mariages?: Mariage[];
+        Deces?: Deces[];
+    }>();
     const [loading, setLoading] = useState(true);
     const [updatingStatus, setUpdatingStatus] = useState(false);
     const [error, setError] = useState("");
@@ -45,7 +50,8 @@ const DemandeDetailPage = () => {
         const fetchRequest = async () => {
             setLoading(true);
             try {
-                const foundRequest: Demande = await getDemande(id);
+                const foundRequest = await getDemande(id);
+                console.log(foundRequest);
 
                 if (foundRequest) {
                     setRequest(foundRequest);
@@ -312,7 +318,7 @@ const DemandeDetailPage = () => {
                                                     Nom
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.Nom}
+                                                    {request.Citoyen.Nom}
                                                 </p>
                                             </div>
                                             <div>
@@ -320,7 +326,7 @@ const DemandeDetailPage = () => {
                                                     Prénom
                                                 </h3>
                                                 <p className="mt-1">
-                                                    {request.Prenom}
+                                                    {request.Citoyen.Prenom}
                                                 </p>
                                             </div>
                                             <div>

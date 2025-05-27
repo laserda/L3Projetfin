@@ -9,7 +9,7 @@ import { forwardRef, useEffect, useState } from "react";
 
 const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
     function ActeNaissance({ ID_Demande }, ref) {
-        const [acteInfos, setActeInfos] = useState<(Demande & { Citoyen: Citoyen }) | null>(null);
+        const [acteInfos, setActeInfos] = useState<any>(null);
         const [agent, setAgent] = useState<Agent | null>(null);
         const [isLoading, setIsLoading] = useState(true);
 
@@ -59,10 +59,10 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 {/* Informations de l'état civil */}
                 <div className="flex justify-between mb-4">
                     <div className="text-left">
-                        <p className="uppercase font-bold text-md">Département de {acteInfos?.Citoyen.LieuNaissance}</p>
-                        <p className="text-md">Commune de {acteInfos?.Citoyen.LieuNaissance}</p>
+                        {/* <p className="uppercase font-bold text-md">Département de {acteInfos?.Citoyen.LieuNaissance}</p> */}
+                        {/* <p className="text-md">Commune de {acteInfos?.Citoyen.LieuNaissance}</p> */}
                         <p className="uppercase font-bold text-md ">État civil</p>
-                        <p className="text-md">Centre principal {acteInfos?.Citoyen.LieuNaissance}</p>
+                        {/* <p className="text-md">Centre principal {acteInfos?.Citoyen.LieuNaissance}</p> */}
                         <p className=" text-md">N° {acteInfos?.NumeroActe} du {new Date(acteInfos?.DateDemande || "").toLocaleDateString()} du registre</p>
                     </div>
                     <div className="text-center font-bold">
@@ -80,7 +80,7 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                         est né <strong>{acteInfos?.Prenom}</strong>
                     </p>
                     <p className="mb-1">
-                        à la Maternité de {acteInfos?.Citoyen.LieuNaissance} ./
+                        {/* à la Maternité de {acteInfos?.Citoyen.LieuNaissance} ./ */}
                         fils de{" "} <strong>{acteInfos?.NomPere} {acteInfos?.PrenomPere}</strong>
                     </p>
                     <p className="mb-1">
@@ -120,7 +120,8 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                     </div>
                     <div className="text-right">
                         <p className="text-lg mb-4">
-                            Délivré à {acteInfos?.Citoyen.LieuNaissance}, le <strong>{new Date(acteInfos?.DateDemande || "").toLocaleDateString()}</strong>
+                            {/* Délivré à {acteInfos?.Citoyen.LieuNaissance} */}
+                            , le <strong>{new Date(acteInfos?.DateDemande || "").toLocaleDateString()}</strong>
                         </p>
                         <p className="font-semibold text-md mb-2">L'Officier de l'État Civil,</p>
                         <div className="mb-4">

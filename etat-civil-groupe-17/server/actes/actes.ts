@@ -1,14 +1,13 @@
 "use server";
 
 import { ActeRepository } from './repositories/actesRepository'
-import { CitoyenRepository } from '../auth/repositories/citoyenRepository';
 import { getSession } from "../sessions/citoyen_session";
-import { createDemandeSchema } from '@/validation/validation-demande';
-import { DemandePourTier, StatutDemande } from '@/lib/generated/prisma';
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
 import { ResultData } from '@/types';
 import { AgentRepository } from '../auth/repositories/agentRepository';
+
+import { TypeActe } from '@/lib/generated/prisma';
 
 
 const acteRepo = new ActeRepository()
@@ -60,22 +59,89 @@ export async function createActe(ID_Demande: string): Promise<ResultData> {
 }
 
 export async function getActe(ID_Demande: string) {
+
     try {
-        return await acteRepo.findOne({
+        const acte = await acteRepo.findOne({
             where: { ID_Demande },
             include: {
                 Agent: true,
                 Demande: {
                     include: {
-                        Citoyen: true
+                        Citoyen: true,
+                        Deces: true,
+                        Mariages: true,
+                        Naissances: true
                     }
                 }
             }
         });
+        const res = factoryActe(acte);
+        return res;
 
     } catch (error) {
         console.error("Erreur lors de la récupération de l'acte:", error);
         return null;
+    }
+}
+
+function factoryActe(data: any) {
+    switch (data.Demande.TypeActe) {
+        case TypeActe.Naissance:
+            const naissance = {
+                Citoyen: data.Demande.Citoyen,
+                Demande: {
+                    Nom: data.Demande.Naissances[0].Nom,
+                    Prenom: data.Demande.Naissances[0].Prenom,
+                    NomMere: data.Demande.Naissances[0].NomMere,
+                    PrenomMere: data.Demande.Naissances[0].PrenomMere,
+                    ProfessionMere: data.Demande.Naissances[0].ProfessionMere,
+                    DateNaisMere: data.Demande.Naissances[0].DateNaisMere,
+                    NomPere: data.Demande.Naissances[0].NomPere,
+                    PrenomPere: data.Demande.Naissances[0].PrenomPere,
+                    ProfessionPere: data.Demande.Naissances[0].ProfessionPere,
+                    DateNaisPere: data.Demande.Naissances[0].DateNaisPere
+                },
+                Agent: data.Agent,
+            }
+            return naissance
+        case TypeActe.Mariage:
+            const mariage = {
+                Citoyen: data.Demande.Citoyen,
+                Demande: {
+                    Nom: data.Demande.Mariages[0].Nom,
+                    Prenom: data.Demande.Mariages[0].Prenom,
+                    NomMere: data.Demande.Mariages[0].NomMere,
+                    PrenomMere: data.Demande.Mariages[0].PrenomMere,
+                    ProfessionMere: data.Demande.Mariages[0].ProfessionMere,
+                    DateNaisMere: data.Demande.Mariages[0].DateNaisMere,
+                    NomPere: data.Demande.Mariages[0].NomPere,
+                    PrenomPere: data.Demande.Mariages[0].PrenomPere,
+                    ProfessionPere: data.Demande.Mariages[0].ProfessionPere,
+                    DateNaisPere: data.Demande.Mariages[0].DateNaisPere
+                },
+                Agent: data.Agent,
+            }
+            return mariage
+        case TypeActe.Décès:
+            const deces = {
+                Citoyen: data.Demande.Citoyen,
+                Demande: {
+                    Nom: data.Demande.Deces[0].Nom,
+                    Prenom: data.Demande.Deces[0].Prenom,
+                    NomMere: data.Demande.Deces[0].NomMere,
+                    PrenomMere: data.Demande.Deces[0].PrenomMere,
+                    ProfessionMere: data.Demande.Deces[0].ProfessionMere,
+                    DateNaisMere: data.Demande.Deces[0].DateNaisMere,
+                    NomPere: data.Demande.Deces[0].NomPere,
+                    PrenomPere: data.Demande.Deces[0].PrenomPere,
+                    ProfessionPere: data.Demande.Deces[0].ProfessionPere,
+                    DateNaisPere: data.Demande.Deces[0].DateNaisPere
+                },
+                Agent: data.Agent,
+            }
+            return deces
+        default:
+            return null;
     }
 }
 

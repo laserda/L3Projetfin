@@ -23,8 +23,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { createDemande } from "@/server/demande/demande";
-import { CreateDemandeDecesFormData, createDemandeDecesSchema } from "@/validation/validation-demande";
+import { createDecesDemande, createDemande } from "@/server/demande/demande";
+import { CreateDemandeDecesFormData, createDemandeDecesSchema, decesSchema, DemandeDecesFormData } from "@/validation/validation-demande";
 import { TypeActe } from "@/lib/generated/prisma";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { getTarifByType } from "@/server/admin/tarif/tarif";
@@ -42,7 +42,7 @@ const DemandeDecesForm = () => {
     const typeFromUrl = searchParams.get("type") as TypeActe;
 
     const form = useForm({
-        resolver: zodResolver(createDemandeDecesSchema),
+        resolver: zodResolver(decesSchema),
         defaultValues: {
             TypeActe: TypeActe.Décès,
         },
@@ -64,7 +64,7 @@ const DemandeDecesForm = () => {
         }
     }, [typeFromUrl, form]);
 
-    const onSubmit = async (data: CreateDemandeDecesFormData) => {
+    const onSubmit = async (data: DemandeDecesFormData) => {
         try {
             setIsLoading(true)
             const formData = new FormData();
@@ -72,7 +72,7 @@ const DemandeDecesForm = () => {
                 formData.append(key, value);
             });
 
-            const newRequest = await createDemande(formData);
+            const newRequest = await createDecesDemande(formData);
 
             if (!newRequest.success) {
                 setErr(newRequest.error);

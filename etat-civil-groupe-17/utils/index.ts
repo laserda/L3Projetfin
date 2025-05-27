@@ -1,7 +1,15 @@
 import n2words from "n2words";
-import { DemandePourTier, StatutDemande, TypeActe } from "@/lib/generated/prisma";
+import { StatutDemande, TypeActe } from "@/lib/generated/prisma";
 
 
+export const DemandePourTier = {
+    Moi: "Moi",
+    MonEnfant: "MonEnfant",
+    UnMenbreFamile: "UnMenbreFamile",
+    Autre: "Autre"
+} as const;
+
+export type DemandePourTier = (typeof DemandePourTier)[keyof typeof DemandePourTier];
 
 
 
@@ -69,6 +77,7 @@ export const getStatusDemande = (status: string) => {
 
 
 export const getRequestDemandePourTier = (type: string) => {
+
     switch (type) {
         case DemandePourTier.Moi:
             return "Moi même";
