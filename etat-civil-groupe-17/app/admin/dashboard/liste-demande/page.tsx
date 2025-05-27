@@ -38,8 +38,8 @@ import { Loader } from "@/components/Loader";
 import { getStatusInfo } from "@/app/shared/common";
 
 const DemandesListPage: FC = () => {
-    const [requests, setRequests] = useState<Demande[]>([]);
-    const [filteredRequests, setFilteredRequests] = useState<Demande[]>([]);
+    const [requests, setRequests] = useState<any[]>([]);
+    const [filteredRequests, setFilteredRequests] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     // Filtres

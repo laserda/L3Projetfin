@@ -37,13 +37,21 @@ CREATE TABLE "Demande" (
     "ID_Citoyen" TEXT NOT NULL,
     "TypeActe" "TypeActe" NOT NULL,
     "NumeroActe" TEXT NOT NULL DEFAULT '',
-    "Nom" TEXT NOT NULL DEFAULT '',
-    "Prenom" TEXT NOT NULL DEFAULT '',
     "Statut" "StatutDemande" NOT NULL,
     "DemandePourTier" "DemandePourTier" NOT NULL,
     "DateDemande" TIMESTAMP(3) NOT NULL,
     "DateActe" TIMESTAMP(3),
     "ID_Paiement" TEXT,
+
+    CONSTRAINT "Demande_pkey" PRIMARY KEY ("ID_Demande")
+);
+
+-- CreateTable
+CREATE TABLE "Naissance" (
+    "ID_Naissance" TEXT NOT NULL,
+    "ID_Demande" TEXT NOT NULL,
+    "Nom" TEXT NOT NULL DEFAULT '',
+    "Prenom" TEXT NOT NULL DEFAULT '',
     "NomMere" TEXT DEFAULT '',
     "PrenomMere" TEXT DEFAULT '',
     "ProfessionMere" TEXT DEFAULT '',
@@ -53,7 +61,37 @@ CREATE TABLE "Demande" (
     "ProfessionPere" TEXT DEFAULT '',
     "DateNaisPere" TIMESTAMP(3),
 
-    CONSTRAINT "Demande_pkey" PRIMARY KEY ("ID_Demande")
+    CONSTRAINT "Naissance_pkey" PRIMARY KEY ("ID_Naissance")
+);
+
+-- CreateTable
+CREATE TABLE "Mariage" (
+    "ID_Mariage" TEXT NOT NULL,
+    "ID_Demande" TEXT NOT NULL,
+    "NomEpoux" TEXT NOT NULL DEFAULT '',
+    "PrenomEpoux" TEXT NOT NULL DEFAULT '',
+    "DateNaissanceEpoux" TIMESTAMP(3) NOT NULL,
+    "NomEpouse" TEXT DEFAULT '',
+    "PrenomEpouse" TEXT DEFAULT '',
+    "DateNaissanceEpouse" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Mariage_pkey" PRIMARY KEY ("ID_Mariage")
+);
+
+-- CreateTable
+CREATE TABLE "Deces" (
+    "ID_Deces" TEXT NOT NULL,
+    "ID_Demande" TEXT NOT NULL,
+    "Nom" TEXT NOT NULL DEFAULT '',
+    "Prenom" TEXT NOT NULL DEFAULT '',
+    "NomMere" TEXT DEFAULT '',
+    "PrenomMere" TEXT DEFAULT '',
+    "ProfessionMere" TEXT DEFAULT '',
+    "NomPere" TEXT DEFAULT '',
+    "PrenomPere" TEXT DEFAULT '',
+    "ProfessionPere" TEXT DEFAULT '',
+
+    CONSTRAINT "Deces_pkey" PRIMARY KEY ("ID_Deces")
 );
 
 -- CreateTable
@@ -98,11 +136,11 @@ CREATE TABLE "Historique_Modifications" (
     "ID_Historique" TEXT NOT NULL,
     "TypeEntite" "TypeEntite" NOT NULL,
     "ID_Demande" TEXT,
-    "ID_Agent" TEXT NOT NULL,
     "Action" TEXT NOT NULL,
     "DateModification" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "Ancienne_Valeur" TEXT NOT NULL,
     "Nouvelle_Valeur" TEXT NOT NULL,
+    "CreatedBy" TEXT NOT NULL,
 
     CONSTRAINT "Historique_Modifications_pkey" PRIMARY KEY ("ID_Historique")
 );
@@ -132,6 +170,15 @@ CREATE INDEX "Demande_ID_Citoyen_idx" ON "Demande"("ID_Citoyen");
 CREATE INDEX "Demande_ID_Paiement_idx" ON "Demande"("ID_Paiement");
 
 -- CreateIndex
+CREATE INDEX "Naissance_ID_Demande_idx" ON "Naissance"("ID_Demande");
+
+-- CreateIndex
+CREATE INDEX "Mariage_ID_Demande_idx" ON "Mariage"("ID_Demande");
+
+-- CreateIndex
+CREATE INDEX "Deces_ID_Demande_idx" ON "Deces"("ID_Demande");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Document_Acte_ID_Demande_key" ON "Document_Acte"("ID_Demande");
 
 -- CreateIndex
@@ -147,9 +194,6 @@ CREATE UNIQUE INDEX "Paiement_Transaction_ID_key" ON "Paiement"("Transaction_ID"
 CREATE UNIQUE INDEX "Agent_Email_key" ON "Agent"("Email");
 
 -- CreateIndex
-CREATE INDEX "Historique_Modifications_ID_Agent_idx" ON "Historique_Modifications"("ID_Agent");
-
--- CreateIndex
 CREATE INDEX "Historique_Modifications_ID_Demande_idx" ON "Historique_Modifications"("ID_Demande");
 
 -- CreateIndex
@@ -162,13 +206,19 @@ ALTER TABLE "Demande" ADD CONSTRAINT "Demande_ID_Citoyen_fkey" FOREIGN KEY ("ID_
 ALTER TABLE "Demande" ADD CONSTRAINT "Demande_ID_Paiement_fkey" FOREIGN KEY ("ID_Paiement") REFERENCES "Paiement"("ID_Paiement") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Naissance" ADD CONSTRAINT "Naissance_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Mariage" ADD CONSTRAINT "Mariage_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Deces" ADD CONSTRAINT "Deces_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Document_Acte" ADD CONSTRAINT "Document_Acte_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Document_Acte" ADD CONSTRAINT "Document_Acte_ID_Agent_fkey" FOREIGN KEY ("ID_Agent") REFERENCES "Agent"("ID_Agent") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "Historique_Modifications_ID_Agent_fkey" FOREIGN KEY ("ID_Agent") REFERENCES "Agent"("ID_Agent") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Historique_Modifications" ADD CONSTRAINT "Historique_Modifications_ID_Demande_fkey" FOREIGN KEY ("ID_Demande") REFERENCES "Demande"("ID_Demande") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -72,13 +72,28 @@ model Demande {
   ID_Citoyen    String
   TypeActe      TypeActe
   NumeroActe     String   @default("")
-  Nom            String   @default("")
-  Prenom         String   @default("")
   Statut        StatutDemande
   DemandePourTier  DemandePourTier 
   DateDemande   DateTime   
   DateActe  DateTime?  
   ID_Paiement   String?     @unique
+  Citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
+  Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
+  Document      Document_Acte?
+  Historique    Historique_Modifications[]
+  Naissances     Naissance[]
+  Mariages     Mariage[]
+  Deces       Deces[]
+
+  @@index([ID_Citoyen])
+  @@index([ID_Paiement])
+}
+
+model Naissance {
+  ID_Naissance    String    @id @default(uuid())
+  ID_Demande    String    
+  Nom            String   @default("")
+  Prenom         String   @default("")
   NomMere            String?   @default("")
   PrenomMere         String?   @default("")  
   ProfessionMere         String?   @default("")  
@@ -87,14 +102,43 @@ model Demande {
   PrenomPere         String?   @default("")  
   ProfessionPere     String?   @default("")
   DateNaisPere  DateTime?  
-  Citoyen       Citoyen      @relation(fields: [ID_Citoyen], references: [ID_Citoyen])
-  Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
-  Document      Document_Acte?
-  Historique    Historique_Modifications[]
+  Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
 
-  @@index([ID_Citoyen])
-  @@index([ID_Paiement])
+  @@index([ID_Demande])
 }
+
+
+model Mariage {
+  ID_Mariage    String    @id @default(uuid())
+  ID_Demande    String    
+  NomEpoux            String   @default("")
+  PrenomEpoux        String   @default("")
+  DateNaissanceEpoux  DateTime
+  NomEpouse           String?   @default("")
+  PrenomEpouse         String?   @default("")  
+  DateNaissanceEpouse  DateTime
+  Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
+
+  @@index([ID_Demande])
+}
+
+
+model Deces {
+  ID_Deces    String    @id @default(uuid())
+  ID_Demande    String   
+  Nom            String   @default("")
+  Prenom         String   @default("")
+  NomMere            String?   @default("")
+  PrenomMere         String?   @default("")  
+  ProfessionMere         String?   @default("")  
+  NomPere            String?   @default("")
+  PrenomPere         String?   @default("")  
+  ProfessionPere     String?   @default("")
+  Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
+
+  @@index([ID_Demande])
+}
+
 
 model Document_Acte {
   ID_Document_Acte    String     @id @default(uuid())
@@ -131,23 +175,20 @@ model Agent {
   Role       RoleAgent
   Password      String
   Documents  Document_Acte[]
-  Historiques Historique_Modifications[]
 }
 
 model Historique_Modifications {
   ID_Historique     String      @id @default(uuid())
   TypeEntite       TypeEntite
   ID_Demande         String?
-  ID_Agent          String
   Action            String
   DateModification DateTime @default(now())
   Ancienne_Valeur   String
   Nouvelle_Valeur   String
+  CreatedBy   String
 
-  Agent             Agent       @relation(fields: [ID_Agent], references: [ID_Agent])
   Demande     Demande? @relation(fields: [ID_Demande], references: [ID_Demande])
 
-  @@index([ID_Agent])
   @@index([ID_Demande])
 }
 
