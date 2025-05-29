@@ -88,8 +88,13 @@ function factoryActe(data: any) {
     switch (data.Demande.TypeActe) {
         case TypeActe.Naissance:
             const naissance = {
-                Citoyen: data.Demande.Citoyen,
+                Citoyen: {
+                    Nom: data.Demande.Citoyen.Nom,
+                    Prenom: data.Demande.Citoyen.Prenom,
+                    Email: data.Demande.Citoyen.Email,
+                },
                 Demande: {
+                    ...data.Demande,
                     Nom: data.Demande.Naissances[0].Nom,
                     Prenom: data.Demande.Naissances[0].Prenom,
                     NomMere: data.Demande.Naissances[0].NomMere,
@@ -101,13 +106,18 @@ function factoryActe(data: any) {
                     ProfessionPere: data.Demande.Naissances[0].ProfessionPere,
                     DateNaisPere: data.Demande.Naissances[0].DateNaisPere
                 },
-                Agent: data.Agent,
+                Agent: {
+                    Nom: data.Agent.Nom,
+                    Prenom: data.Agent.Prenom,
+                    // Email: data.Demande.Citoyen.Email,
+                },
             }
             return naissance
         case TypeActe.Mariage:
             const mariage = {
                 Citoyen: data.Demande.Citoyen,
                 Demande: {
+                    ...data.Demande,
                     Nom: data.Demande.Mariages[0].Nom,
                     Prenom: data.Demande.Mariages[0].Prenom,
                     NomMere: data.Demande.Mariages[0].NomMere,
@@ -119,13 +129,18 @@ function factoryActe(data: any) {
                     ProfessionPere: data.Demande.Mariages[0].ProfessionPere,
                     DateNaisPere: data.Demande.Mariages[0].DateNaisPere
                 },
-                Agent: data.Agent,
+                Agent: {
+                    Nom: data.Agent.Nom,
+                    Prenom: data.Agent.Prenom,
+                    // Email: data.Demande.Citoyen.Email,
+                },
             }
             return mariage
         case TypeActe.Décès:
             const deces = {
                 Citoyen: data.Demande.Citoyen,
                 Demande: {
+                    ...data.Demande,
                     Nom: data.Demande.Deces[0].Nom,
                     Prenom: data.Demande.Deces[0].Prenom,
                     NomMere: data.Demande.Deces[0].NomMere,
@@ -137,7 +152,11 @@ function factoryActe(data: any) {
                     ProfessionPere: data.Demande.Deces[0].ProfessionPere,
                     DateNaisPere: data.Demande.Deces[0].DateNaisPere
                 },
-                Agent: data.Agent,
+                Agent: {
+                    Nom: data.Agent.Nom,
+                    Prenom: data.Agent.Prenom,
+                    // Email: data.Demande.Citoyen.Email,
+                },
             }
             return deces
         default:

@@ -136,13 +136,21 @@ export async function createMarigeDemande(formData: FormData): Promise<ResultDat
                 error: ErrorsMessage.errors,
             };
         }
+        console.log('user', user);
 
-        if (result.data.DemandePourTier == QuiDemande.LeMari) {
+        if (result.data.DemandePourTier === QuiDemande.LeMari) {
             result.data.NomEpoux = user.Nom;
             result.data.PrenomEpoux = user.Prenom;
             result.data.DateNaissanceEpoux = user.DateNaissance.toISOString();
-        } else {
-            result.data.DateActe = `${result.data.DateActe}T00:00:00.000Z`;
+            result.data.DateNaissanceEpouse = user.DateNaissance.toISOString();
+        } if (result.data.DemandePourTier === QuiDemande.LaFemme) {
+            result.data.NomEpouse = user.Nom;
+            result.data.PrenomEpouse = user.Prenom;
+            result.data.DateNaissanceEpoux = user.DateNaissance.toISOString();
+            result.data.DateNaissanceEpouse = user.DateNaissance.toISOString();
+        } if (result.data.DemandePourTier === QuiDemande.Autre) {
+            result.data.DateNaissanceEpoux = `${result.data.DateNaissanceEpoux}T00:00:00.000Z`;
+            result.data.DateNaissanceEpouse = `${result.data.DateNaissanceEpouse}T00:00:00.000Z`;
         }
 
         const demande = {
@@ -151,7 +159,7 @@ export async function createMarigeDemande(formData: FormData): Promise<ResultDat
             TypeActe: result.data.TypeActe,
             NumeroActe: result.data.NumeroActe
         }
-
+        console.log('data', result.data);
         const newDemande = await demandeRepo.create({
             data: {
                 ...demande,
@@ -163,7 +171,8 @@ export async function createMarigeDemande(formData: FormData): Promise<ResultDat
             }
         });
 
-        const newDateNaissanceEpouse = `${result.data.DateNaissanceEpouse}T00:00:00.000Z`
+        // const newDateNaissanceEpouse = `${result.data.DateNaissanceEpouse}T00:00:00.000Z`
+
 
         const demandeMariage = {
             NomEpoux: result.data.NomEpoux ?? '',
@@ -171,7 +180,7 @@ export async function createMarigeDemande(formData: FormData): Promise<ResultDat
             DateNaissanceEpoux: result.data.DateNaissanceEpoux ?? '',
             NomEpouse: result.data.NomEpouse ?? '',
             PrenomEpouse: result.data.PrenomEpouse ?? '',
-            DateNaissanceEpouse: newDateNaissanceEpouse ?? ''
+            DateNaissanceEpouse: result.data.DateNaissanceEpouse ?? ''
         }
 
         const newDemandeMariage = await mariageRepo.create({
@@ -330,8 +339,9 @@ function factoryDemande(data: any) {
             const naissance = {
                 Demande: {
                     ...data,
-                    Nom: data.Naissances[0].Nom,
-                    Prenom: data.Naissances[0].Prenom,
+                    Nom: data.Citoyen.Nom,
+                    Prenom: data.Citoyen.Prenom,
+                    Email: data.Citoyen.Email,
                 },
             }
             return naissance
@@ -339,8 +349,9 @@ function factoryDemande(data: any) {
             const mariage = {
                 Demande: {
                     ...data,
-                    Nom: data.Mariages[0].Nom,
-                    Prenom: data.Mariages[0].Prenom,
+                    Nom: data.Citoyen.Nom,
+                    Prenom: data.Citoyen.Prenom,
+                    Email: data.Citoyen.Email,
                 },
             }
             return mariage
@@ -348,8 +359,9 @@ function factoryDemande(data: any) {
             const deces = {
                 Demande: {
                     ...data,
-                    Nom: data.Deces[0].Nom,
-                    Prenom: data.Deces[0].Prenom,
+                    Nom: data.Citoyen.Nom,
+                    Prenom: data.Citoyen.Prenom,
+                    Email: data.Citoyen.Email,
                 },
             }
             return deces
@@ -366,7 +378,7 @@ export async function getDemandePayer(ID_Demande: string) {
             Statut: { not: StatutDemande.SoumiseEnAttenteDePaiment }
         },
         include: {
-            // Citoyen: true,
+            Citoyen: true,
             Naissances: true,
             Mariages: true,
             Deces: true

@@ -10,7 +10,7 @@ import { forwardRef, useEffect, useState } from "react";
 const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
     function ActeNaissance({ ID_Demande }, ref) {
         const [acteInfos, setActeInfos] = useState<any>(null);
-        const [agent, setAgent] = useState<Agent | null>(null);
+        const [agent, setAgent] = useState<any>(null);
         const [isLoading, setIsLoading] = useState(true);
 
         const getDocumentInfo = async () => {

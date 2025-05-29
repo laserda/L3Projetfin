@@ -22,13 +22,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, FileText, Download } from "lucide-react";
-import { Citoyen, Deces, Demande, Mariage, Naissance } from "@/lib/generated/prisma";
 
 const ConfirmationPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [request, setRequest] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [type, setType] = useState<string>("");
     const router = useRouter();
 
     const componentRef = useRef<HTMLDivElement>(null);
@@ -45,10 +43,9 @@ const ConfirmationPage: FC = () => {
         const fetchRequest = async () => {
             setLoading(true);
             try {
-                // const foundRequest = await getDemandePayerNaissance(id);
                 const foundRequest = await getDemandePayer(id);
                 setRequest(foundRequest?.Demande);
-                console.log(foundRequest);
+                // console.log(foundRequest);
 
             } catch (error) {
                 console.error("Erreur lors de la récupération de la demande:", error);
@@ -130,19 +127,19 @@ const ConfirmationPage: FC = () => {
                                 {getRequestTypeName(request.TypeActe)}
                             </p>
                             <p>
-                                <span className="font-medium">Nom :</span> {request.Nom}
+                                <span className="font-medium">Nom du demandeur :</span> {request.Nom}
                             </p>
                             <p>
-                                <span className="font-medium">Prénom :</span> {request.Prenom}
+                                <span className="font-medium">Prénom du demandeur :</span> {request.Prenom}
                             </p>
                             <p>
-                                <span className="font-medium">Date :</span>{" "}
+                                <span className="font-medium">Date de l'évènement :</span>{" "}
                                 {request.DateActe?.toDateString()}
                             </p>
-                            {/* <p>
-                                <span className="font-medium">Email :</span>{" "}
+                            <p>
+                                <span className="font-medium">Email du demandeur :</span>{" "}
                                 {request.Email}
-                            </p> */}
+                            </p>
                             <p>
                                 <span className="font-medium">Date de soumission :</span>{" "}
                                 {formatDate(request.DateDemande.toDateString())}

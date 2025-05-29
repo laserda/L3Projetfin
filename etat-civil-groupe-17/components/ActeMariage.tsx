@@ -1,5 +1,4 @@
 "use client";
-import { Agent, Demande, Citoyen } from "@/lib/generated/prisma";
 import { getActe } from "@/server/actes/actes";
 import { dateEnLettres } from "@/utils";
 import Image from "next/image";
@@ -9,7 +8,7 @@ import { forwardRef, useEffect, useState } from "react";
 const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
     function ActeMariage({ ID_Demande }, ref) {
         const [acteInfos, setActeInfos] = useState<any>(null);
-        const [agent, setAgent] = useState<Agent | null>(null);
+        const [agent, setAgent] = useState<any>(null);
         const [isLoading, setIsLoading] = useState(true);
 
         const getDocumentInfo = async () => {
@@ -58,10 +57,7 @@ const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 {/* Informations de l'état civil */}
                 <div className="flex justify-between">
                     <div className="text-left">
-                        <p className="uppercase font-bold text-md">Département de {acteInfos?.Citoyen.LieuNaissance}</p>
-                        <p className="text-md">Commune de {acteInfos?.Citoyen.LieuNaissance}</p>
                         <p className="uppercase font-bold text-md">État civil</p>
-                        <p className="text-base">Centre principal {acteInfos?.Citoyen.LieuNaissance}</p>
                         <p className="text-base">N° {acteInfos?.NumeroActe} du {new Date(acteInfos?.DateDemande || "").toLocaleDateString()} du registre</p>
                     </div>
                     <div className="text-center font-bold">
@@ -90,8 +86,7 @@ const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                                 {acteInfos?.Prenom} {acteInfos?.Nom}
                             </p>
                             <p className="mb-1">
-                                Né(e) le {new Date(acteInfos?.DateActe || "").toLocaleDateString()} à {acteInfos?.Citoyen.LieuNaissance}
-                            </p>
+                                Né(e) le {new Date(acteInfos?.DateActe || "").toLocaleDateString()}</p>
                             <p className="mb-1">
                                 Profession : {acteInfos?.ProfessionPere || "Sans profession"}
                             </p>
@@ -109,7 +104,6 @@ const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                                 {acteInfos?.PrenomMere} {acteInfos?.NomMere}
                             </p>
                             <p className="mb-1">
-                                Né(e) le {new Date(acteInfos?.DateNaisMere || "").toLocaleDateString()} à {acteInfos?.Citoyen.LieuNaissance}
                             </p>
                             <p className="mb-1">
                                 Profession : {acteInfos?.ProfessionMere || "Sans profession"}
@@ -149,9 +143,7 @@ const ActeMariage = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                         </div>
                     </div>
                     <div className="text-right">
-                        <p className="text-md mb-4">
-                            Délivré à {acteInfos?.Citoyen.LieuNaissance}, le <strong>{new Date(acteInfos?.DateDemande || "").toLocaleDateString()}</strong>
-                        </p>
+
                         <p className="font-semibold text-md mb-2">L'Officier de l'État Civil,</p>
                         <div className="mb-4">
                             <Image

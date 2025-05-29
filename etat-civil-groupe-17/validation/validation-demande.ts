@@ -117,7 +117,8 @@ export const createDemandeDecesSchema = z.object({
 
 export enum QuiDemande {
     LeMari = "Le mari",
-    LaFemme = "La femme"
+    LaFemme = "La femme",
+    Autre = "Autre"
 }
 
 export const mariageSchema = z.object({

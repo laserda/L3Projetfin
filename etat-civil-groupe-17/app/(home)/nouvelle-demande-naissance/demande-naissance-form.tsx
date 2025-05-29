@@ -37,7 +37,7 @@ import { naissanceSchema, DemandeNaissanceFormData } from "@/validation/validati
 import { Info } from "lucide-react";
 import { TypeActe } from "@/lib/generated/prisma";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ErrorsMessage } from "@/enums/errors-message";
+
 import { getTarifByType } from "@/server/admin/tarif/tarif";
 
 
@@ -78,7 +78,6 @@ const DemandeNaissanceForm = () => {
     }, [typeFromUrl, form]);
 
     const onSubmit = async (data: DemandeNaissanceFormData) => {
-        // console.log(data);
 
         try {
             setIsLoading(true)
