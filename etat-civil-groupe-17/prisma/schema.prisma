@@ -85,9 +85,9 @@ model Demande {
   Paiement      Paiement?      @relation(fields: [ID_Paiement], references: [ID_Paiement])
   Document      Document_Acte?
   Historique    Historique_Modifications[]
-  Naissances     Naissance[]
-  Mariages     Mariage[]
-  Deces       Deces[]
+  Naissances     Naissance? 
+  Mariages     Mariage?
+  Deces       Deces?
 
   @@index([ID_Citoyen])
   @@index([ID_Paiement])
@@ -95,7 +95,7 @@ model Demande {
 
 model Naissance {
   ID_Naissance    String    @id @default(uuid())
-  ID_Demande    String    
+  ID_Demande    String    @unique
   Nom            String   @default("")
   Prenom         String   @default("")
   NomMere            String?   @default("")
@@ -108,13 +108,12 @@ model Naissance {
   DateNaisPere  DateTime?  
   Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
 
-  @@index([ID_Demande])
 }
 
 
 model Mariage {
   ID_Mariage    String    @id @default(uuid())
-  ID_Demande    String    
+  ID_Demande    String    @unique
   NomEpoux            String   @default("")
   PrenomEpoux        String   @default("")
   DateNaissanceEpoux  DateTime
@@ -123,13 +122,12 @@ model Mariage {
   DateNaissanceEpouse  DateTime
   Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
 
-  @@index([ID_Demande])
 }
 
 
 model Deces {
   ID_Deces    String    @id @default(uuid())
-  ID_Demande    String   
+  ID_Demande    String   @unique
   Nom            String   @default("")
   Prenom         String   @default("")
   NomMere            String?   @default("")
@@ -140,7 +138,6 @@ model Deces {
   ProfessionPere     String?   @default("")
   Demande       Demande      @relation(fields: [ID_Demande], references: [ID_Demande])
 
-  @@index([ID_Demande])
 }
 
 
