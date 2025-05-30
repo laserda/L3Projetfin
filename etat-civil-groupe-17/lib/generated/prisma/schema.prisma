@@ -28,6 +28,11 @@ enum DemandePourTier {
   Autre
 }
 
+enum QuiDemande {
+  LeMari
+  LaFemme
+}
+
 enum StatutDemande {
   SoumiseEnAttenteDePaiment
   SoumisePayee
@@ -73,7 +78,7 @@ model Demande {
   TypeActe        TypeActe
   NumeroActe      String                     @default("")
   Statut          StatutDemande
-  DemandePourTier DemandePourTier
+  DemandePourTier String
   DateDemande     DateTime
   DateActe        DateTime?
   ID_Paiement     String?                    @unique

@@ -1,5 +1,4 @@
 "use client";
-import { Agent, Demande, Citoyen } from "@/lib/generated/prisma";
 import { getActe } from "@/server/actes/actes";
 import { dateEnLettres } from "@/utils";
 import Image from "next/image";
@@ -8,15 +7,16 @@ import { forwardRef, useEffect, useState } from "react";
 
 const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
     function ActeDeces({ ID_Demande }, ref) {
-        const [acteInfos, setActeInfos] = useState<(Demande & { Citoyen: Citoyen }) | null>(null);
-        const [agent, setAgent] = useState<Agent | null>(null);
+        const [acteInfos, setActeInfos] = useState<any>(null);
+        const [agent, setAgent] = useState<any>(null);
         const [isLoading, setIsLoading] = useState(true);
 
         const getDocumentInfo = async () => {
             try {
                 const res = await getActe(ID_Demande);
                 setActeInfos(res?.Demande);
-                setAgent(res?.Agent);
+                setAgent(res?.Agent)
+
             } catch (error) {
                 console.error(error);
             } finally {
@@ -33,9 +33,9 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
         }
 
         return (
-            <div ref={ref} className="max-w-3xl h-screen mx-auto p-10 border border-black text-sm leading-relaxed bg-white text-black font-serif">
+            <div ref={ref} className="max-w-3xl h-screen mx-auto pt-10 p-10 border border-black text-sm leading-relaxed bg-white text-black font-serif">
 
-                <div className=" flex justify-between mb-8 border-b-2 border-gray-800 pb-6">
+                <div className=" flex justify-between p-8 mb-8 border-b-2 border-gray-800 pb-6">
                     <div className="flex flex-col items-center">
                         <p className="uppercase font-bold mb-2 text-sm">République de Côte d'Ivoire</p>
                         <Image
@@ -51,32 +51,15 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                     <div className="text-center">
                         <p className="uppercase font-bold text-lg mb-2">Acte de Décès</p>
                         <p className="text-lg">Du registre des actes de l'État Civil</p>
-                        <p className="text-lg">Pour l'année {new Date(acteInfos?.DateActe || "").getFullYear()}</p>
+                        <p className="text-lg">Pour l'année {new Date(acteInfos?.DateActe || "").getFullYear()}
+                        </p>
                     </div>
                 </div>
-
-                {/* <div className="flex justify-between mb-6">
-                <div className="text-left">
-                    <p className="uppercase font-bold">Département de {acteInfos?.Citoyen.LieuNaissance}</p>
-                    <p>Commune de {acteInfos?.Citoyen.LieuNaissance}</p>
-                    <p className="uppercase font-bold">État civil</p>
-                    <p>Centre principal {acteInfos?.Citoyen.LieuNaissance}</p>
-                    <p className="mt-2">N° {acteInfos?.NumeroActe} du {acteInfos?.DateDemande?.toLocaleDateString()} du registre</p>
-                </div>
-                <div className="text-right font-bold">
-                    <p>DÉCÈS DE</p>
-                    <p className="text-lg">{acteInfos?.Nom}</p>
-                    <p>{acteInfos?.Prenom} .</p>
-                </div>
-            </div> */}
 
                 {/* Informations de l'état civil */}
                 <div className="flex justify-between mb-4">
                     <div className="text-left">
-                        <p className="uppercase font-bold text-md">Département de {acteInfos?.Citoyen.LieuNaissance}</p>
-                        <p className="text-md">Commune de {acteInfos?.Citoyen.LieuNaissance}</p>
                         <p className="uppercase font-bold text-md ">État civil</p>
-                        <p className="text-md">Centre principal {acteInfos?.Citoyen.LieuNaissance}</p>
                         <p className=" text-md">N° {acteInfos?.NumeroActe} du {new Date(acteInfos?.DateDemande || "").toLocaleDateString()} du registre</p>
                     </div>
                     <div className="text-center font-bold">
@@ -87,15 +70,12 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 </div>
 
 
-                {/* Informations de naissance */}
                 <div className="mb-8 text-md">
                     <p className="mb-1">
                         {acteInfos?.DateActe && <span>Le {dateEnLettres(acteInfos.DateActe)}</span>} ./
-                        {/* à vingt heures zéro minute ./ */}
-                        est décédé(e) <strong>{acteInfos?.Prenom}</strong>
+                        est décédé(e) <strong>{acteInfos?.Nom} {acteInfos?.Prenom}</strong>
                     </p>
                     <p className="mb-1">
-                        {/* à la Maternité de {acteInfos?.Citoyen.LieuNaissance} ./ */}
                         fils de{" "} <strong>{acteInfos?.NomPere} {acteInfos?.PrenomPere}</strong>
                     </p>
                     <p className="mb-1">
@@ -105,9 +85,7 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                         et de <strong>{acteInfos?.NomMere} {acteInfos?.PrenomMere}</strong>
                         profession{" "}<strong>{acteInfos?.ProfessionMere || "Sans profession"}</strong>
                     </p>
-
                 </div>
-
 
                 <div className="mb-4">
                     <p className="text-base text-center">
@@ -125,7 +103,7 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                     </div>
                     <div className="text-right">
                         <p className="text-lg mb-4">
-                            Délivré à {acteInfos?.Citoyen.LieuNaissance}, le <strong>{new Date(acteInfos?.DateDemande || "").toLocaleDateString()}</strong>
+                            Délivré  le <strong>{new Date(acteInfos?.DateDemande || "").toLocaleDateString()}</strong>
                         </p>
                         <p className="font-semibold text-md mb-2">L'Officier de l'État Civil,</p>
                         <div className="mb-4">

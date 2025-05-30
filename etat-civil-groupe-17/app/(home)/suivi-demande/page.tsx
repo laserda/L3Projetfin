@@ -21,11 +21,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import {
     Search,
-    FileText,
-    Clock,
-    Check,
-    X,
-    ArrowUp,
     Filter,
     RefreshCw,
 } from "lucide-react";
@@ -39,7 +34,7 @@ import { getStatusInfo } from "@/app/shared/common";
 
 const SuiviPage = () => {
     const router = useRouter();
-    const [requests, setRequests] = useState<DemandeResquest[]>([]);
+    const [requests, setRequests] = useState<any>([]);
     const [filteredRequests, setFilteredRequests] = useState<DemandeResquest[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -309,7 +304,7 @@ const SuiviPage = () => {
                                                         request.TypeActe
                                                     )}
                                                 </td>
-                                                <td className="py-3 px-4">{`${request.Nom} ${request.Prenom}`}</td>
+                                                <td className="py-3 px-4">{`${request.Citoyen.Nom} ${request.Citoyen.Prenom}`}</td>
                                                 <td className="py-3 px-4">
                                                     <span className="max-w-[150px] truncate inline-block">
                                                         {request.Citoyen.Email}

@@ -1,7 +1,15 @@
-import { DemandePourTier, TypeActe } from "@/lib/generated/prisma";
+import { TypeActe } from "@/lib/generated/prisma";
+import { DemandePourTier } from "@/utils";
 import { z } from "zod";
 
-export const createDemandeSchema = z.object({
+// export enum DemandePourTier {
+//   Moi = "Moi",
+//   MonEnfant = "MonEnfant",
+//   UnMenbreFamile = "UnMenbreFamile",
+//   Autre = "Autre"
+// }
+
+export const naissanceSchema = z.object({
     TypeActe: z.nativeEnum(TypeActe),
     NumeroActe: z.string(),
     DemandePourTier: z.nativeEnum(DemandePourTier),
@@ -90,6 +98,86 @@ export const createDemandeDecesSchema = z.object({
     ProfessionMere: z.string().optional()
 })
 
-export type CreateDemandeFormData = z.infer<typeof createDemandeSchema>;
+
+
+// export const naissanceSchema = z.object({
+//     Nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
+//     Prenom: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
+//     NomMere: z.string().min(2, 'Le nom de la mère doit contenir au moins 2 caractères').optional(),
+//     PrenomMere: z.string().min(2, 'Le prénom de la mère doit contenir au moins 2 caractères').optional(),
+//     ProfessionMere: z.string().max(100, 'La profession de la mère ne peut pas dépasser 100 caractères').optional(),
+//     DateNaisMere: z.date().max(new Date(), 'La date de naissance de la mère ne peut pas être dans le futur').optional(),
+//     NomPere: z.string().min(2, 'Le nom du père doit contenir au moins 2 caractères').optional(),
+//     PrenomPere: z.string().min(2, 'Le prénom du père doit contenir au moins 2 caractères').optional(),
+//     ProfessionPere: z.string().max(100, 'La profession du père ne peut pas dépasser 100 caractères').optional(),
+//     DateNaisPere: z.date().max(new Date(), 'La date de naissance du père ne peut pas être dans le futur').optional(),
+// });
+
+// export type DemandeNaissanceFormData = z.infer<typeof naissanceSchema>;
+
+export enum QuiDemande {
+    LeMari = "Le mari",
+    LaFemme = "La femme",
+    Autre = "Autre"
+}
+
+export const mariageSchema = z.object({
+    TypeActe: z.nativeEnum(TypeActe),
+    NumeroActe: z.string(),
+    DemandePourTier: z.nativeEnum(QuiDemande).optional(),
+    DateActe: z.string().min(1, "La date de l'acte est requis"),
+    NomEpoux: z.string()
+        .min(2, 'Le nom de l\'époux doit contenir au moins 2 caractères')
+        .optional(),
+    PrenomEpoux: z.string()
+        .min(2, 'Le prénom de l\'époux doit contenir au moins 2 caractères').optional(),
+    DateNaissanceEpoux: z.string()
+        .min(1, 'La date de naissance de l\'époux ne peut pas être dans le futur').optional(),
+    NomEpouse: z.string()
+        .min(2, 'Le nom de l\'épouse doit contenir au moins 2 caractères')
+        .max(50, 'Le nom de l\'épouse ne peut pas dépasser 50 caractères')
+        .optional(),
+    PrenomEpouse: z.string()
+        .min(2, 'Le prénom de l\'épouse doit contenir au moins 2 caractères')
+        .optional(),
+    DateNaissanceEpouse: z.string()
+        .min(1, 'La date de naissance de l\'épouse ne peut pas être dans le futur').optional(),
+});
+
+export type DemandeMariageFormData = z.infer<typeof mariageSchema>;
+
+
+export const decesSchema = z.object({
+    TypeActe: z.nativeEnum(TypeActe),
+    NumeroActe: z.string(),
+    DateActe: z.string().min(1, "La date de l'acte est requis"),
+    Nom: z.string()
+        .min(2, 'Le nom doit contenir au moins 2 caractères'),
+    Prenom: z.string()
+        .min(2, 'Le prénom doit contenir au moins 2 caractères'),
+    NomMere: z.string()
+        .min(2, 'Le nom de la mère doit contenir au moins 2 caractères')
+        .optional(),
+    PrenomMere: z.string()
+        .min(2, 'Le prénom de la mère doit contenir au moins 2 caractères')
+        .optional(),
+    ProfessionMere: z.string()
+        .max(100, 'La profession de la mère ne peut pas dépasser 100 caractères')
+        .optional(),
+    NomPere: z.string()
+        .min(2, 'Le nom du père doit contenir au moins 2 caractères')
+        .optional(),
+    PrenomPere: z.string()
+        .min(2, 'Le prénom du père doit contenir au moins 2 caractères')
+        .optional(),
+    ProfessionPere: z.string()
+        .max(100, 'La profession du père ne peut pas dépasser 100 caractères')
+        .optional(),
+});
+
+export type DemandeDecesFormData = z.infer<typeof decesSchema>;
+
+
+export type DemandeNaissanceFormData = z.infer<typeof naissanceSchema>;
 export type CreateDemandeDecesFormData = z.infer<typeof createDemandeDecesSchema>;
 export type CreateDemandeMariageFormData = z.infer<typeof createDemandeMariageSchema>;
