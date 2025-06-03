@@ -443,8 +443,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -1817,16 +1817,10 @@ export namespace Prisma {
 
   export type DemandeCountOutputType = {
     Historique: number
-    Naissances: number
-    Mariages: number
-    Deces: number
   }
 
   export type DemandeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Historique?: boolean | DemandeCountOutputTypeCountHistoriqueArgs
-    Naissances?: boolean | DemandeCountOutputTypeCountNaissancesArgs
-    Mariages?: boolean | DemandeCountOutputTypeCountMariagesArgs
-    Deces?: boolean | DemandeCountOutputTypeCountDecesArgs
   }
 
   // Custom InputTypes
@@ -1845,27 +1839,6 @@ export namespace Prisma {
    */
   export type DemandeCountOutputTypeCountHistoriqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Historique_ModificationsWhereInput
-  }
-
-  /**
-   * DemandeCountOutputType without action
-   */
-  export type DemandeCountOutputTypeCountNaissancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NaissanceWhereInput
-  }
-
-  /**
-   * DemandeCountOutputType without action
-   */
-  export type DemandeCountOutputTypeCountMariagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MariageWhereInput
-  }
-
-  /**
-   * DemandeCountOutputType without action
-   */
-  export type DemandeCountOutputTypeCountDecesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DecesWhereInput
   }
 
 
@@ -3299,9 +3272,9 @@ export namespace Prisma {
       Paiement: Prisma.$PaiementPayload<ExtArgs> | null
       Document: Prisma.$Document_ActePayload<ExtArgs> | null
       Historique: Prisma.$Historique_ModificationsPayload<ExtArgs>[]
-      Naissances: Prisma.$NaissancePayload<ExtArgs>[]
-      Mariages: Prisma.$MariagePayload<ExtArgs>[]
-      Deces: Prisma.$DecesPayload<ExtArgs>[]
+      Naissances: Prisma.$NaissancePayload<ExtArgs> | null
+      Mariages: Prisma.$MariagePayload<ExtArgs> | null
+      Deces: Prisma.$DecesPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       ID_Demande: string
@@ -3711,9 +3684,9 @@ export namespace Prisma {
     Paiement<T extends Demande$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Demande$PaiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Document<T extends Demande$DocumentArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DocumentArgs<ExtArgs>>): Prisma__Document_ActeClient<$Result.GetResult<Prisma.$Document_ActePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Historique<T extends Demande$HistoriqueArgs<ExtArgs> = {}>(args?: Subset<T, Demande$HistoriqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historique_ModificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Naissances<T extends Demande$NaissancesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$NaissancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Mariages<T extends Demande$MariagesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$MariagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Deces<T extends Demande$DecesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DecesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Naissances<T extends Demande$NaissancesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$NaissancesArgs<ExtArgs>>): Prisma__NaissanceClient<$Result.GetResult<Prisma.$NaissancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Mariages<T extends Demande$MariagesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$MariagesArgs<ExtArgs>>): Prisma__MariageClient<$Result.GetResult<Prisma.$MariagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Deces<T extends Demande$DecesArgs<ExtArgs> = {}>(args?: Subset<T, Demande$DecesArgs<ExtArgs>>): Prisma__DecesClient<$Result.GetResult<Prisma.$DecesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4226,11 +4199,6 @@ export namespace Prisma {
      */
     include?: NaissanceInclude<ExtArgs> | null
     where?: NaissanceWhereInput
-    orderBy?: NaissanceOrderByWithRelationInput | NaissanceOrderByWithRelationInput[]
-    cursor?: NaissanceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NaissanceScalarFieldEnum | NaissanceScalarFieldEnum[]
   }
 
   /**
@@ -4250,11 +4218,6 @@ export namespace Prisma {
      */
     include?: MariageInclude<ExtArgs> | null
     where?: MariageWhereInput
-    orderBy?: MariageOrderByWithRelationInput | MariageOrderByWithRelationInput[]
-    cursor?: MariageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MariageScalarFieldEnum | MariageScalarFieldEnum[]
   }
 
   /**
@@ -4274,11 +4237,6 @@ export namespace Prisma {
      */
     include?: DecesInclude<ExtArgs> | null
     where?: DecesWhereInput
-    orderBy?: DecesOrderByWithRelationInput | DecesOrderByWithRelationInput[]
-    cursor?: DecesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DecesScalarFieldEnum | DecesScalarFieldEnum[]
   }
 
   /**
@@ -13546,9 +13504,9 @@ export namespace Prisma {
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     Historique?: Historique_ModificationsListRelationFilter
-    Naissances?: NaissanceListRelationFilter
-    Mariages?: MariageListRelationFilter
-    Deces?: DecesListRelationFilter
+    Naissances?: XOR<NaissanceNullableScalarRelationFilter, NaissanceWhereInput> | null
+    Mariages?: XOR<MariageNullableScalarRelationFilter, MariageWhereInput> | null
+    Deces?: XOR<DecesNullableScalarRelationFilter, DecesWhereInput> | null
   }
 
   export type DemandeOrderByWithRelationInput = {
@@ -13565,9 +13523,9 @@ export namespace Prisma {
     Paiement?: PaiementOrderByWithRelationInput
     Document?: Document_ActeOrderByWithRelationInput
     Historique?: Historique_ModificationsOrderByRelationAggregateInput
-    Naissances?: NaissanceOrderByRelationAggregateInput
-    Mariages?: MariageOrderByRelationAggregateInput
-    Deces?: DecesOrderByRelationAggregateInput
+    Naissances?: NaissanceOrderByWithRelationInput
+    Mariages?: MariageOrderByWithRelationInput
+    Deces?: DecesOrderByWithRelationInput
   }
 
   export type DemandeWhereUniqueInput = Prisma.AtLeast<{
@@ -13587,9 +13545,9 @@ export namespace Prisma {
     Paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
     Document?: XOR<Document_ActeNullableScalarRelationFilter, Document_ActeWhereInput> | null
     Historique?: Historique_ModificationsListRelationFilter
-    Naissances?: NaissanceListRelationFilter
-    Mariages?: MariageListRelationFilter
-    Deces?: DecesListRelationFilter
+    Naissances?: XOR<NaissanceNullableScalarRelationFilter, NaissanceWhereInput> | null
+    Mariages?: XOR<MariageNullableScalarRelationFilter, MariageWhereInput> | null
+    Deces?: XOR<DecesNullableScalarRelationFilter, DecesWhereInput> | null
   }, "ID_Demande" | "ID_Paiement">
 
   export type DemandeOrderByWithAggregationInput = {
@@ -13659,10 +13617,10 @@ export namespace Prisma {
 
   export type NaissanceWhereUniqueInput = Prisma.AtLeast<{
     ID_Naissance?: string
+    ID_Demande?: string
     AND?: NaissanceWhereInput | NaissanceWhereInput[]
     OR?: NaissanceWhereInput[]
     NOT?: NaissanceWhereInput | NaissanceWhereInput[]
-    ID_Demande?: StringFilter<"Naissance"> | string
     Nom?: StringFilter<"Naissance"> | string
     Prenom?: StringFilter<"Naissance"> | string
     NomMere?: StringNullableFilter<"Naissance"> | string | null
@@ -13674,7 +13632,7 @@ export namespace Prisma {
     ProfessionPere?: StringNullableFilter<"Naissance"> | string | null
     DateNaisPere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
     Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
-  }, "ID_Naissance">
+  }, "ID_Naissance" | "ID_Demande">
 
   export type NaissanceOrderByWithAggregationInput = {
     ID_Naissance?: SortOrder
@@ -13741,10 +13699,10 @@ export namespace Prisma {
 
   export type MariageWhereUniqueInput = Prisma.AtLeast<{
     ID_Mariage?: string
+    ID_Demande?: string
     AND?: MariageWhereInput | MariageWhereInput[]
     OR?: MariageWhereInput[]
     NOT?: MariageWhereInput | MariageWhereInput[]
-    ID_Demande?: StringFilter<"Mariage"> | string
     NomEpoux?: StringFilter<"Mariage"> | string
     PrenomEpoux?: StringFilter<"Mariage"> | string
     DateNaissanceEpoux?: DateTimeFilter<"Mariage"> | Date | string
@@ -13752,7 +13710,7 @@ export namespace Prisma {
     PrenomEpouse?: StringNullableFilter<"Mariage"> | string | null
     DateNaissanceEpouse?: DateTimeFilter<"Mariage"> | Date | string
     Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
-  }, "ID_Mariage">
+  }, "ID_Mariage" | "ID_Demande">
 
   export type MariageOrderByWithAggregationInput = {
     ID_Mariage?: SortOrder
@@ -13815,10 +13773,10 @@ export namespace Prisma {
 
   export type DecesWhereUniqueInput = Prisma.AtLeast<{
     ID_Deces?: string
+    ID_Demande?: string
     AND?: DecesWhereInput | DecesWhereInput[]
     OR?: DecesWhereInput[]
     NOT?: DecesWhereInput | DecesWhereInput[]
-    ID_Demande?: StringFilter<"Deces"> | string
     Nom?: StringFilter<"Deces"> | string
     Prenom?: StringFilter<"Deces"> | string
     NomMere?: StringNullableFilter<"Deces"> | string | null
@@ -13828,7 +13786,7 @@ export namespace Prisma {
     PrenomPere?: StringNullableFilter<"Deces"> | string | null
     ProfessionPere?: StringNullableFilter<"Deces"> | string | null
     Demande?: XOR<DemandeScalarRelationFilter, DemandeWhereInput>
-  }, "ID_Deces">
+  }, "ID_Deces" | "ID_Demande">
 
   export type DecesOrderByWithAggregationInput = {
     ID_Deces?: SortOrder
@@ -14281,9 +14239,9 @@ export namespace Prisma {
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateInput = {
@@ -14298,9 +14256,9 @@ export namespace Prisma {
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUpdateInput = {
@@ -14315,9 +14273,9 @@ export namespace Prisma {
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateInput = {
@@ -14332,9 +14290,9 @@ export namespace Prisma {
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeCreateManyInput = {
@@ -15144,22 +15102,19 @@ export namespace Prisma {
     none?: Historique_ModificationsWhereInput
   }
 
-  export type NaissanceListRelationFilter = {
-    every?: NaissanceWhereInput
-    some?: NaissanceWhereInput
-    none?: NaissanceWhereInput
+  export type NaissanceNullableScalarRelationFilter = {
+    is?: NaissanceWhereInput | null
+    isNot?: NaissanceWhereInput | null
   }
 
-  export type MariageListRelationFilter = {
-    every?: MariageWhereInput
-    some?: MariageWhereInput
-    none?: MariageWhereInput
+  export type MariageNullableScalarRelationFilter = {
+    is?: MariageWhereInput | null
+    isNot?: MariageWhereInput | null
   }
 
-  export type DecesListRelationFilter = {
-    every?: DecesWhereInput
-    some?: DecesWhereInput
-    none?: DecesWhereInput
+  export type DecesNullableScalarRelationFilter = {
+    is?: DecesWhereInput | null
+    isNot?: DecesWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -15168,18 +15123,6 @@ export namespace Prisma {
   }
 
   export type Historique_ModificationsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NaissanceOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MariageOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DecesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15824,25 +15767,22 @@ export namespace Prisma {
     connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
   }
 
-  export type NaissanceCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
-    createMany?: NaissanceCreateManyDemandeInputEnvelope
-    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+  export type NaissanceCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput
+    connect?: NaissanceWhereUniqueInput
   }
 
-  export type MariageCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
-    createMany?: MariageCreateManyDemandeInputEnvelope
-    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+  export type MariageCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput
+    connect?: MariageWhereUniqueInput
   }
 
-  export type DecesCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
-    createMany?: DecesCreateManyDemandeInputEnvelope
-    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+  export type DecesCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput
+    connect?: DecesWhereUniqueInput
   }
 
   export type Document_ActeUncheckedCreateNestedOneWithoutDemandeInput = {
@@ -15858,25 +15798,22 @@ export namespace Prisma {
     connect?: Historique_ModificationsWhereUniqueInput | Historique_ModificationsWhereUniqueInput[]
   }
 
-  export type NaissanceUncheckedCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
-    createMany?: NaissanceCreateManyDemandeInputEnvelope
-    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
+  export type NaissanceUncheckedCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput
+    connect?: NaissanceWhereUniqueInput
   }
 
-  export type MariageUncheckedCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
-    createMany?: MariageCreateManyDemandeInputEnvelope
-    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
+  export type MariageUncheckedCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput
+    connect?: MariageWhereUniqueInput
   }
 
-  export type DecesUncheckedCreateNestedManyWithoutDemandeInput = {
-    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
-    createMany?: DecesCreateManyDemandeInputEnvelope
-    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
+  export type DecesUncheckedCreateNestedOneWithoutDemandeInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput
+    connect?: DecesWhereUniqueInput
   }
 
   export type EnumTypeActeFieldUpdateOperationsInput = {
@@ -15933,46 +15870,34 @@ export namespace Prisma {
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
   }
 
-  export type NaissanceUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
-    upsert?: NaissanceUpsertWithWhereUniqueWithoutDemandeInput | NaissanceUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: NaissanceCreateManyDemandeInputEnvelope
-    set?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    disconnect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    delete?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    update?: NaissanceUpdateWithWhereUniqueWithoutDemandeInput | NaissanceUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: NaissanceUpdateManyWithWhereWithoutDemandeInput | NaissanceUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+  export type NaissanceUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput
+    upsert?: NaissanceUpsertWithoutDemandeInput
+    disconnect?: NaissanceWhereInput | boolean
+    delete?: NaissanceWhereInput | boolean
+    connect?: NaissanceWhereUniqueInput
+    update?: XOR<XOR<NaissanceUpdateToOneWithWhereWithoutDemandeInput, NaissanceUpdateWithoutDemandeInput>, NaissanceUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type MariageUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
-    upsert?: MariageUpsertWithWhereUniqueWithoutDemandeInput | MariageUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: MariageCreateManyDemandeInputEnvelope
-    set?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    disconnect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    delete?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    update?: MariageUpdateWithWhereUniqueWithoutDemandeInput | MariageUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: MariageUpdateManyWithWhereWithoutDemandeInput | MariageUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: MariageScalarWhereInput | MariageScalarWhereInput[]
+  export type MariageUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput
+    upsert?: MariageUpsertWithoutDemandeInput
+    disconnect?: MariageWhereInput | boolean
+    delete?: MariageWhereInput | boolean
+    connect?: MariageWhereUniqueInput
+    update?: XOR<XOR<MariageUpdateToOneWithWhereWithoutDemandeInput, MariageUpdateWithoutDemandeInput>, MariageUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type DecesUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
-    upsert?: DecesUpsertWithWhereUniqueWithoutDemandeInput | DecesUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: DecesCreateManyDemandeInputEnvelope
-    set?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    disconnect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    delete?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    update?: DecesUpdateWithWhereUniqueWithoutDemandeInput | DecesUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: DecesUpdateManyWithWhereWithoutDemandeInput | DecesUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: DecesScalarWhereInput | DecesScalarWhereInput[]
+  export type DecesUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput
+    upsert?: DecesUpsertWithoutDemandeInput
+    disconnect?: DecesWhereInput | boolean
+    delete?: DecesWhereInput | boolean
+    connect?: DecesWhereUniqueInput
+    update?: XOR<XOR<DecesUpdateToOneWithWhereWithoutDemandeInput, DecesUpdateWithoutDemandeInput>, DecesUncheckedUpdateWithoutDemandeInput>
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -16003,46 +15928,34 @@ export namespace Prisma {
     deleteMany?: Historique_ModificationsScalarWhereInput | Historique_ModificationsScalarWhereInput[]
   }
 
-  export type NaissanceUncheckedUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput> | NaissanceCreateWithoutDemandeInput[] | NaissanceUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput | NaissanceCreateOrConnectWithoutDemandeInput[]
-    upsert?: NaissanceUpsertWithWhereUniqueWithoutDemandeInput | NaissanceUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: NaissanceCreateManyDemandeInputEnvelope
-    set?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    disconnect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    delete?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    connect?: NaissanceWhereUniqueInput | NaissanceWhereUniqueInput[]
-    update?: NaissanceUpdateWithWhereUniqueWithoutDemandeInput | NaissanceUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: NaissanceUpdateManyWithWhereWithoutDemandeInput | NaissanceUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
+  export type NaissanceUncheckedUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: NaissanceCreateOrConnectWithoutDemandeInput
+    upsert?: NaissanceUpsertWithoutDemandeInput
+    disconnect?: NaissanceWhereInput | boolean
+    delete?: NaissanceWhereInput | boolean
+    connect?: NaissanceWhereUniqueInput
+    update?: XOR<XOR<NaissanceUpdateToOneWithWhereWithoutDemandeInput, NaissanceUpdateWithoutDemandeInput>, NaissanceUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type MariageUncheckedUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput> | MariageCreateWithoutDemandeInput[] | MariageUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput | MariageCreateOrConnectWithoutDemandeInput[]
-    upsert?: MariageUpsertWithWhereUniqueWithoutDemandeInput | MariageUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: MariageCreateManyDemandeInputEnvelope
-    set?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    disconnect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    delete?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    connect?: MariageWhereUniqueInput | MariageWhereUniqueInput[]
-    update?: MariageUpdateWithWhereUniqueWithoutDemandeInput | MariageUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: MariageUpdateManyWithWhereWithoutDemandeInput | MariageUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: MariageScalarWhereInput | MariageScalarWhereInput[]
+  export type MariageUncheckedUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: MariageCreateOrConnectWithoutDemandeInput
+    upsert?: MariageUpsertWithoutDemandeInput
+    disconnect?: MariageWhereInput | boolean
+    delete?: MariageWhereInput | boolean
+    connect?: MariageWhereUniqueInput
+    update?: XOR<XOR<MariageUpdateToOneWithWhereWithoutDemandeInput, MariageUpdateWithoutDemandeInput>, MariageUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type DecesUncheckedUpdateManyWithoutDemandeNestedInput = {
-    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput> | DecesCreateWithoutDemandeInput[] | DecesUncheckedCreateWithoutDemandeInput[]
-    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput | DecesCreateOrConnectWithoutDemandeInput[]
-    upsert?: DecesUpsertWithWhereUniqueWithoutDemandeInput | DecesUpsertWithWhereUniqueWithoutDemandeInput[]
-    createMany?: DecesCreateManyDemandeInputEnvelope
-    set?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    disconnect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    delete?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    connect?: DecesWhereUniqueInput | DecesWhereUniqueInput[]
-    update?: DecesUpdateWithWhereUniqueWithoutDemandeInput | DecesUpdateWithWhereUniqueWithoutDemandeInput[]
-    updateMany?: DecesUpdateManyWithWhereWithoutDemandeInput | DecesUpdateManyWithWhereWithoutDemandeInput[]
-    deleteMany?: DecesScalarWhereInput | DecesScalarWhereInput[]
+  export type DecesUncheckedUpdateOneWithoutDemandeNestedInput = {
+    create?: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+    connectOrCreate?: DecesCreateOrConnectWithoutDemandeInput
+    upsert?: DecesUpsertWithoutDemandeInput
+    disconnect?: DecesWhereInput | boolean
+    delete?: DecesWhereInput | boolean
+    connect?: DecesWhereUniqueInput
+    update?: XOR<XOR<DecesUpdateToOneWithWhereWithoutDemandeInput, DecesUpdateWithoutDemandeInput>, DecesUncheckedUpdateWithoutDemandeInput>
   }
 
   export type DemandeCreateNestedOneWithoutNaissancesInput = {
@@ -16593,9 +16506,9 @@ export namespace Prisma {
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutCitoyenInput = {
@@ -16609,9 +16522,9 @@ export namespace Prisma {
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutCitoyenInput = {
@@ -16793,11 +16706,6 @@ export namespace Prisma {
     create: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
   }
 
-  export type NaissanceCreateManyDemandeInputEnvelope = {
-    data: NaissanceCreateManyDemandeInput | NaissanceCreateManyDemandeInput[]
-    skipDuplicates?: boolean
-  }
-
   export type MariageCreateWithoutDemandeInput = {
     ID_Mariage?: string
     NomEpoux?: string
@@ -16821,11 +16729,6 @@ export namespace Prisma {
   export type MariageCreateOrConnectWithoutDemandeInput = {
     where: MariageWhereUniqueInput
     create: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
-  }
-
-  export type MariageCreateManyDemandeInputEnvelope = {
-    data: MariageCreateManyDemandeInput | MariageCreateManyDemandeInput[]
-    skipDuplicates?: boolean
   }
 
   export type DecesCreateWithoutDemandeInput = {
@@ -16855,11 +16758,6 @@ export namespace Prisma {
   export type DecesCreateOrConnectWithoutDemandeInput = {
     where: DecesWhereUniqueInput
     create: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
-  }
-
-  export type DecesCreateManyDemandeInputEnvelope = {
-    data: DecesCreateManyDemandeInput | DecesCreateManyDemandeInput[]
-    skipDuplicates?: boolean
   }
 
   export type CitoyenUpsertWithoutDemandesInput = {
@@ -16985,100 +16883,109 @@ export namespace Prisma {
     CreatedBy?: StringFilter<"Historique_Modifications"> | string
   }
 
-  export type NaissanceUpsertWithWhereUniqueWithoutDemandeInput = {
-    where: NaissanceWhereUniqueInput
+  export type NaissanceUpsertWithoutDemandeInput = {
     update: XOR<NaissanceUpdateWithoutDemandeInput, NaissanceUncheckedUpdateWithoutDemandeInput>
     create: XOR<NaissanceCreateWithoutDemandeInput, NaissanceUncheckedCreateWithoutDemandeInput>
+    where?: NaissanceWhereInput
   }
 
-  export type NaissanceUpdateWithWhereUniqueWithoutDemandeInput = {
-    where: NaissanceWhereUniqueInput
+  export type NaissanceUpdateToOneWithWhereWithoutDemandeInput = {
+    where?: NaissanceWhereInput
     data: XOR<NaissanceUpdateWithoutDemandeInput, NaissanceUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type NaissanceUpdateManyWithWhereWithoutDemandeInput = {
-    where: NaissanceScalarWhereInput
-    data: XOR<NaissanceUpdateManyMutationInput, NaissanceUncheckedUpdateManyWithoutDemandeInput>
+  export type NaissanceUpdateWithoutDemandeInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type NaissanceScalarWhereInput = {
-    AND?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
-    OR?: NaissanceScalarWhereInput[]
-    NOT?: NaissanceScalarWhereInput | NaissanceScalarWhereInput[]
-    ID_Naissance?: StringFilter<"Naissance"> | string
-    ID_Demande?: StringFilter<"Naissance"> | string
-    Nom?: StringFilter<"Naissance"> | string
-    Prenom?: StringFilter<"Naissance"> | string
-    NomMere?: StringNullableFilter<"Naissance"> | string | null
-    PrenomMere?: StringNullableFilter<"Naissance"> | string | null
-    ProfessionMere?: StringNullableFilter<"Naissance"> | string | null
-    DateNaisMere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
-    NomPere?: StringNullableFilter<"Naissance"> | string | null
-    PrenomPere?: StringNullableFilter<"Naissance"> | string | null
-    ProfessionPere?: StringNullableFilter<"Naissance"> | string | null
-    DateNaisPere?: DateTimeNullableFilter<"Naissance"> | Date | string | null
+  export type NaissanceUncheckedUpdateWithoutDemandeInput = {
+    ID_Naissance?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type MariageUpsertWithWhereUniqueWithoutDemandeInput = {
-    where: MariageWhereUniqueInput
+  export type MariageUpsertWithoutDemandeInput = {
     update: XOR<MariageUpdateWithoutDemandeInput, MariageUncheckedUpdateWithoutDemandeInput>
     create: XOR<MariageCreateWithoutDemandeInput, MariageUncheckedCreateWithoutDemandeInput>
+    where?: MariageWhereInput
   }
 
-  export type MariageUpdateWithWhereUniqueWithoutDemandeInput = {
-    where: MariageWhereUniqueInput
+  export type MariageUpdateToOneWithWhereWithoutDemandeInput = {
+    where?: MariageWhereInput
     data: XOR<MariageUpdateWithoutDemandeInput, MariageUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type MariageUpdateManyWithWhereWithoutDemandeInput = {
-    where: MariageScalarWhereInput
-    data: XOR<MariageUpdateManyMutationInput, MariageUncheckedUpdateManyWithoutDemandeInput>
+  export type MariageUpdateWithoutDemandeInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MariageScalarWhereInput = {
-    AND?: MariageScalarWhereInput | MariageScalarWhereInput[]
-    OR?: MariageScalarWhereInput[]
-    NOT?: MariageScalarWhereInput | MariageScalarWhereInput[]
-    ID_Mariage?: StringFilter<"Mariage"> | string
-    ID_Demande?: StringFilter<"Mariage"> | string
-    NomEpoux?: StringFilter<"Mariage"> | string
-    PrenomEpoux?: StringFilter<"Mariage"> | string
-    DateNaissanceEpoux?: DateTimeFilter<"Mariage"> | Date | string
-    NomEpouse?: StringNullableFilter<"Mariage"> | string | null
-    PrenomEpouse?: StringNullableFilter<"Mariage"> | string | null
-    DateNaissanceEpouse?: DateTimeFilter<"Mariage"> | Date | string
+  export type MariageUncheckedUpdateWithoutDemandeInput = {
+    ID_Mariage?: StringFieldUpdateOperationsInput | string
+    NomEpoux?: StringFieldUpdateOperationsInput | string
+    PrenomEpoux?: StringFieldUpdateOperationsInput | string
+    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
+    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
+    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DecesUpsertWithWhereUniqueWithoutDemandeInput = {
-    where: DecesWhereUniqueInput
+  export type DecesUpsertWithoutDemandeInput = {
     update: XOR<DecesUpdateWithoutDemandeInput, DecesUncheckedUpdateWithoutDemandeInput>
     create: XOR<DecesCreateWithoutDemandeInput, DecesUncheckedCreateWithoutDemandeInput>
+    where?: DecesWhereInput
   }
 
-  export type DecesUpdateWithWhereUniqueWithoutDemandeInput = {
-    where: DecesWhereUniqueInput
+  export type DecesUpdateToOneWithWhereWithoutDemandeInput = {
+    where?: DecesWhereInput
     data: XOR<DecesUpdateWithoutDemandeInput, DecesUncheckedUpdateWithoutDemandeInput>
   }
 
-  export type DecesUpdateManyWithWhereWithoutDemandeInput = {
-    where: DecesScalarWhereInput
-    data: XOR<DecesUpdateManyMutationInput, DecesUncheckedUpdateManyWithoutDemandeInput>
+  export type DecesUpdateWithoutDemandeInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type DecesScalarWhereInput = {
-    AND?: DecesScalarWhereInput | DecesScalarWhereInput[]
-    OR?: DecesScalarWhereInput[]
-    NOT?: DecesScalarWhereInput | DecesScalarWhereInput[]
-    ID_Deces?: StringFilter<"Deces"> | string
-    ID_Demande?: StringFilter<"Deces"> | string
-    Nom?: StringFilter<"Deces"> | string
-    Prenom?: StringFilter<"Deces"> | string
-    NomMere?: StringNullableFilter<"Deces"> | string | null
-    PrenomMere?: StringNullableFilter<"Deces"> | string | null
-    ProfessionMere?: StringNullableFilter<"Deces"> | string | null
-    NomPere?: StringNullableFilter<"Deces"> | string | null
-    PrenomPere?: StringNullableFilter<"Deces"> | string | null
-    ProfessionPere?: StringNullableFilter<"Deces"> | string | null
+  export type DecesUncheckedUpdateWithoutDemandeInput = {
+    ID_Deces?: StringFieldUpdateOperationsInput | string
+    Nom?: StringFieldUpdateOperationsInput | string
+    Prenom?: StringFieldUpdateOperationsInput | string
+    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
+    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
+    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DemandeCreateWithoutNaissancesInput = {
@@ -17093,8 +17000,8 @@ export namespace Prisma {
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutNaissancesInput = {
@@ -17109,8 +17016,8 @@ export namespace Prisma {
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutNaissancesInput = {
@@ -17141,8 +17048,8 @@ export namespace Prisma {
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutNaissancesInput = {
@@ -17157,8 +17064,8 @@ export namespace Prisma {
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeCreateWithoutMariagesInput = {
@@ -17173,8 +17080,8 @@ export namespace Prisma {
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutMariagesInput = {
@@ -17189,8 +17096,8 @@ export namespace Prisma {
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutMariagesInput = {
@@ -17221,8 +17128,8 @@ export namespace Prisma {
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutMariagesInput = {
@@ -17237,8 +17144,8 @@ export namespace Prisma {
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeCreateWithoutDecesInput = {
@@ -17253,8 +17160,8 @@ export namespace Prisma {
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutDecesInput = {
@@ -17269,8 +17176,8 @@ export namespace Prisma {
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutDecesInput = {
@@ -17301,8 +17208,8 @@ export namespace Prisma {
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutDecesInput = {
@@ -17317,8 +17224,8 @@ export namespace Prisma {
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeCreateWithoutDocumentInput = {
@@ -17332,9 +17239,9 @@ export namespace Prisma {
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutDocumentInput = {
@@ -17348,9 +17255,9 @@ export namespace Prisma {
     DateActe?: Date | string | null
     ID_Paiement?: string | null
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutDocumentInput = {
@@ -17403,9 +17310,9 @@ export namespace Prisma {
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutDocumentInput = {
@@ -17419,9 +17326,9 @@ export namespace Prisma {
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type AgentUpsertWithoutDocumentsInput = {
@@ -17464,9 +17371,9 @@ export namespace Prisma {
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutPaiementInput = {
@@ -17480,9 +17387,9 @@ export namespace Prisma {
     DateActe?: Date | string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
     Historique?: Historique_ModificationsUncheckedCreateNestedManyWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutPaiementInput = {
@@ -17512,9 +17419,9 @@ export namespace Prisma {
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutPaiementInput = {
@@ -17528,9 +17435,9 @@ export namespace Prisma {
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type Document_ActeCreateWithoutAgentInput = {
@@ -17604,9 +17511,9 @@ export namespace Prisma {
     Citoyen: CitoyenCreateNestedOneWithoutDemandesInput
     Paiement?: PaiementCreateNestedOneWithoutDemandeInput
     Document?: Document_ActeCreateNestedOneWithoutDemandeInput
-    Naissances?: NaissanceCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageCreateNestedManyWithoutDemandeInput
-    Deces?: DecesCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageCreateNestedOneWithoutDemandeInput
+    Deces?: DecesCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeUncheckedCreateWithoutHistoriqueInput = {
@@ -17620,9 +17527,9 @@ export namespace Prisma {
     DateActe?: Date | string | null
     ID_Paiement?: string | null
     Document?: Document_ActeUncheckedCreateNestedOneWithoutDemandeInput
-    Naissances?: NaissanceUncheckedCreateNestedManyWithoutDemandeInput
-    Mariages?: MariageUncheckedCreateNestedManyWithoutDemandeInput
-    Deces?: DecesUncheckedCreateNestedManyWithoutDemandeInput
+    Naissances?: NaissanceUncheckedCreateNestedOneWithoutDemandeInput
+    Mariages?: MariageUncheckedCreateNestedOneWithoutDemandeInput
+    Deces?: DecesUncheckedCreateNestedOneWithoutDemandeInput
   }
 
   export type DemandeCreateOrConnectWithoutHistoriqueInput = {
@@ -17652,9 +17559,9 @@ export namespace Prisma {
     Citoyen?: CitoyenUpdateOneRequiredWithoutDemandesNestedInput
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutHistoriqueInput = {
@@ -17668,9 +17575,9 @@ export namespace Prisma {
     DateActe?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeCreateManyCitoyenInput = {
@@ -17695,9 +17602,9 @@ export namespace Prisma {
     Paiement?: PaiementUpdateOneWithoutDemandeNestedInput
     Document?: Document_ActeUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateWithoutCitoyenInput = {
@@ -17711,9 +17618,9 @@ export namespace Prisma {
     ID_Paiement?: NullableStringFieldUpdateOperationsInput | string | null
     Document?: Document_ActeUncheckedUpdateOneWithoutDemandeNestedInput
     Historique?: Historique_ModificationsUncheckedUpdateManyWithoutDemandeNestedInput
-    Naissances?: NaissanceUncheckedUpdateManyWithoutDemandeNestedInput
-    Mariages?: MariageUncheckedUpdateManyWithoutDemandeNestedInput
-    Deces?: DecesUncheckedUpdateManyWithoutDemandeNestedInput
+    Naissances?: NaissanceUncheckedUpdateOneWithoutDemandeNestedInput
+    Mariages?: MariageUncheckedUpdateOneWithoutDemandeNestedInput
+    Deces?: DecesUncheckedUpdateOneWithoutDemandeNestedInput
   }
 
   export type DemandeUncheckedUpdateManyWithoutCitoyenInput = {
@@ -17735,42 +17642,6 @@ export namespace Prisma {
     Ancienne_Valeur: string
     Nouvelle_Valeur: string
     CreatedBy: string
-  }
-
-  export type NaissanceCreateManyDemandeInput = {
-    ID_Naissance?: string
-    Nom?: string
-    Prenom?: string
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    DateNaisMere?: Date | string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
-    DateNaisPere?: Date | string | null
-  }
-
-  export type MariageCreateManyDemandeInput = {
-    ID_Mariage?: string
-    NomEpoux?: string
-    PrenomEpoux?: string
-    DateNaissanceEpoux: Date | string
-    NomEpouse?: string | null
-    PrenomEpouse?: string | null
-    DateNaissanceEpouse: Date | string
-  }
-
-  export type DecesCreateManyDemandeInput = {
-    ID_Deces?: string
-    Nom?: string
-    Prenom?: string
-    NomMere?: string | null
-    PrenomMere?: string | null
-    ProfessionMere?: string | null
-    NomPere?: string | null
-    PrenomPere?: string | null
-    ProfessionPere?: string | null
   }
 
   export type Historique_ModificationsUpdateWithoutDemandeInput = {
@@ -17801,114 +17672,6 @@ export namespace Prisma {
     Ancienne_Valeur?: StringFieldUpdateOperationsInput | string
     Nouvelle_Valeur?: StringFieldUpdateOperationsInput | string
     CreatedBy?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NaissanceUpdateWithoutDemandeInput = {
-    ID_Naissance?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NaissanceUncheckedUpdateWithoutDemandeInput = {
-    ID_Naissance?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NaissanceUncheckedUpdateManyWithoutDemandeInput = {
-    ID_Naissance?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisMere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaisPere?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type MariageUpdateWithoutDemandeInput = {
-    ID_Mariage?: StringFieldUpdateOperationsInput | string
-    NomEpoux?: StringFieldUpdateOperationsInput | string
-    PrenomEpoux?: StringFieldUpdateOperationsInput | string
-    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
-    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MariageUncheckedUpdateWithoutDemandeInput = {
-    ID_Mariage?: StringFieldUpdateOperationsInput | string
-    NomEpoux?: StringFieldUpdateOperationsInput | string
-    PrenomEpoux?: StringFieldUpdateOperationsInput | string
-    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
-    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MariageUncheckedUpdateManyWithoutDemandeInput = {
-    ID_Mariage?: StringFieldUpdateOperationsInput | string
-    NomEpoux?: StringFieldUpdateOperationsInput | string
-    PrenomEpoux?: StringFieldUpdateOperationsInput | string
-    DateNaissanceEpoux?: DateTimeFieldUpdateOperationsInput | Date | string
-    NomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomEpouse?: NullableStringFieldUpdateOperationsInput | string | null
-    DateNaissanceEpouse?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DecesUpdateWithoutDemandeInput = {
-    ID_Deces?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type DecesUncheckedUpdateWithoutDemandeInput = {
-    ID_Deces?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type DecesUncheckedUpdateManyWithoutDemandeInput = {
-    ID_Deces?: StringFieldUpdateOperationsInput | string
-    Nom?: StringFieldUpdateOperationsInput | string
-    Prenom?: StringFieldUpdateOperationsInput | string
-    NomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomMere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionMere?: NullableStringFieldUpdateOperationsInput | string | null
-    NomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    PrenomPere?: NullableStringFieldUpdateOperationsInput | string | null
-    ProfessionPere?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Document_ActeCreateManyAgentInput = {
