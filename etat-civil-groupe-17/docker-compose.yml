@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   postgres:
     image: postgres:15
@@ -9,7 +10,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
-      - "5432:5432"
+      - "5440:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -17,6 +18,26 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  nextjs:
+    container_name: etat_civil_web
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/etat_civil
+      NODE_ENV: development
+      CITOYEN_SESSION_SECRET: ton_secret_session
+      ADMIN_SESSION_SECRET: ton_secret_session
+      NEXT_PUBLIC_KEY: pk_test_f35e022cf222bdb9bc0854790ce8beb75d9df351
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
 
 volumes:
   postgres_data:
