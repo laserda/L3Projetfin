@@ -301,7 +301,7 @@ const DashboardIndexPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {recentDemandes.map((request) => {
+                                    {recentDemandes.map((request: any) => {
                                         const statusInfo = getStatusInfo(
                                             request.Statut
                                         );

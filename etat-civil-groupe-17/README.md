@@ -4,8 +4,8 @@
 
 -   Node.js (version recommandée : 18+)
 -   pnpm (ou npm/yarn)
--   PostgreSQL (utilisé via NeonDB dans ce projet)
--   Un fichier `.env.local` à la racine du projet
+-   PostgreSQL 
+-   Un fichier `.env` à la racine du projet
 
 ## Installation
 
@@ -19,18 +19,18 @@
 2. **Installer les dépendances :**
 
     ```bash
-    pnpm install
+    npm install
     ```
 
     ou
 
     ```bash
-    npm install
+    pnpm install
     ```
 
 3. **Configurer les variables d'environnement :**
 
-    Crée un fichier `.env.local` à la racine du projet et ajoute les variables suivantes (exemple issu du projet) :
+    Crée un fichier `.env` à la racine du projet et ajoute les variables suivantes (exemple issu du projet) :
 
     ```
     DATABASE_URL="postgresql://utilisateur:motdepasse@localhost:5432/nom_de_la_base?schema=public"
@@ -52,14 +52,22 @@
 
 ## Scripts disponibles
 
+
+-   npm run dev
+
+ou 
+
 -   `pnpm dev` : Démarre le serveur de développement Next.js
 -   `pnpm build` : Build l'application pour la production
 -   `pnpm start` : Lance l'application en mode production
 -   `pnpm lint` : Lint le code
 
-ou 
 
--   npm run dev
+## Page admin
+
+http://localhost:3000/admin
+
+l`option de creation de user adnib est ouverte pour faciliter les tests
 
 ## Structure du projet
 
