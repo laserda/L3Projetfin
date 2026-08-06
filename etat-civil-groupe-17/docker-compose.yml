@@ -25,9 +25,6 @@ services:
       CITOYEN_SESSION_SECRET: ton_secret_session
       ADMIN_SESSION_SECRET: ton_secret_session
       NEXT_PUBLIC_KEY: pk_test_f35e022cf222bdb9bc0854790ce8beb75d9df351
-    depends_on:
-      postgres:
-        condition: service_healthy
     volumes:
       - .:/app
 
