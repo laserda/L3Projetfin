@@ -37,3 +37,4 @@ services:
       start_period: 30s
     volumes:
       - .:/app
+      - /app/node_modules
