@@ -12,5 +12,8 @@ npx prisma generate --schema=./prisma/schema.prisma
 echo "📦 Prisma: Applying migrations..."
 npx prisma migrate deploy --schema=./prisma/schema.prisma
 
+echo "🚀 Build Next.js..."
+npm run build
+
 echo "🚀 Lancement de Next.js"
-npm run dev
+npm run start

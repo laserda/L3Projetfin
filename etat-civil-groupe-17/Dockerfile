@@ -11,11 +11,6 @@ COPY . .
 # Installer les dépendances (prisma generate est exécuté via postinstall ici)
 RUN npm install
 
-# Build de l'application Next.js
-RUN npm run build
-
-# Créer le fichier docker-entrypoint.sh directement
-
 RUN chmod +x docker-entrypoint.sh
 
 ENTRYPOINT ["/bin/sh", "./docker-entrypoint.sh"]
