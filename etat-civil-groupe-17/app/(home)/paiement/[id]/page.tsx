@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { ComponentType, FC, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DemandeResquest, Request } from "@/types";
 import {
@@ -24,7 +24,15 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import dynamic from "next/dynamic";
 import { ErrorsMessage } from "@/enums/errors-message";
 import { useRouter } from "next/navigation";
-import { PaystackConsumer } from "react-paystack";
+// react-paystack accède à `window` dès son chargement : on ne le charge que dans le navigateur
+// (jamais pendant la préparation de la page par le serveur).
+const PaystackConsumer = dynamic(
+    () => import("react-paystack").then((mod) => mod.PaystackConsumer),
+    {
+        ssr: false,
+        loading: () => <Button disabled>Payer</Button>,
+    }
+) as ComponentType<any>;
 import { getTarifByType, getTarifs } from "@/server/admin/tarif/tarif";
 
 
@@ -218,7 +226,7 @@ const PaiementPage: FC = () => {
                     <div className="flex justify-end">
 
                         <PaystackConsumer {...componentProps} >
-                            {({ initializePayment }) => <Button
+                            {({ initializePayment }: { initializePayment: (...args: any[]) => void }) => <Button
                                 isLoading={isLoading}
                                 onClick={() => {
                                     setIsLoading(true);
