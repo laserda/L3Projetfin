@@ -18,7 +18,11 @@ export default async function DashboardLayout({
 
                 <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
                     <header className="bg-white shadow-sm z-10 fixed w-full p-4 flex items-center justify-between">
-                        <h1 className="text-base md:text-xl font-semibold text-gray-800 ml-14">
+                        {/* Une seule ligne : sur téléphone, l'en-tête ne masque plus le contenu */}
+                        <h1
+                            className="text-base md:text-xl font-semibold text-gray-800 ml-14 min-w-0 truncate"
+                            title={`${agent?.Nom ?? ""} - ${agent?.Email ?? ""} - ${agent?.Role ?? ""}`}
+                        >
                             {agent?.Nom} - {agent?.Email} - {agent?.Role}
                         </h1>
                     </header>

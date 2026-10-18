@@ -8,3 +8,4 @@ out
 *.log
 Dockerfile
 docker-compose.yml
+e2e

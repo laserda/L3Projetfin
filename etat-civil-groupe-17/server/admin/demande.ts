@@ -4,6 +4,7 @@ import { DemandeRepository } from "./repositories/demandeRepository";
 import { HistoriqueRepository } from "./repositories/historiqueRepository";
 // import { CitoyenRepository } from "../auth/repositories/citoyenRepository";
 import { getSession } from "../sessions/citoyen_session";
+import { getSession as getAgentSession } from "../sessions/agent_session";
 
 // import { createDemandeSchema } from "@/validation/validation-demande";
 import { StatutDemande } from "@/lib/generated/prisma";
@@ -117,7 +118,8 @@ export async function getSuivieDesDemande() {
 
 export async function updateDemandeStatus(ID_Demande: string, status: StatutDemande) {
 
-    let session = await getSession();
+    // Action réservée aux agents : la session est signée avec la clé admin.
+    let session = await getAgentSession();
     console.log("igor");
     console.log(session);
     let user = await agentRepo.findById(session?.userId);

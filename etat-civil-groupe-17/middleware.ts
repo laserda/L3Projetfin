@@ -1,6 +1,7 @@
 // middlewares/auth.ts
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/server/sessions";
+import { decrypt as decryptAgentSession } from "@/server/sessions/agent_session";
 import { cookies } from "next/headers";
 
 export async function authMiddleware(request: NextRequest) {
@@ -34,23 +35,28 @@ export async function requireAdmin(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const cookieStore = await cookies();
     const session = cookieStore.get("session")?.value;
-    const decryptedSession = await decrypt(session);
-
+    // La session des agents/administrateurs est signée avec ADMIN_SESSION_SECRET :
+    // elle doit donc être vérifiée avec la même clé (et non celle des citoyens).
+    const decryptedSession = session ? await decryptAgentSession(session) : undefined;
+    const isAgentSession =
+        decryptedSession?.Role === "Administrateur" ||
+        decryptedSession?.Role === "Agent";
 
     if (pathname === "/admin" || pathname === "/admin/register") {
-        // Si session existe, on redirige vers /admin/dashboard
-        if (decryptedSession) {
+        // Si une session agent valide existe, on redirige vers /admin/dashboard
+        if (isAgentSession) {
             return NextResponse.redirect(new URL("/admin/dashboard", request.url));
         }
-    }
-
-    // Ne pas bloquer les routes d'auth admin
-    if (pathname === "/admin" || pathname === "/admin/register") {
+        // Ne pas bloquer les routes d'auth admin
         return NextResponse.next();
     }
 
-    if (!session) {
-        return NextResponse.redirect(new URL("/admin", request.url));
+    if (!decryptedSession) {
+        // Pas de session agent valide : retour à la page de connexion admin,
+        // en mémorisant la page demandée pour y revenir après connexion.
+        const loginUrl = new URL("/admin", request.url);
+        loginUrl.searchParams.set("redirect", pathname);
+        return NextResponse.redirect(loginUrl);
     }
 
     if (

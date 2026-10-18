@@ -1,7 +1,8 @@
 "use server";
 
 import { ActeRepository } from './repositories/actesRepository'
-import { getSession } from "../sessions/citoyen_session";
+// La création d'acte est faite par un agent : on lit la session agent.
+import { getSession } from "../sessions/agent_session";
 import { getDateTimeISOString } from '@/utils';
 import { ErrorsMessage } from '@/enums/errors-message';
 import { ResultData } from '@/types';

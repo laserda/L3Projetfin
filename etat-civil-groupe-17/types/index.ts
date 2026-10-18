@@ -65,5 +65,7 @@ export interface DemandeResquest {
 export interface ResultData {
     success?: boolean;
     error?: string;
+    // Champ du formulaire concerné par l'erreur (pour l'afficher sous ce champ)
+    field?: string;
     data?: any;
 }

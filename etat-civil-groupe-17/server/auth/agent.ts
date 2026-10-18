@@ -15,19 +15,26 @@ import { ErrorsMessage } from "@/enums/errors-message";
 
 const agentRepo = new AgentRepository();
 
+// Message volontairement identique pour un e-mail inconnu ou un mot de passe
+// erroné (on ne révèle pas quels comptes existent).
+const AGENT_LOGIN_ERROR = "Adresse e-mail ou mot de passe incorrect.";
+
 export async function login(formData: FormData): Promise<ResultData> {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
+        const issue = result.error.issues[0];
         return {
-            error: ErrorsMessage.errors
+            error: issue?.message ?? ErrorsMessage.errors,
+            field: issue?.path[0]?.toString(),
         };
     }
     try {
         const isAgent = await getAgentByEmail(result.data.Email);
         if (!isAgent) {
             return {
-                error: "Email ou Mot de passe incorrect",
+                error: AGENT_LOGIN_ERROR,
+                field: "Password",
             };
         }
         const isPasswordCorrect = await verifyPassword(
@@ -36,7 +43,8 @@ export async function login(formData: FormData): Promise<ResultData> {
         );
         if (!isPasswordCorrect) {
             return {
-                error: "Email ou Mot de passe incorrect",
+                error: AGENT_LOGIN_ERROR,
+                field: "Password",
             };
         }
 
@@ -104,7 +112,8 @@ const getAgentByEmail = async (email: string) => {
 
 export async function logout() {
     await deleteSession();
-    redirect("/login");
+    // Retour à la page de connexion de l'espace agents
+    redirect("/admin");
 }
 
 export async function getAgent() {
