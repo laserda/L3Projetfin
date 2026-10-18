@@ -121,7 +121,7 @@ md:translate-x-0 md:z-auto
                     </div>
 
                     <div className={`p-4 border-t w-full flex `}>
-                        <LogOutButton />
+                        <LogOutButton espace="admin" />
                     </div>
                 </div>
             </aside>

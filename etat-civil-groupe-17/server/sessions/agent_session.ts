@@ -1,7 +1,8 @@
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { RoleAgent } from "@/lib/generated/prisma";
+// Import de type uniquement : ce module est aussi utilisé par le middleware.
+import type { RoleAgent } from "@/lib/generated/prisma";
 
 const secretKey = process.env.ADMIN_SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -14,6 +15,10 @@ export async function createSession(userId: string, Role: RoleAgent) {
     Cookies.set("session", session, {
         // httpOnly: true,
         // secure: true,
+        // Cookie valable sur tout le site pour que la connexion reste active
+        // d'une page du tableau de bord à l'autre.
+        path: "/",
+        sameSite: "lax",
         expires: expiresAt,
     });
 }
@@ -33,6 +38,8 @@ export async function encrypt(payload: SessionPayload) {
 }
 
 export async function decrypt(session: string | undefined = "") {
+    // Aucun jeton : pas de session, inutile de tenter une vérification.
+    if (!session) return undefined;
     try {
         const { payload } = await jwtVerify(session, encodedKey, {
             algorithms: ["HS256"],
@@ -40,6 +47,7 @@ export async function decrypt(session: string | undefined = "") {
         return payload;
     } catch (error) {
         console.log("Failed to verify session");
+        return undefined;
     }
 }
 

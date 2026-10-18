@@ -20,8 +20,16 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { LoginFormData, loginSchema } from "@/validation/validation-agent";
 import { login } from "@/server/auth/agent";
 import { useRouter } from "next/navigation";
+import { ErrorsMessage } from "@/enums/errors-message";
 
-function LoginForm() {
+type LoginFormProps = {
+    // Page du tableau de bord à ouvrir après connexion
+    redirectTo?: string;
+    // Affiche une confirmation quand on arrive juste après une inscription
+    justRegistered?: boolean;
+};
+
+function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: LoginFormProps) {
     const router = useRouter();
     const [isPending, setIsPending] = useState(false);
     const [err, setErr] = useState<string | undefined>("");
@@ -45,14 +53,18 @@ function LoginForm() {
             const res = await login(formData);
 
             if (!res.success) {
-                const errMessage = res.error;
-                setErr(errMessage);
+                // Erreur liée à un champ : affichée sous ce champ
+                if (res.field === "Email" || res.field === "Password") {
+                    form.setError(res.field, { type: "server", message: res.error });
+                } else {
+                    setErr(res.error ?? ErrorsMessage.errors);
+                }
                 setIsPending(false);
             } else {
-                router.push("/admin/dashboard");
+                router.push(redirectTo);
             }
-        } catch (error) {
-            setErr(error as string);
+        } catch {
+            setErr(ErrorsMessage.errors);
             setIsPending(false);
         }
 
@@ -60,7 +72,19 @@ function LoginForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
+                {justRegistered && !err && (
+                    <Alert className="flex items-center border-green-600" role="status">
+                        <Info className="h-4 w-4" color="green" />
+                        <div>
+                            <AlertTitle>Compte créé</AlertTitle>
+                            <AlertDescription>
+                                Votre compte a bien été créé. Connectez-vous pour accéder au tableau de bord.
+                            </AlertDescription>
+                        </div>
+                    </Alert>
+                )}
+
                 {err && (
                     <Alert
                         variant="destructive"

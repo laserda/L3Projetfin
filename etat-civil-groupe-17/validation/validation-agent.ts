@@ -1,11 +1,17 @@
 import { z } from "zod";
 
+// Connexion : on vérifie seulement que les champs sont remplis et que l'e-mail
+// est bien formé ; aucune règle de longueur pour ne pas bloquer les comptes existants.
 export const loginSchema = z.object({
-  Email: z.string().email({ message: "Invalid email address" }).trim(),
+  Email: z
+    .string()
+    .trim()
+    .min(1, { message: "Veuillez saisir votre adresse e-mail." })
+    .email({ message: "Veuillez saisir une adresse e-mail valide." }),
   Password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .trim(),
+    .trim()
+    .min(1, { message: "Veuillez saisir votre mot de passe." }),
 });
 export const registerSchema = z.object({
   Nom: z

@@ -18,6 +18,8 @@ export async function encrypt(payload: SessionPayload) {
 }
 
 export async function decrypt(session: string | undefined = "") {
+    // Aucun jeton (visiteur non connecté) : ce n'est pas un échec de vérification.
+    if (!session) return undefined;
     try {
         const { payload } = await jwtVerify(session, encodedKey, {
             algorithms: ["HS256"],

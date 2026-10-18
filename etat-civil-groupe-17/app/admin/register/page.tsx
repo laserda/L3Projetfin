@@ -12,8 +12,8 @@ import RegisterForm from "./registerForm";
 
 const Page = () => {
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            <Card className="w-full max-w-md min-w-[425px]">
+        <div className="flex justify-center items-center min-h-screen px-4 py-6">
+            <Card className="w-full max-w-md">
                 <CardHeader className="space-y-1">
                     <div className="flex justify-center mb-4">
                         <Logo size="large" />

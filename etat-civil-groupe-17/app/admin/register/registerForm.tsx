@@ -63,7 +63,8 @@ function RegisterForm() {
                 setErr(errMessage);
                 setIsPending(false);
             } else {
-                router.push("/admin/dashboard");
+                // Le compte est créé : on renvoie vers la connexion avec un message
+                router.push("/admin?inscrit=1");
             }
         } catch (error) {
             setErr(error as string);
