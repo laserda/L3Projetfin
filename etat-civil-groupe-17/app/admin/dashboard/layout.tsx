@@ -13,14 +13,14 @@ export default async function DashboardLayout({
     const agent = await getAgent();
     return (
         <main className="min-h-screen flex flex-col">
-            <div className="flex flex-1 h-screen bg-gray-50">
+            <div className="flex flex-1 h-screen bg-background">
                 <SideBar />
 
                 <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
-                    <header className="bg-white shadow-sm z-10 fixed w-full p-4 flex items-center justify-between">
+                    <header className="bg-card/95 backdrop-blur border-b shadow-sm z-10 fixed w-full p-4 flex items-center justify-between">
                         {/* Une seule ligne : sur téléphone, l'en-tête ne masque plus le contenu */}
                         <h1
-                            className="text-base md:text-xl font-semibold text-gray-800 ml-14 min-w-0 truncate"
+                            className="text-base md:text-xl font-semibold text-foreground ml-14 min-w-0 truncate"
                             title={`${agent?.Nom ?? ""} - ${agent?.Email ?? ""} - ${agent?.Role ?? ""}`}
                         >
                             {agent?.Nom} - {agent?.Email} - {agent?.Role}

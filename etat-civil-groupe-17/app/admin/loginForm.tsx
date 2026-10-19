@@ -74,8 +74,8 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
                 {justRegistered && !err && (
-                    <Alert className="flex items-center border-green-600" role="status">
-                        <Info className="h-4 w-4" color="green" />
+                    <Alert className="flex items-center border-success" role="status">
+                        <Info className="h-4 w-4 text-success" />
                         <div>
                             <AlertTitle>Compte créé</AlertTitle>
                             <AlertDescription>
@@ -88,9 +88,9 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
                 {err && (
                     <Alert
                         variant="destructive"
-                        className="flex items-center border-red-500"
+                        className="flex items-center border-destructive"
                     >
-                        <Info className="h-4 w-4" color="red" />
+                        <Info className="h-4 w-4 text-destructive" />
                         <div>
                             <AlertTitle>Erreur</AlertTitle>
                             <AlertDescription>{err}</AlertDescription>

@@ -154,8 +154,9 @@ const PaiementPage: FC = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-[60vh]">
-                <div className="animate-pulse text-ci-orange">
+            <div data-slot="loader" role="status" aria-busy="true" className="flex flex-col gap-4 justify-center items-center min-h-[60vh]">
+                <span className="loader-ring h-14 w-14 rounded-full border-4 animate-spin" />
+                <div className="animate-pulse text-primary font-medium">
                     Chargement...
                 </div>
             </div>
@@ -166,7 +167,7 @@ const PaiementPage: FC = () => {
         return (
             <Card className="max-w-md mx-auto">
                 <CardHeader>
-                    <CardTitle className="text-red-500">
+                    <CardTitle className="text-destructive">
                         Demande introuvable
                     </CardTitle>
                     <CardDescription>
@@ -197,9 +198,9 @@ const PaiementPage: FC = () => {
                     {err && (
                         <Alert
                             variant="destructive"
-                            className="flex items-center border-red-500"
+                            className="flex items-center border-destructive"
                         >
-                            <Info className="h-4 w-4" color="red" />
+                            <Info className="h-4 w-4 text-destructive" />
                             <div>
                                 <AlertTitle>Erreur</AlertTitle>
                                 <AlertDescription>{err}</AlertDescription>
@@ -209,14 +210,14 @@ const PaiementPage: FC = () => {
 
 
                     <div className="border-t pt-4">
-                        <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                            <h3 className="font-medium text-gray-900 mb-2">
+                        <div className="bg-muted p-4 rounded-lg mb-4">
+                            <h3 className="font-medium text-foreground mb-2">
                                 Frais de timbre
                             </h3>
-                            <p className="text-gray-600 mb-2">
+                            <p className="text-muted-foreground mb-2">
                                 Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-muted-foreground">
                                 Vous devez régler ces frais pour que
                                 votre demande soit traitée.
                             </p>
@@ -236,7 +237,7 @@ const PaiementPage: FC = () => {
                                 Payer
                             </Button>}
                         </PaystackConsumer>
-                        {/* <PaystackButtonNoSSR {...componentProps} className="bg-ci-orange hover:bg-ci-orange/90" /> */}
+                        {/* <PaystackButtonNoSSR {...componentProps} className="bg-primary hover:bg-primary/90" /> */}
 
                     </div>
                 </CardContent>

@@ -116,9 +116,9 @@ const DemandeMariageForm = () => {
                             {err && (
                                 <Alert
                                     variant="destructive"
-                                    className="flex items-center border-red-500"
+                                    className="flex items-center border-destructive"
                                 >
-                                    <Info className="h-4 w-4" color="red" />
+                                    <Info className="h-4 w-4 text-destructive" />
                                     <div>
                                         <AlertTitle>Erreur</AlertTitle>
                                         <AlertDescription>{err}</AlertDescription>
@@ -507,14 +507,14 @@ const DemandeMariageForm = () => {
                             </>}
 
                             <div className="border-t pt-4">
-                                <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                                    <h3 className="font-medium text-gray-900 mb-2">
+                                <div className="bg-muted p-4 rounded-lg mb-4">
+                                    <h3 className="font-medium text-foreground mb-2">
                                         Frais de timbre
                                     </h3>
-                                    <p className="text-gray-600 mb-2">
+                                    <p className="text-muted-foreground mb-2">
                                         Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
                                     </p>
-                                    <p className="text-sm text-gray-500">
+                                    <p className="text-sm text-muted-foreground">
                                         Vous devez régler ces frais pour que
                                         votre demande soit traitée.
                                     </p>

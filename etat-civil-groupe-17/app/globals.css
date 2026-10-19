@@ -2,90 +2,166 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Charte graphique État Civil CI
+ * --------------------------------
+ * Toutes les couleurs, la typographie, les arrondis et les ombres du site
+ * sont définis ici sous forme de variables de thème (format HSL « h s% l% »),
+ * puis exposés à Tailwind dans tailwind.config.js.
+ * Les composants n'utilisent que ces variables (bg-primary, text-muted-foreground,
+ * text-success, shadow-md…) : aucune couleur n'est codée en dur ailleurs.
+ *
+ * Couleurs de la marque (identité ivoirienne) :
+ *   orange #FF7900 -> --brand-orange : 28.5 100% 50%
+ *   vert   #009E60 -> --brand-green  : 156.5 100% 31%
+ */
+
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
+        /* Marque */
+        --brand-orange: 28.5 100% 50%; /* #FF7900 */
+        --brand-green: 156.5 100% 31%; /* #009E60 */
+        --brand-white: 0 0% 100%;
+
+        /* Surfaces et texte */
+        --background: 30 33% 98.5%;
+        --foreground: 222 47% 11%;
 
         --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
+        --card-foreground: 222 47% 11%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
+        --popover-foreground: 222 47% 11%;
 
-        --primary: 29 100% 50%; /* Orange CI */
+        --primary: var(--brand-orange);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: 155 100% 31%; /* Vert CI */
+        --secondary: var(--brand-green);
         --secondary-foreground: 0 0% 100%;
 
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
+        --muted: 30 20% 95.5%;
+        --muted-foreground: 220 9% 38%;
 
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
+        --accent: 29 100% 95%;
+        --accent-foreground: 24 85% 28%;
 
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
+        /* États (messages, statuts, badges) */
+        --destructive: 0 72% 48%;
+        --destructive-foreground: 0 0% 100%;
+        --success: 156 100% 25%;
+        --success-foreground: 0 0% 100%;
+        --warning: 35 92% 36%;
+        --warning-foreground: 0 0% 100%;
+        --info: 214 80% 44%;
+        --info-foreground: 0 0% 100%;
 
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 29 100% 50%; /* Orange CI pour focus */
+        --border: 30 14% 88%;
+        --input: 30 12% 84%;
+        --ring: var(--brand-orange);
 
-        --radius: 0.5rem;
+        /* Voile derrière les fenêtres et le menu mobile */
+        --overlay: 222 47% 6%;
 
-        --sidebar-background: 0 0% 98%;
-        --sidebar-foreground: 240 5.3% 26.1%;
-        --sidebar-primary: 29 100% 50%;
-        --sidebar-primary-foreground: 0 0% 98%;
-        --sidebar-accent: 240 4.8% 95.9%;
-        --sidebar-accent-foreground: 240 5.9% 10%;
-        --sidebar-border: 220 13% 91%;
-        --sidebar-ring: 29 100% 50%;
+        /* Documents officiels imprimables (actes) : toujours noir sur blanc */
+        --paper: 0 0% 100%;
+        --paper-foreground: 0 0% 0%;
+        --paper-border: 222 30% 18%;
+
+        /* Graphiques */
+        --chart-1: var(--brand-orange);
+        --chart-2: var(--brand-green);
+        --chart-3: 214 80% 50%;
+        --chart-4: 42 95% 48%;
+        --chart-5: 220 9% 46%;
+        --chart-label: 0 0% 100%;
+
+        /* Barre latérale de l'administration */
+        --sidebar-background: 0 0% 100%;
+        --sidebar-foreground: 222 20% 26%;
+        --sidebar-primary: var(--brand-orange);
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 29 100% 95%;
+        --sidebar-accent-foreground: 24 85% 28%;
+        --sidebar-border: 30 14% 88%;
+        --sidebar-ring: var(--brand-orange);
+
+        /* Typographie */
+        --font-sans: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial,
+            "Noto Sans", system-ui, -apple-system, sans-serif;
+        --font-heading: "Poppins", "Inter", "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
+
+        /* Arrondis */
+        --radius: 0.75rem;
+
+        /* Ombres (teinte reprise du texte, opacité faible) */
+        --shadow-color: 222 47% 11%;
+        --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / 0.05);
+        --shadow-sm: 0 1px 3px 0 hsl(var(--shadow-color) / 0.08),
+            0 1px 2px -1px hsl(var(--shadow-color) / 0.06);
+        --shadow-md: 0 4px 12px -2px hsl(var(--shadow-color) / 0.1),
+            0 2px 4px -2px hsl(var(--shadow-color) / 0.06);
+        --shadow-lg: 0 12px 28px -6px hsl(var(--shadow-color) / 0.14),
+            0 4px 8px -4px hsl(var(--shadow-color) / 0.08);
     }
 
+    /* Mode sombre : prêt à l'emploi (classe « dark » sur <html>) */
     .dark {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
+        --background: 222 40% 7%;
+        --foreground: 30 20% 96%;
 
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
+        --card: 222 32% 11%;
+        --card-foreground: 30 20% 96%;
 
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
+        --popover: 222 32% 11%;
+        --popover-foreground: 30 20% 96%;
 
-        --primary: 29 100% 50%; /* Orange CI */
+        --primary: var(--brand-orange);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: 155 100% 31%; /* Vert CI */
+        --secondary: var(--brand-green);
         --secondary-foreground: 0 0% 100%;
 
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
+        --muted: 222 25% 16%;
+        --muted-foreground: 220 12% 70%;
 
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
+        --accent: 28 60% 18%;
+        --accent-foreground: 30 100% 85%;
 
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
+        --destructive: 0 75% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --success: 156 70% 45%;
+        --success-foreground: 222 40% 7%;
+        --warning: 40 95% 58%;
+        --warning-foreground: 222 40% 7%;
+        --info: 214 90% 66%;
+        --info-foreground: 222 40% 7%;
 
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-        --ring: 29 100% 50%;
+        --border: 222 22% 20%;
+        --input: 222 22% 24%;
+        --ring: var(--brand-orange);
 
-        --sidebar-background: 240 5.9% 10%;
-        --sidebar-foreground: 240 4.8% 95.9%;
-        --sidebar-primary: 29 100% 50%;
+        --overlay: 222 47% 3%;
+
+        --chart-3: 214 90% 62%;
+        --chart-4: 42 95% 58%;
+        --chart-5: 220 12% 62%;
+
+        --sidebar-background: 222 32% 11%;
+        --sidebar-foreground: 30 20% 90%;
+        --sidebar-primary: var(--brand-orange);
         --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 240 3.7% 15.9%;
-        --sidebar-accent-foreground: 240 4.8% 95.9%;
-        --sidebar-border: 240 3.7% 15.9%;
-        --sidebar-ring: 29 100% 50%;
+        --sidebar-accent: 28 60% 18%;
+        --sidebar-accent-foreground: 30 100% 85%;
+        --sidebar-border: 222 22% 20%;
+        --sidebar-ring: var(--brand-orange);
+
+        --shadow-color: 222 60% 2%;
     }
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 @layer base {
@@ -94,6 +170,28 @@ html {
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground font-sans antialiased;
+        font-feature-settings: "cv11", "ss01";
+        text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-heading tracking-tight;
+    }
+
+    ::selection {
+        @apply bg-primary/20 text-foreground;
+    }
+}
+
+@layer utilities {
+    /* Écran de chargement : anneau aux couleurs de la marque */
+    .loader-ring {
+        border-color: hsl(var(--muted));
+        border-top-color: hsl(var(--brand-orange));
+        border-right-color: hsl(var(--brand-green));
     }
 }

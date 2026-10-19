@@ -67,7 +67,7 @@ function page() {
                         </thead>
                         <tbody>
                             {tarifs.map((tarif: any) => (
-                                <tr key={tarif.ID_FraisTimbre} className="border-b hover:bg-gray-50">
+                                <tr key={tarif.ID_FraisTimbre} className="border-b hover:bg-muted">
                                     <td className="py-3 px-4">{tarif.TypeActe}</td>
 
                                     <td className="py-3 px-4">
@@ -91,7 +91,7 @@ function page() {
                         </tbody>
                     </table>
                 ) : (
-                    <div className="text-center text-gray-500 text-xl">
+                    <div className="text-center text-muted-foreground text-xl">
                         Aucun agent enregistré
                     </div>
                 )}

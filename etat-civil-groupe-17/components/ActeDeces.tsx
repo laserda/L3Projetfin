@@ -33,9 +33,9 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
         }
 
         return (
-            <div ref={ref} className="max-w-3xl h-screen mx-auto pt-10 p-10 border border-black text-sm leading-relaxed bg-white text-black font-serif">
+            <div ref={ref} className="max-w-3xl h-screen mx-auto pt-10 p-10 border border-paper-foreground text-sm leading-relaxed bg-paper text-paper-foreground font-serif">
 
-                <div className=" flex justify-between p-8 mb-8 border-b-2 border-gray-800 pb-6">
+                <div className=" flex justify-between p-8 mb-8 border-b-2 border-paper-border pb-6">
                     <div className="flex flex-col items-center">
                         <p className="uppercase font-bold mb-2 text-sm">République de Côte d'Ivoire</p>
                         <Image
@@ -97,7 +97,7 @@ const ActeDeces = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 {/* Signature et date */}
                 <div className="flex justify-between items-start">
                     <div className="text-center">
-                        <div className="w-32 h-24 border-2 border-gray-800 flex items-center justify-center">
+                        <div className="w-32 h-24 border-2 border-paper-border flex items-center justify-center">
                             <p className="font-bold">Timbre</p>
                         </div>
                     </div>

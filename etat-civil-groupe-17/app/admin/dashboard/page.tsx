@@ -57,17 +57,17 @@ const DashboardIndexPage = () => {
         fetchDemandes();
     }, []);
     const pieChartData = [
-        { name: "Naissance", value: demandesNaissance.length, color: "#2563EB" },
-        { name: "Mariage", value: demandesMariage.length, color: "#F59E0B" },
-        { name: "Décès", value: demandesDeces.length, color: "#6B7280" },
+        { name: "Naissance", value: demandesNaissance.length, color: "hsl(var(--chart-1))" },
+        { name: "Mariage", value: demandesMariage.length, color: "hsl(var(--chart-2))" },
+        { name: "Décès", value: demandesDeces.length, color: "hsl(var(--chart-5))" },
     ];
 
     const statusChartData = [
-        { name: "En attente", value: enAttente.length, color: "#F59E0B" },
-        { name: "En traitement", value: enTraitement.length, color: "#3B82F6" },
-        { name: "Approuvées", value: valide.length, color: "#10B981" },
-        { name: "Rejetées", value: refuse.length, color: "#EF4444" },
-        { name: "Livrées", value: livree.length, color: "#4FD1C5" },
+        { name: "En attente", value: enAttente.length, color: "hsl(var(--warning))" },
+        { name: "En traitement", value: enTraitement.length, color: "hsl(var(--info))" },
+        { name: "Approuvées", value: valide.length, color: "hsl(var(--success))" },
+        { name: "Rejetées", value: refuse.length, color: "hsl(var(--destructive))" },
+        { name: "Livrées", value: livree.length, color: "hsl(var(--secondary))" },
     ];
 
     const generalStats = [
@@ -75,37 +75,37 @@ const DashboardIndexPage = () => {
             title: "Total demandes",
             value: demandes.length,
             Icon: FileText,
-            color: "bg-gray-100",
+            color: "bg-muted",
         },
         {
             title: "En traitement",
             value: enTraitement.length,
             Icon: ArrowUp,
-            color: "bg-blue-100",
+            color: "bg-info/10",
         },
         {
             title: "En attente",
             value: enAttente.length,
             Icon: Clock,
-            color: "bg-yellow-100",
+            color: "bg-warning/10",
         },
         {
             title: "Validées",
             value: valide.length,
             Icon: Check,
-            color: "bg-green-100",
+            color: "bg-success/10",
         },
         {
             title: "Livrées",
             value: livree.length,
             Icon: CheckCheck,
-            color: "bg-green-300",
+            color: "bg-success/25",
         },
         {
             title: "Refusées",
             value: refuse.length,
             Icon: X,
-            color: "bg-red-100",
+            color: "bg-destructive/10",
         },
     ]
 
@@ -115,32 +115,32 @@ const DashboardIndexPage = () => {
             case "SoumisePayee":
                 return {
                     icon: <Clock className="h-4 w-4" />,
-                    color: "text-yellow-500",
+                    color: "text-warning",
                 };
             case "Validée":
                 return {
                     icon: <Check className="h-4 w-4" />,
-                    color: "text-green-500",
+                    color: "text-success",
                 };
             case "Livrée":
                 return {
                     icon: <CheckCheck className="h-4 w-4" />,
-                    color: "text-green-500",
+                    color: "text-success",
                 };
             case "Refusée":
                 return {
                     icon: <X className="h-4 w-4" />,
-                    color: "text-red-500",
+                    color: "text-destructive",
                 };
             case "EnTraitement":
                 return {
                     icon: <ArrowUp className="h-4 w-4" />,
-                    color: "text-blue-500",
+                    color: "text-info",
                 };
             default:
                 return {
                     icon: <FileText className="h-4 w-4" />,
-                    color: "text-gray-500",
+                    color: "text-muted-foreground",
                 };
         }
     };
@@ -161,7 +161,7 @@ const DashboardIndexPage = () => {
                         <CardContent className="p-6">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <p className="text-sm text-gray-500">
+                                    <p className="text-sm text-muted-foreground">
                                         {card.title}
                                     </p>
                                     <h3 className="text-3xl font-bold">
@@ -202,7 +202,7 @@ const DashboardIndexPage = () => {
                                             )}%`
                                         }
                                         outerRadius={80}
-                                        fill="#8884d8"
+                                        fill="hsl(var(--chart-1))"
                                         dataKey="value"
                                     >
                                         {pieChartData.map((entry, index) => (
@@ -239,7 +239,7 @@ const DashboardIndexPage = () => {
                                         bottom: 5,
                                     }}
                                 >
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                                     <XAxis dataKey="name" />
                                     <YAxis />
                                     <Tooltip />
@@ -247,6 +247,7 @@ const DashboardIndexPage = () => {
                                     <Bar
                                         dataKey="value"
                                         name="Nombre"
+                                        fill="hsl(var(--chart-1))"
                                         radius={[4, 4, 0, 0]}
                                     >
                                         {statusChartData.map((entry, index) => (
@@ -272,7 +273,7 @@ const DashboardIndexPage = () => {
                 </CardHeader>
                 <CardContent>
                     {recentDemandes.length === 0 ? (
-                        <p className="text-center py-8 text-gray-500">
+                        <p className="text-center py-8 text-muted-foreground">
                             Aucune demande n'a encore été enregistrée.
                         </p>
                     ) : (
@@ -308,7 +309,7 @@ const DashboardIndexPage = () => {
                                         return (
                                             <tr
                                                 key={request.ID_Demande}
-                                                className="border-b hover:bg-gray-50"
+                                                className="border-b hover:bg-muted"
                                             >
                                                 <td className="py-3 px-4">
                                                     {request.ID_Demande

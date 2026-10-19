@@ -63,17 +63,64 @@ module.exports = {
                     border: "hsl(var(--sidebar-border))",
                     ring: "hsl(var(--sidebar-ring))",
                 },
-                // Couleurs CI
+                // États (succès, avertissement, information)
+                success: {
+                    DEFAULT: "hsl(var(--success))",
+                    foreground: "hsl(var(--success-foreground))",
+                },
+                warning: {
+                    DEFAULT: "hsl(var(--warning))",
+                    foreground: "hsl(var(--warning-foreground))",
+                },
+                info: {
+                    DEFAULT: "hsl(var(--info))",
+                    foreground: "hsl(var(--info-foreground))",
+                },
+                // Voile derrière les fenêtres et le menu mobile
+                overlay: "hsl(var(--overlay))",
+                // Documents officiels imprimables (actes)
+                paper: {
+                    DEFAULT: "hsl(var(--paper))",
+                    foreground: "hsl(var(--paper-foreground))",
+                    border: "hsl(var(--paper-border))",
+                },
+                // Graphiques
+                chart: {
+                    1: "hsl(var(--chart-1))",
+                    2: "hsl(var(--chart-2))",
+                    3: "hsl(var(--chart-3))",
+                    4: "hsl(var(--chart-4))",
+                    5: "hsl(var(--chart-5))",
+                },
+                // Couleurs de la marque (Côte d'Ivoire) : définies dans app/globals.css
+                // orange #FF7900, vert #009E60
+                brand: {
+                    orange: "hsl(var(--brand-orange))",
+                    green: "hsl(var(--brand-green))",
+                    white: "hsl(var(--brand-white))",
+                },
                 ci: {
-                    orange: "#FF7900",
-                    green: "#009E60",
-                    white: "#FFFFFF",
+                    orange: "hsl(var(--brand-orange))",
+                    green: "hsl(var(--brand-green))",
+                    white: "hsl(var(--brand-white))",
                 },
             },
+            fontFamily: {
+                sans: ["var(--font-sans)"],
+                heading: ["var(--font-heading)"],
+            },
             borderRadius: {
+                xl: "calc(var(--radius) + 4px)",
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+            },
+            boxShadow: {
+                xs: "var(--shadow-xs)",
+                sm: "var(--shadow-sm)",
+                DEFAULT: "var(--shadow-sm)",
+                md: "var(--shadow-md)",
+                lg: "var(--shadow-lg)",
             },
             keyframes: {
                 "accordion-down": {

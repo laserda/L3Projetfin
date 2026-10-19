@@ -77,9 +77,9 @@ function RegisterForm() {
                 {err && (
                     <Alert
                         variant="destructive"
-                        className="flex items-center border-red-500"
+                        className="flex items-center border-destructive"
                     >
-                        <Info className="h-4 w-4" color="red" />
+                        <Info className="h-4 w-4 text-destructive" />
                         <div>
                             <AlertTitle>Erreur</AlertTitle>
                             <AlertDescription>{err}</AlertDescription>

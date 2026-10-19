@@ -46,7 +46,7 @@ const Page = async ({ searchParams }: PageProps) => {
                 </CardContent>
 
                 <CardFooter className="flex justify-center">
-                    <Link href={"/admin/register"} className="text-gray-500">
+                    <Link href={"/admin/register"} className="text-muted-foreground">
                         Pas encore inscrit ? Inscription
                     </Link>
                 </CardFooter>

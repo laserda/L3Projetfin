@@ -114,38 +114,38 @@ const DemandeDetailPage = () => {
             case "SoumisePayee":
                 return {
                     icon: <Clock className="h-5 w-5" />,
-                    color: "text-yellow-500",
-                    bg: "bg-yellow-100",
+                    color: "text-warning",
+                    bg: "bg-warning/10",
                 };
             case "Validée":
                 return {
                     icon: <Check className="h-5 w-5" />,
-                    color: "text-green-500",
-                    bg: "bg-green-100",
+                    color: "text-success",
+                    bg: "bg-success/10",
                 };
             case "Refusée":
                 return {
                     icon: <X className="h-5 w-5" />,
-                    color: "text-red-500",
-                    bg: "bg-red-100",
+                    color: "text-destructive",
+                    bg: "bg-destructive/10",
                 };
             case "EnTraitement":
                 return {
                     icon: <ArrowUp className="h-5 w-5" />,
-                    color: "text-blue-500",
-                    bg: "bg-blue-100",
+                    color: "text-info",
+                    bg: "bg-info/10",
                 };
             case "Livrée":
                 return {
                     icon: <CheckCheck className="h-5 w-5" />,
-                    color: "text-green-500",
-                    bg: "bg-green-100",
+                    color: "text-success",
+                    bg: "bg-success/10",
                 };
             default:
                 return {
                     icon: null,
-                    color: "text-gray-500",
-                    bg: "bg-gray-100",
+                    color: "text-muted-foreground",
+                    bg: "bg-muted",
                 };
         }
     };
@@ -159,7 +159,7 @@ const DemandeDetailPage = () => {
             <>
                 <Card className="max-w-md mx-auto">
                     <CardHeader>
-                        <CardTitle className="text-red-500">
+                        <CardTitle className="text-destructive">
                             Demande introuvable
                         </CardTitle>
                         <CardDescription>
@@ -241,9 +241,9 @@ const DemandeDetailPage = () => {
                     </Button>
                 );
             case "Livrée":
-                return <p className="text-green-500 text-xl">La demande est déjà signée et livrée.</p>;
+                return <p className="text-success text-xl">La demande est déjà signée et livrée.</p>;
             case "Refusée":
-                return <p className="text-red-500 text-xl">La demande est refusée.</p>;
+                return <p className="text-destructive text-xl">La demande est refusée.</p>;
             default:
                 return null;
         }
@@ -314,7 +314,7 @@ const DemandeDetailPage = () => {
                                     <div className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                                             <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
+                                                <h3 className="text-sm font-medium text-muted-foreground">
                                                     Nom
                                                 </h3>
                                                 <p className="mt-1">
@@ -322,7 +322,7 @@ const DemandeDetailPage = () => {
                                                 </p>
                                             </div>
                                             <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
+                                                <h3 className="text-sm font-medium text-muted-foreground">
                                                     Prénom
                                                 </h3>
                                                 <p className="mt-1">
@@ -330,7 +330,7 @@ const DemandeDetailPage = () => {
                                                 </p>
                                             </div>
                                             <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
+                                                <h3 className="text-sm font-medium text-muted-foreground">
                                                     Date
                                                 </h3>
                                                 <p className="mt-1">
@@ -339,14 +339,14 @@ const DemandeDetailPage = () => {
                                             </div>
 
                                             <div>
-                                                <h3 className="text-sm font-medium text-gray-500">
+                                                <h3 className="text-sm font-medium text-muted-foreground">
                                                     Paiement
                                                 </h3>
                                                 <p className="mt-1">
                                                     {request.ID_Paiement ? (
                                                         <Badge
                                                             variant="outline"
-                                                            className="bg-green-50 text-green-600 border-green-200"
+                                                            className="bg-success/10 text-success border-success/30"
                                                         >
                                                             Frais de timbre
                                                             payés
@@ -354,7 +354,7 @@ const DemandeDetailPage = () => {
                                                     ) : (
                                                         <Badge
                                                             variant="outline"
-                                                            className="bg-red-50 text-red-600 border-red-200"
+                                                            className="bg-destructive/10 text-destructive border-destructive/30"
                                                         >
                                                             Paiement non
                                                             confirmé
@@ -367,7 +367,7 @@ const DemandeDetailPage = () => {
                                         <Separator />
 
                                         <div>
-                                            <h3 className="text-sm font-medium text-gray-500 mb-2">
+                                            <h3 className="text-sm font-medium text-muted-foreground mb-2">
                                                 Date de soumission
                                             </h3>
                                             <p>
@@ -381,15 +381,15 @@ const DemandeDetailPage = () => {
                                     <div className="space-y-4">
                                         <div className="flex items-start">
                                             <div className="flex-shrink-0 mr-3">
-                                                <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                                                    <ArrowUp className="h-4 w-4 text-blue-600" />
+                                                <div className="h-8 w-8 rounded-full bg-info/10 flex items-center justify-center">
+                                                    <ArrowUp className="h-4 w-4 text-info" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <p className="font-medium">
                                                     Demande créée
                                                 </p>
-                                                <p className="text-sm text-gray-500">
+                                                <p className="text-sm text-muted-foreground">
                                                     {(
                                                         request.DateDemande.toString()
                                                     )}
@@ -403,15 +403,15 @@ const DemandeDetailPage = () => {
 
                                         <div className="flex items-start">
                                             <div className="flex-shrink-0 mr-3">
-                                                <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
-                                                    <Clock className="h-4 w-4 text-yellow-600" />
+                                                <div className="h-8 w-8 rounded-full bg-warning/10 flex items-center justify-center">
+                                                    <Clock className="h-4 w-4 text-warning" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <p className="font-medium">
                                                     Statut initial
                                                 </p>
-                                                <p className="text-sm text-gray-500">
+                                                <p className="text-sm text-muted-foreground">
                                                     {(
                                                         request.Statut
                                                     )}
@@ -444,7 +444,7 @@ const DemandeDetailPage = () => {
                                                             "EnTraitement" &&
                                                             "Demande en traitement"}
                                                     </p>
-                                                    <p className="text-sm text-gray-500">
+                                                    <p className="text-sm text-muted-foreground">
                                                         Date inconnue
                                                     </p>
                                                     <p className="text-sm mt-1">
@@ -472,7 +472,7 @@ const DemandeDetailPage = () => {
                     <Card>
                         <CardHeader>
                             <CardTitle>Actions</CardTitle>
-                            {error ? <CardDescription className="text-red-500 text-xl">{error}</CardDescription> :
+                            {error ? <CardDescription className="text-destructive text-xl">{error}</CardDescription> :
                                 <CardDescription>
                                     Gérer le traitement de cette demande
                                 </CardDescription>}
