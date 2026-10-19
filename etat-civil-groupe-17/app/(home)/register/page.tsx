@@ -18,7 +18,7 @@ export default async function SignUpForm() {
     if (session) redirect("/");
     return (
         <div className="flex justify-center items-center min-h-[80vh]">
-            <Card className="min-w-[425px] max-w-md">
+            <Card className="w-full max-w-md sm:min-w-[425px]">
                 <CardHeader className="space-y-1">
                     <div className="flex justify-center mb-4">
                         <Logo size="large" />
@@ -36,7 +36,7 @@ export default async function SignUpForm() {
                 </CardContent>
 
                 <CardFooter className="flex justify-center">
-                    <Link href={"/login"} className="text-gray-500 text-sm">
+                    <Link href={"/login"} className="text-muted-foreground text-sm">
                         Déjà inscrit ? Se connecter
                     </Link>
                 </CardFooter>

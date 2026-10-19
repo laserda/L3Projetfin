@@ -27,7 +27,7 @@ const Page = () => {
                 <CardContent><RegisterForm /></CardContent>
 
                 <CardFooter className="flex justify-center">
-                    <Link href={"/admin"} className="text-gray-500">
+                    <Link href={"/admin"} className="text-muted-foreground">
                         Déjà inscrit ? Connexion
                     </Link>
                 </CardFooter>

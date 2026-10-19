@@ -19,7 +19,7 @@ const Page = async () => {
     
     return (
         <div className="flex justify-center items-center min-h-[80vh]">
-            <Card className="w-full max-w-md min-w-[425px]">
+            <Card className="w-full max-w-md sm:min-w-[425px]">
                 <CardHeader className="space-y-1">
                     <div className="flex justify-center mb-4">
                         <Logo size="large" />
@@ -37,7 +37,7 @@ const Page = async () => {
                 </CardContent>
 
                 <CardFooter className="flex justify-center">
-                    <Link href={"/register"} className="text-gray-500">
+                    <Link href={"/register"} className="text-muted-foreground">
                         Pas encore inscrit ? Inscription
                     </Link>
                 </CardFooter>

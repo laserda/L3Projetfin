@@ -127,7 +127,7 @@ const SuiviPage = () => {
 
     return (
         <>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Liste de mes demandes</h1>
                 <div className="flex items-center space-x-2">
                     <Button
@@ -159,7 +159,7 @@ const SuiviPage = () => {
                                 Recherche
                             </label>
                             <div className="relative">
-                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                                 <Input
                                     id="search"
                                     placeholder="Nom, email, référence..."
@@ -239,11 +239,11 @@ const SuiviPage = () => {
                 <CardContent className="p-0">
                     {filteredRequests.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-12 px-4">
-                            <Filter className="h-12 w-12 text-gray-400 mb-4" />
-                            <h3 className="text-lg font-medium text-gray-900 mb-1">
+                            <Filter className="h-12 w-12 text-muted-foreground mb-4" />
+                            <h3 className="text-lg font-medium text-foreground mb-1">
                                 Aucune demande trouvée
                             </h3>
-                            <p className="text-gray-500 text-center max-w-md">
+                            <p className="text-muted-foreground text-center max-w-md">
                                 Aucune demande ne correspond à vos critères de
                                 filtrage. Essayez de modifier vos filtres ou de
                                 créer une nouvelle demande.
@@ -260,7 +260,7 @@ const SuiviPage = () => {
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm">
                                 <thead>
-                                    <tr className="border-b bg-gray-50">
+                                    <tr className="border-b bg-muted">
                                         <th className="text-left py-3 px-4 font-medium">
                                             Référence
                                         </th>
@@ -292,7 +292,7 @@ const SuiviPage = () => {
                                         return (
                                             <tr
                                                 key={request.ID_Demande}
-                                                className="border-b hover:bg-gray-50"
+                                                className="border-b hover:bg-muted"
                                             >
                                                 <td className="py-3 px-4 font-medium">
                                                     {request.ID_Demande
@@ -338,7 +338,7 @@ const SuiviPage = () => {
                                                             ?
                                                             <Button
                                                                 size="sm"
-                                                                className="bg-ci-orange hover:bg-ci-orange/90"
+                                                                className="bg-primary hover:bg-primary/90"
                                                                 onClick={() => {
 
 

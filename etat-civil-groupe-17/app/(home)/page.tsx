@@ -12,12 +12,12 @@ export default async function HomePage() {
     return (
         <main className="px-4 md:px-8">
             {/* Hero */}
-            <section className="py-12 md:py-16 text-center bg-gradient-to-br from-white to-gray-100 rounded-xl shadow-sm border mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+            <section className="relative overflow-hidden py-12 md:py-16 px-4 text-center bg-gradient-to-br from-accent via-card to-secondary/10 rounded-2xl shadow-md border mb-12">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-foreground text-balance">
                     Service d'État Civil{" "}
-                    <span className="text-ci-orange">Numérique</span>
+                    <span className="text-primary">Numérique</span>
                 </h1>
-                <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-8">
+                <p className="max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
                     Demandez vos actes d'état civil en ligne, suivez vos
                     demandes et recevez vos documents sans vous déplacer.
                 </p>
@@ -25,7 +25,7 @@ export default async function HomePage() {
                     <Link href="#nos-service">
                         <Button
                             size="lg"
-                            className="bg-ci-orange hover:bg-ci-orange/90"
+                            className="bg-primary hover:bg-primary/90"
                         >
                             <FileText className="mr-2 h-5 w-5" />
                             Nouvelle demande
@@ -42,7 +42,7 @@ export default async function HomePage() {
                             <Button
                                 size="lg"
                                 variant="secondary"
-                                className="bg-ci-green hover:bg-ci-green/90 text-white"
+                                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
                             >
                                 <User className="mr-2 h-5 w-5" />
                                 Espace administration
@@ -56,8 +56,8 @@ export default async function HomePage() {
             <NosServiceLayout />
 
             {/* Processus */}
-            <section className="py-12 mt-8 bg-gray-50 rounded-xl p-8">
-                <h2 className="text-2xl font-bold mb-10 text-center text-gray-800">
+            <section className="py-12 mt-8 bg-card border shadow-sm rounded-2xl px-4 sm:p-8">
+                <h2 className="text-2xl font-bold mb-10 text-center text-foreground">
                     Comment ça marche ?
                 </h2>
                 <div className="grid md:grid-cols-4 gap-8">
@@ -88,13 +88,13 @@ export default async function HomePage() {
                         },
                     ].map((item) => (
                         <div key={item.step} className="text-center">
-                            <div className="flex items-center justify-center w-12 h-12 mx-auto bg-ci-orange text-white rounded-full font-bold text-lg mb-4">
+                            <div className="flex items-center justify-center w-12 h-12 mx-auto bg-primary text-primary-foreground rounded-full font-bold text-lg mb-4 shadow-md ring-4 ring-primary/15">
                                 {item.step}
                             </div>
-                            <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                            <h3 className="text-lg font-semibold mb-2 text-foreground">
                                 {item.title}
                             </h3>
-                            <p className="text-gray-600">{item.description}</p>
+                            <p className="text-muted-foreground">{item.description}</p>
                         </div>
                     ))}
                 </div>

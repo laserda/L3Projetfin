@@ -82,7 +82,7 @@ const ConfirmationPage: FC = () => {
         return (
             <Card className="max-w-md mx-auto">
                 <CardHeader>
-                    <CardTitle className="text-red-500">Demande introuvable</CardTitle>
+                    <CardTitle className="text-destructive">Demande introuvable</CardTitle>
                     <CardDescription>
                         Nous n'avons pas pu trouver votre demande. Veuillez vérifier l'URL
                         ou essayer à nouveau.
@@ -99,22 +99,22 @@ const ConfirmationPage: FC = () => {
 
     return (
         <div className="max-w-2xl mx-auto">
-            <Card className="border-green-100 shadow-lg">
-                <CardHeader className="bg-green-50 border-b border-green-100">
+            <Card className="border-success/30 shadow-lg">
+                <CardHeader className="bg-success/10 border-b border-success/30">
                     <div className="flex items-center justify-center mb-4">
-                        <CheckCircle className="h-16 w-16 text-green-500" />
+                        <CheckCircle className="h-16 w-16 text-success" />
                     </div>
-                    <CardTitle className="text-center text-2xl text-green-700">
+                    <CardTitle className="text-center text-2xl text-success">
                         Demande enregistrée avec succès !
                     </CardTitle>
-                    <CardDescription className="text-center text-green-600">
+                    <CardDescription className="text-center text-success">
                         Votre demande a été enregistrée dans notre système.
                     </CardDescription>
                 </CardHeader>
 
                 <CardContent className="pt-6">
-                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                        <h3 className="font-medium text-gray-800 mb-2">
+                    <div className="bg-muted p-4 rounded-lg mb-6">
+                        <h3 className="font-medium text-foreground mb-2">
                             Récapitulatif de votre demande
                         </h3>
                         <div className="space-y-3 text-sm">
@@ -146,7 +146,7 @@ const ConfirmationPage: FC = () => {
                             </p>
                             <p>
                                 <span className="font-medium">Statut actuel :</span>{" "}
-                                <span className="text-yellow-600 font-medium">
+                                <span className="text-warning font-medium">
                                     {getStatusDemande(request.Statut)}
                                 </span>
                             </p>
@@ -154,11 +154,11 @@ const ConfirmationPage: FC = () => {
                     </div>
 
                     {request.Statut !== "Livrée" && (
-                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                            <h3 className="font-medium text-blue-800 mb-2">
+                        <div className="bg-info/10 p-4 rounded-lg border border-info/30">
+                            <h3 className="font-medium text-info mb-2">
                                 Que se passe-t-il maintenant ?
                             </h3>
-                            <ul className="space-y-2 text-blue-700 text-sm">
+                            <ul className="space-y-2 text-info text-sm">
                                 <li className="flex items-start">
                                     <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                                     <span>

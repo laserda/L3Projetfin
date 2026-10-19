@@ -63,7 +63,7 @@ function page() {
                         </thead>
                         <tbody>
                             {agents.map((agent: any) => (
-                                <tr key={agent.ID_Agent} className="border-b hover:bg-gray-50">
+                                <tr key={agent.ID_Agent} className="border-b hover:bg-muted">
                                     <td className="py-3 px-4">{agent.Role}</td>
 
                                     <td className="py-3 px-4">
@@ -84,7 +84,7 @@ function page() {
                         </tbody>
                     </table>
                 ) : (
-                    <div className="text-center text-gray-500 text-xl">
+                    <div className="text-center text-muted-foreground text-xl">
                         Aucun agent enregistré
                     </div>
                 )}

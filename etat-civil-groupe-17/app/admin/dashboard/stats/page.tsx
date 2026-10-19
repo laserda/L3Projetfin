@@ -56,17 +56,17 @@ const Page = () => {
             {
                 name: "Naissance",
                 value: requests.filter((r) => r.TypeActe === "Naissance").length,
-                color: "#2563EB",
+                color: "hsl(var(--chart-1))",
             },
             {
                 name: "Mariage",
                 value: requests.filter((r) => r.TypeActe === "Mariage").length,
-                color: "#F59E0B",
+                color: "hsl(var(--chart-2))",
             },
             {
                 name: "Décès",
                 value: requests.filter((r) => r.TypeActe === "Décès").length,
-                color: "#6B7280",
+                color: "hsl(var(--chart-5))",
             },
         ];
 
@@ -75,22 +75,22 @@ const Page = () => {
             {
                 name: "En attente",
                 value: requests.filter((r) => r.Statut === "SoumisePayee").length,
-                color: "#F59E0B",
+                color: "hsl(var(--warning))",
             },
             {
                 name: "En traitement",
                 value: requests.filter((r) => r.Statut === "EnTraitement").length,
-                color: "#3B82F6",
+                color: "hsl(var(--info))",
             },
             {
                 name: "Validées",
                 value: requests.filter((r) => r.Statut === "Validée").length,
-                color: "#10B981",
+                color: "hsl(var(--success))",
             },
             {
                 name: "Refusées",
                 value: requests.filter((r) => r.Statut === "Refusée").length,
-                color: "#EF4444",
+                color: "hsl(var(--destructive))",
             },
         ];
 
@@ -159,7 +159,7 @@ const Page = () => {
             <text
                 x={x}
                 y={y}
-                fill="white"
+                fill="hsl(var(--chart-label))"
                 textAnchor="middle"
                 dominantBaseline="central"
             >
@@ -179,10 +179,10 @@ const Page = () => {
             {requests.length === 0 ? (
                 <Card>
                     <CardContent className="p-8 text-center">
-                        <h3 className="text-lg font-medium text-gray-800 mb-2">
+                        <h3 className="text-lg font-medium text-foreground mb-2">
                             Aucune donnée disponible
                         </h3>
-                        <p className="text-gray-500 max-w-md mx-auto mb-4">
+                        <p className="text-muted-foreground max-w-md mx-auto mb-4">
                             Il n'y a pas encore de demandes enregistrées dans le
                             système. Les statistiques seront disponibles une
                             fois que des demandes auront été soumises.
@@ -195,7 +195,7 @@ const Page = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                         <Card>
                             <CardContent className="p-6">
-                                <h3 className="text-lg font-medium text-gray-800 mb-1">
+                                <h3 className="text-lg font-medium text-foreground mb-1">
                                     Total des demandes
                                 </h3>
                                 <p className="text-3xl font-bold">
@@ -206,14 +206,14 @@ const Page = () => {
 
                         <Card>
                             <CardContent className="p-6">
-                                <h3 className="text-lg font-medium text-gray-800 mb-1">
+                                <h3 className="text-lg font-medium text-foreground mb-1">
                                     Naissances
                                 </h3>
                                 <div className="flex items-baseline">
                                     <p className="text-3xl font-bold mr-2">
                                         {chartData.byType[0].value}
                                     </p>
-                                    <p className="text-gray-500">
+                                    <p className="text-muted-foreground">
                                         {formatPercentage(
                                             chartData.byType[0].value
                                         )}
@@ -224,14 +224,14 @@ const Page = () => {
 
                         <Card>
                             <CardContent className="p-6">
-                                <h3 className="text-lg font-medium text-gray-800 mb-1">
+                                <h3 className="text-lg font-medium text-foreground mb-1">
                                     Mariages
                                 </h3>
                                 <div className="flex items-baseline">
                                     <p className="text-3xl font-bold mr-2">
                                         {chartData.byType[1].value}
                                     </p>
-                                    <p className="text-gray-500">
+                                    <p className="text-muted-foreground">
                                         {formatPercentage(
                                             chartData.byType[1].value
                                         )}
@@ -242,14 +242,14 @@ const Page = () => {
 
                         <Card>
                             <CardContent className="p-6">
-                                <h3 className="text-lg font-medium text-gray-800 mb-1">
+                                <h3 className="text-lg font-medium text-foreground mb-1">
                                     Décès
                                 </h3>
                                 <div className="flex items-baseline">
                                     <p className="text-3xl font-bold mr-2">
                                         {chartData.byType[2].value}
                                     </p>
-                                    <p className="text-gray-500">
+                                    <p className="text-muted-foreground">
                                         {formatPercentage(
                                             chartData.byType[2].value
                                         )}
@@ -297,7 +297,7 @@ const Page = () => {
                                                     }
                                                     outerRadius={130}
                                                     innerRadius={60}
-                                                    fill="#8884d8"
+                                                    fill="hsl(var(--chart-1))"
                                                     dataKey="value"
                                                 >
                                                     {chartData.byType.map(
@@ -350,7 +350,7 @@ const Page = () => {
                                                     bottom: 5,
                                                 }}
                                             >
-                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                                                 <XAxis dataKey="name" />
                                                 <YAxis />
                                                 <Tooltip />
@@ -358,6 +358,7 @@ const Page = () => {
                                                 <Bar
                                                     dataKey="value"
                                                     name="Nombre"
+                                                    fill="hsl(var(--chart-1))"
                                                     radius={[4, 4, 0, 0]}
                                                 >
                                                     {chartData.byStatus.map(
@@ -402,7 +403,7 @@ const Page = () => {
                                                     bottom: 5,
                                                 }}
                                             >
-                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                                                 <XAxis dataKey="month" />
                                                 <YAxis />
                                                 <Tooltip />
@@ -411,7 +412,7 @@ const Page = () => {
                                                     type="monotone"
                                                     dataKey="total"
                                                     name="Total"
-                                                    stroke="#6B7280"
+                                                    stroke="hsl(var(--foreground))"
                                                     activeDot={{ r: 8 }}
                                                     strokeWidth={2}
                                                 />
@@ -419,19 +420,19 @@ const Page = () => {
                                                     type="monotone"
                                                     dataKey="naissance"
                                                     name="Naissance"
-                                                    stroke="#2563EB"
+                                                    stroke="hsl(var(--chart-1))"
                                                 />
                                                 <Line
                                                     type="monotone"
                                                     dataKey="mariage"
                                                     name="Mariage"
-                                                    stroke="#F59E0B"
+                                                    stroke="hsl(var(--chart-2))"
                                                 />
                                                 <Line
                                                     type="monotone"
                                                     dataKey="deces"
                                                     name="Décès"
-                                                    stroke="#6B7280"
+                                                    stroke="hsl(var(--chart-5))"
                                                 />
                                             </LineChart>
                                         </ResponsiveContainer>

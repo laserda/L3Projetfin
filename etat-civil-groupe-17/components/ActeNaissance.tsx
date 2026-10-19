@@ -34,9 +34,9 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
         }
 
         return (
-            <div ref={ref} className="max-w-4xl mx-auto p-12 border-2 border-gray-800 text-sm leading-relaxed bg-white text-black font-serif shadow-lg">
+            <div ref={ref} className="max-w-4xl mx-auto p-12 border-2 border-paper-border text-sm leading-relaxed bg-paper text-paper-foreground font-serif shadow-lg">
                 {/* En-tête avec le logo et le titre */}
-                <div className=" flex justify-between mb-8 border-b-2 border-gray-800 pb-6">
+                <div className=" flex justify-between mb-8 border-b-2 border-paper-border pb-6">
                     <div className="flex flex-col items-center">
                         <p className="uppercase font-bold mb-2 text-sm">République de Côte d'Ivoire</p>
                         <Image
@@ -93,7 +93,7 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 </div>
 
                 {/* Mentions */}
-                <div className="border-t-2 border-b-2 border-gray-800 py-6 mb-4">
+                <div className="border-t-2 border-b-2 border-paper-border py-6 mb-4">
                     <div className="text-center font-bold text-lg mb-4">MENTIONS (éventuellement)</div>
                     <div className="space-y-3 text-base">
                         <p>Marié le ..................................................... Néant ............................. à ................. Néant ......................</p>
@@ -114,7 +114,7 @@ const ActeNaissance = forwardRef<HTMLDivElement, { ID_Demande: string }>(
                 {/* Signature et date */}
                 <div className="flex justify-between items-start">
                     <div className="text-center">
-                        <div className="w-32 h-24 border-2 border-gray-800 flex items-center justify-center">
+                        <div className="w-32 h-24 border-2 border-paper-border flex items-center justify-center">
                             <p className="font-bold">Timbre</p>
                         </div>
                     </div>

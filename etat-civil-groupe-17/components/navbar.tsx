@@ -39,7 +39,7 @@ export const Navbar = async () => {
                 <li key={link.href}>
                     <Link
                         href={link.href}
-                        className="text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                        className="text-foreground/80 hover:text-primary hover:bg-accent transition-colors px-3 py-2 rounded-md text-sm font-medium"
                     >
                         {link.label}
                     </Link>
@@ -49,11 +49,11 @@ export const Navbar = async () => {
     );
 
     return (
-        <nav className="bg-white shadow-sm border-b">
+        <nav className="sticky top-0 z-40 bg-card/90 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-sm border-b">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
-                    <div className="flex items-center">
-                        <Link href="/" className="flex-shrink-0 flex items-center">
+                    <div className="flex items-center min-w-0">
+                        <Link href="/" className="flex-shrink-0 flex items-center min-w-0">
                             <Logo />
                         </Link>
 
@@ -64,11 +64,11 @@ export const Navbar = async () => {
                     </div>
 
                     {/* Auth & mobile menu */}
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-2 shrink-0">
                         {user ? (
                             <>
                                 <p>{user.nom}</p>
-                                <LogOutButton />
+                                <div className="shrink-0"><LogOutButton /></div>
                             </>
                         ) : (
                             <Link href="/login" className={buttonVariants()}>
@@ -78,7 +78,7 @@ export const Navbar = async () => {
                         )}
 
                         {/* Mobile menu */}
-                        <div className="md:hidden ml-2">
+                        <div className="md:hidden">
                             <Sheet>
                                 <SheetTrigger asChild>
                                     <Button variant="ghost" size="sm">
