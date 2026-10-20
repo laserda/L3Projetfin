@@ -9,9 +9,100 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { FieldValues, UseFormReturn, Path } from "react-hook-form";
+
+// Structure commune des formulaires de demande d'acte (naissance, mariage, décès) :
+// cadre, sections, champs et bouton d'envoi, pensés d'abord pour le téléphone (360 px).
+
+// Cadre de la page de demande : titre, description puis le formulaire
+export function DemandeFormLayout({
+    title,
+    description,
+    children,
+}: {
+    title: ReactNode;
+    description?: ReactNode;
+    children: ReactNode;
+}) {
+    return (
+        <div data-slot="demande-form" className="w-full max-w-3xl mx-auto">
+            <Card className="gap-4 py-5 sm:gap-6 sm:py-6">
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="text-xl sm:text-2xl">{title}</CardTitle>
+                    {description && (
+                        <CardDescription className="text-base sm:text-sm">
+                            {description}
+                        </CardDescription>
+                    )}
+                </CardHeader>
+                <CardContent className="px-4 sm:px-6">{children}</CardContent>
+            </Card>
+        </div>
+    );
+}
+
+// Groupe de champs : une colonne sur téléphone, deux à partir des tablettes
+export function DemandeFormSection({
+    title,
+    children,
+    className,
+}: {
+    title?: ReactNode;
+    children: ReactNode;
+    className?: string;
+}) {
+    return (
+        <section
+            data-slot="demande-section"
+            className={cn("space-y-4 rounded-lg border p-4 sm:p-5", className)}
+        >
+            {title && <h3 className="text-base font-semibold">{title}</h3>}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-4 [&>*]:min-w-0">
+                {children}
+            </div>
+        </section>
+    );
+}
+
+// Bouton d'envoi : pleine largeur et facile à toucher sur téléphone
+export function DemandeFormActions({
+    label,
+    isLoading,
+}: {
+    label: ReactNode;
+    isLoading: boolean;
+}) {
+    return (
+        <div data-slot="demande-actions" className="flex flex-col sm:flex-row sm:justify-end">
+            <Button
+                type="submit"
+                size="lg"
+                isLoading={isLoading}
+                className="h-12 w-full text-base sm:w-auto sm:min-w-56"
+            >
+                {label}
+            </Button>
+        </div>
+    );
+}
+
+// Champs de saisie (44 px de haut, texte de 16 px : pas de zoom automatique sur téléphone)
+export const demandeChampClassName = "h-11 text-base md:text-base";
+// Liste déroulante (déclencheur) et ses entrées ; un texte trop long est coupé (…)
+// pour que la flèche reste visible sur téléphone
+export const demandeSelectTriggerClassName =
+    "w-full min-w-0 data-[size=default]:h-11 text-base [&>[data-slot=select-value]]:block [&>[data-slot=select-value]]:min-w-0 [&>[data-slot=select-value]]:truncate";
+export const demandeSelectItemClassName = "min-h-11 text-base";
 
 function CustomForm<T extends FieldValues>({
     Passedform,

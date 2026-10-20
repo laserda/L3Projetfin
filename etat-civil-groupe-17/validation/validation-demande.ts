@@ -11,8 +11,11 @@ import { z } from "zod";
 
 export const naissanceSchema = z.object({
     TypeActe: z.nativeEnum(TypeActe),
-    NumeroActe: z.string(),
-    DemandePourTier: z.nativeEnum(DemandePourTier),
+    // Mêmes règles qu'avant ; seuls les messages d'erreur sont en français
+    NumeroActe: z.string({ required_error: "Le numéro d'acte est requis." }),
+    DemandePourTier: z.nativeEnum(DemandePourTier, {
+        errorMap: () => ({ message: "Veuillez choisir pour qui vous faites la demande." }),
+    }),
     Prenom: z.string().optional().transform((val, ctx: any) => {
         const demandePourTier = ctx.contextualData?.DemandePourTier;
         return demandePourTier === DemandePourTier.Moi ? '' : val;

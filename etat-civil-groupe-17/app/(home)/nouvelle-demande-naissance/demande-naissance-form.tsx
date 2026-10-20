@@ -6,13 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import {
     Form,
     FormControl,
     FormField,
@@ -21,7 +14,14 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import {
+    DemandeFormActions,
+    DemandeFormLayout,
+    DemandeFormSection,
+    demandeChampClassName,
+    demandeSelectItemClassName,
+    demandeSelectTriggerClassName,
+} from "@/components/CustomForm";
 
 import {
     Select,
@@ -104,16 +104,10 @@ const DemandeNaissanceForm = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Demande d'acte de naissance</CardTitle>
-                    <CardDescription>
-                        Remplissez ce formulaire pour demander votre document
-                        officiel.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
+        <DemandeFormLayout
+            title="Demande d'acte de naissance"
+            description="Remplissez ce formulaire pour demander votre document officiel."
+        >
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
@@ -131,11 +125,12 @@ const DemandeNaissanceForm = () => {
                                     </div>
                                 </Alert>
                             )}
+                            <DemandeFormSection>
                             <FormField
                                 control={form.control}
                                 name="DemandePourTier"
                                 render={({ field }) => (
-                                    <FormItem className="space-y-3">
+                                    <FormItem className="md:col-span-2">
                                         <FormLabel>Pour qui faite vous la demande ?</FormLabel>
                                         <FormControl>
                                             <Select
@@ -146,13 +141,13 @@ const DemandeNaissanceForm = () => {
                                                 {...field}
                                             >
                                                 <FormControl>
-                                                    <SelectTrigger>
+                                                    <SelectTrigger className={demandeSelectTriggerClassName}>
                                                         <SelectValue placeholder="Sélectionnez un type de document" />
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent >
                                                     {Object.values(DemandePourTier).map((type) => (
-                                                        <SelectItem key={type} value={type}>
+                                                        <SelectItem key={type} value={type} className={demandeSelectItemClassName}>
                                                             {getRequestDemandePourTier(type)}
                                                         </SelectItem>
                                                     ))}
@@ -164,7 +159,6 @@ const DemandeNaissanceForm = () => {
                                 )}
                             />
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="NumeroActe"
@@ -173,6 +167,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Numéro d'acte</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Numéro d'acte"
                                                     {...field}
                                                 />
@@ -190,6 +185,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Date de naissance</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="date de naissance"
                                                     {...field}
                                                     type="date"
@@ -199,10 +195,8 @@ const DemandeNaissanceForm = () => {
                                         </FormItem>
                                     )}
                                 />}
-                            </div>
 
-
-                            {demandePourTier !== DemandePourTier.Moi && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {demandePourTier !== DemandePourTier.Moi && <>
                                 <FormField
                                     control={form.control}
                                     name="Nom"
@@ -211,6 +205,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Nom du tier</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Numéro d'acte"
                                                     {...field}
                                                 />
@@ -228,6 +223,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Prenom du tier </FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Prénom"
                                                     {...field}
                                                 />
@@ -236,10 +232,10 @@ const DemandeNaissanceForm = () => {
                                         </FormItem>
                                     )}
                                 />
-                            </div>}
+                            </>}
+                            </DemandeFormSection>
 
-                            <h3 className="text-base font-medium">Mère</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <DemandeFormSection title="Mère">
                                 <FormField
                                     control={form.control}
                                     name="NomMere"
@@ -248,6 +244,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Nom de la mère</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Nom de la mère"
                                                     {...field}
                                                 />
@@ -264,6 +261,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Prénom de la mère</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Prénom de la mère"
                                                     {...field}
                                                 />
@@ -282,6 +280,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Date de naissance de la mère</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Date de naissance de la mère"
                                                     {...field}
                                                     type="date"
@@ -300,6 +299,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Profession de la mère</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Profession de la mère"
                                                     {...field}
                                                 />
@@ -308,9 +308,9 @@ const DemandeNaissanceForm = () => {
                                         </FormItem>
                                     )}
                                 />
-                            </div>
-                            <h3 className="text-base font-medium">Père</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            </DemandeFormSection>
+
+                            <DemandeFormSection title="Père">
                                 <FormField
                                     control={form.control}
                                     name="NomPere"
@@ -319,6 +319,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Nom du père</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Nom du père"
                                                     {...field}
                                                 />
@@ -335,6 +336,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Prénom du père</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Prénom du père"
                                                     {...field}
                                                 />
@@ -352,6 +354,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Date de naissance du père</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Date de naissance du père"
                                                     {...field}
                                                     type="date"
@@ -370,6 +373,7 @@ const DemandeNaissanceForm = () => {
                                             <FormLabel>Profession du père</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    className={demandeChampClassName}
                                                     placeholder="Profession du père"
                                                     {...field}
                                                 />
@@ -378,36 +382,28 @@ const DemandeNaissanceForm = () => {
                                         </FormItem>
                                     )}
                                 />
+                            </DemandeFormSection>
+
+                            <div className="bg-muted p-4 rounded-lg">
+                                <h3 className="font-semibold text-foreground mb-2">
+                                    Frais de timbre
+                                </h3>
+                                <p className="text-muted-foreground mb-2">
+                                    Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                    Vous devez régler ces frais pour que
+                                    votre demande soit traitée.
+                                </p>
                             </div>
 
-                            <div className="border-t pt-4">
-                                <div className="bg-muted p-4 rounded-lg mb-4">
-                                    <h3 className="font-medium text-foreground mb-2">
-                                        Frais de timbre
-                                    </h3>
-                                    <p className="text-muted-foreground mb-2">
-                                        Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        Vous devez régler ces frais pour que
-                                        votre demande soit traitée.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end">
-                                <Button
-                                    type="submit"
-                                    isLoading={isLoading}
-                                >
-                                    Soumettre ma demande
-                                </Button>
-                            </div>
+                            <DemandeFormActions
+                                label="Soumettre ma demande"
+                                isLoading={isLoading}
+                            />
                         </form>
                     </Form>
-                </CardContent>
-            </Card>
-        </div>
+        </DemandeFormLayout>
     );
 };
 
