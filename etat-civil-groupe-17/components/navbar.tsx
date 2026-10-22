@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import LogOutButton from "./LogOutButton";
+import { ThemeToggle } from "./ThemeToggle";
 import { getCitoyen } from "@/server/auth/citoyen";
 
 export const Navbar = async () => {
@@ -83,6 +84,7 @@ export const Navbar = async () => {
 
                     {/* Auth & mobile menu */}
                     <div className="flex items-center gap-2 shrink-0">
+                        <ThemeToggle />
                         {user ? (
                             <>
                                 <p>{user.nom}</p>

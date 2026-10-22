@@ -14,6 +14,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import LogOutButton from "./LogOutButton";
+import { ThemeToggle } from "./ThemeToggle";
 import { getAgent } from "@/server/auth/agent";
 import { Agent } from "@/lib/generated/prisma";
 
@@ -121,7 +122,8 @@ md:translate-x-0 md:z-auto
                         </nav>
                     </div>
 
-                    <div className={`p-4 border-t w-full flex [&_button]:min-h-11`}>
+                    <div className={`p-4 border-t w-full flex gap-2 [&_button]:min-h-11`}>
+                        <ThemeToggle className="min-h-11 min-w-11 shrink-0" />
                         <LogOutButton espace="admin" />
                     </div>
                 </div>

@@ -187,6 +187,15 @@ html {
     }
 }
 
+/* Impression : toujours noir sur blanc, quel que soit le mode (clair ou sombre) */
+@media print {
+    html,
+    body {
+        background: hsl(var(--paper)) !important;
+        color: hsl(var(--paper-foreground)) !important;
+    }
+}
+
 @layer utilities {
     /* Écran de chargement : anneau aux couleurs de la marque */
     .loader-ring {
