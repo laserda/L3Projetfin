@@ -98,30 +98,37 @@ const ConfirmationPage: FC = () => {
     }
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <Card className="border-success/30 shadow-lg">
-                <CardHeader className="bg-success/10 border-b border-success/30">
+        <div className="w-full max-w-2xl mx-auto">
+            <Card className="gap-0 overflow-hidden rounded-xl border-success/30 border-t-4 border-t-success py-0 shadow-lg">
+                <CardHeader className="bg-success/10 border-b border-success/30 px-4 py-6 sm:px-6">
                     <div className="flex items-center justify-center mb-4">
-                        <CheckCircle className="h-16 w-16 text-success" />
+                        <CheckCircle className="h-14 w-14 text-success sm:h-16 sm:w-16" />
                     </div>
-                    <CardTitle className="text-center text-2xl text-success">
+                    <CardTitle className="text-center text-xl font-bold text-success sm:text-2xl">
                         Demande enregistrée avec succès !
                     </CardTitle>
-                    <CardDescription className="text-center text-success">
+                    <CardDescription className="text-center text-base text-success sm:text-sm">
                         Votre demande a été enregistrée dans notre système.
                     </CardDescription>
                 </CardHeader>
 
-                <CardContent className="pt-6">
+                <CardContent className="px-4 pt-6 sm:px-6">
+                    {/* Numéro de suivi : toujours visible, en tête, et lisible en entier sur téléphone */}
+                    <div
+                        data-slot="numero-suivi"
+                        className="mb-4 rounded-lg border-2 border-primary/40 bg-primary/5 p-4 text-center"
+                    >
+                        <p className="text-sm font-medium text-muted-foreground">Référence :</p>
+                        <p className="mt-1 break-all font-mono text-base font-bold text-foreground sm:text-lg">
+                            {request.ID_Demande}
+                        </p>
+                    </div>
+
                     <div className="bg-muted p-4 rounded-lg mb-6">
-                        <h3 className="font-medium text-foreground mb-2">
+                        <h3 className="font-semibold text-foreground mb-2">
                             Récapitulatif de votre demande
                         </h3>
-                        <div className="space-y-3 text-sm">
-                            <p>
-                                <span className="font-medium">Référence :</span>{" "}
-                                {request.ID_Demande}
-                            </p>
+                        <div className="space-y-3 text-sm break-words">
                             <p>
                                 <span className="font-medium">Type de document :</span>{" "}
                                 {getRequestTypeName(request.TypeActe)}
@@ -158,7 +165,7 @@ const ConfirmationPage: FC = () => {
                             <h3 className="font-medium text-info mb-2">
                                 Que se passe-t-il maintenant ?
                             </h3>
-                            <ul className="space-y-2 text-info text-sm">
+                            <ul className="space-y-2 text-info text-sm [overflow-wrap:anywhere]">
                                 <li className="flex items-start">
                                     <ArrowRight className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                                     <span>
@@ -185,7 +192,7 @@ const ConfirmationPage: FC = () => {
                     )}
                 </CardContent>
 
-                <CardFooter className="flex justify-between flex-wrap gap-3">
+                <CardFooter className="flex flex-col-reverse items-stretch gap-3 border-t px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 [&_button]:h-11 [&_button]:w-full [&_button]:text-base sm:[&_button]:w-auto md:[&_button]:h-10 md:[&_button]:text-sm">
                     <Button variant={"outline"} onClick={() => router.push("/suivi-demande")}>
                         Retour
                     </Button>

@@ -20,6 +20,20 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import {
+    demandeChampClassName,
+    demandeSelectItemClassName,
+    demandeSelectTriggerClassName,
+} from "@/components/CustomForm";
+import { cn } from "@/lib/utils";
+import {
     Search,
     Filter,
     RefreshCw,
@@ -82,8 +96,10 @@ const SuiviPage = () => {
             result = result.filter(
                 (req) =>
                     req.ID_Demande.toLowerCase().includes(term) ||
-                    req.Nom.toLowerCase().includes(term) ||
-                    req.Prenom.toLowerCase().includes(term) ||
+                    // Nom et prénom du citoyen (ceux affichés dans la liste) : une demande n'a pas
+                    // de champ Nom/Prenom, ce qui faisait planter la page dès qu'un numéro ne correspondait pas
+                    req.Citoyen.Nom.toLowerCase().includes(term) ||
+                    req.Citoyen.Prenom.toLowerCase().includes(term) ||
                     req.Citoyen.Email.toLowerCase().includes(term)
             );
         }
@@ -128,13 +144,13 @@ const SuiviPage = () => {
     return (
         <>
             <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Liste de mes demandes</h1>
+                <h1 className="text-xl font-bold sm:text-2xl">Liste de mes demandes</h1>
                 <div className="flex items-center space-x-2">
                     <Button
                         variant="outline"
                         size="sm"
                         onClick={resetFilters}
-                        className="flex items-center"
+                        className="flex h-11 items-center md:h-9"
                     >
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Actualiser
@@ -142,14 +158,14 @@ const SuiviPage = () => {
                 </div>
             </div>
 
-            <Card className="mb-6">
-                <CardHeader>
+            <Card className="mb-6 gap-4 py-5 rounded-xl border-t-4 border-t-primary shadow-lg sm:gap-6 sm:py-6">
+                <CardHeader className="px-4 sm:px-6">
                     <CardTitle className="text-lg">Filtres</CardTitle>
                     <CardDescription>
                         Filtrez les demandes selon différents critères
                     </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-4 sm:px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label
@@ -159,11 +175,11 @@ const SuiviPage = () => {
                                 Recherche
                             </label>
                             <div className="relative">
-                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                                <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                                 <Input
                                     id="search"
                                     placeholder="Nom, email, référence..."
-                                    className="pl-9"
+                                    className={cn(demandeChampClassName, "pl-9")}
                                     value={searchTerm}
                                     onChange={(e) =>
                                         setSearchTerm(e.target.value)
@@ -187,15 +203,15 @@ const SuiviPage = () => {
                                     )
                                 }
                             >
-                                <SelectTrigger id="status-filter">
+                                <SelectTrigger id="status-filter" className={demandeSelectTriggerClassName}>
                                     <SelectValue placeholder="Tous les statuts" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="all">
+                                    <SelectItem value="all" className={demandeSelectItemClassName}>
                                         Tous les statuts
                                     </SelectItem>
                                     {Object.values(StatutDemande).map((type) => (
-                                        <SelectItem key={type} value={type}>
+                                        <SelectItem key={type} value={type} className={demandeSelectItemClassName}>
                                             {getStatusDemande(type)}
                                         </SelectItem>
                                     ))}
@@ -216,15 +232,15 @@ const SuiviPage = () => {
                                     setTypeFilter(value as TypeActe | "all")
                                 }
                             >
-                                <SelectTrigger id="type-filter">
+                                <SelectTrigger id="type-filter" className={demandeSelectTriggerClassName}>
                                     <SelectValue placeholder="Tous les types" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="all">
+                                    <SelectItem value="all" className={demandeSelectItemClassName}>
                                         Tous les types
                                     </SelectItem>
                                     {Object.values(TypeActe).map((type) => (
-                                        <SelectItem key={type} value={type}>
+                                        <SelectItem key={type} value={type} className={demandeSelectItemClassName}>
                                             {getRequestTypeName(type)}
                                         </SelectItem>
                                     ))}
@@ -235,10 +251,10 @@ const SuiviPage = () => {
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className="overflow-hidden rounded-xl py-0 shadow-lg">
                 <CardContent className="p-0">
                     {filteredRequests.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12 px-4">
+                        <div role="status" className="flex flex-col items-center justify-center py-12 px-4">
                             <Filter className="h-12 w-12 text-muted-foreground mb-4" />
                             <h3 className="text-lg font-medium text-foreground mb-1">
                                 Aucune demande trouvée
@@ -250,7 +266,7 @@ const SuiviPage = () => {
                             </p>
                             <Button
                                 variant="outline"
-                                className="mt-4"
+                                className="mt-4 h-11 md:h-9"
                                 onClick={resetFilters}
                             >
                                 Réinitialiser les filtres
@@ -258,64 +274,49 @@ const SuiviPage = () => {
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                                <thead>
-                                    <tr className="border-b bg-muted">
-                                        <th className="text-left py-3 px-4 font-medium">
+                            {/* Sur téléphone, la référence et le statut restent visibles sans faire défiler le tableau */}
+                            <Table className="min-w-[48rem]">
+                                <TableHeader>
+                                    <TableRow className="bg-muted">
+                                        <TableHead>
                                             Référence
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
-                                            Type
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
-                                            Nom & prénom
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
-                                            Email
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
-                                            Date
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Statut
-                                        </th>
-                                        <th className="text-right py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
+                                            Type
+                                        </TableHead>
+                                        <TableHead>
+                                            Nom & prénom
+                                        </TableHead>
+                                        <TableHead>
+                                            Email
+                                        </TableHead>
+                                        <TableHead>
+                                            Date
+                                        </TableHead>
+                                        <TableHead className="text-right">
                                             Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
                                     {filteredRequests.map((request) => {
                                         const statusInfo = getStatusInfo(
                                             request.Statut
                                         );
                                         return (
-                                            <tr
+                                            <TableRow
                                                 key={request.ID_Demande}
-                                                className="border-b hover:bg-muted"
+                                                className="hover:bg-muted"
                                             >
-                                                <td className="py-3 px-4 font-medium">
+                                                <TableCell className="font-medium">
                                                     {request.ID_Demande
                                                         .substring(0, 8)
                                                         .toUpperCase()}
-                                                </td>
-                                                <td className="py-3 px-4">
-                                                    {getRequestTypeName(
-                                                        request.TypeActe
-                                                    )}
-                                                </td>
-                                                <td className="py-3 px-4">{`${request.Citoyen.Nom} ${request.Citoyen.Prenom}`}</td>
-                                                <td className="py-3 px-4">
-                                                    <span className="max-w-[150px] truncate inline-block">
-                                                        {request.Citoyen.Email}
-                                                    </span>
-                                                </td>
-                                                <td className="py-3 px-4">
-                                                    {formatDate(
-                                                        request.DateDemande.toDateString()
-                                                    )}
-                                                </td>
-                                                <td className="py-3 px-4">
+                                                </TableCell>
+                                                <TableCell>
                                                     <Badge
                                                         variant="outline"
                                                         className={
@@ -331,14 +332,30 @@ const SuiviPage = () => {
                                                             </span>
                                                         </span>
                                                     </Badge>
-                                                </td>
-                                                <td className="py-3 px-4 text-right">
+                                                </TableCell>
+                                                <TableCell>
+                                                    {getRequestTypeName(
+                                                        request.TypeActe
+                                                    )}
+                                                </TableCell>
+                                                <TableCell>{`${request.Citoyen.Nom} ${request.Citoyen.Prenom}`}</TableCell>
+                                                <TableCell>
+                                                    <span className="max-w-[150px] truncate inline-block">
+                                                        {request.Citoyen.Email}
+                                                    </span>
+                                                </TableCell>
+                                                <TableCell>
+                                                    {formatDate(
+                                                        request.DateDemande.toDateString()
+                                                    )}
+                                                </TableCell>
+                                                <TableCell className="text-right">
                                                     {
                                                         request.Statut == StatutDemande.SoumiseEnAttenteDePaiment
                                                             ?
                                                             <Button
                                                                 size="sm"
-                                                                className="bg-primary hover:bg-primary/90"
+                                                                className="h-11 bg-primary hover:bg-primary/90 md:h-8"
                                                                 onClick={() => {
 
 
@@ -351,6 +368,7 @@ const SuiviPage = () => {
                                                             <Button
                                                                 variant="outline"
                                                                 size="sm"
+                                                                className="h-11 md:h-8"
                                                                 onClick={() => {
 
 
@@ -360,12 +378,12 @@ const SuiviPage = () => {
                                                                 Détails
                                                             </Button>
                                                     }
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                            </TableRow>
                                         );
                                     })}
-                                </tbody>
-                            </table>
+                                </TableBody>
+                            </Table>
                         </div>
                     )}
                 </CardContent>

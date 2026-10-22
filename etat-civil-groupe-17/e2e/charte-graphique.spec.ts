@@ -16,6 +16,8 @@ const SHOTS_DIR = process.env.SHOTS_DIR;
 const TEXT_DUMP_DIR = process.env.TEXT_DUMP_DIR;
 const stamp = Date.now();
 const MONTANT = "1500";
+// Page de paiement : montant au format « 15 000 FCFA » (US-3.g)
+const MONTANT_PAIEMENT = "1 500 FCFA";
 
 const admin = {
     nom: "Testeur",
@@ -344,7 +346,7 @@ async function parcoursSuite(page: Page, context: BrowserContext) {
 
     // 3. Paiement (fenêtre Paystack simulée) -> confirmation
     await expect(page.getByText("Faite le paiement de votre demande Acte de naissance")).toBeVisible();
-    await expect(page.getByText(`${MONTANT} FCFA`)).toBeVisible();
+    await expect(page.getByText(MONTANT_PAIEMENT)).toBeVisible();
     await dumpText(page, "parcours-3-paiement");
     await shot(page, "CA-3.a.2-3-paiement");
     await page.getByRole("button", { name: "Payer" }).click();
@@ -393,7 +395,7 @@ test("CA-3.1 pages citoyen sur 360 px : demande, paiement, tableau de bord citoy
     expect.soft(await brandColorsOnPage(page)).toContain("orange");
     await shot(page, "CA-3.1-demande-naissance-mobile-360");
     await creerDemandeNaissance(page);
-    await expect(page.getByText(`${MONTANT} FCFA`)).toBeVisible();
+    await expect(page.getByText(MONTANT_PAIEMENT)).toBeVisible();
     await expectNoHorizontalScroll(page);
     await expectReadableText(page);
     await shot(page, "CA-3.1-paiement-mobile-360");
@@ -415,7 +417,7 @@ test("CA-3.1 pages citoyen sur ordinateur : demande, paiement, tableau de bord c
     expect.soft(await brandColorsOnPage(page)).toContain("orange");
     await shot(page, "CA-3.1-demande-naissance-desktop");
     await creerDemandeNaissance(page);
-    await expect(page.getByText(`${MONTANT} FCFA`)).toBeVisible();
+    await expect(page.getByText(MONTANT_PAIEMENT)).toBeVisible();
     expect.soft(await brandColorsOnPage(page)).toContain("orange");
     await shot(page, "CA-3.1-paiement-desktop");
     await page.goto("/suivi-demande");

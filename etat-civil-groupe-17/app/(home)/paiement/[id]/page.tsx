@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, FileText, Info } from "lucide-react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { formatDate, getRequestTypeName, getStatusDemande } from "@/utils";
+import { formatDate, formatMontantFCFA, getRequestTypeName, getStatusDemande } from "@/utils";
 import { createPaimentDemande, getDemande, getDemandeEnAttenteDePaiement } from "@/server/demande/demande";
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,6 +64,7 @@ const PaiementPage: FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [montant, setMontant] = useState(0);
     const [err, setErr] = useState<string | undefined>("");
+    const [paiementInterrompu, setPaiementInterrompu] = useState(false);
 
     const form = useForm({
         resolver: zodResolver(paiementSchema),
@@ -110,8 +111,10 @@ const PaiementPage: FC = () => {
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.        
+        // implementation for  whatever you want to do when the Paystack dialog closed.
         setIsLoading(false);
+        // Paiement annulé ou non abouti : la demande reste en attente de paiement, on l'indique clairement
+        setPaiementInterrompu(true);
 
     }
 
@@ -186,15 +189,15 @@ const PaiementPage: FC = () => {
 
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Paiement</CardTitle>
-                    <CardDescription>
+        <div className="w-full max-w-3xl mx-auto">
+            <Card className="gap-4 py-5 rounded-xl border-t-4 border-t-primary shadow-lg sm:gap-6 sm:py-6">
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="text-xl font-bold sm:text-2xl">Paiement</CardTitle>
+                    <CardDescription className="text-base sm:text-sm">
                         Faite le paiement de votre demande {getRequestTypeName(request.TypeActe)}
                     </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4 px-4 sm:px-6">
                     {err && (
                         <Alert
                             variant="destructive"
@@ -208,28 +211,50 @@ const PaiementPage: FC = () => {
                         </Alert>
                     )}
 
+                    {paiementInterrompu && (
+                        <Alert
+                            className="flex items-start gap-3 border-warning/30 bg-warning/10"
+                        >
+                            <Info className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+                            <div>
+                                <AlertTitle className="text-warning">
+                                    Paiement non effectué
+                                </AlertTitle>
+                                <AlertDescription className="text-foreground">
+                                    Le paiement a été annulé ou n'a pas abouti. Aucun montant
+                                    n'a été validé&nbsp;: votre demande est conservée, en attente de
+                                    paiement. Vous pouvez relancer le paiement.
+                                </AlertDescription>
+                            </div>
+                        </Alert>
+                    )}
 
-                    <div className="border-t pt-4">
-                        <div className="bg-muted p-4 rounded-lg mb-4">
-                            <h3 className="font-medium text-foreground mb-2">
-                                Frais de timbre
-                            </h3>
-                            <p className="text-muted-foreground mb-2">
-                                Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                                Vous devez régler ces frais pour que
-                                votre demande soit traitée.
-                            </p>
-                        </div>
+                    <div className="rounded-lg border bg-muted p-4 sm:p-5">
+                        <h3 className="font-semibold text-foreground mb-2">
+                            Frais de timbre
+                        </h3>
+                        <p className="text-muted-foreground mb-2">
+                            Les frais de timbre s'élèvent à{" "}
+                            <span className="font-semibold text-foreground">
+                                {formatMontantFCFA(montant)}
+                            </span>{" "}
+                            pour ce document.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Vous devez régler ces frais pour que
+                            votre demande soit traitée.
+                        </p>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex sm:justify-end">
 
                         <PaystackConsumer {...componentProps} >
                             {({ initializePayment }: { initializePayment: (...args: any[]) => void }) => <Button
+                                size="lg"
+                                className="h-11 w-full text-base sm:w-auto md:h-10 md:text-sm"
                                 isLoading={isLoading}
                                 onClick={() => {
+                                    setPaiementInterrompu(false);
                                     setIsLoading(true);
                                     initializePayment(handlePaystackSuccessAction, handlePaystackCloseAction)
                                 }}
