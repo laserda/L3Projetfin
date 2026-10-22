@@ -6,13 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import {
     Form,
     FormControl,
     FormField,
@@ -21,16 +14,19 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import {
+    DemandeFormActions,
+    DemandeFormLayout,
+    DemandeFormSection,
+    demandeChampClassName,
+} from "@/components/CustomForm";
 
-import { createDecesDemande, createDemande } from "@/server/demande/demande";
-import { CreateDemandeDecesFormData, createDemandeDecesSchema, decesSchema, DemandeDecesFormData } from "@/validation/validation-demande";
+import { createDecesDemande } from "@/server/demande/demande";
+import { decesSchema, DemandeDecesFormData } from "@/validation/validation-demande";
 import { TypeActe } from "@/lib/generated/prisma";
-import { ErrorsMessage } from "@/enums/errors-message";
 import { getTarifByType } from "@/server/admin/tarif/tarif";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 
 const DemandeDecesForm = () => {
     const router = useRouter();
@@ -91,251 +87,234 @@ const DemandeDecesForm = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Demande d'acte de décès</CardTitle>
-                    <CardDescription>
-                        Remplissez ce formulaire pour demander votre document
-                        officiel.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(onSubmit)}
-                            className="space-y-6"
+        <DemandeFormLayout
+            title="Demande d'acte de décès"
+            description="Remplissez ce formulaire pour demander votre document officiel."
+        >
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                >
+                    {err && (
+                        <Alert
+                            variant="destructive"
+                            className="flex items-center border-destructive"
                         >
-                            {err && (
-                                <Alert
-                                    variant="destructive"
-                                    className="flex items-center border-destructive"
-                                >
-                                    <Info className="h-4 w-4 text-destructive" />
-                                    <div>
-                                        <AlertTitle>Erreur</AlertTitle>
-                                        <AlertDescription>{err}</AlertDescription>
-                                    </div>
-                                </Alert>
+                            <Info className="h-4 w-4 text-destructive" />
+                            <div>
+                                <AlertTitle>Erreur</AlertTitle>
+                                <AlertDescription>{err}</AlertDescription>
+                            </div>
+                        </Alert>
+                    )}
+                    <DemandeFormSection>
+                        <FormField
+                            control={form.control}
+                            name="NumeroActe"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Numéro de l'acte du décès</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Numéro de l'acte du décès"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
                             )}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <FormField
-                                    control={form.control}
-                                    name="NumeroActe"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Numéro de l'acte du décès</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder="Numéro de l'acte du décès"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name="DateActe"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Date de décès</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder="Date du décès"
-                                                    {...field}
-                                                    type="date"
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
+                        <FormField
+                            control={form.control}
+                            name="DateActe"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Date de décès</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Date du décès"
+                                            {...field}
+                                            type="date"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <FormField
-                                    control={form.control}
-                                    name="Nom"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Nom du défunt</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder="Nom du défunt"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                        <FormField
+                            control={form.control}
+                            name="Nom"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Nom du défunt</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Nom du défunt"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name="Prenom"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Prénom du défunt</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder="Prénom du défunt"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
+                        <FormField
+                            control={form.control}
+                            name="Prenom"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Prénom du défunt</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Prénom du défunt"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </DemandeFormSection>
 
-                            <Separator />
+                    <DemandeFormSection title="Père du défunt">
+                        <FormField
+                            control={form.control}
+                            name="NomPere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Nom</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Nom du père"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                            <div className="space-y-4">
-                                <h3 className="text-lg font-medium">Père du défunt</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="NomPere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Nom</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Nom du père"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
+                        <FormField
+                            control={form.control}
+                            name="PrenomPere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Prénom</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Prénom du père"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                                    <FormField
-                                        control={form.control}
-                                        name="PrenomPere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Prénom</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Prénom du père"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
+                        <FormField
+                            control={form.control}
+                            name="ProfessionPere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Profession</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Profession du père"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </DemandeFormSection>
 
-                                    <FormField
-                                        control={form.control}
-                                        name="ProfessionPere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Profession</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Profession du père"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                            </div>
+                    <DemandeFormSection title="Mère du défunt">
+                        <FormField
+                            control={form.control}
+                            name="NomMere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Nom</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Nom de la mère"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                            <Separator />
+                        <FormField
+                            control={form.control}
+                            name="PrenomMere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Prénom</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Prénom de la mère"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                            <div className="space-y-4">
-                                <h3 className="text-lg font-medium">Mère du défunt</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="NomMere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Nom</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Nom de la mère"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
+                        <FormField
+                            control={form.control}
+                            name="ProfessionMere"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Profession</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={demandeChampClassName}
+                                            placeholder="Profession de la mère"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </DemandeFormSection>
 
-                                    <FormField
-                                        control={form.control}
-                                        name="PrenomMere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Prénom</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Prénom de la mère"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
+                    <div className="bg-muted p-4 rounded-lg">
+                        <h3 className="font-semibold text-foreground mb-2">
+                            Frais de timbre
+                        </h3>
+                        <p className="text-muted-foreground mb-2">
+                            Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Vous devez régler ces frais pour que
+                            votre demande soit traitée.
+                        </p>
+                    </div>
 
-                                    <FormField
-                                        control={form.control}
-                                        name="ProfessionMere"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Profession</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Profession de la mère"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="border-t pt-4">
-                                <div className="bg-muted p-4 rounded-lg mb-4">
-                                    <h3 className="font-medium text-foreground mb-2">
-                                        Frais de timbre
-                                    </h3>
-                                    <p className="text-muted-foreground mb-2">
-                                        Les frais de timbre s'élèvent à {montant} FCFA pour ce document.
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        Vous devez régler ces frais pour que
-                                        votre demande soit traitée.
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div className="flex justify-end">
-                                <Button
-                                    type="submit"
-                                    isLoading={isLoading}
-                                >
-                                    Soumettre ma demande
-                                </Button>
-                            </div>
-                        </form>
-                    </Form>
-                </CardContent>
-            </Card>
-        </div>
+                    <DemandeFormActions
+                        label="Soumettre ma demande"
+                        isLoading={isLoading}
+                    />
+                </form>
+            </Form>
+        </DemandeFormLayout>
     );
 };
 
