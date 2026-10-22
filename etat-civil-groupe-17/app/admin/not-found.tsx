@@ -19,10 +19,10 @@ const NotFound = () => {
                 </p>
                 <div className="mt-6">
                     <Link
-                        href="/admin/dashboard"
+                        href="/"
                         className={`${buttonVariants({ size: "lg" })} h-11 w-full bg-primary hover:bg-primary/90`}
                     >
-                        Retour au tableau de bord
+                        Retour à l'accueil
                     </Link>
                 </div>
             </div>

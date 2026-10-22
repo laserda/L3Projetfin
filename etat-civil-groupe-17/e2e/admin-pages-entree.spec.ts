@@ -151,9 +151,10 @@ test("CA-3.10 adresse inconnue de l'administration : page « introuvable » avec
         await expect(page.locator("[data-slot=logo]")).toBeVisible();
         await expect(page.getByText("This page could not be found")).toHaveCount(0);
         await shot(page, `CA-3.10-introuvable-${url.includes("dashboard") ? "tableau-de-bord" : "admin"}`);
-        await page.getByRole("link", { name: "Retour au tableau de bord" }).click();
-        await expect(page).toHaveURL(/\/admin\/dashboard$/);
-        await expect(page.locator("header h1")).toContainText(agent.email);
+        const lien = page.getByRole("link", { name: "Retour à l'accueil" });
+        await expect(lien).toHaveAttribute("href", "/");
+        await lien.click();
+        await expect(page).toHaveURL(/\/(login)?$/);
     }
 });
 
