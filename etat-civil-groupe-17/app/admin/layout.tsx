@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import "../globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default async function DashboardLayout({
     children,
@@ -10,8 +11,10 @@ export default async function DashboardLayout({
     // console.log(session);
 
     return (
-        <html lang="fr">
-            <body>{children}</body>
+        <html lang="fr" suppressHydrationWarning>
+            <body>
+                <ThemeProvider>{children}</ThemeProvider>
+            </body>
         </html>
     );
 }
