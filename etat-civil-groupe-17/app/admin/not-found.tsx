@@ -1,12 +1,16 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { buttonVariants } from "@/components/ui/button";
 
 const NotFound = () => {
     return (
-        <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-                <h1 className="text-9xl font-bold text-primary">404</h1>
-                <h2 className="mt-4 text-3xl font-bold text-foreground">
+        <div className="flex justify-center items-center min-h-[80vh] px-4 py-8">
+            <div className="w-full max-w-md rounded-xl border bg-card text-card-foreground border-t-4 border-t-primary shadow-lg px-6 py-8 text-center">
+                <div className="flex justify-center mb-4">
+                    <Logo size="large" />
+                </div>
+                <h1 className="text-7xl font-bold text-primary">404</h1>
+                <h2 className="mt-4 text-2xl font-bold text-foreground">
                     Page introuvable
                 </h2>
                 <p className="mt-2 text-base text-muted-foreground">
@@ -15,10 +19,10 @@ const NotFound = () => {
                 </p>
                 <div className="mt-6">
                     <Link
-                        href="/"
-                        className={`${buttonVariants()} bg-primary hover:bg-primary/90`}
+                        href="/admin/dashboard"
+                        className={`${buttonVariants({ size: "lg" })} h-11 w-full bg-primary hover:bg-primary/90`}
                     >
-                        Retour à l'accueil
+                        Retour au tableau de bord
                     </Link>
                 </div>
             </div>

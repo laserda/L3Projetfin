@@ -74,7 +74,7 @@ function RegisterForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
                 {err && (
                     <Alert
                         variant="destructive"
@@ -97,6 +97,7 @@ function RegisterForm() {
                                 <FormLabel>Nom</FormLabel>
                                 <FormControl>
                                     <Input
+                                        className="h-11 text-base md:h-10 md:text-sm"
                                         placeholder="Jean Dupont"
                                         {...field}
                                         disabled={isPending}
@@ -113,7 +114,12 @@ function RegisterForm() {
                             <FormItem>
                                 <FormLabel>Prénom</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Jean" {...field} disabled={isPending} />
+                                    <Input
+                                        className="h-11 text-base md:h-10 md:text-sm"
+                                        placeholder="Jean"
+                                        {...field}
+                                        disabled={isPending}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -129,6 +135,7 @@ function RegisterForm() {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="email"
                                     placeholder="email@domaine.com"
                                     {...field}
@@ -148,6 +155,7 @@ function RegisterForm() {
                             <FormLabel>Mot de passe</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="password"
                                     placeholder="********"
                                     {...field}
@@ -169,7 +177,7 @@ function RegisterForm() {
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
                                 >
-                                    <SelectTrigger className="w-full">
+                                    <SelectTrigger className="h-11 w-full text-base md:h-10 md:text-sm">
                                         <SelectValue placeholder="Role" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -185,7 +193,12 @@ function RegisterForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" isLoading={isPending}>
+                <Button
+                    type="submit"
+                    size="lg"
+                    className="h-11 w-full text-base md:h-10 md:text-sm"
+                    isLoading={isPending}
+                >
                     Créer mon compte
                 </Button>
             </form>

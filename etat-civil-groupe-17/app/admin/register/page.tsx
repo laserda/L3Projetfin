@@ -12,13 +12,13 @@ import RegisterForm from "./registerForm";
 
 const Page = () => {
     return (
-        <div className="flex justify-center items-center min-h-screen px-4 py-6">
-            <Card className="w-full max-w-md">
+        <div className="flex justify-center items-center min-h-screen px-4 py-8">
+            <Card className="w-full max-w-md rounded-xl border-t-4 border-t-primary shadow-lg sm:min-w-[425px]">
                 <CardHeader className="space-y-1">
                     <div className="flex justify-center mb-4">
                         <Logo size="large" />
                     </div>
-                    <CardTitle className="text-2xl text-center">Inscription</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-center">Inscription</CardTitle>
                     <CardDescription className="text-center">
                         Espace reservé aux agents
                     </CardDescription>
@@ -26,8 +26,8 @@ const Page = () => {
 
                 <CardContent><RegisterForm /></CardContent>
 
-                <CardFooter className="flex justify-center">
-                    <Link href={"/admin"} className="text-muted-foreground">
+                <CardFooter className="flex justify-center border-t pt-4">
+                    <Link href={"/admin"} className="py-2 text-sm font-medium text-primary hover:underline">
                         Déjà inscrit ? Connexion
                     </Link>
                 </CardFooter>
