@@ -64,7 +64,11 @@ function LoginForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form
+                noValidate
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-5"
+            >
                 {err && (
                     <Alert
                         variant="destructive"
@@ -86,6 +90,7 @@ function LoginForm() {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="email"
                                     placeholder="exemple@email.com"
                                     {...field}
@@ -108,6 +113,7 @@ function LoginForm() {
                             <FormLabel>Mot de passe</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="password"
                                     placeholder="********"
                                     {...field}
@@ -122,7 +128,12 @@ function LoginForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" isLoading={isPending}>
+                <Button
+                    type="submit"
+                    size="lg"
+                    className="h-11 w-full text-base md:h-10 md:text-sm"
+                    isLoading={isPending}
+                >
                     {isPending ? "En cours de connexion" : "Se connecter"}
                 </Button>
             </form>
