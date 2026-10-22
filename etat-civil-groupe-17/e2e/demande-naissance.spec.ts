@@ -15,6 +15,8 @@ const SHOTS_DIR = process.env.SHOTS_DIR;
 const DATABASE_URL = process.env.E2E_DATABASE_URL;
 const stamp = Date.now();
 const MONTANT = "1500";
+// Page de paiement : montant au format « 15 000 FCFA » (US-3.g)
+const MONTANT_PAIEMENT = "1 500 FCFA";
 const MOBILE = { width: 360, height: 740 };
 const URL_DEMANDE = "/nouvelle-demande-naissance?type=Naissance";
 
@@ -387,7 +389,7 @@ test("CA-3.5 / CA-3.e.2 — demande correctement remplie (pour soi) : page de pa
     expect(envois.length).toBeGreaterThanOrEqual(1);
     const id = page.url().split("/paiement/")[1];
     await expect(page.getByText("Faite le paiement de votre demande Acte de naissance")).toBeVisible();
-    await expect(page.getByText(`${MONTANT} FCFA`)).toBeVisible();
+    await expect(page.getByText(MONTANT_PAIEMENT)).toBeVisible();
     await expect(page.getByRole("button", { name: "Payer" })).toBeEnabled();
     await shot(page, "CA-3.e.2-page-paiement-360px");
 
@@ -432,7 +434,7 @@ test("CA-3.5 / CA-3.e.2 — demande correctement remplie (pour un enfant) : page
     await page.getByRole("button", { name: "Soumettre ma demande" }).click();
     await expect(page).toHaveURL(/\/paiement\/[^/]+$/);
     const id = page.url().split("/paiement/")[1];
-    await expect(page.getByText(`${MONTANT} FCFA`)).toBeVisible();
+    await expect(page.getByText(MONTANT_PAIEMENT)).toBeVisible();
 
     test.skip(!DATABASE_URL, "E2E_DATABASE_URL non défini : relecture en base impossible");
     const [r] = await lireDemande(id);

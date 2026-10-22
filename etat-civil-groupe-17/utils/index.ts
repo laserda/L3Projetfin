@@ -90,6 +90,10 @@ export const getRequestDemandePourTier = (type: string) => {
     }
 };
 
+// Montant affiché au format « 15 000 FCFA » (espaces insécables : le montant ne se coupe pas)
+export const formatMontantFCFA = (montant: number) =>
+    `${Math.round(montant).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} FCFA`;
+
 export const getDateTimeISOString = () => {
     const todayAtMidnight = new Date();
     todayAtMidnight.setHours(0, 0, 0, 0);
