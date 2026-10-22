@@ -1,6 +1,7 @@
 import { FileText } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { TypeActe } from "@/lib/generated/prisma";
 
@@ -40,9 +41,9 @@ function NosServiceLayout() {
                     {features.map((feature, index) => (
                         <Card
                             key={index}
-                            className="border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                            className="h-full rounded-xl border-t-4 border-t-primary shadow-lg transition-all duration-300 hover:border-primary/50 hover:border-t-primary hover:-translate-y-0.5"
                         >
-                            <CardContent className="p-6 flex flex-col items-center text-center">
+                            <CardContent className="flex flex-1 flex-col items-center px-4 text-center sm:px-6">
                                 <div className="mb-4 p-3 bg-accent rounded-2xl">
                                     {feature.icon}
                                 </div>
@@ -52,10 +53,12 @@ function NosServiceLayout() {
                                 <p className="text-muted-foreground mb-4">
                                     {feature.description}
                                 </p>
-                                <Link href={feature.href}>
-                                    <Button className="mt-auto">
-                                        Faire une demande
-                                    </Button>
+                                {/* Lien présenté comme un bouton (pas de bouton dans un lien), cible tactile de 44 px sur téléphone */}
+                                <Link
+                                    href={feature.href}
+                                    className={cn(buttonVariants(), "mt-auto h-11 w-full text-base sm:w-auto md:h-9 md:text-sm")}
+                                >
+                                    Faire une demande
                                 </Link>
                             </CardContent>
                         </Card>
