@@ -10,7 +10,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
     Select,
     SelectContent,
@@ -37,7 +37,10 @@ import {
     Search,
     Filter,
     RefreshCw,
+    FileText,
+    FilePlus,
 } from "lucide-react";
+import Link from "next/link";
 
 import { StatutDemande, TypeActe } from "@/lib/generated/prisma";
 import { getSuivieDesDemande } from "@/server/demande/demande";
@@ -253,7 +256,22 @@ const SuiviPage = () => {
 
             <Card className="overflow-hidden rounded-xl py-0 shadow-lg">
                 <CardContent className="p-0">
-                    {filteredRequests.length === 0 ? (
+                    {requests.length === 0 ? (
+                        // Le citoyen n'a encore aucune demande : message explicite et bouton pour en créer une
+                        <div role="status" data-slot="aucune-demande" className="flex flex-col items-center justify-center py-12 px-4">
+                            <FileText className="h-12 w-12 text-primary mb-4" />
+                            <h3 className="text-lg font-medium text-foreground mb-1 text-center">
+                                Vous n'avez pas encore de demande
+                            </h3>
+                            <p className="text-muted-foreground text-center max-w-md">
+                                Vos demandes d'actes d'état civil s'afficheront ici, avec leur état.
+                            </p>
+                            <Link href="/nos-service" className={cn(buttonVariants(), "mt-4 h-11 md:h-9")}>
+                                <FilePlus className="mr-2 h-4 w-4" />
+                                Créer une demande
+                            </Link>
+                        </div>
+                    ) : filteredRequests.length === 0 ? (
                         <div role="status" className="flex flex-col items-center justify-center py-12 px-4">
                             <Filter className="h-12 w-12 text-muted-foreground mb-4" />
                             <h3 className="text-lg font-medium text-foreground mb-1">
