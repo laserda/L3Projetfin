@@ -72,7 +72,7 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
                 {justRegistered && !err && (
                     <Alert className="flex items-center border-success" role="status">
                         <Info className="h-4 w-4 text-success" />
@@ -106,6 +106,7 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="email"
                                     placeholder="exemple@email.com"
                                     {...field}
@@ -128,6 +129,7 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
                             <FormLabel>Mot de passe</FormLabel>
                             <FormControl>
                                 <Input
+                                    className="h-11 text-base md:h-10 md:text-sm"
                                     type="password"
                                     placeholder="********"
                                     {...field}
@@ -142,7 +144,12 @@ function LoginForm({ redirectTo = "/admin/dashboard", justRegistered = false }: 
                     )}
                 />
 
-                <Button type="submit" className="w-full" isLoading={isPending}>
+                <Button
+                    type="submit"
+                    size="lg"
+                    className="h-11 w-full text-base md:h-10 md:text-sm"
+                    isLoading={isPending}
+                >
                     Se connecter
                 </Button>
             </form>
