@@ -10,6 +10,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import Link from "next/link";
 import { Loader } from "@/components/Loader";
 import { getTarif, getTarifByType, getTarifs } from "@/server/admin/tarif/tarif";
@@ -38,7 +46,7 @@ function page() {
 
     return (
         <>
-            <div className="mb-6 flex justify-between items-center">
+            <div className="mb-6 flex flex-wrap gap-2 justify-between items-center">
                 <h1 className="text-2xl font-bold mb-6">Tarifs</h1>
 
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -56,26 +64,26 @@ function page() {
 
             <div className="overflow-x-auto">
                 {tarifs ? (
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b">
-                                <th className="text-left py-3 px-4 font-medium">Type</th>
-                                <th className="text-left py-3 px-4 font-medium">Prix timbre</th>
-                                <th className="text-left py-3 px-4 font-medium">Prix expedition</th>
-                                <th className="text-right py-3 px-4 font-medium">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Table className="min-w-[32rem]">
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Prix timbre</TableHead>
+                                <TableHead>Prix expedition</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
                             {tarifs.map((tarif: any) => (
-                                <tr key={tarif.ID_FraisTimbre} className="border-b hover:bg-muted">
-                                    <td className="py-3 px-4">{tarif.TypeActe}</td>
+                                <TableRow key={tarif.ID_FraisTimbre} className="hover:bg-muted">
+                                    <TableCell>{tarif.TypeActe}</TableCell>
 
-                                    <td className="py-3 px-4">
+                                    <TableCell>
                                         {tarif.PrixTimbre}
-                                    </td>
-                                    <td className="py-3 px-4">{tarif.FraisDossier} </td>
+                                    </TableCell>
+                                    <TableCell>{tarif.FraisDossier} </TableCell>
 
-                                    <td className="py-3 px-4 text-right">
+                                    <TableCell className="text-right">
                                         <Button
                                             onClick={async () => {
                                                 const res = await getTarif(tarif.ID_FraisTimbre);
@@ -85,11 +93,11 @@ function page() {
                                         >
                                             <Eye size={24} />
                                         </Button>
-                                    </td>
-                                </tr>
+                                    </TableCell>
+                                </TableRow>
                             ))}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 ) : (
                     <div className="text-center text-muted-foreground text-xl">
                         Aucun agent enregistré

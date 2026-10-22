@@ -19,6 +19,14 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import {
     Search,
     FileText,
     Clock,
@@ -118,7 +126,7 @@ const DemandesListPage: FC = () => {
 
     return (
         <>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-wrap gap-2 justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Liste des demandes</h1>
                 <div className="flex items-center space-x-2">
                     <Button
@@ -249,64 +257,64 @@ const DemandesListPage: FC = () => {
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                                <thead>
-                                    <tr className="border-b bg-muted">
-                                        <th className="text-left py-3 px-4 font-medium">
+                            <Table className="min-w-[48rem]">
+                                <TableHeader>
+                                    <TableRow className="bg-muted">
+                                        <TableHead>
                                             Référence
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Type
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Nom
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Numéro d acte
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Date
-                                        </th>
-                                        <th className="text-left py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead>
                                             Statut
-                                        </th>
-                                        <th className="text-right py-3 px-4 font-medium">
+                                        </TableHead>
+                                        <TableHead className="text-right">
                                             Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
                                     {filteredRequests.map((request) => {
                                         const statusInfo = getStatusInfo(
                                             request.Statut
                                         );
                                         return (
-                                            <tr
+                                            <TableRow
                                                 key={request.ID_Demande}
-                                                className="border-b hover:bg-muted"
+                                                className="hover:bg-muted"
                                             >
-                                                <td className="py-3 px-4 font-medium">
+                                                <TableCell className="font-medium">
                                                     {request.ID_Demande
                                                         .substring(0, 8)
                                                         .toUpperCase()}
-                                                </td>
-                                                <td className="py-3 px-4">
+                                                </TableCell>
+                                                <TableCell>
                                                     {getRequestTypeName(
                                                         request.TypeActe
                                                     )}
-                                                </td>
-                                                <td className="py-3 px-4">{`${request.Nom} ${request.Prenom}`}</td>
-                                                <td className="py-3 px-4">
+                                                </TableCell>
+                                                <TableCell>{`${request.Nom} ${request.Prenom}`}</TableCell>
+                                                <TableCell>
                                                     <span className="max-w-[150px] truncate inline-block">
                                                         {request.NumeroActe}
                                                     </span>
-                                                </td>
-                                                <td className="py-3 px-4">
+                                                </TableCell>
+                                                <TableCell>
                                                     {formatDate(
                                                         request.DateDemande.toDateString()
                                                     )}
-                                                </td>
-                                                <td className="py-3 px-4">
+                                                </TableCell>
+                                                <TableCell>
                                                     <Badge
                                                         variant="outline"
                                                         className={
@@ -322,20 +330,20 @@ const DemandesListPage: FC = () => {
                                                             </span>
                                                         </span>
                                                     </Badge>
-                                                </td>
-                                                <td className="py-3 px-4 text-right">
+                                                </TableCell>
+                                                <TableCell className="text-right">
                                                     <Link
                                                         href={`/admin/dashboard/details-demande/${request.ID_Demande}`}
                                                         className={buttonVariants({ variant: "outline" })}
                                                     >
                                                         Détails
                                                     </Link>
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                            </TableRow>
                                         );
                                     })}
-                                </tbody>
-                            </table>
+                                </TableBody>
+                            </Table>
                         </div>
                     )}
                 </CardContent>

@@ -10,6 +10,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import Link from "next/link";
 import { Loader } from "@/components/Loader";
 
@@ -34,7 +42,7 @@ function page() {
 
     return (
         <>
-            <div className="mb-6 flex justify-between items-center">
+            <div className="mb-6 flex flex-wrap gap-2 justify-between items-center">
                 <h1 className="text-2xl font-bold mb-6">Agents</h1>
 
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -52,37 +60,37 @@ function page() {
 
             <div className="overflow-x-auto">
                 {agents ? (
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b">
-                                <th className="text-left py-3 px-4 font-medium">Type</th>
-                                <th className="text-left py-3 px-4 font-medium">Nom</th>
-                                <th className="text-left py-3 px-4 font-medium">Email</th>
-                                <th className="text-right py-3 px-4 font-medium">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Table className="min-w-[32rem]">
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Nom</TableHead>
+                                <TableHead>Email</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
                             {agents.map((agent: any) => (
-                                <tr key={agent.ID_Agent} className="border-b hover:bg-muted">
-                                    <td className="py-3 px-4">{agent.Role}</td>
+                                <TableRow key={agent.ID_Agent} className="hover:bg-muted">
+                                    <TableCell>{agent.Role}</TableCell>
 
-                                    <td className="py-3 px-4">
+                                    <TableCell>
                                         {agent.Nom} - {agent.Prenom}
-                                    </td>
-                                    <td className="py-3 px-4">{agent.Email} </td>
+                                    </TableCell>
+                                    <TableCell>{agent.Email} </TableCell>
 
-                                    <td className="py-3 px-4 text-right">
+                                    <TableCell className="text-right">
                                         <Link
                                             href={`/admin/dashboard/agents/${agent.ID_Agent}`}
                                             className={buttonVariants({ variant: "link" })}
                                         >
                                             Voir
                                         </Link>
-                                    </td>
-                                </tr>
+                                    </TableCell>
+                                </TableRow>
                             ))}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 ) : (
                     <div className="text-center text-muted-foreground text-xl">
                         Aucun agent enregistré

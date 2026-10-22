@@ -253,7 +253,7 @@ const DemandeDetailPage = () => {
 
     return (
         <>
-            <div className="flex items-center mb-6">
+            <div className="flex flex-wrap items-center mb-6">
                 <Button variant="ghost" onClick={() => {
                     router.back()
                 }} className="mr-4">
@@ -267,7 +267,7 @@ const DemandeDetailPage = () => {
                 <div className="lg:col-span-2">
                     <Card>
                         <CardHeader>
-                            <div className="flex justify-between items-start">
+                            <div className="flex flex-wrap gap-2 justify-between items-start">
                                 <div>
                                     <CardTitle className="mb-2">
                                         {getRequestTypeName(request.TypeActe)}
