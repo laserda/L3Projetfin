@@ -18,13 +18,13 @@ const Page = async () => {
     console.log(session);
     
     return (
-        <div className="flex justify-center items-center min-h-[80vh]">
-            <Card className="w-full max-w-md sm:min-w-[425px]">
+        <div className="flex justify-center items-center min-h-[80vh] px-4 py-8">
+            <Card className="w-full max-w-md rounded-xl border-t-4 border-t-primary shadow-lg sm:min-w-[425px]">
                 <CardHeader className="space-y-1">
                     <div className="flex justify-center mb-4">
                         <Logo size="large" />
                     </div>
-                    <CardTitle className="text-2xl text-center">
+                    <CardTitle className="text-2xl font-bold text-center">
                         Connexion
                     </CardTitle>
                     <CardDescription className="text-center">
@@ -36,8 +36,8 @@ const Page = async () => {
                     <LoginForm />
                 </CardContent>
 
-                <CardFooter className="flex justify-center">
-                    <Link href={"/register"} className="text-muted-foreground">
+                <CardFooter className="flex justify-center border-t pt-4">
+                    <Link href={"/register"} className="py-2 text-sm font-medium text-primary hover:underline">
                         Pas encore inscrit ? Inscription
                     </Link>
                 </CardFooter>

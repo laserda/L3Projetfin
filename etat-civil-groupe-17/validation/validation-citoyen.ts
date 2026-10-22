@@ -3,10 +3,14 @@ export type RegisterFormData = z.infer<typeof registerSchema>;
 export type LoginFormData = z.infer<typeof loginSchema>;
 
 export const loginSchema = z.object({
-    Email: z.string().email({ message: "Invalid email address" }).trim(),
+    Email: z
+        .string()
+        .min(1, { message: "Veuillez saisir votre adresse e-mail" })
+        .email({ message: "Veuillez saisir une adresse e-mail valide" })
+        .trim(),
     Password: z
         .string()
-        .min(8, { message: "Password must be at least 8 characters" })
+        .min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" })
         .trim(),
 });
 export const registerSchema = z.object({
@@ -18,8 +22,15 @@ export const registerSchema = z.object({
         .string()
         .min(3, { message: "Le prénom doit contenir au moins 3 caractères" })
         .trim(),
-    Email: z.string().email({ message: "Invalid email address" }).trim(),
-    DateNaissance: z.string({ message: "Date de naissance invalide" }).trim(),
+    Email: z
+        .string()
+        .min(1, { message: "Veuillez saisir votre adresse e-mail" })
+        .email({ message: "Veuillez saisir une adresse e-mail valide" })
+        .trim(),
+    DateNaissance: z
+        .string({ message: "Date de naissance invalide" })
+        .min(1, { message: "Veuillez indiquer votre date de naissance" })
+        .trim(),
     LieuNaissance: z
         .string()
         .min(3, { message: "Lieu de naissance invalide" })
@@ -31,6 +42,6 @@ export const registerSchema = z.object({
     Adresse: z.string().min(3, { message: "Adresse invalide" }).trim(),
     Password: z
         .string()
-        .min(8, { message: "Password must be at least 8 characters" })
+        .min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" })
         .trim(),
 });
