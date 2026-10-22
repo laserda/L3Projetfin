@@ -126,9 +126,10 @@ export enum QuiDemande {
 
 export const mariageSchema = z.object({
     TypeActe: z.nativeEnum(TypeActe),
-    NumeroActe: z.string(),
+    // Mêmes règles qu'avant ; seuls les messages d'un champ vide sont en français
+    NumeroActe: z.string({ required_error: "Le numéro d'acte est requis." }),
     DemandePourTier: z.nativeEnum(QuiDemande).optional(),
-    DateActe: z.string().min(1, "La date de l'acte est requis"),
+    DateActe: z.string({ required_error: "La date de l'acte est requise." }).min(1, "La date de l'acte est requis"),
     NomEpoux: z.string()
         .min(2, 'Le nom de l\'époux doit contenir au moins 2 caractères')
         .optional(),
@@ -152,11 +153,12 @@ export type DemandeMariageFormData = z.infer<typeof mariageSchema>;
 
 export const decesSchema = z.object({
     TypeActe: z.nativeEnum(TypeActe),
-    NumeroActe: z.string(),
-    DateActe: z.string().min(1, "La date de l'acte est requis"),
-    Nom: z.string()
+    // Mêmes règles qu'avant ; seuls les messages d'un champ vide sont en français
+    NumeroActe: z.string({ required_error: "Le numéro d'acte est requis." }),
+    DateActe: z.string({ required_error: "La date de l'acte est requise." }).min(1, "La date de l'acte est requis"),
+    Nom: z.string({ required_error: "Le nom du défunt est requis." })
         .min(2, 'Le nom doit contenir au moins 2 caractères'),
-    Prenom: z.string()
+    Prenom: z.string({ required_error: "Le prénom du défunt est requis." })
         .min(2, 'Le prénom doit contenir au moins 2 caractères'),
     NomMere: z.string()
         .min(2, 'Le nom de la mère doit contenir au moins 2 caractères')
