@@ -1,9 +1,16 @@
-import { FileText, User, Search } from "lucide-react";
+import { FileText, User, Search, LogIn, UserPlus } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import NosServiceLayout from "@/components/Layouts/NosServiceLayout";
+import { TypeActe } from "@/lib/generated/prisma";
 // import { getUser } from "@/server/user";
+
+const actes = [
+    { label: "Acte de naissance", href: `/nouvelle-demande-naissance?type=${TypeActe.Naissance}` },
+    { label: "Acte de mariage", href: `/nouvelle-demande-mariage?type=${TypeActe.Mariage}` },
+    { label: "Acte de décès", href: `/nouvelle-demande-deces?type=${TypeActe.Décès}` },
+];
 
 
 export default async function HomePage() {
@@ -21,20 +28,42 @@ export default async function HomePage() {
                     Demandez vos actes d'état civil en ligne, suivez vos
                     demandes et recevez vos documents sans vous déplacer.
                 </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                    <Link href="#nos-service">
-                        <Button
-                            size="lg"
-                            className="bg-primary hover:bg-primary/90"
-                        >
-                            <FileText className="mr-2 h-5 w-5" />
-                            Nouvelle demande
-                        </Button>
-                    </Link>
+                <div
+                    className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mb-4"
+                    data-testid="accueil-actes"
+                >
+                    {actes.map((acte) => (
+                        <Link key={acte.href} href={acte.href}>
+                            <Button
+                                size="lg"
+                                className="w-full sm:w-auto min-h-11 bg-primary hover:bg-primary/90"
+                            >
+                                <FileText className="mr-2 h-5 w-5" />
+                                {acte.label}
+                            </Button>
+                        </Link>
+                    ))}
+                </div>
+                <div
+                    className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3"
+                    data-testid="accueil-compte"
+                >
                     <Link href="/suivi-demande">
-                        <Button size="lg" variant="outline">
+                        <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11">
                             <Search className="mr-2 h-5 w-5" />
                             Suivre ma demande
+                        </Button>
+                    </Link>
+                    <Link href="/login">
+                        <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11">
+                            <LogIn className="mr-2 h-5 w-5" />
+                            Connexion
+                        </Button>
+                    </Link>
+                    <Link href="/register">
+                        <Button size="lg" variant="secondary" className="w-full sm:w-auto min-h-11">
+                            <UserPlus className="mr-2 h-5 w-5" />
+                            Inscription
                         </Button>
                     </Link>
                     {/* {session && session.user.role !== "user" && (

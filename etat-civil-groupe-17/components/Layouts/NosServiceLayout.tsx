@@ -53,7 +53,7 @@ function NosServiceLayout() {
                                     {feature.description}
                                 </p>
                                 <Link href={feature.href}>
-                                    <Button className="mt-auto">
+                                    <Button className="mt-auto min-h-11">
                                         Faire une demande
                                     </Button>
                                 </Link>
